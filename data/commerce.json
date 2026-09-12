@@ -1,0 +1,136 @@
+{
+  "_meta": {
+    "specialisation": "Commerce component of E3005 (double degree with Bachelor of Engineering Honours, Electrical and Computer Systems Engineering specialisation)",
+    "courseCode": "E3005",
+    "commencingYear": 2024,
+    "campus": "Clayton",
+    "requiresFile": "common-first-year.json",
+    "sources": [
+      "https://handbook.monash.edu/2024/courses/E3005 (course requirements, 96 CP from Commerce Parts A+B)",
+      "https://handbook.monash.edu/2024/courses/B2001 (Bachelor of Commerce Part A/B/C structure)",
+      "https://www.monash.edu/__data/assets/pdf_file/0020/3303641/2024-map-E3005.pdf (course progression map, Electrical and Computer Systems Engineering specialisation, 2024 commencing, updated 14 Oct 2025)",
+      "https://handbook.monash.edu/2024/units/{CODE} (prerequisite/corequisite/prohibition rules, 2024 Handbook)"
+    ],
+    "openDecisions": [
+      "This file covers Part A (Commerce specified study, 36 CP core + notes below) only. Part B (Commerce listed major, 48 CP / 8 units across Years 3-5) is NOT included yet — it depends entirely on which of the 11 available majors is chosen (Accounting, Actuarial studies, Behavioural commerce, Business analytics, Econometrics, Economics, Finance, Management studies, Marketing science, Mathematical foundations of econometrics, Sustainability and responsible management). Add once a major is picked.",
+      "Part A also includes an 'Additional commerce unit' (6 CP, flexible/FREE-eligible) and one 'Capstone, consulting project, international experience or internship unit' (6 CP, chosen from ~30 options, sits in Year 4 Semester 2 on the ECE course map) — neither has a fixed code, so neither is listed as a catalog unit here. Add whichever specific unit is chosen as a custom unit closer to the time.",
+      "ACC1100 vs ACC1001: only one counts toward the 36 CP Part A core. ACC1100 is required if majoring in Accounting or Actuarial Studies; otherwise either satisfies the requirement. Both listed as separate catalog entries — add whichever one applies, not both.",
+      "ECC1000 vs ECX2953: only one counts. ECX2953 is restricted to students completing an Accounting major in a double degree (E3005 is on its approved-course list) and is required for professional accounting accreditation; ECC1000 is the standard choice for every other major. Both listed as separate catalog entries.",
+      "The E3005 double-degree course map places several ECE core units in different semesters than the E3007 single-degree map already in electrical.json (e.g. ECE2191 and ECE4132 move from Year 2/5 to Year 3 Semester 2; ECE3141 moves from Year 5 to Year 4 Semester 1; an extra 'Level 4/5 ECE-coded core elective' slot appears in Year 4 Semester 1). electrical.json was NOT changed to match, since Sahel's transfer to the double degree isn't confirmed yet and the current single-degree placements are what's actually enrolled. If the transfer is confirmed, electrical.json's year/semester fields should be updated to the E3005 sequence."
+    ]
+  },
+  "units": [
+    {
+      "code": "ACC1100",
+      "title": "Introduction to financial accounting",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 1,
+      "type": "commerce",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": "Choose one of ACC1100/ACC1001 — only one counts toward the 36cp Part A core. Required (not ACC1001) if majoring in Accounting or Actuarial Studies."
+    },
+    {
+      "code": "ACC1001",
+      "title": "Accounting fundamentals",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 1,
+      "type": "commerce",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": "Choose one of ACC1100/ACC1001 — only one counts toward the 36cp Part A core. Not valid if majoring in Accounting or Actuarial Studies (use ACC1100 instead)."
+    },
+    {
+      "code": "ECC1000",
+      "title": "Principles of microeconomics",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 2,
+      "type": "commerce",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": "Choose one of ECC1000/ECX2953 — only one counts toward the 36cp Part A core. Use this one unless majoring in Accounting."
+    },
+    {
+      "code": "ECX2953",
+      "title": "Economics",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 2,
+      "type": "commerce",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": "Choose one of ECC1000/ECX2953. Restricted enrolment: only students in specific double-degree courses (E3005 included) completing an Accounting major, for professional accreditation."
+    },
+    {
+      "code": "ETC1000",
+      "title": "Business and economic statistics",
+      "creditPoints": 6,
+      "year": 2,
+      "semester": 1,
+      "type": "commerce",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": ""
+    },
+    {
+      "code": "MKC1200",
+      "title": "Principles of marketing",
+      "creditPoints": 6,
+      "year": 2,
+      "semester": 2,
+      "type": "commerce",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": ""
+    },
+    {
+      "code": "MGC1010",
+      "title": "Introduction to management",
+      "creditPoints": 6,
+      "year": 2,
+      "semester": 2,
+      "type": "commerce",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": ""
+    },
+    {
+      "code": "BTC1110",
+      "title": "Commercial law",
+      "creditPoints": 6,
+      "year": 3,
+      "semester": 1,
+      "type": "commerce",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": ""
+    }
+  ]
+}

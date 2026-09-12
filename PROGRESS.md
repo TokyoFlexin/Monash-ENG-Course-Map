@@ -5,12 +5,43 @@ Running log across sessions. Claude updates this as work happens.
 ## Setup answers
 - Intake year: 2024
 - Degree: E3007 single degree — Electrical & Computer Systems Engineering
+  (currently enrolled/confirmed). Also applying to transfer into **E3005**
+  (Electrical + Commerce double degree) — not confirmed yet, see "Commerce
+  expansion" below.
 
 ## Status
 - [x] Step 1 — Research (unit data + prereqs/coreqs) — DONE
 - [x] Step 2 — UI (design directions -> build) — DONE, see below
 - [x] Step 3 — Test — DONE, formal pass complete, see below
 - [x] Step 4 — Deploy — DONE, see below
+- Live at https://tokyoflexin.github.io/monash-course-map/
+
+## Post-launch revision round (this session)
+Sahel came back with feedback after using the deployed planner for real:
+1. **Redesign** — original "Transcript" comp felt too flat, cards blended into
+   the background, wanted more color/soul. Presented 3 new comps ([Planner
+   Redesign Comps](https://claude.ai/code/artifact/4b20ec59-5166-48ba-8282-688b5c1675d5) —
+   PCB/circuit board, Blueprint/drafting, Ledger-evolved). He picked **C —
+   Ledger, evolved**: kept the Fraunces/editorial bones but pushed to real
+   saturated per-type color, a colored left-rule + drop shadow on every card
+   so they lift off the page. Built into the real `index.html` — new palette
+   (warm paper `#f2ead9` ground, deep-forest/burnt-sienna/indigo/plum/teal
+   per type instead of the old muted tones), `.card.t-{type}` classes driving
+   the left-rule, bolder Fraunces headings (700 weight).
+2. **"Add custom unit" relocated** — was a `<details>` accordion at the very
+   bottom of the catalog sidebar (had to scroll past all ~30 units to reach
+   it). Now a full-width button directly under the search box that expands
+   inline; same form/logic, just moved and restyled as a real button.
+3. **Quick-start onboarding** — added a modal (`#onboardVeil`) offering 8
+   cutoff options (Through Y1 S1 ... Through Y4 S2). Picking one adds every
+   *catalog* (non-commerce) unit at or before that point into its canonical
+   slot; he edits/removes from there. Auto-opens once on a truly empty plan
+   (tracked via a separate `e3007-planner-onboarded-v1` localStorage flag, so
+   it doesn't reappear after he's started), and is always reachable again via
+   a "Quick start…" button in the topbar. Decided against export/import or
+   account sync for now — he confirmed the real problem was first-time setup
+   effort, not cross-device sync.
+4. **Commerce expansion** — see below.
 
 ## Product pivot (important — read this before touching the UI)
 Original brief (INSTRUCTIONS.md) described a **static visual map**: pre-filled,
@@ -136,12 +167,56 @@ it; nothing sensitive in the code — public Handbook unit codes/titles only).
 - Pages enabled via `gh api repos/.../pages` (branch `main`, root).
 - Live URL: https://tokyoflexin.github.io/monash-course-map/
 
+## Commerce expansion (E3005 double degree)
+Sahel is applying to transfer into E3005 (Bachelor of Engineering Honours +
+Bachelor of Commerce, Electrical and Computer Systems specialisation) and
+wants to see Commerce progress in the same planner. Researched with the same
+rigor as electrical.json (Handbook `Rules` accordion per unit, not just the
+course map).
+
+**Added** — `data/commerce.json`, 8 catalog units, all `type: "commerce"`:
+Part A ("Commerce specified study") core, the 36cp-worth of it that's fixed
+regardless of major:
+- ACC1100 *or* ACC1001 (Y1 S1) — both listed, pick one (ACC1100 required if
+  majoring in Accounting/Actuarial Studies)
+- ECC1000 *or* ECX2953 (Y1 S2) — both listed; ECX2953 is Accounting-major-only
+  (confirmed E3005 is on its restricted-enrolment allow-list)
+- ETC1000 (Y2 S1), MKC1200 + MGC1010 (Y2 S2), BTC1110 (Y3 S1)
+- None of these 8 have real prerequisites/corequisites (verified on the
+  Handbook, not assumed) — only course-level prohibitions against B2007
+  (Bachelor of Business), irrelevant to this planner. Not encoded as
+  catalog prohibitions since it's not a real conflict for this student.
+- Wired into `index.html`: third `loadCatalog()` fetch, third sidebar group
+  ("Commerce (E3005 double degree)"), grouping logic updated so commerce
+  units don't fall into the Common-First-Year bucket by year-number alone.
+
+**Not yet added** (documented as `openDecisions` in commerce.json):
+- **Part B (48cp, one major, 8 units across Y3-Y5)** — genuinely can't add
+  this without knowing which of the 11 majors he's choosing (Accounting,
+  Finance, Marketing science, Management studies, etc. — units differ
+  completely per major). **Waiting on his answer.**
+- The "Additional commerce unit" (6cp, flexible/FREE-eligible) and the
+  "Capstone/consulting/international/internship" unit (6cp, ~30 possible
+  codes, Y4 S2 slot) have no fixed code — add as custom units once chosen,
+  same pattern as ECE4099's Professional Practice replacement.
+- **electrical.json was deliberately NOT changed**, even though the E3005
+  double-degree map places several ECE units in different semesters than the
+  E3007 single-degree map already in there (ECE2191 and ECE4132 move to Y3 S2,
+  ECE3141 moves to Y4 S1, plus an extra Level 4/5 ECE elective slot in Y4 S1).
+  Since the transfer isn't confirmed and E3007 is what's actually enrolled
+  right now, changing the confirmed data for an unconfirmed transfer felt
+  like the wrong risk to take silently. Revisit if the transfer goes through.
+- Source: https://handbook.monash.edu/2024/courses/E3005,
+  https://handbook.monash.edu/2024/courses/B2001,
+  https://www.monash.edu/__data/assets/pdf_file/0020/3303641/2024-map-E3005.pdf
+  (fetched via r.jina.ai reader proxy — direct browser navigation to Monash
+  PDF assets triggers a download the automation can't complete; the Cloudflare
+  block that stops raw curl/WebFetch doesn't apply to jina's fetcher).
+
 ## Next up
-- Formal Step 3 pass: prohibition-conflict flag with two custom units; a
-  couple more corequisite cases; maybe a "known issues" scan of the whole
-  catalog once he's actually used it for a while.
-- Step 4 (Deploy): confirm hosting choice with Sahel (GitHub Pages vs
-  Netlify) before doing anything — per INSTRUCTIONS.md, don't create accounts
-  or push to a public repo without his explicit yes. Not started.
+- **Blocking**: Sahel's Commerce major choice, to complete Part B of
+  commerce.json (48cp / 8 units).
 - Optional, only if he wants it later: prereq/coreq checking for custom units
   too (he'd need to name which catalog/custom codes they depend on).
+- If the E3005 transfer is confirmed: update electrical.json's year/semester
+  placements to match the double-degree sequence (see note above).

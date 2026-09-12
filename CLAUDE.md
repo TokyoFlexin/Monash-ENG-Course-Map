@@ -13,3 +13,10 @@ Engineering course map. Before doing ANYTHING each session:
 ## Current phase
 Phase 1 = ELECTRICAL ONLY (E3007, Electrical & Computer Systems Engineering,
 single degree). Do not build other specialisations yet.
+
+**Exception (explicitly requested by Sahel, not a scope drift):** he's applying
+to transfer into E3005, the Electrical+Commerce double degree, and wants the
+Commerce side visible in the planner now so he can see progress toward that.
+See PROGRESS.md for what's been added (`data/commerce.json`, Part A core units
+only) and what's still open (Part B major-specific units — pending his major
+choice). This is additive, not a pivot: E3007 electrical data is untouched.

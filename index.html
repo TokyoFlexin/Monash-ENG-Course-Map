@@ -9,10 +9,11 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
   :root{
-    --bg:#eeeeec; --panel:#f4f5f0; --line:#d4d6d1; --line-strong:#b9bcb3;
-    --ink:#1a1c1a; --sub:#5c625d; --faint:#9a9f92;
-    --core:#23271f; --spec:#8a6a3f; --elective:#2b4a63; --commerce:#5f3d73; --breadth:#3c6e71;
-    --up:#8a6a3f; --down:#2b4a63; --warn:#a3352b; --warn-bg:#fbeceb;
+    --bg:#f2ead9; --panel:#f7f2e4; --line:#ddd0b3; --line-strong:#c9b98d;
+    --ink:#2b1d12; --sub:#6b5a3e; --faint:#a3906a;
+    --core:#1f4d3a; --spec:#b5502f; --elective:#3c4d8a; --commerce:#7d3c6b; --breadth:#1f7a72;
+    --up:#b5502f; --down:#3c4d8a; --warn:#8a2c22; --warn-bg:#f5ddd2;
+    --card-bg:#fffdf7; --card-shadow:0 3px 10px rgba(43,29,18,.12);
   }
   *{box-sizing:border-box}
   html,body{margin:0; padding:0;}
@@ -44,7 +45,7 @@
 
   /* ---------- header ---------- */
   .topbar{max-width:1040px; margin:0 auto 24px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap;}
-  .topbar h1{font-family:'Fraunces',serif; font-weight:600; font-size:26px;}
+  .topbar h1{font-family:'Fraunces',serif; font-weight:700; font-size:30px;}
   .topbar .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--sub); margin-bottom:6px;}
   .summary{display:flex; gap:20px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--sub);}
   .summary b{color:var(--ink); font-variant-numeric:tabular-nums;}
@@ -54,9 +55,9 @@
   /* ---------- catalog panel ---------- */
   .catalog-head{padding:20px 18px 14px; border-bottom:1px solid var(--line);}
   .catalog-head .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sub);}
-  .catalog-head h2{font-family:'Fraunces',serif; font-weight:600; font-size:18px; margin-top:4px;}
+  .catalog-head h2{font-family:'Fraunces',serif; font-weight:700; font-size:21px; margin-top:4px;}
   .catalog-search{margin:14px 18px 0; width:calc(100% - 36px);}
-  .catalog-search input{width:100%; padding:7px 9px; border:1px solid var(--line-strong); background:#fff; font-family:'IBM Plex Mono',monospace; font-size:12px; border-radius:2px;}
+  .catalog-search input{width:100%; padding:7px 9px; border:1px solid var(--line-strong); background:var(--card-bg); font-family:'IBM Plex Mono',monospace; font-size:12px; border-radius:2px;}
   .catalog-search input:focus{outline:1.5px solid var(--core); outline-offset:0;}
   .catalog-group{padding:14px 18px 4px;}
   .catalog-group-title{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-bottom:8px;}
@@ -73,7 +74,7 @@
   .cat-row .title{font-size:12px; color:var(--sub); line-height:1.3; margin-top:2px;}
   .cat-row .slot{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--faint); margin-top:2px;}
   .cat-row button.toggle{
-    flex:none; width:22px; height:22px; border-radius:50%; border:1px solid var(--line-strong); background:#fff;
+    flex:none; width:22px; height:22px; border-radius:50%; border:1px solid var(--line-strong); background:var(--card-bg);
     color:var(--sub); position:relative; overflow:hidden;
     transition:border-color .18s ease, color .18s ease, transform .18s ease;
   }
@@ -87,23 +88,25 @@
   .cat-row button.toggle:hover .icon-a{opacity:0; transform:translateX(-3px);}
   .cat-row button.toggle:hover .icon-b{opacity:1; transform:translateX(0);}
 
-  .add-custom{margin:18px 18px 20px; padding-top:16px; border-top:1px solid var(--line);}
-  .add-custom summary{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--sub); cursor:pointer; list-style:none;}
+  .add-custom{margin:14px 18px 4px; padding-bottom:14px; border-bottom:1px solid var(--line);}
+  .add-custom summary{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--sub);
+    cursor:pointer; list-style:none; border:1px solid var(--line-strong); border-radius:2px; padding:8px 10px; text-align:center;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
   .add-custom summary::-webkit-details-marker{display:none;}
-  .add-custom summary::before{content:"+ "; color:var(--ink);}
-  .add-custom[open] summary::before{content:"\2212 ";}
+  .add-custom summary:hover{border-color:var(--core); color:var(--ink); background:rgba(26,28,26,.035);}
+  .add-custom[open] summary{border-color:var(--ink); color:var(--ink); background:var(--card-bg);}
   .add-custom form{margin-top:12px; display:flex; flex-direction:column; gap:8px;}
   .add-custom label{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); display:block; margin-bottom:3px;}
   .add-custom input, .add-custom select, .add-custom textarea{
-    width:100%; padding:6px 8px; border:1px solid var(--line-strong); background:#fff; font-family:'IBM Plex Sans',sans-serif; font-size:12px; border-radius:2px;
+    width:100%; padding:6px 8px; border:1px solid var(--line-strong); background:var(--card-bg); font-family:'IBM Plex Sans',sans-serif; font-size:12px; border-radius:2px;
   }
   .add-custom .row2{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
   .add-custom textarea{resize:vertical; min-height:40px; font-family:'IBM Plex Sans',sans-serif;}
   .add-custom .submit{margin-top:4px; background:var(--core); color:#fff; border:none; padding:8px; font-size:12px; border-radius:2px; transition:opacity .15s ease, transform .15s ease;}
   .add-custom .submit:hover{opacity:.88;}
   .add-custom .submit:active{transform:scale(.98);}
-  .add-custom summary{transition:color .15s ease;}
-  .add-custom summary:hover{color:var(--ink);}
 
   /* ---------- grid ---------- */
   .grid{max-width:1040px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:14px 20px;}
@@ -116,19 +119,25 @@
   .cell-empty{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--faint); padding:8px 0;}
 
   .card{
-    border:1px solid var(--line-strong); background:#fff; padding:8px 10px 9px; margin-bottom:8px; border-radius:2px;
+    border:1px solid var(--line-strong); border-left:5px solid var(--line-strong); background:var(--card-bg);
+    padding:10px 12px 11px; margin-bottom:9px; border-radius:2px; box-shadow:var(--card-shadow);
     cursor:pointer; transition:opacity .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .15s ease;
   }
   .card:hover{transform:translateY(-1px);}
   .card:last-child{margin-bottom:0;}
+  .card.t-core{border-left-color:var(--core);}
+  .card.t-specialisation{border-left-color:var(--spec);}
+  .card.t-elective{border-left-color:var(--elective);}
+  .card.t-commerce{border-left-color:var(--commerce);}
+  .card.t-breadth{border-left-color:var(--breadth);}
   .card-top{display:flex; justify-content:space-between; align-items:baseline; gap:8px;}
   .card .code{font-family:'IBM Plex Mono',monospace; font-size:11px; display:flex; align-items:baseline; gap:6px;}
   .card .code .dot{width:6px; height:6px; border-radius:50%; display:inline-block;}
   .card .cp{color:var(--faint); font-size:10.5px; font-variant-numeric:tabular-nums;}
-  .card .title{font-family:'Fraunces',serif; font-size:13.5px; line-height:1.28; margin-top:4px;}
+  .card .title{font-family:'Fraunces',serif; font-weight:600; font-size:14.5px; line-height:1.28; margin-top:4px;}
   .card .note{font-size:10.5px; color:var(--sub); line-height:1.35; margin-top:5px;}
   .card .controls{display:flex; align-items:center; gap:6px; margin-top:7px;}
-  .card .controls select{font-size:10px; font-family:'IBM Plex Mono',monospace; border:1px solid var(--line); background:#fbfbf9; padding:2px 4px; border-radius:2px; color:var(--sub);}
+  .card .controls select{font-size:10px; font-family:'IBM Plex Mono',monospace; border:1px solid var(--line-strong); background:var(--card-bg); padding:2px 8px; border-radius:20px; color:var(--sub);}
   .card .remove{font-size:10px; color:var(--faint); border:none; background:none; padding:2px 4px; transition:color .15s ease;}
   .card .remove:hover{color:var(--warn);}
   .card .flags{margin-top:6px; display:flex; flex-direction:column; gap:3px; animation:fadeIn .3s ease;}
@@ -142,6 +151,33 @@
   .type-core{background:var(--core);} .type-specialisation{background:var(--spec);}
   .type-elective{background:var(--elective);} .type-commerce{background:var(--commerce);}
   .type-breadth{background:var(--breadth);}
+
+  /* ---------- onboarding modal ---------- */
+  .modal-veil{
+    position:fixed; inset:0; background:rgba(43,29,18,.4); backdrop-filter:blur(1.5px);
+    display:flex; align-items:center; justify-content:center; padding:20px; z-index:100;
+    animation:fadeIn .2s ease;
+  }
+  .modal-veil[hidden]{display:none;}
+  .modal{
+    background:var(--card-bg); border:1px solid var(--line-strong); border-radius:3px; box-shadow:0 12px 40px rgba(43,29,18,.25);
+    max-width:480px; width:100%; padding:26px 28px 24px;
+  }
+  .modal .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sub);}
+  .modal h2{font-family:'Fraunces',serif; font-weight:700; font-size:22px; margin-top:4px;}
+  .modal-copy{font-size:12.5px; color:var(--sub); line-height:1.5; margin-top:10px;}
+  .onboard-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:8px; margin-top:18px;}
+  .onboard-grid button{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; text-align:left; padding:10px 12px; border:1px solid var(--line-strong);
+    background:var(--panel); border-radius:2px; color:var(--ink); transition:border-color .15s ease, background .15s ease, transform .15s ease;
+  }
+  .onboard-grid button:hover{border-color:var(--core); background:var(--card-bg); transform:translateY(-1px);}
+  .onboard-grid button b{display:block; font-family:'Fraunces',serif; font-weight:600; font-size:13.5px; margin-bottom:2px;}
+  .onboard-scratch{
+    width:100%; margin-top:14px; padding:10px; background:none; border:1px dashed var(--line-strong); color:var(--sub);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.04em; border-radius:2px; transition:border-color .15s ease, color .15s ease;
+  }
+  .onboard-scratch:hover{border-color:var(--sub); color:var(--ink);}
 
   .legend{max-width:1040px; margin:28px auto 0; display:flex; gap:16px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--sub); padding-top:16px; border-top:1px solid var(--line);}
   .legend span{display:flex; align-items:center; gap:5px;}
@@ -166,10 +202,9 @@
     <div class="catalog-search">
       <input type="text" id="searchInput" placeholder="filter units&hellip;">
     </div>
-    <div id="catalogGroups"></div>
 
     <details class="add-custom">
-      <summary>Add a custom unit</summary>
+      <summary>+ Add a custom unit</summary>
       <form id="customForm">
         <div>
           <label>Code</label>
@@ -219,6 +254,8 @@
         <button type="submit" class="submit">Add to plan</button>
       </form>
     </details>
+
+    <div id="catalogGroups"></div>
   </aside>
 
   <main class="main">
@@ -230,6 +267,7 @@
       <div class="summary">
         <div>units placed &middot; <b id="sumUnits">0</b></div>
         <div>credit points &middot; <b id="sumCp">0</b></div>
+        <button class="reset-btn" id="quickStartBtn">Quick start&hellip;</button>
         <button class="reset-btn" id="resetBtn">Reset plan</button>
       </div>
     </div>
@@ -248,6 +286,16 @@
     </div>
   </main>
 
+</div>
+
+<div class="modal-veil" id="onboardVeil" hidden>
+  <div class="modal" role="dialog" aria-labelledby="onboardTitle">
+    <div class="eyebrow">E3007 &middot; Electrical</div>
+    <h2 id="onboardTitle">Quick start</h2>
+    <p class="modal-copy">Already partway through? Pick how far you've gotten and every core/specialisation unit up to that point gets added in its canonical slot &mdash; edit or remove anything after, nothing here is final.</p>
+    <div class="onboard-grid" id="onboardGrid"></div>
+    <button class="onboard-scratch" id="onboardScratch">Start from a blank plan</button>
+  </div>
 </div>
 
 <script>
@@ -308,11 +356,12 @@ function saveState(){
 
 /* ---------------- data load ---------------- */
 async function loadCatalog(){
-  const [common, elec] = await Promise.all([
+  const [common, elec, comm] = await Promise.all([
     fetch('data/common-first-year.json').then(r => r.json()),
-    fetch('data/electrical.json').then(r => r.json())
+    fetch('data/electrical.json').then(r => r.json()),
+    fetch('data/commerce.json').then(r => r.json())
   ]);
-  catalog = common.units.concat(elec.units);
+  catalog = common.units.concat(elec.units, comm.units);
 }
 
 /* ---------------- validation ---------------- */
@@ -392,8 +441,9 @@ function renderCatalog(filter){
   const el = document.getElementById('catalogGroups');
   el.innerHTML = '';
   const groups = [
-    {title:'Common first year', items: catalog.filter(u => YEARS_FIRST(u))},
-    {title:'Electrical specialisation', items: catalog.filter(u => !YEARS_FIRST(u))}
+    {title:'Common first year', items: catalog.filter(u => u.type!=='commerce' && YEARS_FIRST(u))},
+    {title:'Electrical specialisation', items: catalog.filter(u => u.type!=='commerce' && !YEARS_FIRST(u))},
+    {title:'Commerce (E3005 double degree)', items: catalog.filter(u => u.type==='commerce')}
   ];
   function YEARS_FIRST(u){ return (u.year===1) || (u.year===2 && u.semester===1) || u.code==='SCI1000'; }
 
@@ -477,7 +527,7 @@ function renderCell(y, s, newCodes){
 function unitCard(code, key, isNew){
   const u = byCode(code);
   const card = document.createElement('div');
-  card.className = 'card' + (isNew ? ' card-enter' : '');
+  card.className = `card t-${u.type}` + (isNew ? ' card-enter' : '');
   card.dataset.code = code;
   const flags = flagsFor(code, key);
   card.innerHTML = `
@@ -565,6 +615,51 @@ function removeUnitAnimated(code){
   setTimeout(finish, 250); // safety net if animationend doesn't fire
 }
 
+/* ---------------- quick start ---------------- */
+const ONBOARD_KEY = 'e3007-planner-onboarded-v1';
+const ONBOARD_CUTOFFS = [
+  {y:1, s:1, label:'Through Y1 S1'},
+  {y:1, s:2, label:'Through Y1 S2'},
+  {y:2, s:1, label:'Through Y2 S1'},
+  {y:2, s:2, label:'Through Y2 S2'},
+  {y:3, s:1, label:'Through Y3 S1'},
+  {y:3, s:2, label:'Through Y3 S2'},
+  {y:4, s:1, label:'Through Y4 S1'},
+  {y:4, s:2, label:'Through Y4 S2'},
+];
+
+function renderOnboardGrid(){
+  const el = document.getElementById('onboardGrid');
+  el.innerHTML = '';
+  ONBOARD_CUTOFFS.forEach(({y,s,label}) => {
+    const count = catalog.filter(u => u.type!=='commerce' && (u.year*10+u.semester) <= (y*10+s)).length;
+    const btn = document.createElement('button');
+    btn.innerHTML = `<b>${label}</b>${count} core/specialisation unit${count===1?'':'s'} added`;
+    btn.addEventListener('click', () => applyQuickStart(y*10+s));
+    el.appendChild(btn);
+  });
+}
+
+function applyQuickStart(cutoffRank){
+  catalog.forEach(u => {
+    if(u.type === 'commerce') return;
+    if((u.year*10 + u.semester) > cutoffRank) return;
+    addUnit(u.code, slotKey(u.year, u.semester));
+  });
+  saveState();
+  refreshAll();
+  closeOnboard();
+}
+
+function openOnboard(){
+  renderOnboardGrid();
+  document.getElementById('onboardVeil').hidden = false;
+}
+function closeOnboard(){
+  document.getElementById('onboardVeil').hidden = true;
+  try{ localStorage.setItem(ONBOARD_KEY, '1'); }catch(e){}
+}
+
 function refreshAll(){
   renderCatalog(document.getElementById('searchInput').value);
   renderGrid();
@@ -635,11 +730,21 @@ document.getElementById('resetBtn').addEventListener('click', () => {
 });
 
 /* ---------------- init ---------------- */
+document.getElementById('quickStartBtn').addEventListener('click', openOnboard);
+document.getElementById('onboardScratch').addEventListener('click', closeOnboard);
+document.getElementById('onboardVeil').addEventListener('click', (e) => {
+  if(e.target.id === 'onboardVeil') closeOnboard();
+});
+
 (async function init(){
   populateYearSelect();
   await loadCatalog();
   loadState();
   refreshAll();
+  const isEmpty = Object.values(placements).every(arr => arr.length === 0) && customUnits.length === 0;
+  let alreadyOnboarded = false;
+  try{ alreadyOnboarded = !!localStorage.getItem(ONBOARD_KEY); }catch(e){}
+  if(isEmpty && !alreadyOnboarded) openOnboard();
 })();
 </script>
 </body>
