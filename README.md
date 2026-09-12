@@ -26,7 +26,7 @@ Click any unit and its lineage lights up: everything it depends on in amber (ups
 **A real catalog, organised sanely**
 - 70 units in a collapsible folder tree with counts on each folder — 23 electrical or common first-year, 47 commerce
 - Search auto-expands whatever matches
-- Add your own custom units for anything outside the catalog (looking at you, economics electives)
+- Add your own custom units for anything outside the catalog (looking at you, engineering electives)
 
 **Made yours**
 - It asks your name on the first visit. The header then reads "{Your name}'s course plan," with a little ink-stamp monogram of your initials.
