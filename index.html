@@ -183,7 +183,7 @@
   }
   .onboard-scratch:hover{border-color:var(--sub); color:var(--ink);}
 
-  .legend{max-width:1040px; margin:28px auto 0; display:flex; gap:16px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--sub); padding-top:16px; border-top:1px solid var(--line);}
+  .legend{max-width:1040px; margin:0 auto 22px; display:flex; gap:16px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--sub); padding-bottom:16px; border-bottom:1px solid var(--line);}
   .legend span{display:flex; align-items:center; gap:5px;}
   .legend i{width:7px; height:7px; border-radius:50%; display:inline-block;}
 
@@ -276,8 +276,6 @@
       </div>
     </div>
 
-    <div class="grid" id="planGrid"></div>
-
     <div class="legend">
       <span><i style="background:var(--core)"></i>core</span>
       <span><i style="background:var(--spec)"></i>specialisation</span>
@@ -288,6 +286,8 @@
       <span style="color:var(--down)">&mdash; downstream (needs this)</span>
       <span style="color:var(--warn)">&mdash; flagged</span>
     </div>
+
+    <div class="grid" id="planGrid"></div>
   </main>
 
 </div>
