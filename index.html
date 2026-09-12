@@ -45,12 +45,28 @@
 
   /* ---------- header ---------- */
   .topbar{max-width:1040px; margin:0 auto 24px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap;}
+  .title-row{display:flex; align-items:center; gap:12px;}
   .topbar h1{font-family:'Fraunces',serif; font-weight:700; font-size:30px;}
   .topbar .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--sub); margin-bottom:6px;}
-  .summary{display:flex; gap:20px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--sub);}
+  .summary{display:flex; align-items:center; gap:20px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--sub);}
   .summary b{color:var(--ink); font-variant-numeric:tabular-nums;}
-  .reset-btn{background:none; border:1px solid var(--line-strong); color:var(--sub); font-size:11px; padding:5px 10px; border-radius:2px; transition:border-color .18s ease, color .18s ease;}
-  .reset-btn:hover{border-color:var(--warn); color:var(--warn);}
+
+  .monogram{
+    position:relative; width:34px; height:34px; border-radius:50%; border:1.5px solid var(--core); color:var(--core);
+    display:flex; align-items:center; justify-content:center; flex:none;
+    font-family:'Fraunces',serif; font-weight:600; font-size:13px; letter-spacing:.02em;
+    transform:rotate(-6deg); opacity:.85;
+  }
+  .monogram::before{
+    content:""; position:absolute; inset:-5px; border-radius:50%; border:1px solid var(--core); opacity:.35;
+  }
+
+  .settings-btn{
+    width:32px; height:32px; border-radius:50%; border:1px solid var(--line-strong); background:var(--card-bg);
+    color:var(--sub); display:flex; align-items:center; justify-content:center; flex:none;
+    transition:border-color .15s ease, color .15s ease, transform .3s ease;
+  }
+  .settings-btn:hover{border-color:var(--core); color:var(--core); transform:rotate(45deg);}
 
   /* ---------- catalog panel ---------- */
   .catalog-head{padding:20px 18px 14px; border-bottom:1px solid var(--line);}
@@ -178,9 +194,15 @@
   }
   .modal-veil[hidden]{display:none;}
   .modal{
-    background:var(--card-bg); border:1px solid var(--line-strong); border-radius:3px; box-shadow:0 12px 40px rgba(43,29,18,.25);
+    position:relative; background:var(--card-bg); border:1px solid var(--line-strong); border-radius:3px; box-shadow:0 12px 40px rgba(43,29,18,.25);
     max-width:480px; width:100%; padding:26px 28px 24px;
   }
+  .modal-x{
+    position:absolute; top:16px; right:16px; width:26px; height:26px; border-radius:50%; border:1px solid var(--line-strong);
+    background:none; color:var(--sub); font-size:16px; line-height:1; display:flex; align-items:center; justify-content:center;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .modal-x:hover{border-color:var(--warn); color:var(--warn);}
   .modal .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sub);}
   .modal h2{font-family:'Fraunces',serif; font-weight:700; font-size:22px; margin-top:4px;}
   .modal-copy{font-size:12.5px; color:var(--sub); line-height:1.5; margin-top:10px;}
@@ -196,6 +218,24 @@
     font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.04em; border-radius:2px; transition:border-color .15s ease, color .15s ease;
   }
   .onboard-scratch:hover{border-color:var(--sub); color:var(--ink);}
+
+  .settings-field{margin-top:16px;}
+  .settings-field label{
+    display:block; font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase;
+    color:var(--faint); margin-bottom:5px;
+  }
+  .settings-field input{
+    width:100%; padding:8px 10px; border:1px solid var(--line-strong); background:var(--panel);
+    font-family:'IBM Plex Sans',sans-serif; font-size:13px; color:var(--ink); border-radius:2px;
+  }
+  .settings-field input:focus{outline:1.5px solid var(--core); outline-offset:0;}
+  .settings-actions{display:flex; flex-direction:column; gap:8px; margin-top:18px;}
+  .settings-actions .onboard-scratch{margin-top:0;}
+  .settings-danger{
+    width:100%; margin-top:18px; padding:10px; background:none; border:1px solid var(--warn-bg); color:var(--warn);
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.04em; border-radius:2px; transition:background .15s ease;
+  }
+  .settings-danger:hover{background:var(--warn-bg);}
 
   .legend{max-width:1040px; margin:0 auto 22px; display:flex; gap:16px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--sub); padding-bottom:16px; border-bottom:1px solid var(--line);}
   .legend span{display:flex; align-items:center; gap:5px;}
@@ -280,13 +320,15 @@
     <div class="topbar">
       <div>
         <div class="eyebrow">E3007 &middot; Electrical &amp; Computer Systems &mdash; Clayton, 2024 commencing</div>
-        <h1>Your course plan</h1>
+        <div class="title-row">
+          <h1 id="planTitle">Your course plan</h1>
+          <div class="monogram" id="monogram" hidden></div>
+        </div>
       </div>
       <div class="summary">
         <div>units placed &middot; <b id="sumUnits">0</b></div>
         <div>credit points &middot; <b id="sumCp">0</b></div>
-        <button class="reset-btn" id="quickStartBtn">Quick start&hellip;</button>
-        <button class="reset-btn" id="resetBtn">Reset plan</button>
+        <button class="settings-btn" id="settingsBtn" title="Settings" aria-label="Settings"></button>
       </div>
     </div>
 
@@ -309,10 +351,33 @@
 <div class="modal-veil" id="onboardVeil" hidden>
   <div class="modal" role="dialog" aria-labelledby="onboardTitle">
     <div class="eyebrow">E3007 &middot; Electrical</div>
-    <h2 id="onboardTitle">Quick start</h2>
+    <h2 id="onboardTitle">Welcome</h2>
+    <div class="settings-field">
+      <label for="onboardName">What should we call you?</label>
+      <input type="text" id="onboardName" placeholder="e.g. Sahel" autocomplete="given-name">
+    </div>
     <p class="modal-copy">Already partway through? Pick how far you've gotten and every core/specialisation unit up to that point gets added in its canonical slot &mdash; edit or remove anything after, nothing here is final.</p>
     <div class="onboard-grid" id="onboardGrid"></div>
     <button class="onboard-scratch" id="onboardScratch">Start from a blank plan</button>
+  </div>
+</div>
+
+<div class="modal-veil" id="settingsVeil" hidden>
+  <div class="modal" role="dialog" aria-labelledby="settingsTitle">
+    <button class="modal-x" id="settingsClose" aria-label="Close settings">&times;</button>
+    <div class="eyebrow">E3007 &middot; Electrical</div>
+    <h2 id="settingsTitle">Settings</h2>
+    <div class="settings-field">
+      <label for="settingsName">Your name</label>
+      <input type="text" id="settingsName" placeholder="e.g. Sahel" autocomplete="given-name">
+    </div>
+    <div class="settings-actions">
+      <button class="onboard-scratch" id="settingsQuickStart">Quick start&hellip;</button>
+      <button class="onboard-scratch" id="settingsExport">Export plan (.json)</button>
+      <button class="onboard-scratch" id="settingsImport">Import plan&hellip;</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </div>
+    <button class="settings-danger" id="settingsReset">Reset plan</button>
   </div>
 </div>
 
@@ -327,6 +392,7 @@ let placements = {};       // "Y{y}S{s}" -> [code, ...]
 let selectedCode = null;
 let knownPlacedCodes = new Set(); // for entrance-animation diffing — codes placed as of the last render
 let openGroups = new Set(); // catalog-group keys the user has manually expanded (persists across re-renders)
+let userName = '';
 
 function icon(path){
   return `<svg class="icon-svg" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
@@ -335,7 +401,8 @@ const ICONS = {
   plus: icon('<path d="M8 2.5v11M2.5 8h11"/>'),
   arrowRight: icon('<path d="M2.5 8h10.5M9 4l4 4-4 4"/>'),
   check: icon('<path d="M3 8.5l3.3 3.3L13 4.5"/>'),
-  cross: icon('<path d="M4 4l8 8M12 4l-8 8"/>')
+  cross: icon('<path d="M4 4l8 8M12 4l-8 8"/>'),
+  settings: icon('<line x1="2" y1="4.5" x2="14" y2="4.5"/><circle cx="6" cy="4.5" r="1.6" fill="currentColor" stroke="none"/><line x1="2" y1="8" x2="14" y2="8"/><circle cx="10.5" cy="8" r="1.6" fill="currentColor" stroke="none"/><line x1="2" y1="11.5" x2="14" y2="11.5"/><circle cx="5" cy="11.5" r="1.6" fill="currentColor" stroke="none"/>')
 };
 
 function slotKey(y,s){ return `Y${y}S${s}`; }
@@ -365,11 +432,12 @@ function loadState(){
     const data = JSON.parse(raw);
     if(data.placements) placements = Object.assign(placements, data.placements);
     if(data.customUnits) customUnits = data.customUnits;
+    if(typeof data.name === 'string') userName = data.name;
   }catch(e){ console.warn('planner: could not read saved plan', e); }
 }
 function saveState(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({placements, customUnits}));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({placements, customUnits, name: userName}));
   }catch(e){ console.warn('planner: could not save plan', e); }
 }
 
@@ -804,17 +872,97 @@ document.getElementById('customForm').addEventListener('submit', (e) => {
 
 document.getElementById('searchInput').addEventListener('input', (e) => renderCatalog(e.target.value));
 
-document.getElementById('resetBtn').addEventListener('click', () => {
+function resetPlan(){
   if(!confirm('Clear your whole plan? This removes every placed unit and custom unit.')) return;
   YEARS.forEach(y => SEMS.forEach(s => placements[slotKey(y,s)] = []));
   customUnits = [];
   selectedCode = null;
   saveState();
   refreshAll();
+}
+
+/* ---------------- identity (name + monogram) ---------------- */
+function getInitials(name){
+  return name.trim().split(/\s+/).slice(0,2).map(w => w[0]).join('').toUpperCase();
+}
+function updateIdentity(){
+  const title = document.getElementById('planTitle');
+  const mono = document.getElementById('monogram');
+  if(userName){
+    title.textContent = `${userName}’s course plan`;
+    mono.textContent = getInitials(userName);
+    mono.hidden = false;
+  }else{
+    title.textContent = 'Your course plan';
+    mono.hidden = true;
+  }
+  document.getElementById('onboardName').value = userName;
+  document.getElementById('settingsName').value = userName;
+}
+function setName(v){
+  userName = v.trim();
+  saveState();
+  updateIdentity();
+}
+document.getElementById('onboardName').addEventListener('input', (e) => setName(e.target.value));
+document.getElementById('settingsName').addEventListener('input', (e) => setName(e.target.value));
+
+/* ---------------- settings panel ---------------- */
+function openSettings(){
+  updateIdentity();
+  document.getElementById('settingsVeil').hidden = false;
+}
+function closeSettings(){ document.getElementById('settingsVeil').hidden = true; }
+document.getElementById('settingsBtn').addEventListener('click', openSettings);
+document.getElementById('settingsClose').addEventListener('click', closeSettings);
+document.getElementById('settingsVeil').addEventListener('click', (e) => {
+  if(e.target.id === 'settingsVeil') closeSettings();
+});
+document.getElementById('settingsQuickStart').addEventListener('click', () => { closeSettings(); openOnboard(); });
+document.getElementById('settingsReset').addEventListener('click', () => { closeSettings(); resetPlan(); });
+
+document.getElementById('settingsExport').addEventListener('click', () => {
+  const data = {name: userName, placements, customUnits, exportedAt: new Date().toISOString()};
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'e3007-course-plan.json';
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+});
+
+const importFile = document.getElementById('importFile');
+document.getElementById('settingsImport').addEventListener('click', () => importFile.click());
+importFile.addEventListener('change', () => {
+  const file = importFile.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try{
+      const data = JSON.parse(reader.result);
+      const validSlot = k => /^Y[1-5]S[12]$/.test(k);
+      if(typeof data.placements !== 'object' || !Object.keys(data.placements).every(validSlot)){
+        throw new Error('not a recognisable plan file');
+      }
+      YEARS.forEach(y => SEMS.forEach(s => placements[slotKey(y,s)] = data.placements[slotKey(y,s)] || []));
+      customUnits = Array.isArray(data.customUnits) ? data.customUnits : [];
+      if(typeof data.name === 'string') userName = data.name;
+      saveState();
+      updateIdentity();
+      refreshAll();
+      closeSettings();
+    }catch(e){
+      alert('Could not read that file — is it a plan exported from this planner?');
+    }
+    importFile.value = '';
+  };
+  reader.readAsText(file);
 });
 
 /* ---------------- init ---------------- */
-document.getElementById('quickStartBtn').addEventListener('click', openOnboard);
 document.getElementById('onboardScratch').addEventListener('click', closeOnboard);
 document.getElementById('onboardVeil').addEventListener('click', (e) => {
   if(e.target.id === 'onboardVeil') closeOnboard();
@@ -822,8 +970,10 @@ document.getElementById('onboardVeil').addEventListener('click', (e) => {
 
 (async function init(){
   populateYearSelect();
+  document.getElementById('settingsBtn').innerHTML = ICONS.settings;
   await loadCatalog();
   loadState();
+  updateIdentity();
   refreshAll();
   const isEmpty = Object.values(placements).every(arr => arr.length === 0) && customUnits.length === 0;
   let alreadyOnboarded = false;

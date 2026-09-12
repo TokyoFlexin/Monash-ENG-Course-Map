@@ -277,6 +277,39 @@ Every folder shows a unit count and is collapsed by default.
   subfolder within Commerce) via direct DOM inspection of each `<details>`
   element's `open` state, not just visually.
 
+## Personalization (this session, follow-up)
+Sahel asked for a name prompt on first visit + a settings section top-right,
+and gave free rein on the rest ("surprise me"). Delivered:
+- **First-visit name prompt** — folded into the existing onboarding modal
+  rather than a separate step (it already owns the "first thing you see"
+  moment). Updates the header live as you type, before you've even
+  dismissed the modal.
+- **"{Name}'s course plan"** replaces "Your course plan" once a name is set;
+  falls back to the generic title if it's ever cleared.
+- **Ink-stamp monogram** — a small circular badge with the user's initials
+  next to the title, double-ringed and tilted a few degrees like a rubber
+  stamp on a transcript. This is the "surprise" — ties into the same
+  stamp/ledger visual language already used for semester tags on cards in
+  the Ledger-evolved redesign, rather than being a random addition.
+- **Settings panel** (gear icon, top-right, replaces the old Quick
+  start/Reset button pair in the topbar): edit your name anytime, Quick
+  start, Reset plan (moved here, kept its confirm dialog), plus two new
+  ones —
+- **Export plan (.json)** and **Import plan** — the "move your plan to
+  another browser/device" need that came up earlier (when quick-start was
+  discussed) and was deliberately deferred. Added now as part of settings
+  since it fits naturally: export downloads `{name, placements,
+  customUnits}` as a file; import validates the shape (every placements key
+  must match `Y[1-5]S[12]`) before applying, rejects with an alert
+  otherwise rather than silently corrupting the plan.
+- Name is now part of the same `STORAGE_KEY` payload as the plan (not a
+  separate localStorage key) — so it round-trips through export/import too.
+- Tested: live header update while typing, full reload persistence (name +
+  monogram + plan all survive), export→import round-trip (via direct JS,
+  since this sandboxed browser can't drive real file download/upload
+  dialogs), import validation correctly rejecting malformed JSON, and the
+  whole settings modal at mobile width (375px).
+
 ## Drag and drop (this session, follow-up)
 Sahel wanted to drag units between semester cells instead of using the
 per-card `<select>` dropdown. Added native HTML5 drag-and-drop:
