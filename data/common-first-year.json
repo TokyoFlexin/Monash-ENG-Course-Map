@@ -1,0 +1,112 @@
+{
+  "_meta": {
+    "description": "Common First Year for E3007 Bachelor of Engineering (Honours) and Bachelor of Science — identical regardless of specialisation. Shared by every specialisation data file. This is the catalog for the planner: units here are known/compulsory with real prerequisite data. Everything else (science major/elective choices, breadth, Commerce units) is added as a custom unit inside the planner itself, not pre-listed here.",
+    "commencingYear": 2024,
+    "campus": "Clayton",
+    "foundationPathway": "Foundation mathematics only (ENG1090) — VCE Specialist Maths >30 not met, VCE Physics >25 met",
+    "sources": [
+      "https://www.monash.edu/__data/assets/pdf_file/0003/3303642/2024-map-E3007.pdf (course progression map, 2024 commencing, updated 14 Oct 2025)",
+      "https://handbook.monash.edu/2024/units/{CODE} (prerequisite/corequisite/prohibition rules, 2024 Handbook)"
+    ]
+  },
+  "units": [
+    {
+      "code": "ENG1090",
+      "title": "Foundation mathematics",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 1,
+      "type": "core",
+      "prerequisites": [],
+      "prerequisiteText": "VCE Mathematical Methods (Units 3 & 4) or equivalent",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": ["MTH1020"],
+      "notes": ""
+    },
+    {
+      "code": "ENG1013",
+      "title": "Engineering smart systems",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 1,
+      "type": "core",
+      "prerequisites": [],
+      "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics (Units 3 & 4) recommended",
+      "corequisites": [],
+      "corequisiteText": "Must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
+      "prohibitions": ["ENG1002", "ENG1003"],
+      "notes": ""
+    },
+    {
+      "code": "ENG1005",
+      "title": "Engineering mathematics",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 2,
+      "type": "core",
+      "prerequisites": ["ENG1090"],
+      "prerequisiteText": "ENG1090 Foundation mathematics (passed), OR VCE Specialist Mathematics (Units 3 & 4) with a raw study score of at least 30",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": ["MTH1030", "MTH1035"],
+      "notes": "Handbook: enrolling without meeting this prerequisite risks discontinuation from the unit."
+    },
+    {
+      "code": "ENG1014",
+      "title": "Engineering numerical analysis",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 2,
+      "type": "core",
+      "prerequisites": [],
+      "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics recommended",
+      "corequisites": ["ENG1005"],
+      "corequisiteText": "ENG1005 Engineering mathematics; must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
+      "prohibitions": ["ENG1060"],
+      "notes": ""
+    },
+    {
+      "code": "ENG1011",
+      "title": "Engineering methods",
+      "creditPoints": 6,
+      "year": 2,
+      "semester": 1,
+      "type": "core",
+      "prerequisites": [],
+      "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics recommended",
+      "corequisites": [],
+      "corequisiteText": "Must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
+      "prohibitions": ["ENG1001"],
+      "notes": ""
+    },
+    {
+      "code": "ENG1012",
+      "title": "Engineering design",
+      "creditPoints": 6,
+      "year": 2,
+      "semester": 1,
+      "type": "core",
+      "prerequisites": [],
+      "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent",
+      "corequisites": [],
+      "corequisiteText": "Must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
+      "prohibitions": ["ENG1002"],
+      "notes": ""
+    },
+    {
+      "code": "SCI1000",
+      "title": "Science communication to influence change",
+      "creditPoints": 6,
+      "year": 2,
+      "semester": 1,
+      "type": "core",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": ["SCI2010", "SCI2015", "SCI1005"],
+      "notes": "Faculty of Science unit, identical across every E3007 specialisation table."
+    }
+  ]
+}

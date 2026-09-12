@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E3007 Course Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --bg:#eeeeec; --panel:#f4f5f0; --line:#d4d6d1; --line-strong:#b9bcb3;
+    --ink:#1a1c1a; --sub:#5c625d; --faint:#9a9f92;
+    --core:#23271f; --spec:#8a6a3f; --elective:#2b4a63; --commerce:#5f3d73; --breadth:#3c6e71;
+    --up:#8a6a3f; --down:#2b4a63; --warn:#a3352b; --warn-bg:#fbeceb;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0; padding:0;}
+  body{background:var(--bg); color:var(--ink); font-family:'IBM Plex Sans',sans-serif; font-size:14px;}
+  h1,h2,h3{text-wrap:balance; margin:0;}
+  button{font-family:inherit; cursor:pointer;}
+  select{font-family:inherit;}
+  ::selection{background:#d8dbce;}
+
+  @keyframes cardIn{ from{opacity:0; transform:translateY(5px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes cardOut{ from{opacity:1; transform:translateY(0) scale(1);} to{opacity:0; transform:translateY(-3px) scale(.97);} }
+  @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
+  @keyframes pulse{ 0%{transform:scale(1);} 35%{transform:scale(1.18);} 100%{transform:scale(1);} }
+  .card-enter{ animation:cardIn .32s cubic-bezier(.2,.7,.3,1) both; }
+  .card-exit{ animation:cardOut .18s ease-in both; pointer-events:none; }
+  .pulse{ display:inline-block; animation:pulse .3s ease; }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
+  }
+
+  /* ---------- layout shell ---------- */
+  .app{display:flex; min-height:100vh;}
+  .catalog{
+    width:320px; flex:none; border-right:1px solid var(--line); background:var(--panel);
+    display:flex; flex-direction:column; position:sticky; top:0; height:100vh; overflow-y:auto;
+  }
+  .main{flex:1; min-width:0; padding:28px 32px 80px;}
+
+  /* ---------- header ---------- */
+  .topbar{max-width:1040px; margin:0 auto 24px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap;}
+  .topbar h1{font-family:'Fraunces',serif; font-weight:600; font-size:26px;}
+  .topbar .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--sub); margin-bottom:6px;}
+  .summary{display:flex; gap:20px; font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--sub);}
+  .summary b{color:var(--ink); font-variant-numeric:tabular-nums;}
+  .reset-btn{background:none; border:1px solid var(--line-strong); color:var(--sub); font-size:11px; padding:5px 10px; border-radius:2px; transition:border-color .18s ease, color .18s ease;}
+  .reset-btn:hover{border-color:var(--warn); color:var(--warn);}
+
+  /* ---------- catalog panel ---------- */
+  .catalog-head{padding:20px 18px 14px; border-bottom:1px solid var(--line);}
+  .catalog-head .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sub);}
+  .catalog-head h2{font-family:'Fraunces',serif; font-weight:600; font-size:18px; margin-top:4px;}
+  .catalog-search{margin:14px 18px 0; width:calc(100% - 36px);}
+  .catalog-search input{width:100%; padding:7px 9px; border:1px solid var(--line-strong); background:#fff; font-family:'IBM Plex Mono',monospace; font-size:12px; border-radius:2px;}
+  .catalog-search input:focus{outline:1.5px solid var(--core); outline-offset:0;}
+  .catalog-group{padding:14px 18px 4px;}
+  .catalog-group-title{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-bottom:8px;}
+  .cat-row{
+    display:flex; align-items:flex-start; gap:8px; padding:8px 6px; margin:0 -6px; border-top:1px solid var(--line);
+    border-radius:2px; transition:background .18s ease;
+  }
+  .cat-row:hover{background:rgba(26,28,26,.035);}
+  .catalog-group .cat-row:first-of-type{border-top:none;}
+  .cat-row .dot{width:6px; height:6px; border-radius:50%; margin-top:5px; flex:none;}
+  .cat-row .meta{flex:1; min-width:0;}
+  .cat-row .code{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink); display:flex; gap:6px; align-items:baseline;}
+  .cat-row .code .cp{color:var(--faint); font-weight:400;}
+  .cat-row .title{font-size:12px; color:var(--sub); line-height:1.3; margin-top:2px;}
+  .cat-row .slot{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--faint); margin-top:2px;}
+  .cat-row button.toggle{
+    flex:none; width:22px; height:22px; border-radius:50%; border:1px solid var(--line-strong); background:#fff;
+    color:var(--sub); position:relative; overflow:hidden;
+    transition:border-color .18s ease, color .18s ease, transform .18s ease;
+  }
+  .cat-row button.toggle.added{border-color:var(--ink); color:var(--ink);}
+  .cat-row button.toggle:hover{border-color:var(--core); color:var(--core); transform:scale(1.06);}
+  .cat-row button.toggle .icon{
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    transition:opacity .16s ease, transform .16s ease;
+  }
+  .cat-row button.toggle .icon-b{opacity:0; transform:translateX(3px);}
+  .cat-row button.toggle:hover .icon-a{opacity:0; transform:translateX(-3px);}
+  .cat-row button.toggle:hover .icon-b{opacity:1; transform:translateX(0);}
+
+  .add-custom{margin:18px 18px 20px; padding-top:16px; border-top:1px solid var(--line);}
+  .add-custom summary{font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--sub); cursor:pointer; list-style:none;}
+  .add-custom summary::-webkit-details-marker{display:none;}
+  .add-custom summary::before{content:"+ "; color:var(--ink);}
+  .add-custom[open] summary::before{content:"\2212 ";}
+  .add-custom form{margin-top:12px; display:flex; flex-direction:column; gap:8px;}
+  .add-custom label{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.05em; text-transform:uppercase; color:var(--faint); display:block; margin-bottom:3px;}
+  .add-custom input, .add-custom select, .add-custom textarea{
+    width:100%; padding:6px 8px; border:1px solid var(--line-strong); background:#fff; font-family:'IBM Plex Sans',sans-serif; font-size:12px; border-radius:2px;
+  }
+  .add-custom .row2{display:grid; grid-template-columns:1fr 1fr; gap:8px;}
+  .add-custom textarea{resize:vertical; min-height:40px; font-family:'IBM Plex Sans',sans-serif;}
+  .add-custom .submit{margin-top:4px; background:var(--core); color:#fff; border:none; padding:8px; font-size:12px; border-radius:2px; transition:opacity .15s ease, transform .15s ease;}
+  .add-custom .submit:hover{opacity:.88;}
+  .add-custom .submit:active{transform:scale(.98);}
+  .add-custom summary{transition:color .15s ease;}
+  .add-custom summary:hover{color:var(--ink);}
+
+  /* ---------- grid ---------- */
+  .grid{max-width:1040px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:14px 20px;}
+  .year-label{grid-column:1 / -1; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin:22px 0 -2px; padding-top:14px; border-top:1px solid var(--line);}
+  .year-label:first-of-type{border-top:none; margin-top:0; padding-top:0;}
+  .cell{border:1px solid var(--line); background:var(--panel); padding:12px 14px 14px; min-height:96px; border-radius:2px;}
+  .cell-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
+  .cell-head .label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--sub);}
+  .cell-head .cp-total{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); font-variant-numeric:tabular-nums;}
+  .cell-empty{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--faint); padding:8px 0;}
+
+  .card{
+    border:1px solid var(--line-strong); background:#fff; padding:8px 10px 9px; margin-bottom:8px; border-radius:2px;
+    cursor:pointer; transition:opacity .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .15s ease;
+  }
+  .card:hover{transform:translateY(-1px);}
+  .card:last-child{margin-bottom:0;}
+  .card-top{display:flex; justify-content:space-between; align-items:baseline; gap:8px;}
+  .card .code{font-family:'IBM Plex Mono',monospace; font-size:11px; display:flex; align-items:baseline; gap:6px;}
+  .card .code .dot{width:6px; height:6px; border-radius:50%; display:inline-block;}
+  .card .cp{color:var(--faint); font-size:10.5px; font-variant-numeric:tabular-nums;}
+  .card .title{font-family:'Fraunces',serif; font-size:13.5px; line-height:1.28; margin-top:4px;}
+  .card .note{font-size:10.5px; color:var(--sub); line-height:1.35; margin-top:5px;}
+  .card .controls{display:flex; align-items:center; gap:6px; margin-top:7px;}
+  .card .controls select{font-size:10px; font-family:'IBM Plex Mono',monospace; border:1px solid var(--line); background:#fbfbf9; padding:2px 4px; border-radius:2px; color:var(--sub);}
+  .card .remove{font-size:10px; color:var(--faint); border:none; background:none; padding:2px 4px; transition:color .15s ease;}
+  .card .remove:hover{color:var(--warn);}
+  .card .flags{margin-top:6px; display:flex; flex-direction:column; gap:3px; animation:fadeIn .3s ease;}
+  .card .flag{font-size:10.5px; color:var(--warn); background:var(--warn-bg); padding:3px 6px; border-radius:2px; line-height:1.35;}
+
+  .card.dim{opacity:.32;}
+  .card.up{border-color:var(--up); box-shadow:0 0 0 1px var(--up) inset;}
+  .card.down{border-color:var(--down); box-shadow:0 0 0 1px var(--down) inset;}
+  .card.selected{outline:1.5px solid var(--ink); outline-offset:2px;}
+
+  .type-core{background:var(--core);} .type-specialisation{background:var(--spec);}
+  .type-elective{background:var(--elective);} .type-commerce{background:var(--commerce);}
+  .type-breadth{background:var(--breadth);}
+
+  .legend{max-width:1040px; margin:28px auto 0; display:flex; gap:16px; flex-wrap:wrap; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--sub); padding-top:16px; border-top:1px solid var(--line);}
+  .legend span{display:flex; align-items:center; gap:5px;}
+  .legend i{width:7px; height:7px; border-radius:50%; display:inline-block;}
+
+  @media (max-width:860px){
+    .app{flex-direction:column;}
+    .catalog{width:100%; height:auto; position:relative; max-height:none; border-right:none; border-bottom:1px solid var(--line);}
+    .main{padding:22px 16px 60px;}
+    .grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+
+  <aside class="catalog">
+    <div class="catalog-head">
+      <div class="eyebrow">E3007 &middot; Electrical</div>
+      <h2>Catalog</h2>
+    </div>
+    <div class="catalog-search">
+      <input type="text" id="searchInput" placeholder="filter units&hellip;">
+    </div>
+    <div id="catalogGroups"></div>
+
+    <details class="add-custom">
+      <summary>Add a custom unit</summary>
+      <form id="customForm">
+        <div>
+          <label>Code</label>
+          <input type="text" id="cf-code" placeholder="e.g. BFC1001" required>
+        </div>
+        <div>
+          <label>Title</label>
+          <input type="text" id="cf-title" placeholder="e.g. Financial accounting" required>
+        </div>
+        <div class="row2">
+          <div>
+            <label>Credit points</label>
+            <input type="number" id="cf-cp" value="6" min="0" step="1" required>
+          </div>
+          <div>
+            <label>Type</label>
+            <select id="cf-type">
+              <option value="commerce">Commerce</option>
+              <option value="elective">Elective</option>
+              <option value="breadth">Breadth</option>
+            </select>
+          </div>
+        </div>
+        <div class="row2">
+          <div>
+            <label>Year</label>
+            <select id="cf-year"></select>
+          </div>
+          <div>
+            <label>Semester</label>
+            <select id="cf-sem"><option value="1">S1</option><option value="2">S2</option></select>
+          </div>
+        </div>
+        <div>
+          <label>Semester offered (for the flag check)</label>
+          <select id="cf-offered">
+            <option value="both">Both S1 &amp; S2</option>
+            <option value="1">S1 only</option>
+            <option value="2">S2 only</option>
+            <option value="unknown">Unknown</option>
+          </select>
+        </div>
+        <div>
+          <label>Notes (optional &mdash; e.g. its own prereqs)</label>
+          <textarea id="cf-notes" placeholder="e.g. prereq: BFC1001"></textarea>
+        </div>
+        <button type="submit" class="submit">Add to plan</button>
+      </form>
+    </details>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <div class="eyebrow">E3007 &middot; Electrical &amp; Computer Systems &mdash; Clayton, 2024 commencing</div>
+        <h1>Your course plan</h1>
+      </div>
+      <div class="summary">
+        <div>units placed &middot; <b id="sumUnits">0</b></div>
+        <div>credit points &middot; <b id="sumCp">0</b></div>
+        <button class="reset-btn" id="resetBtn">Reset plan</button>
+      </div>
+    </div>
+
+    <div class="grid" id="planGrid"></div>
+
+    <div class="legend">
+      <span><i style="background:var(--core)"></i>core</span>
+      <span><i style="background:var(--spec)"></i>specialisation</span>
+      <span><i style="background:var(--elective)"></i>elective</span>
+      <span><i style="background:var(--commerce)"></i>commerce</span>
+      <span><i style="background:var(--breadth)"></i>breadth</span>
+      <span style="color:var(--up)">&mdash; upstream (must come first)</span>
+      <span style="color:var(--down)">&mdash; downstream (needs this)</span>
+      <span style="color:var(--warn)">&mdash; flagged</span>
+    </div>
+  </main>
+
+</div>
+
+<script>
+const STORAGE_KEY = 'e3007-planner-v1';
+const YEARS = [1,2,3,4,5];
+const SEMS = [1,2];
+
+let catalog = [];          // known units from data files
+let customUnits = [];      // {code,title,creditPoints,semesterOffered,type,notes,year,semester} + id
+let placements = {};       // "Y{y}S{s}" -> [code, ...]
+let selectedCode = null;
+let knownPlacedCodes = new Set(); // for entrance-animation diffing — codes placed as of the last render
+
+function icon(path){
+  return `<svg class="icon-svg" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
+}
+const ICONS = {
+  plus: icon('<path d="M8 2.5v11M2.5 8h11"/>'),
+  arrowRight: icon('<path d="M2.5 8h10.5M9 4l4 4-4 4"/>'),
+  check: icon('<path d="M3 8.5l3.3 3.3L13 4.5"/>'),
+  cross: icon('<path d="M4 4l8 8M12 4l-8 8"/>')
+};
+
+function slotKey(y,s){ return `Y${y}S${s}`; }
+SEMS; YEARS.forEach(y => SEMS.forEach(s => { placements[slotKey(y,s)] = []; }));
+
+function allUnits(){ return catalog.concat(customUnits); }
+function byCode(code){ return allUnits().find(u => u.code === code); }
+
+function placementOf(code){
+  for(const key in placements){
+    if(placements[key].includes(code)) return key;
+  }
+  return null;
+}
+
+function parseSlot(key){
+  const m = key.match(/^Y(\d)S(\d)$/);
+  return {y:+m[1], s:+m[2]};
+}
+function rank(key){ const {y,s} = parseSlot(key); return y*10+s; }
+
+/* ---------------- persistence ---------------- */
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const data = JSON.parse(raw);
+    if(data.placements) placements = Object.assign(placements, data.placements);
+    if(data.customUnits) customUnits = data.customUnits;
+  }catch(e){ console.warn('planner: could not read saved plan', e); }
+}
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({placements, customUnits}));
+  }catch(e){ console.warn('planner: could not save plan', e); }
+}
+
+/* ---------------- data load ---------------- */
+async function loadCatalog(){
+  const [common, elec] = await Promise.all([
+    fetch('data/common-first-year.json').then(r => r.json()),
+    fetch('data/electrical.json').then(r => r.json())
+  ]);
+  catalog = common.units.concat(elec.units);
+}
+
+/* ---------------- validation ---------------- */
+function flagsFor(code, slotKeyStr){
+  const u = byCode(code);
+  const flags = [];
+  const {y, s} = parseSlot(slotKeyStr);
+  const myRank = y*10+s;
+
+  // semester offering: only custom units carry a structured semesterOffered field.
+  // Catalog units deliberately aren't hard-checked here — Handbook "Offerings" reflect a
+  // specific teaching year and can shift (verified during testing: the 2024 Handbook shows
+  // ECE3161 as S1-only, but the course map places it at Y4 S2 — a real discrepancy, not
+  // something safe to encode as a strict rule). Any known offering pattern is surfaced as
+  // plain-language text in the unit's `notes` instead of a flag.
+  const offered = u.semesterOffered;
+  if(offered && offered !== 'both' && offered !== 'unknown'){
+    if(String(offered) !== String(s)) flags.push(`Not usually offered in S${s} (offered S${offered}).`);
+  }
+
+  // prerequisites: must appear strictly earlier
+  (u.prerequisites || []).forEach(pcode => {
+    const pKey = placementOf(pcode);
+    const pUnit = byCode(pcode);
+    if(!pKey){
+      flags.push(`Prerequisite ${pcode}${pUnit ? ' ('+pUnit.title+')' : ''} isn't in your plan yet.`);
+    } else if(rank(pKey) >= myRank){
+      flags.push(`Prerequisite ${pcode} is placed in ${pKey.replace('Y','Y').replace('S',' S')} — needs to come before ${slotKeyStr.replace('S',' S')}.`);
+    }
+  });
+
+  // corequisites: same or earlier
+  (u.corequisites || []).forEach(ccode => {
+    const cKey = placementOf(ccode);
+    const cUnit = byCode(ccode);
+    if(!cKey){
+      flags.push(`Corequisite ${ccode}${cUnit ? ' ('+cUnit.title+')' : ''} isn't in your plan yet.`);
+    } else if(rank(cKey) > myRank){
+      flags.push(`Corequisite ${ccode} is placed later than ${slotKeyStr.replace('S',' S')}.`);
+    }
+  });
+
+  // prohibitions: anywhere in the plan
+  (u.prohibitions || []).forEach(xcode => {
+    if(placementOf(xcode)){
+      flags.push(`Prohibited combination: can't count both this and ${xcode}.`);
+    }
+  });
+
+  return flags;
+}
+
+/* ---------------- chain highlighting ---------------- */
+function chainFor(code){
+  const up = new Set(), down = new Set();
+  const placedCodes = new Set(Object.values(placements).flat());
+  (function walkUp(c){
+    const u = byCode(c);
+    if(!u) return;
+    (u.prerequisites||[]).concat(u.corequisites||[]).forEach(p => {
+      if(placedCodes.has(p) && !up.has(p)){ up.add(p); walkUp(p); }
+    });
+  })(code);
+  (function walkDown(c){
+    placedCodes.forEach(oc => {
+      const ou = byCode(oc);
+      if(!ou) return;
+      const deps = (ou.prerequisites||[]).concat(ou.corequisites||[]);
+      if(deps.includes(c) && !down.has(oc)){ down.add(oc); walkDown(oc); }
+    });
+  })(code);
+  return {up, down};
+}
+
+/* ---------------- rendering: catalog ---------------- */
+function renderCatalog(filter){
+  const el = document.getElementById('catalogGroups');
+  el.innerHTML = '';
+  const groups = [
+    {title:'Common first year', items: catalog.filter(u => YEARS_FIRST(u))},
+    {title:'Electrical specialisation', items: catalog.filter(u => !YEARS_FIRST(u))}
+  ];
+  function YEARS_FIRST(u){ return (u.year===1) || (u.year===2 && u.semester===1) || u.code==='SCI1000'; }
+
+  const q = (filter||'').trim().toLowerCase();
+
+  groups.forEach(g => {
+    const items = g.items.filter(u => !q || u.code.toLowerCase().includes(q) || u.title.toLowerCase().includes(q));
+    if(!items.length) return;
+    const wrap = document.createElement('div');
+    wrap.className = 'catalog-group';
+    const h = document.createElement('div');
+    h.className = 'catalog-group-title';
+    h.textContent = g.title;
+    wrap.appendChild(h);
+    items.forEach(u => wrap.appendChild(catalogRow(u)));
+    el.appendChild(wrap);
+  });
+}
+
+function catalogRow(u){
+  const row = document.createElement('div');
+  row.className = 'cat-row';
+  const placed = !!placementOf(u.code);
+  row.innerHTML = `
+    <span class="dot type-${u.type}"></span>
+    <div class="meta">
+      <div class="code"><span>${u.code}</span><span class="cp">${u.creditPoints}cp</span></div>
+      <div class="title">${u.title}</div>
+      <div class="slot">canonical Y${u.year} S${u.semester}</div>
+    </div>
+    <button class="toggle ${placed ? 'added' : ''}" title="${placed ? 'Remove from plan' : 'Add to plan'}">
+      <span class="icon icon-a">${placed ? ICONS.check : ICONS.plus}</span>
+      <span class="icon icon-b">${placed ? ICONS.cross : ICONS.arrowRight}</span>
+    </button>
+  `;
+  row.querySelector('.toggle').addEventListener('click', () => {
+    if(placementOf(u.code)){
+      removeUnitAnimated(u.code);
+    }else{
+      addUnit(u.code, slotKey(u.year, u.semester));
+      refreshAll();
+    }
+  });
+  return row;
+}
+
+/* ---------------- rendering: grid ---------------- */
+function renderGrid(){
+  const el = document.getElementById('planGrid');
+  const currentCodes = new Set(Object.values(placements).flat());
+  const newCodes = new Set([...currentCodes].filter(c => !knownPlacedCodes.has(c)));
+  el.innerHTML = '';
+  YEARS.forEach(y => {
+    const yl = document.createElement('div');
+    yl.className = 'year-label';
+    yl.textContent = `Year ${y}`;
+    el.appendChild(yl);
+    SEMS.forEach(s => el.appendChild(renderCell(y,s,newCodes)));
+  });
+  applySelection();
+  knownPlacedCodes = currentCodes;
+}
+
+function renderCell(y, s, newCodes){
+  const key = slotKey(y,s);
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  const codes = placements[key];
+  const cp = codes.reduce((sum,c) => sum + (byCode(c)?.creditPoints||0), 0);
+  cell.innerHTML = `<div class="cell-head"><span class="label">Semester ${s}</span><span class="cp-total">${cp}cp</span></div>`;
+  if(!codes.length){
+    const empty = document.createElement('div');
+    empty.className = 'cell-empty';
+    empty.textContent = 'no units placed';
+    cell.appendChild(empty);
+  }
+  codes.forEach(code => cell.appendChild(unitCard(code, key, newCodes.has(code))));
+  return cell;
+}
+
+function unitCard(code, key, isNew){
+  const u = byCode(code);
+  const card = document.createElement('div');
+  card.className = 'card' + (isNew ? ' card-enter' : '');
+  card.dataset.code = code;
+  const flags = flagsFor(code, key);
+  card.innerHTML = `
+    <div class="card-top">
+      <span class="code"><span class="dot type-${u.type}"></span>${u.code}</span>
+      <span class="cp">${u.creditPoints}cp</span>
+    </div>
+    <div class="title">${u.title}</div>
+    ${u.notes ? `<div class="note">${u.notes}</div>` : ''}
+    <div class="controls">
+      <select class="move"></select>
+      <button class="remove">remove</button>
+    </div>
+    ${flags.length ? `<div class="flags">${flags.map(f => `<div class="flag">${f}</div>`).join('')}</div>` : ''}
+  `;
+  const moveSelect = card.querySelector('.move');
+  YEARS.forEach(y => SEMS.forEach(s => {
+    const opt = document.createElement('option');
+    opt.value = slotKey(y,s);
+    opt.textContent = `Y${y} S${s}`;
+    if(slotKey(y,s) === key) opt.selected = true;
+    moveSelect.appendChild(opt);
+  }));
+  moveSelect.addEventListener('change', () => {
+    removeUnit(code, false);
+    addUnit(code, moveSelect.value);
+    refreshAll();
+  });
+  card.querySelector('.remove').addEventListener('click', (e) => {
+    e.stopPropagation();
+    removeUnitAnimated(code);
+  });
+  card.addEventListener('click', () => {
+    selectedCode = (selectedCode === code) ? null : code;
+    applySelection();
+  });
+  return card;
+}
+
+function applySelection(){
+  const cards = document.querySelectorAll('.card');
+  if(!selectedCode){
+    cards.forEach(c => c.classList.remove('up','down','dim','selected'));
+    return;
+  }
+  const {up, down} = chainFor(selectedCode);
+  cards.forEach(card => {
+    const c = card.dataset.code;
+    card.classList.remove('up','down','dim','selected');
+    if(c === selectedCode) card.classList.add('selected');
+    else if(up.has(c)) card.classList.add('up');
+    else if(down.has(c)) card.classList.add('down');
+    else card.classList.add('dim');
+  });
+}
+
+/* ---------------- mutation ---------------- */
+function addUnit(code, key){
+  if(!placements[key]) return;
+  if(placements[key].includes(code)) return;
+  placements[key].push(code);
+  saveState();
+}
+function removeUnit(code, alsoSave=true){
+  for(const key in placements){
+    placements[key] = placements[key].filter(c => c !== code);
+  }
+  if(selectedCode === code) selectedCode = null;
+  if(alsoSave) saveState();
+}
+
+function removeUnitAnimated(code){
+  const cardEl = document.querySelector(`.card[data-code="${code}"]`);
+  if(!cardEl){ removeUnit(code); refreshAll(); return; }
+  knownPlacedCodes.delete(code); // so it re-animates in if added straight back
+  cardEl.classList.add('card-exit');
+  let done = false;
+  const finish = () => {
+    if(done) return;
+    done = true;
+    removeUnit(code);
+    refreshAll();
+  };
+  cardEl.addEventListener('animationend', finish, {once:true});
+  setTimeout(finish, 250); // safety net if animationend doesn't fire
+}
+
+function refreshAll(){
+  renderCatalog(document.getElementById('searchInput').value);
+  renderGrid();
+  updateSummary();
+}
+
+function updateSummary(){
+  const codes = Object.values(placements).flat();
+  const cp = codes.reduce((sum,c) => sum + (byCode(c)?.creditPoints||0), 0);
+  setPulsed('sumUnits', codes.length);
+  setPulsed('sumCp', cp);
+}
+function setPulsed(id, value){
+  const el = document.getElementById(id);
+  if(el.textContent === String(value)) return;
+  el.textContent = value;
+  el.classList.remove('pulse');
+  void el.offsetWidth; // restart the animation
+  el.classList.add('pulse');
+}
+
+/* ---------------- custom unit form ---------------- */
+function populateYearSelect(){
+  const sel = document.getElementById('cf-year');
+  YEARS.forEach(y => {
+    const opt = document.createElement('option');
+    opt.value = y; opt.textContent = `Year ${y}`;
+    sel.appendChild(opt);
+  });
+}
+
+document.getElementById('customForm').addEventListener('submit', (e) => {
+  e.preventDefault();
+  const code = document.getElementById('cf-code').value.trim().toUpperCase();
+  if(!code) return;
+  const year = +document.getElementById('cf-year').value;
+  const semester = +document.getElementById('cf-sem').value;
+  const unit = {
+    code,
+    title: document.getElementById('cf-title').value.trim(),
+    creditPoints: +document.getElementById('cf-cp').value,
+    type: document.getElementById('cf-type').value,
+    semesterOffered: document.getElementById('cf-offered').value,
+    notes: document.getElementById('cf-notes').value.trim(),
+    prerequisites: [],
+    corequisites: [],
+    prohibitions: [],
+    year, semester
+  };
+  customUnits = customUnits.filter(u => u.code !== code); // replace if re-added
+  customUnits.push(unit);
+  addUnit(code, slotKey(year, semester));
+  saveState();
+  e.target.reset();
+  document.getElementById('cf-cp').value = 6;
+  refreshAll();
+});
+
+document.getElementById('searchInput').addEventListener('input', (e) => renderCatalog(e.target.value));
+
+document.getElementById('resetBtn').addEventListener('click', () => {
+  if(!confirm('Clear your whole plan? This removes every placed unit and custom unit.')) return;
+  YEARS.forEach(y => SEMS.forEach(s => placements[slotKey(y,s)] = []));
+  customUnits = [];
+  selectedCode = null;
+  saveState();
+  refreshAll();
+});
+
+/* ---------------- init ---------------- */
+(async function init(){
+  populateYearSelect();
+  await loadCatalog();
+  loadState();
+  refreshAll();
+})();
+</script>
+</body>
+</html>
