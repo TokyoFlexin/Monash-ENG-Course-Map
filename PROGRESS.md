@@ -333,11 +333,42 @@ it just never got the same "Semester X offering only" plain-text note that
 ECE2191 already carries, not a bug in the deliberate "don't hard-check
 semester for catalog units" design decision (see Decisions section above).
 Fixed the note on ECE2071 in electrical.json.
-- **Open question for Sahel**: this note was only ever added when I happened
-  to notice an offering quirk during original research — it was never a
-  systematic pass. Worth asking whether he wants a full audit of every
-  catalog unit's actual Handbook offering pattern (23 electrical + 47
-  commerce = 70 units) to catch any other missing notes like this one.
+
+**Follow-up: full offering audit (Sahel asked for this explicitly).**
+Cross-checked the 47 Commerce units first — the Finance/Business
+Analytics/Econometrics elective research already captured offering data
+during the original parallel-agent research, so no re-checking needed there
+(verified programmatically: every unit either has an explicit offering note
+or was confirmed both-semester). Part A core (8 units) and Economics core (3
+units) were previously checked live and are genuinely both-semester at
+Clayton — correctly have no note.
+
+That left 24 units never systematically checked: all 7 common-first-year +
+16 electrical (minus ECE2071/ECE2191 already fixed) + the 3 Economics core
+units, re-verified as a final sanity pass. Split across 2 parallel research
+agents checking only the Handbook "Offerings" section (prereqs/coreqs were
+already correct, no need to redo). Result: **11 more units had the exact
+same silent gap as ECE2071** — genuinely single-semester at Clayton with no
+note saying so. Fixed all 11:
+- **Common first year**: ENG1090 (S1 only)
+- **Electrical**: ECE2131 (S1 only), ECE2072 (S2 only), ECE2111 (S2 only),
+  ECE3051 (S1 only), ECE3073 (S1 only), ECE3122 (S2 only, appended to its
+  existing ECE3121-substitution note), ECE3141 (S1 only), ECE4191 (S2 only,
+  appended to its existing note), ECE4132 (S2 only)
+- **ECE3161** was the most important find — this is the exact discrepancy
+  already described in this file's Decisions section above (course map
+  places it Y4 S2, Handbook says Semester 1 only) but that decision was
+  apparently never actually written into the JSON `notes` field. Same class
+  of bug as ECE2071: documented in PROGRESS.md, never landed in the data.
+  Fixed now with a note explaining the discrepancy and why the placement
+  was kept as-is.
+- Economics core (ECC1100, ECC2000, ECC2010) re-confirmed both-semester,
+  no note needed, no change.
+- All placements were already consistent with their real offering semester
+  except ECE3161 (documented above) — no other silent conflicts found.
+- Validated: all 12 fixed units (this pass + ECE2071 from before) now
+  actually carry the note in the JSON, spot-checked live in the app that it
+  renders on the card.
 
 ## Next up
 - Once Sahel actually picks a major, trim the other 3 out (or just leave them

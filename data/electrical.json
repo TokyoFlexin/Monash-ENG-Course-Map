@@ -70,7 +70,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": ["ECE2031"],
-      "notes": ""
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
     },
     {
       "code": "ECE2072",
@@ -84,7 +84,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "If already completed as a First Year technical elective, must be replaced with another ECE technical elective (or an engineering minor unit) of equal or higher level."
+      "notes": "If already completed as a First Year technical elective, must be replaced with another ECE technical elective (or an engineering minor unit) of equal or higher level. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook."
     },
     {
       "code": "ECE2111",
@@ -98,7 +98,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": ["ECE2011"],
-      "notes": ""
+      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook."
     },
     {
       "code": "ECE3051",
@@ -112,7 +112,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": ""
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
     },
     {
       "code": "ECE3073",
@@ -126,7 +126,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": ""
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
     },
     {
       "code": "ECE3122",
@@ -140,7 +140,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": ["ECE3121"],
-      "notes": "Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting — you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4."
+      "notes": "Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting — you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) — no Semester 1 offering exists."
     },
     {
       "code": "ECE3161",
@@ -154,7 +154,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": ["ECE3062"],
-      "notes": ""
+      "notes": "Course map places this at Y4 S2, but the 2024 Handbook shows it as Semester 1 offering only at Clayton (no S2 offering that year) — a real discrepancy between the recommended sequence and the specific 2024 timetable. Kept at the course map's Y4 S2 slot since sequencing can shift year to year; re-check the live Handbook before actually enrolling."
     },
     {
       "code": "ENG4701",
@@ -182,7 +182,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": ["ECE2041"],
-      "notes": ""
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
     },
     {
       "code": "ENG0001",
@@ -224,7 +224,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": ["ECE3091", "TRC4407"],
-      "notes": "Not open to exchange/study abroad students."
+      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook."
     },
     {
       "code": "ECE4132",
@@ -238,7 +238,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": ["ECE3062"],
-      "notes": ""
+      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook."
     }
   ]
 }
