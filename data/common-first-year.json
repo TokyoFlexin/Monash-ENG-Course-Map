@@ -21,8 +21,11 @@
       "prerequisiteText": "VCE Mathematical Methods (Units 3 & 4) or equivalent",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["MTH1020"],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
+      "prohibitions": [
+        "MTH1020"
+      ],
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1"
     },
     {
       "code": "ENG1013",
@@ -35,8 +38,12 @@
       "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics (Units 3 & 4) recommended",
       "corequisites": [],
       "corequisiteText": "Must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
-      "prohibitions": ["ENG1002", "ENG1003"],
-      "notes": ""
+      "prohibitions": [
+        "ENG1002",
+        "ENG1003"
+      ],
+      "notes": "",
+      "semesterOffered": "both"
     },
     {
       "code": "ENG1005",
@@ -45,12 +52,18 @@
       "year": 1,
       "semester": 2,
       "type": "core",
-      "prerequisites": ["ENG1090"],
+      "prerequisites": [
+        "ENG1090"
+      ],
       "prerequisiteText": "ENG1090 Foundation mathematics (passed), OR VCE Specialist Mathematics (Units 3 & 4) with a raw study score of at least 30",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["MTH1030", "MTH1035"],
-      "notes": "Handbook: enrolling without meeting this prerequisite risks discontinuation from the unit."
+      "prohibitions": [
+        "MTH1030",
+        "MTH1035"
+      ],
+      "notes": "Handbook: enrolling without meeting this prerequisite risks discontinuation from the unit.",
+      "semesterOffered": "both"
     },
     {
       "code": "ENG1014",
@@ -61,10 +74,15 @@
       "type": "core",
       "prerequisites": [],
       "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics recommended",
-      "corequisites": ["ENG1005"],
+      "corequisites": [
+        "ENG1005"
+      ],
       "corequisiteText": "ENG1005 Engineering mathematics; must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
-      "prohibitions": ["ENG1060"],
-      "notes": ""
+      "prohibitions": [
+        "ENG1060"
+      ],
+      "notes": "",
+      "semesterOffered": "both"
     },
     {
       "code": "ENG1011",
@@ -77,8 +95,11 @@
       "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics recommended",
       "corequisites": [],
       "corequisiteText": "Must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
-      "prohibitions": ["ENG1001"],
-      "notes": ""
+      "prohibitions": [
+        "ENG1001"
+      ],
+      "notes": "",
+      "semesterOffered": "both"
     },
     {
       "code": "ENG1012",
@@ -91,8 +112,11 @@
       "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent",
       "corequisites": [],
       "corequisiteText": "Must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
-      "prohibitions": ["ENG1002"],
-      "notes": ""
+      "prohibitions": [
+        "ENG1002"
+      ],
+      "notes": "",
+      "semesterOffered": "both"
     },
     {
       "code": "SCI1000",
@@ -105,8 +129,13 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["SCI2010", "SCI2015", "SCI1005"],
-      "notes": "Faculty of Science unit, identical across every E3007 specialisation table."
+      "prohibitions": [
+        "SCI2010",
+        "SCI2015",
+        "SCI1005"
+      ],
+      "notes": "Faculty of Science unit, identical across every E3007 specialisation table.",
+      "semesterOffered": "both"
     }
   ]
 }

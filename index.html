@@ -458,12 +458,13 @@ function flagsFor(code, slotKeyStr){
   const {y, s} = parseSlot(slotKeyStr);
   const myRank = y*10+s;
 
-  // semester offering: only custom units carry a structured semesterOffered field.
-  // Catalog units deliberately aren't hard-checked here — Handbook "Offerings" reflect a
-  // specific teaching year and can shift (verified during testing: the 2024 Handbook shows
-  // ECE3161 as S1-only, but the course map places it at Y4 S2 — a real discrepancy, not
-  // something safe to encode as a strict rule). Any known offering pattern is surfaced as
-  // plain-language text in the unit's `notes` instead of a flag.
+  // semester offering: every catalog unit was audited against the 2024 Handbook and carries
+  // a real semesterOffered value ("1", "2", "both", or "unknown" for campus-restricted units
+  // our simple model can't represent). This is a genuine warn-not-block flag, same as
+  // prereqs/coreqs/prohibitions below — it can fire even at a unit's own canonical slot
+  // (e.g. ECE3161's course-map slot is Y4 S2, but the Handbook shows it as S1-only; see its
+  // `notes` for why the placement was kept anyway). Moving the unit to a semester matching
+  // its real offering clears the flag.
   const offered = u.semesterOffered;
   if(offered && offered !== 'both' && offered !== 'unknown'){
     if(String(offered) !== String(s)) flags.push(`Not usually offered in S${s} (offered S${offered}).`);

@@ -370,6 +370,38 @@ note saying so. Fixed all 11:
   actually carry the note in the JSON, spot-checked live in the app that it
   renders on the card.
 
+## Offering notes → real flags (this session, follow-up)
+Sahel placed ECE2071 in Semester 2 after the audit above and still got no
+warning. Root cause: the earlier fix only added plain-text `notes` — static
+text that renders regardless of which semester you place a unit in. It
+never actually checked anything. The app *already* has a real semester-check
+in `flagsFor()` (`index.html`), driven by a `semesterOffered` field — but
+that field was only ever set by the "add custom unit" form, never present
+on catalog units, so the check silently never fired for anything in the
+catalog. The `notes` text was cosmetic; the actual bug was this missing
+field.
+
+Fixed properly: added a verified `semesterOffered` ("1"/"2"/"both"/"unknown")
+to all 70 catalog units — the 23 electrical/common-first-year ones from
+this session's audit, plus all 47 Commerce units (cross-referencing the
+offering data already captured in their `notes` during the original major
+research, so no re-checking needed there). `"unknown"` used for the 4
+units that are real Handbook options but campus-restricted rather than
+semester-restricted (BFX3301, BFX3871, BEX3726, ETF3500) — the app's model
+only understands semesters, not campus, so asserting "both" for those would
+overstate what we actually verified.
+- This turns every single-semester unit's `notes` text into a live,
+  reactive flag exactly like prereqs/coreqs/prohibitions — appears when
+  placed off-semester, clears when moved to the right one. Tested live:
+  ECE2071 in S2 now shows "Not usually offered in S2 (offered S1)." next to
+  its two prerequisite flags; moving it to S1 clears just that one flag.
+- ECE3161 now flags at ITS OWN course-map canonical slot (Y4 S2), since
+  that's genuinely not its real offering semester — intentional, matches
+  the discrepancy already explained in its `notes`. This is exactly what
+  warn-not-block is for: surface the tension, let Sahel decide, never block.
+- Updated the stale code comment in `flagsFor()` that explained the *old*
+  (incorrect) reasoning for not checking catalog units.
+
 ## Next up
 - Once Sahel actually picks a major, trim the other 3 out (or just leave them
   — they don't affect validation, only add sidebar length).

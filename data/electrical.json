@@ -23,12 +23,19 @@
       "year": 2,
       "semester": 2,
       "type": "specialisation",
-      "prerequisites": ["ENG1014", "ENG1005"],
+      "prerequisites": [
+        "ENG1014",
+        "ENG1005"
+      ],
       "prerequisiteText": "(ENG1014 Engineering numerical analysis OR ENG1060 Computing for engineers) AND ENG1005 Engineering mathematics",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["MTH2010", "MTH2015"],
-      "notes": ""
+      "prohibitions": [
+        "MTH2010",
+        "MTH2015"
+      ],
+      "notes": "",
+      "semesterOffered": "both"
     },
     {
       "code": "ECE2191",
@@ -37,12 +44,18 @@
       "year": 2,
       "semester": 2,
       "type": "specialisation",
-      "prerequisites": ["ENG1005", "ENG1013"],
+      "prerequisites": [
+        "ENG1005",
+        "ENG1013"
+      ],
       "prerequisiteText": "(ENG1005 Engineering mathematics OR MTH1030 Techniques for modelling) AND (ENG1013 Engineering smart systems OR ENG1003 Engineering mobile apps OR FIT1045 Introduction to programming)",
-      "corequisites": ["ENG2005"],
+      "corequisites": [
+        "ENG2005"
+      ],
       "corequisiteText": "ENG2005 Advanced engineering mathematics OR MTH2010 Multivariable calculus",
       "prohibitions": [],
-      "notes": "Semester 2 offering only."
+      "notes": "Semester 2 offering only.",
+      "semesterOffered": "2"
     },
     {
       "code": "ECE2071",
@@ -51,12 +64,16 @@
       "year": 3,
       "semester": 1,
       "type": "specialisation",
-      "prerequisites": ["ENG1013", "ENG1014"],
+      "prerequisites": [
+        "ENG1013",
+        "ENG1014"
+      ],
       "prerequisiteText": "(ENG1003 Engineering mobile apps OR ENG1013 Engineering smart systems) AND (ENG1060 Computing for engineers OR ENG1014 Engineering numerical analysis)",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "2024 Handbook lists this unit under the title 'Computer organisation and programming'; the current course map (updated Oct 2025) shows the title as 'Systems programming'. Same code, same content area — title changed at some point after 2024. Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
+      "notes": "2024 Handbook lists this unit under the title 'Computer organisation and programming'; the current course map (updated Oct 2025) shows the title as 'Systems programming'. Same code, same content area — title changed at some point after 2024. Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1"
     },
     {
       "code": "ECE2131",
@@ -65,12 +82,18 @@
       "year": 3,
       "semester": 1,
       "type": "specialisation",
-      "prerequisites": ["ENG1013", "ENG1005"],
+      "prerequisites": [
+        "ENG1013",
+        "ENG1005"
+      ],
       "prerequisiteText": "(ENG1013 Engineering smart systems OR ENG1012 Engineering design OR ENG1003 OR ENG1002) AND ENG1005 Engineering mathematics",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["ECE2031"],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
+      "prohibitions": [
+        "ECE2031"
+      ],
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1"
     },
     {
       "code": "ECE2072",
@@ -84,7 +107,8 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "If already completed as a First Year technical elective, must be replaced with another ECE technical elective (or an engineering minor unit) of equal or higher level. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook."
+      "notes": "If already completed as a First Year technical elective, must be replaced with another ECE technical elective (or an engineering minor unit) of equal or higher level. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
+      "semesterOffered": "2"
     },
     {
       "code": "ECE2111",
@@ -93,12 +117,18 @@
       "year": 3,
       "semester": 2,
       "type": "specialisation",
-      "prerequisites": ["ENG1014", "ENG1005"],
+      "prerequisites": [
+        "ENG1014",
+        "ENG1005"
+      ],
       "prerequisiteText": "(ENG1014 Engineering numerical analysis OR ENG1060 Computing for engineers) AND ENG1005 Engineering mathematics",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["ECE2011"],
-      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook."
+      "prohibitions": [
+        "ECE2011"
+      ],
+      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
+      "semesterOffered": "2"
     },
     {
       "code": "ECE3051",
@@ -107,12 +137,15 @@
       "year": 4,
       "semester": 1,
       "type": "specialisation",
-      "prerequisites": ["ECE2131"],
+      "prerequisites": [
+        "ECE2131"
+      ],
       "prerequisiteText": "ECE2131 Electrical circuits",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1"
     },
     {
       "code": "ECE3073",
@@ -121,12 +154,16 @@
       "year": 4,
       "semester": 1,
       "type": "specialisation",
-      "prerequisites": ["ECE2071", "ECE2072"],
+      "prerequisites": [
+        "ECE2071",
+        "ECE2072"
+      ],
       "prerequisiteText": "(ECE2071 Systems programming OR FIT1008 Fundamentals of algorithms OR FIT2085 Fundamentals of algorithms for engineers) AND ECE2072 Digital systems",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1"
     },
     {
       "code": "ECE3122",
@@ -135,12 +172,18 @@
       "year": 4,
       "semester": 2,
       "type": "specialisation",
-      "prerequisites": ["ENG2005", "ECE2131"],
+      "prerequisites": [
+        "ENG2005",
+        "ECE2131"
+      ],
       "prerequisiteText": "ENG2005 Advanced engineering mathematics AND ECE2131 Electrical circuits",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["ECE3121"],
-      "notes": "Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting — you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) — no Semester 1 offering exists."
+      "prohibitions": [
+        "ECE3121"
+      ],
+      "notes": "Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting — you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) — no Semester 1 offering exists.",
+      "semesterOffered": "2"
     },
     {
       "code": "ECE3161",
@@ -149,12 +192,17 @@
       "year": 4,
       "semester": 2,
       "type": "specialisation",
-      "prerequisites": ["ECE2131"],
+      "prerequisites": [
+        "ECE2131"
+      ],
       "prerequisiteText": "ECE2131 Electrical circuits OR ECE2031 Circuits and control",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["ECE3062"],
-      "notes": "Course map places this at Y4 S2, but the 2024 Handbook shows it as Semester 1 offering only at Clayton (no S2 offering that year) — a real discrepancy between the recommended sequence and the specific 2024 timetable. Kept at the course map's Y4 S2 slot since sequencing can shift year to year; re-check the live Handbook before actually enrolling."
+      "prohibitions": [
+        "ECE3062"
+      ],
+      "notes": "Course map places this at Y4 S2, but the 2024 Handbook shows it as Semester 1 offering only at Clayton (no S2 offering that year) — a real discrepancy between the recommended sequence and the specific 2024 timetable. Kept at the course map's Y4 S2 slot since sequencing can shift year to year; re-check the live Handbook before actually enrolling.",
+      "semesterOffered": "1"
     },
     {
       "code": "ENG4701",
@@ -165,10 +213,15 @@
       "type": "core",
       "prerequisites": [],
       "prerequisiteText": "Completion of 96 credit points in engineering study (E3007 is explicitly named at this threshold in the Handbook rule; other courses use 108 CP)",
-      "corequisites": ["ENG0001"],
+      "corequisites": [
+        "ENG0001"
+      ],
       "corequisiteText": "ENG0001 Engineering continuous professional development (Clayton-based students)",
-      "prohibitions": ["ECE4094"],
-      "notes": "Capstone project, part A of two. Not open to exchange/study abroad students."
+      "prohibitions": [
+        "ECE4094"
+      ],
+      "notes": "Capstone project, part A of two. Not open to exchange/study abroad students.",
+      "semesterOffered": "both"
     },
     {
       "code": "ECE3141",
@@ -181,8 +234,11 @@
       "prerequisiteText": "Completion of 48 credit points in engineering study",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["ECE2041"],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook."
+      "prohibitions": [
+        "ECE2041"
+      ],
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1"
     },
     {
       "code": "ENG0001",
@@ -193,10 +249,16 @@
       "type": "core",
       "prerequisites": [],
       "prerequisiteText": "",
-      "corequisites": ["ENG4701"],
+      "corequisites": [
+        "ENG4701"
+      ],
       "corequisiteText": "ENG4701 Final year project A (or an equivalent capstone/industry-experience unit)",
-      "prohibitions": ["ENG0002", "ENG0003"],
-      "notes": "0 credit points. Requires 420 hours of Continuous Professional Development accumulated across the whole degree, not just this semester. Must be enrolled in an engineering bachelor's degree."
+      "prohibitions": [
+        "ENG0002",
+        "ENG0003"
+      ],
+      "notes": "0 credit points. Requires 420 hours of Continuous Professional Development accumulated across the whole degree, not just this semester. Must be enrolled in an engineering bachelor's degree.",
+      "semesterOffered": "both"
     },
     {
       "code": "ENG4702",
@@ -205,12 +267,17 @@
       "year": 5,
       "semester": 2,
       "type": "core",
-      "prerequisites": ["ENG4701"],
+      "prerequisites": [
+        "ENG4701"
+      ],
       "prerequisiteText": "ENG4701 Final year project A",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["ECE4095"],
-      "notes": "Capstone project, part B of two. Not open to exchange/study abroad students."
+      "prohibitions": [
+        "ECE4095"
+      ],
+      "notes": "Capstone project, part B of two. Not open to exchange/study abroad students.",
+      "semesterOffered": "both"
     },
     {
       "code": "ECE4191",
@@ -219,12 +286,21 @@
       "year": 5,
       "semester": 2,
       "type": "specialisation",
-      "prerequisites": ["ECE3073", "ECE3141", "ECE2072", "ECE3161"],
+      "prerequisites": [
+        "ECE3073",
+        "ECE3141",
+        "ECE2072",
+        "ECE3161"
+      ],
       "prerequisiteText": "ECE3073 Computer systems AND (ECE3141 Information and networks OR TRC3500 Sensors and artificial perception) AND ECE2072 Digital systems AND ECE3161 Analogue electronics",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["ECE3091", "TRC4407"],
-      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook."
+      "prohibitions": [
+        "ECE3091",
+        "TRC4407"
+      ],
+      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
+      "semesterOffered": "2"
     },
     {
       "code": "ECE4132",
@@ -233,12 +309,18 @@
       "year": 5,
       "semester": 2,
       "type": "specialisation",
-      "prerequisites": ["ECE2111", "ENG2005"],
+      "prerequisites": [
+        "ECE2111",
+        "ENG2005"
+      ],
       "prerequisiteText": "(ECE2011 Signal processing OR ECE2111 Signals and systems) AND ENG2005 Advanced engineering mathematics",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["ECE3062"],
-      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook."
+      "prohibitions": [
+        "ECE3062"
+      ],
+      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
+      "semesterOffered": "2"
     }
   ]
 }
