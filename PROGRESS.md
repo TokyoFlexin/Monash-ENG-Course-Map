@@ -10,7 +10,7 @@ Running log across sessions. Claude updates this as work happens.
 - [x] Step 1 — Research (unit data + prereqs/coreqs) — DONE
 - [x] Step 2 — UI (design directions -> build) — DONE, see below
 - [x] Step 3 — Test — DONE, formal pass complete, see below
-- [ ] Step 4 — Deploy — not started, needs Sahel's yes on host per INSTRUCTIONS.md
+- [x] Step 4 — Deploy — DONE, see below
 
 ## Product pivot (important — read this before touching the UI)
 Original brief (INSTRUCTIONS.md) described a **static visual map**: pre-filled,
@@ -123,6 +123,18 @@ No app code changes were needed — the existing `flagsFor()` logic
 - Monash Handbook unit pages (2024 version): https://handbook.monash.edu/2024/units/{CODE}
   — prereqs/coreqs/prohibitions live behind a collapsed "Rules" accordion (must click
   to expand); WebFetch alone doesn't render this (JS SPA), browser tool required.
+
+## Deploy (this session)
+Confirmed with Sahel first: **GitHub Pages**, public repo (free tier requires
+it; nothing sensitive in the code — public Handbook unit codes/titles only).
+- Installed `gh` via Homebrew (wasn't present), Sahel authenticated it himself
+  via `gh auth login` (browser flow — his account, his credentials).
+- Repo: [github.com/TokyoFlexin/monash-course-map](https://github.com/TokyoFlexin/monash-course-map)
+  — initial commit made locally first (`git init`, all project files except
+  the stale `monash-course-map.zip`, gitignored), then pushed via
+  `gh repo create --source=. --push`.
+- Pages enabled via `gh api repos/.../pages` (branch `main`, root).
+- Live URL: https://tokyoflexin.github.io/monash-course-map/
 
 ## Next up
 - Formal Step 3 pass: prohibition-conflict flag with two custom units; a
