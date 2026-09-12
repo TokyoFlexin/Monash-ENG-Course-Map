@@ -325,6 +325,20 @@ per-card `<select>` dropdown. Added native HTML5 drag-and-drop:
   requires — confirmed both move-a-placed-card and drag-from-catalog work,
   and that click-to-select-chain and the remove button still work unaffected.
 
+## Data-quality fix: ECE2071 missing offering note (this session, follow-up)
+Sahel noticed placing ECE2071 in Semester 2 gave no warning and asked about
+it. Checked the 2024 Handbook directly (not assumed): ECE2071 is genuinely
+Clayton-Semester-1-only, no S2 offering exists at all. This was a real gap —
+it just never got the same "Semester X offering only" plain-text note that
+ECE2191 already carries, not a bug in the deliberate "don't hard-check
+semester for catalog units" design decision (see Decisions section above).
+Fixed the note on ECE2071 in electrical.json.
+- **Open question for Sahel**: this note was only ever added when I happened
+  to notice an offering quirk during original research — it was never a
+  systematic pass. Worth asking whether he wants a full audit of every
+  catalog unit's actual Handbook offering pattern (23 electrical + 47
+  commerce = 70 units) to catch any other missing notes like this one.
+
 ## Next up
 - Once Sahel actually picks a major, trim the other 3 out (or just leave them
   — they don't affect validation, only add sidebar length).
