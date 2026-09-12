@@ -443,7 +443,11 @@ function renderCatalog(filter){
   const groups = [
     {title:'Common first year', items: catalog.filter(u => u.type!=='commerce' && YEARS_FIRST(u))},
     {title:'Electrical specialisation', items: catalog.filter(u => u.type!=='commerce' && !YEARS_FIRST(u))},
-    {title:'Commerce (E3005 double degree)', items: catalog.filter(u => u.type==='commerce')}
+    {title:'Commerce — core (Part A)', items: catalog.filter(u => u.type==='commerce' && u.major==='core')},
+    {title:'Commerce — Finance major', items: catalog.filter(u => u.type==='commerce' && u.major==='finance')},
+    {title:'Commerce — Economics major', items: catalog.filter(u => u.type==='commerce' && u.major==='economics')},
+    {title:'Commerce — Business Analytics major', items: catalog.filter(u => u.type==='commerce' && u.major==='business-analytics')},
+    {title:'Commerce — Econometrics major', items: catalog.filter(u => u.type==='commerce' && u.major==='econometrics')}
   ];
   function YEARS_FIRST(u){ return (u.year===1) || (u.year===2 && u.semester===1) || u.code==='SCI1000'; }
 

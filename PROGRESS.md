@@ -186,19 +186,64 @@ regardless of major:
   Handbook, not assumed) — only course-level prohibitions against B2007
   (Bachelor of Business), irrelevant to this planner. Not encoded as
   catalog prohibitions since it's not a real conflict for this student.
-- Wired into `index.html`: third `loadCatalog()` fetch, third sidebar group
-  ("Commerce (E3005 double degree)"), grouping logic updated so commerce
-  units don't fall into the Common-First-Year bucket by year-number alone.
+- Wired into `index.html`: third `loadCatalog()` fetch, sidebar grouping
+  updated so commerce units don't fall into the Common-First-Year bucket by
+  year-number alone.
 
-**Not yet added** (documented as `openDecisions` in commerce.json):
-- **Part B (48cp, one major, 8 units across Y3-Y5)** — genuinely can't add
-  this without knowing which of the 11 majors he's choosing (Accounting,
-  Finance, Marketing science, Management studies, etc. — units differ
-  completely per major). **Waiting on his answer.**
+**Part B added (this session, follow-up)** — Sahel hadn't picked a major yet
+("still haven't made my mind, not even in the degree"), shortlisted 4:
+Finance, Economics, Business Analytics, Econometrics. Decided to add all 4 as
+explorable options rather than wait. Researched via 4 parallel background
+research agents (one per major/group), each independently browsing the
+Handbook major pages (`handbook.monash.edu/2024/aos/{CODE}`) and every unit's
+Rules accordion — same rigor as electrical.json, not just the major overview
+page. commerce.json grew from 8 to **47 units**; each now carries a `major`
+field (`core`/`finance`/`economics`/`business-analytics`/`econometrics`) and
+the sidebar splits Commerce into 5 sub-groups accordingly (was one flat list).
+- **Finance** (17): 5 core (BFC2140, BFC2751, BFC3241, BFC3999, ETC2410) +
+  12 electives (choose 3). Real prereq chains found: BFC2751/BFC3241 need
+  BFC2140 first; several electives need BOTH BFC2140 AND BFC2751; BFC3999 is
+  the major's capstone (96cp threshold, no unit prereq, placed last).
+- **Economics** (3 core only — ECC1100, ECC2000, ECC2010): the full elective
+  pool (24cp from 30+ units across 6 overlapping themes) was deliberately
+  **not enumerated**, too large/open to be useful as catalog cards — noted in
+  openDecisions instead, add specific ones as custom units once chosen.
+  Real chain: ECC2010 needs BOTH ECC1000 AND ECC1100.
+- **Econometrics** (5 unique + shares ETC3460 with Finance): core ETC1000 (Part
+  A) + ETC1010 (Business Analytics) + ETC2410 (Finance) already double as its
+  entry units; ETC2440/ETC2520 both accept an engineering substitution — the
+  Handbook explicitly allows ECE2191 (already in this student's Electrical
+  catalog) in place of ETC2520. All 4 "Level 3, choose 3" units need ETC2410.
+- **Business Analytics** (14): 3 core (ETC1010, ETC2420, ETC3250) + 12
+  electives (choose 5, min 2 at Level 3). Found a genuine cross-catalog
+  break: FIT3171 and FIT3179's prerequisites include ENG1003/ENG1013/ENG1014
+  — core Electrical units already in this student's plan — so those may
+  already be unlocked. Found a real gap: FIT3154 needs FIT2086, which isn't
+  in any major's list at all (documented, not silently dropped). Found a real
+  **prohibition pair already in the data**: FIT2094 vs FIT3171 (same
+  "Databases" content at Level 2 vs 3) — tested live, both flag correctly.
+- Every unit's `year`/`semester` is **Claude's suggested placement, not
+  Handbook fact** — Monash doesn't mandate a semester for major electives,
+  only a level 1/2/3 credit mix. Placed Level 1/2 major units in Year 3,
+  Level 3 units in Year 4/5, ordered to respect every real prerequisite chain
+  found (validated: 0 dangling prereq/coreq refs except the documented
+  FIT2086 gap, 0 prerequisite cycles, 0 placements that violate their own
+  chain's ordering).
+- One real bug caught and fixed during validation: several agents correctly
+  found OR-logic prerequisites (e.g. "one of X/Y satisfies this") but the
+  `prerequisites` array only supports AND — I'd initially transcribed a few
+  of these as multi-entry arrays (which the app reads as "need ALL of
+  these"), corrected to single representative codes (ETC3550, ETC3580,
+  ETF3500, FIT3171, FIT3003, FIT3179), full OR logic kept in `prerequisiteText`.
 - The "Additional commerce unit" (6cp, flexible/FREE-eligible) and the
   "Capstone/consulting/international/internship" unit (6cp, ~30 possible
-  codes, Y4 S2 slot) have no fixed code — add as custom units once chosen,
-  same pattern as ECE4099's Professional Practice replacement.
+  codes, Y4 S2 slot) still have no fixed code — add as custom units once
+  chosen, same pattern as ECE4099's Professional Practice replacement.
+- Some Finance/Business Analytics electives turned out not to be normal
+  Clayton semester units: BFX3301 is Caulfield-only (trading-lab, quota
+  limited), BFX3871 and BEX3726 are overseas/immersion study-tour blocks with
+  their own extra costs, ETF3500 was Caulfield-only in the 2024 Handbook.
+  Left in the catalog (they're real Handbook-listed options) but flagged.
 - **electrical.json was deliberately NOT changed**, even though the E3005
   double-degree map places several ECE units in different semesters than the
   E3007 single-degree map already in there (ECE2191 and ECE4132 move to Y3 S2,
@@ -206,16 +251,17 @@ regardless of major:
   Since the transfer isn't confirmed and E3007 is what's actually enrolled
   right now, changing the confirmed data for an unconfirmed transfer felt
   like the wrong risk to take silently. Revisit if the transfer goes through.
-- Source: https://handbook.monash.edu/2024/courses/E3005,
+- Sources: https://handbook.monash.edu/2024/courses/E3005,
   https://handbook.monash.edu/2024/courses/B2001,
+  https://handbook.monash.edu/2024/aos/{FINANCE07,ECONOMIC07,BUSANLMJ01,ECONOMTR05},
   https://www.monash.edu/__data/assets/pdf_file/0020/3303641/2024-map-E3005.pdf
   (fetched via r.jina.ai reader proxy — direct browser navigation to Monash
   PDF assets triggers a download the automation can't complete; the Cloudflare
   block that stops raw curl/WebFetch doesn't apply to jina's fetcher).
 
 ## Next up
-- **Blocking**: Sahel's Commerce major choice, to complete Part B of
-  commerce.json (48cp / 8 units).
+- Once Sahel actually picks a major, trim the other 3 out (or just leave them
+  — they don't affect validation, only add sidebar length).
 - Optional, only if he wants it later: prereq/coreq checking for custom units
   too (he'd need to name which catalog/custom codes they depend on).
 - If the E3005 transfer is confirmed: update electrical.json's year/semester
