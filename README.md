@@ -2,7 +2,7 @@
 
 You drag units onto a Year × Semester grid. The catalog knows the real Handbook: credit points, prerequisites, corequisites, prohibitions, and which semester a unit is actually offered. It flags problems as you go, but it never stops you. Want to put ENG1012 in Year 4? Go ahead. It'll raise an eyebrow, not a barrier.
 
-**[→ Open the planner](https://tokyoflexin.github.io/monash-course-map/)**
+**[→ Open the planner](https://tokyoflexin.github.io/Monash-ENG-Course-Map/)**
 
 ## Why this exists
 
@@ -44,13 +44,13 @@ No gradient soup. No emoji standing in for icons. It's meant to look like someth
 
 It's a static site — no build step, no dependencies, no account.
 
-Just use it: **[tokyoflexin.github.io/monash-course-map](https://tokyoflexin.github.io/monash-course-map/)**
+Just use it: **[tokyoflexin.github.io/Monash-ENG-Course-Map](https://tokyoflexin.github.io/Monash-ENG-Course-Map/)**
 
 Or run it locally:
 
 ```bash
-git clone https://github.com/TokyoFlexin/monash-course-map.git
-cd monash-course-map
+git clone https://github.com/TokyoFlexin/Monash-ENG-Course-Map.git
+cd Monash-ENG-Course-Map
 # open index.html in your browser, or serve it:
 python3 -m http.server 8000
 # then visit http://localhost:8000
@@ -69,6 +69,6 @@ See [`PROGRESS.md`](PROGRESS.md) for the running status log.
 
 ## Fine print
 
-This is unofficial and not affiliated with Monash University. I keep the data as accurate as I can, but the Handbook is the real source of truth, so check it (and your course adviser) before you enrol based on anything here. Found a unit with the wrong data? [Open an issue](https://github.com/TokyoFlexin/monash-course-map/issues/new).
+This is unofficial and not affiliated with Monash University. I keep the data as accurate as I can, but the Handbook is the real source of truth, so check it (and your course adviser) before you enrol based on anything here. Found a unit with the wrong data? [Open an issue](https://github.com/TokyoFlexin/Monash-ENG-Course-Map/issues/new).
 
 *Built by a Monash Engineering student who got sick of planning in a spreadsheet.*

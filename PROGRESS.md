@@ -14,7 +14,7 @@ Running log across sessions. Claude updates this as work happens.
 - [x] Step 2 — UI (design directions -> build) — DONE, see below
 - [x] Step 3 — Test — DONE, formal pass complete, see below
 - [x] Step 4 — Deploy — DONE, see below
-- Live at https://tokyoflexin.github.io/monash-course-map/
+- Live at https://tokyoflexin.github.io/Monash-ENG-Course-Map/
 
 ## Current state (quick orientation — read this first, details below)
 The planner is live and has been through several iteration rounds since
@@ -39,8 +39,8 @@ initial deploy. As of now:
   reset.
 - **Design**: "Ledger, evolved" — warm paper palette, saturated per-type
   colour + left-rule + shadow on cards, Fraunces/IBM Plex Sans+Mono.
-- **Live URL**: https://tokyoflexin.github.io/monash-course-map/ — deployed
-  via GitHub Pages from github.com/TokyoFlexin/monash-course-map, pushed
+- **Live URL**: https://tokyoflexin.github.io/Monash-ENG-Course-Map/ — deployed
+  via GitHub Pages from github.com/TokyoFlexin/Monash-ENG-Course-Map, pushed
   directly after every change this session (nothing pending, working tree
   clean as of the last commit below).
 - **Not yet done**: Commerce major choice (waiting on Sahel), Part B
@@ -203,12 +203,12 @@ Confirmed with Sahel first: **GitHub Pages**, public repo (free tier requires
 it; nothing sensitive in the code — public Handbook unit codes/titles only).
 - Installed `gh` via Homebrew (wasn't present), Sahel authenticated it himself
   via `gh auth login` (browser flow — his account, his credentials).
-- Repo: [github.com/TokyoFlexin/monash-course-map](https://github.com/TokyoFlexin/monash-course-map)
+- Repo: [github.com/TokyoFlexin/Monash-ENG-Course-Map](https://github.com/TokyoFlexin/Monash-ENG-Course-Map)
   — initial commit made locally first (`git init`, all project files except
   the stale `monash-course-map.zip`, gitignored), then pushed via
   `gh repo create --source=. --push`.
 - Pages enabled via `gh api repos/.../pages` (branch `main`, root).
-- Live URL: https://tokyoflexin.github.io/monash-course-map/
+- Live URL: https://tokyoflexin.github.io/Monash-ENG-Course-Map/
 
 ## Commerce expansion (E3005 double degree)
 Sahel is applying to transfer into E3005 (Bachelor of Engineering Honours +
