@@ -59,15 +59,29 @@
   .catalog-search{margin:14px 18px 0; width:calc(100% - 36px);}
   .catalog-search input{width:100%; padding:7px 9px; border:1px solid var(--line-strong); background:var(--card-bg); font-family:'IBM Plex Mono',monospace; font-size:12px; border-radius:2px;}
   .catalog-search input:focus{outline:1.5px solid var(--core); outline-offset:0;}
-  .catalog-group{padding:14px 18px 4px;}
-  .catalog-group-title{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-bottom:8px;}
+  .catalog-group{border-top:1px solid var(--line);}
+  #catalogGroups > .catalog-group:first-child{border-top:none;}
+  .catalog-group-title{
+    display:flex; align-items:center; justify-content:space-between; gap:8px; cursor:pointer; list-style:none;
+    padding:12px 18px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--sub); transition:color .15s ease, background .15s ease;
+  }
+  .catalog-group-title::-webkit-details-marker{display:none;}
+  .catalog-group-title:hover{color:var(--ink); background:rgba(26,28,26,.03);}
+  .catalog-group-title::before{content:"\25B8"; display:inline-block; margin-right:8px; font-size:9px; color:var(--faint); transition:transform .15s ease;}
+  .catalog-group[open] > .catalog-group-title::before{transform:rotate(90deg);}
+  .catalog-group-title .count{font-variant-numeric:tabular-nums; color:var(--faint); font-weight:400;}
+  .catalog-group-body{padding:0 18px 10px;}
+  .catalog-group .catalog-group{border-top:1px solid var(--line); margin:0 -18px;}
+  .catalog-group .catalog-group .catalog-group-title{padding-left:34px;}
+  .catalog-group .catalog-group .catalog-group-body{padding-left:36px;}
   .cat-row{
     display:flex; align-items:flex-start; gap:8px; padding:8px 6px; margin:0 -6px; border-top:1px solid var(--line);
     border-radius:2px; transition:background .18s ease; cursor:grab;
   }
   .cat-row:active{cursor:grabbing;}
   .cat-row:hover{background:rgba(26,28,26,.035);}
-  .catalog-group .cat-row:first-of-type{border-top:none;}
+  .catalog-group-body > .cat-row:first-child{border-top:none;}
   .cat-row .dot{width:6px; height:6px; border-radius:50%; margin-top:5px; flex:none;}
   .cat-row .meta{flex:1; min-width:0;}
   .cat-row .code{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink); display:flex; gap:6px; align-items:baseline;}
@@ -312,6 +326,7 @@ let customUnits = [];      // {code,title,creditPoints,semesterOffered,type,note
 let placements = {};       // "Y{y}S{s}" -> [code, ...]
 let selectedCode = null;
 let knownPlacedCodes = new Set(); // for entrance-animation diffing — codes placed as of the last render
+let openGroups = new Set(); // catalog-group keys the user has manually expanded (persists across re-renders)
 
 function icon(path){
   return `<svg class="icon-svg" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
@@ -441,34 +456,63 @@ function chainFor(code){
 }
 
 /* ---------------- rendering: catalog ---------------- */
+function YEARS_FIRST(u){ return (u.year===1) || (u.year===2 && u.semester===1) || u.code==='SCI1000'; }
+
 function renderCatalog(filter){
   const el = document.getElementById('catalogGroups');
   el.innerHTML = '';
-  const groups = [
-    {title:'Common first year', items: catalog.filter(u => u.type!=='commerce' && YEARS_FIRST(u))},
-    {title:'Electrical specialisation', items: catalog.filter(u => u.type!=='commerce' && !YEARS_FIRST(u))},
-    {title:'Commerce — core (Part A)', items: catalog.filter(u => u.type==='commerce' && u.major==='core')},
-    {title:'Commerce — Finance major', items: catalog.filter(u => u.type==='commerce' && u.major==='finance')},
-    {title:'Commerce — Economics major', items: catalog.filter(u => u.type==='commerce' && u.major==='economics')},
-    {title:'Commerce — Business Analytics major', items: catalog.filter(u => u.type==='commerce' && u.major==='business-analytics')},
-    {title:'Commerce — Econometrics major', items: catalog.filter(u => u.type==='commerce' && u.major==='econometrics')}
-  ];
-  function YEARS_FIRST(u){ return (u.year===1) || (u.year===2 && u.semester===1) || u.code==='SCI1000'; }
-
   const q = (filter||'').trim().toLowerCase();
+  const matches = u => !q || u.code.toLowerCase().includes(q) || u.title.toLowerCase().includes(q);
 
-  groups.forEach(g => {
-    const items = g.items.filter(u => !q || u.code.toLowerCase().includes(q) || u.title.toLowerCase().includes(q));
-    if(!items.length) return;
-    const wrap = document.createElement('div');
-    wrap.className = 'catalog-group';
-    const h = document.createElement('div');
-    h.className = 'catalog-group-title';
-    h.textContent = g.title;
-    wrap.appendChild(h);
-    items.forEach(u => wrap.appendChild(catalogRow(u)));
-    el.appendChild(wrap);
+  const tree = [
+    {key:'common', title:'Common first year', items: catalog.filter(u => u.type!=='commerce' && YEARS_FIRST(u))},
+    {key:'electrical', title:'Electrical specialisation', items: catalog.filter(u => u.type!=='commerce' && !YEARS_FIRST(u))},
+    {key:'commerce', title:'Commerce (E3005 double degree)', sub:[
+      {key:'commerce-core', title:'Core (Part A)', items: catalog.filter(u => u.type==='commerce' && u.major==='core')},
+      {key:'commerce-finance', title:'Finance major', items: catalog.filter(u => u.type==='commerce' && u.major==='finance')},
+      {key:'commerce-economics', title:'Economics major', items: catalog.filter(u => u.type==='commerce' && u.major==='economics')},
+      {key:'commerce-business-analytics', title:'Business Analytics major', items: catalog.filter(u => u.type==='commerce' && u.major==='business-analytics')},
+      {key:'commerce-econometrics', title:'Econometrics major', items: catalog.filter(u => u.type==='commerce' && u.major==='econometrics')}
+    ]}
+  ];
+
+  tree.forEach(node => el.appendChild(renderFolder(node, q, matches)));
+}
+
+// A folder node either has `items` (leaf — renders unit rows) or `sub` (nested folders).
+// Open/closed state persists in `openGroups` across re-renders; a folder auto-opens
+// while it (or a descendant) has a search match, without touching the user's own choice.
+function renderFolder(node, q, matches){
+  const items = node.items ? node.items.filter(matches) : null;
+  const subNodes = node.sub ? node.sub.map(s => ({node:s, items: s.items.filter(matches)})) : null;
+  const count = items ? items.length : subNodes.reduce((sum,s) => sum+s.items.length, 0);
+  const hasContent = items ? items.length>0 : subNodes.some(s => s.items.length>0);
+  if(q && !hasContent) return document.createDocumentFragment();
+
+  const details = document.createElement('details');
+  details.className = 'catalog-group';
+  details.open = openGroups.has(node.key) || (!!q && hasContent);
+  details.addEventListener('toggle', () => {
+    if(details.open) openGroups.add(node.key); else openGroups.delete(node.key);
   });
+
+  const summary = document.createElement('summary');
+  summary.className = 'catalog-group-title';
+  summary.innerHTML = `<span>${node.title}</span><span class="count">${count}</span>`;
+  details.appendChild(summary);
+
+  const body = document.createElement('div');
+  body.className = 'catalog-group-body';
+  if(items){
+    items.forEach(u => body.appendChild(catalogRow(u)));
+  }else{
+    subNodes.forEach(({node:s, items:subItems}) => {
+      if(q && !subItems.length) return;
+      body.appendChild(renderFolder(s, q, matches));
+    });
+  }
+  details.appendChild(body);
+  return details;
 }
 
 function catalogRow(u){

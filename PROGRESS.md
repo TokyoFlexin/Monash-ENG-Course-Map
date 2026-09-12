@@ -259,6 +259,24 @@ the sidebar splits Commerce into 5 sub-groups accordingly (was one flat list).
   PDF assets triggers a download the automation can't complete; the Cloudflare
   block that stops raw curl/WebFetch doesn't apply to jina's fetcher).
 
+## Collapsible catalog folders (this session, follow-up)
+70 units across 7 groups made the sidebar too long to scan (especially after
+the Commerce major expansion). Converted `renderCatalog()` to build a
+two-level folder tree using native `<details>`/`<summary>`: Common first
+year, Electrical specialisation, and Commerce (which itself contains 5
+nested subfolders — Core/Finance/Economics/Business Analytics/Econometrics).
+Every folder shows a unit count and is collapsed by default.
+- Open/closed state lives in a module-level `openGroups` Set, not on the DOM
+  — necessary because `renderCatalog()` rebuilds the whole sidebar on every
+  add/remove/refreshAll(), which would otherwise snap every folder shut the
+  moment you added a unit. Tested explicitly: state survives a full
+  add-unit → refreshAll() cycle.
+- Typing in the search box auto-expands (and only shows) folders that
+  contain a match, without touching the user's own manually-opened folders.
+- Tested all three levels of toggling (top-level, and a nested major
+  subfolder within Commerce) via direct DOM inspection of each `<details>`
+  element's `open` state, not just visually.
+
 ## Drag and drop (this session, follow-up)
 Sahel wanted to drag units between semester cells instead of using the
 per-card `<select>` dropdown. Added native HTML5 drag-and-drop:
