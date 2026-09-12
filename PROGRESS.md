@@ -16,6 +16,39 @@ Running log across sessions. Claude updates this as work happens.
 - [x] Step 4 — Deploy — DONE, see below
 - Live at https://tokyoflexin.github.io/monash-course-map/
 
+## Current state (quick orientation — read this first, details below)
+The planner is live and has been through several iteration rounds since
+initial deploy. As of now:
+- **Catalog**: 70 units total — 23 Electrical/Common-first-year (E3007) +
+  47 Commerce (E3005 double degree, Part A core + Part B for 4 shortlisted
+  majors: Finance/Economics/Business Analytics/Econometrics — no major
+  picked yet). Sidebar is collapsible folders (3 top-level, Commerce has 5
+  nested major subfolders), collapsed by default, counts shown, search
+  auto-expands matches.
+- **Validation**: warn-not-block flags for prerequisites, corequisites,
+  prohibitions, AND semester-offering (every catalog unit has a real
+  Handbook-verified `semesterOffered` — this is a LIVE flag now, not just a
+  note; see "Offering notes → real flags" below for why that distinction
+  matters).
+- **Interactions**: click a card to highlight its up/downstream chain; drag
+  cards between semester cells (or drag straight from the catalog) to move/
+  place units; per-card `<select>` dropdown kept as a touch-device fallback.
+- **Personalization**: optional name (asked on first visit, editable later),
+  "{Name}'s course plan" heading + ink-stamp monogram, gear-icon Settings
+  panel (top-right) with quick-start, export/import plan as `.json`, and
+  reset.
+- **Design**: "Ledger, evolved" — warm paper palette, saturated per-type
+  colour + left-rule + shadow on cards, Fraunces/IBM Plex Sans+Mono.
+- **Live URL**: https://tokyoflexin.github.io/monash-course-map/ — deployed
+  via GitHub Pages from github.com/TokyoFlexin/monash-course-map, pushed
+  directly after every change this session (nothing pending, working tree
+  clean as of the last commit below).
+- **Not yet done**: Commerce major choice (waiting on Sahel), Part B
+  elective-only units beyond core (Economics' large pool intentionally not
+  enumerated), custom-unit prereq checking (never asked for), E3005
+  transfer confirmation (would trigger updating electrical.json's
+  year/semester to match the double-degree sequence).
+
 ## Post-launch revision round (this session)
 Sahel came back with feedback after using the deployed planner for real:
 1. **Redesign** — original "Transcript" comp felt too flat, cards blended into
@@ -39,8 +72,10 @@ Sahel came back with feedback after using the deployed planner for real:
    (tracked via a separate `e3007-planner-onboarded-v1` localStorage flag, so
    it doesn't reappear after he's started), and is always reachable again via
    a "Quick start…" button in the topbar. Decided against export/import or
-   account sync for now — he confirmed the real problem was first-time setup
-   effort, not cross-device sync.
+   account sync at this point in the session — he confirmed the real problem
+   was first-time setup effort, not cross-device sync. (Revisited later the
+   same session anyway once the Settings panel came in — see
+   "Personalization" below, which added export/import as a natural fit there.)
 4. **Commerce expansion** — see below.
 
 ## Product pivot (important — read this before touching the UI)
@@ -84,8 +119,12 @@ in that system, extended with a 5th accent colour for `type: commerce`
   (same `index.html` + `data/` files — this IS the real project, not a mockup).
 - `data/common-first-year.json` — 7 units (First Year core + SCI1000).
 - `data/electrical.json` — 16 units (ECE specialisation core + capstone/CPD units).
-- 23 total catalog units. Validated: 0 duplicate codes, 0 dangling prereq/coreq
-  references, 0 cycles.
+- `data/commerce.json` — 47 units (E3005 double-degree Commerce side — Part A
+  core + Part B for 4 shortlisted majors; see "Commerce expansion" below).
+- **70 total catalog units** (as of the semester-flag audit below). Validated:
+  0 duplicate codes, 0 dangling prereq/coreq references (one documented
+  exception — FIT3154's FIT2086 prereq, a deliberate external gap, not a
+  bug), 0 cycles, every unit carries a verified `semesterOffered` value.
 
 ## Testing done this session (live, via browser automation — not just claimed)
 - Add/remove a catalog unit via the +/✓ toggle — confirmed.
@@ -139,13 +178,17 @@ No app code changes were needed — the existing `flagsFor()` logic
   programming"; the current course map (updated Oct 2025) shows "Systems
   programming." Same code/content, title changed after 2024. Using the
   current title, noted on the unit.
-- **Semester-offering isn't hard-checked for catalog units** (only custom
-  units, which carry an explicit field). Found during testing: the 2024
-  Handbook lists ECE3161 as S1-only, but the course map places it at Y4 S2 —
-  a real discrepancy between "specific 2024 timetable" and "recommended
-  sequence," not safe to encode as a strict rule. Known offering quirks
-  (e.g. ECE2191 "Semester 2 offering only") are shown as plain-text notes on
-  the card instead.
+- **Semester-offering IS now hard-checked for every catalog unit**
+  (superseded — originally decided against this, see "Offering notes → real
+  flags" near the end of this file for why that changed). Every unit carries
+  a verified `semesterOffered` value and gets a real, live flag if placed off
+  its actual Handbook semester — same warn-not-block treatment as
+  prereqs/coreqs/prohibitions. ECE3161 is the one deliberate exception worth
+  knowing: the 2024 Handbook lists it as S1-only, but the course map places
+  it at Y4 S2 — a real discrepancy between "specific 2024 timetable" and
+  "recommended sequence." Kept at the course map's Y4 S2 slot (so it WILL
+  show a flag there by design) rather than silently moved, since sequencing
+  can shift year to year — the flag plus its note explain why.
 
 ## Sources
 - Course progression map (2024 commencing, E3007):
