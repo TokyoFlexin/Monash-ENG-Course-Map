@@ -259,6 +259,21 @@ the sidebar splits Commerce into 5 sub-groups accordingly (was one flat list).
   PDF assets triggers a download the automation can't complete; the Cloudflare
   block that stops raw curl/WebFetch doesn't apply to jina's fetcher).
 
+## Drag and drop (this session, follow-up)
+Sahel wanted to drag units between semester cells instead of using the
+per-card `<select>` dropdown. Added native HTML5 drag-and-drop:
+- Placed cards are draggable — drop on any cell to move them there.
+- Catalog rows (sidebar) are also draggable — drop directly on a cell to add
+  that unit there (doesn't have to be its canonical slot).
+- Drop target cell highlights (dashed border) while dragging over it.
+- The per-card `<select>` dropdown was kept, not removed — native HTML5 drag
+  doesn't work on touch devices, so it's the fallback for mobile/tablet.
+- Tested by dispatching synthetic DragEvents (dragstart/dragover/drop) via
+  the browser tool rather than simulated mouse movement, since this sandboxed
+  browser can't perform real OS-level drag gestures that Chrome's native DnD
+  requires — confirmed both move-a-placed-card and drag-from-catalog work,
+  and that click-to-select-chain and the remove button still work unaffected.
+
 ## Next up
 - Once Sahel actually picks a major, trim the other 3 out (or just leave them
   — they don't affect validation, only add sidebar length).

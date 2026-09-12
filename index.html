@@ -63,8 +63,9 @@
   .catalog-group-title{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-bottom:8px;}
   .cat-row{
     display:flex; align-items:flex-start; gap:8px; padding:8px 6px; margin:0 -6px; border-top:1px solid var(--line);
-    border-radius:2px; transition:background .18s ease;
+    border-radius:2px; transition:background .18s ease; cursor:grab;
   }
+  .cat-row:active{cursor:grabbing;}
   .cat-row:hover{background:rgba(26,28,26,.035);}
   .catalog-group .cat-row:first-of-type{border-top:none;}
   .cat-row .dot{width:6px; height:6px; border-radius:50%; margin-top:5px; flex:none;}
@@ -112,7 +113,8 @@
   .grid{max-width:1040px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:14px 20px;}
   .year-label{grid-column:1 / -1; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin:22px 0 -2px; padding-top:14px; border-top:1px solid var(--line);}
   .year-label:first-of-type{border-top:none; margin-top:0; padding-top:0;}
-  .cell{border:1px solid var(--line); background:var(--panel); padding:12px 14px 14px; min-height:96px; border-radius:2px;}
+  .cell{border:1px solid var(--line); background:var(--panel); padding:12px 14px 14px; min-height:96px; border-radius:2px; transition:border-color .15s ease, background .15s ease;}
+  .cell.drag-over{border-color:var(--core); background:rgba(31,77,58,.06); outline:1.5px dashed var(--core); outline-offset:-5px;}
   .cell-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
   .cell-head .label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--sub);}
   .cell-head .cp-total{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); font-variant-numeric:tabular-nums;}
@@ -121,10 +123,12 @@
   .card{
     border:1px solid var(--line-strong); border-left:5px solid var(--line-strong); background:var(--card-bg);
     padding:10px 12px 11px; margin-bottom:9px; border-radius:2px; box-shadow:var(--card-shadow);
-    cursor:pointer; transition:opacity .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .15s ease;
+    cursor:grab; transition:opacity .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .15s ease;
   }
+  .card:active{cursor:grabbing;}
   .card:hover{transform:translateY(-1px);}
   .card:last-child{margin-bottom:0;}
+  .card.dragging{opacity:.35;}
   .card.t-core{border-left-color:var(--core);}
   .card.t-specialisation{border-left-color:var(--spec);}
   .card.t-elective{border-left-color:var(--elective);}
@@ -471,6 +475,11 @@ function catalogRow(u){
   const row = document.createElement('div');
   row.className = 'cat-row';
   const placed = !!placementOf(u.code);
+  row.draggable = true;
+  row.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', u.code);
+    e.dataTransfer.effectAllowed = 'move';
+  });
   row.innerHTML = `
     <span class="dot type-${u.type}"></span>
     <div class="meta">
@@ -525,6 +534,26 @@ function renderCell(y, s, newCodes){
     cell.appendChild(empty);
   }
   codes.forEach(code => cell.appendChild(unitCard(code, key, newCodes.has(code))));
+
+  cell.addEventListener('dragover', (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = 'move';
+    cell.classList.add('drag-over');
+  });
+  cell.addEventListener('dragleave', (e) => {
+    if(e.target === cell) cell.classList.remove('drag-over');
+  });
+  cell.addEventListener('drop', (e) => {
+    e.preventDefault();
+    cell.classList.remove('drag-over');
+    const code = e.dataTransfer.getData('text/plain');
+    if(!code || !byCode(code)) return;
+    if(placementOf(code) === key) return; // dropped back in its own cell
+    removeUnit(code, false);
+    addUnit(code, key);
+    refreshAll();
+  });
+
   return cell;
 }
 
@@ -533,6 +562,13 @@ function unitCard(code, key, isNew){
   const card = document.createElement('div');
   card.className = `card t-${u.type}` + (isNew ? ' card-enter' : '');
   card.dataset.code = code;
+  card.draggable = true;
+  card.addEventListener('dragstart', (e) => {
+    e.dataTransfer.setData('text/plain', code);
+    e.dataTransfer.effectAllowed = 'move';
+    setTimeout(() => card.classList.add('dragging'), 0);
+  });
+  card.addEventListener('dragend', () => card.classList.remove('dragging'));
   const flags = flagsFor(code, key);
   card.innerHTML = `
     <div class="card-top">
