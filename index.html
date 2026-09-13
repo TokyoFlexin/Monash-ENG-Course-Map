@@ -966,6 +966,7 @@ document.getElementById('customForm').addEventListener('submit', (e) => {
   saveState();
   e.target.reset();
   document.getElementById('cf-cp').value = 6;
+  e.target.closest('details.add-custom').open = false; // collapse the form back down after adding
   refreshAll();
 });
 
