@@ -963,12 +963,24 @@ document.getElementById('customForm').addEventListener('submit', (e) => {
 document.getElementById('searchInput').addEventListener('input', (e) => renderCatalog(e.target.value));
 
 function resetPlan(){
-  if(!confirm('Clear your whole plan? This removes every placed unit and custom unit.')) return;
+  const sure = confirm(
+    'Reset EVERYTHING? This wipes your whole plan AND your name, specialisation, and Commerce ' +
+    'setting — you\'ll see the app exactly like a brand new visitor, starting from the welcome ' +
+    'screen again. This can\'t be undone.'
+  );
+  if(!sure) return;
   YEARS.forEach(y => SEMS.forEach(s => placements[slotKey(y,s)] = []));
   customUnits = [];
   selectedCode = null;
+  userName = '';
+  userSpecialisation = '';
+  userHasCommerce = false;
   saveState();
+  try{ localStorage.removeItem(ONBOARD_KEY); }catch(e){}
+  updateIdentity();
+  updateBranding();
   refreshAll();
+  openOnboard();
 }
 
 /* ---------------- identity (name + monogram) ---------------- */
