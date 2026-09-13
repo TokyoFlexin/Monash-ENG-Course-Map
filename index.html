@@ -894,8 +894,13 @@ function openOnboard(){
 // so opening the modal and closing it via the veil/X without choosing anything doesn't silently
 // save a default specialisation nobody picked.
 function commitOnboardChoices(){
-  setSpecialisation(document.getElementById('onboardSpec').value);
-  setHasCommerce(document.getElementById('onboardCommerce').checked);
+  // Read both form values BEFORE applying either — setSpecialisation() calls updateBranding(),
+  // which resyncs the onboarding checkbox's `.checked` to the (still-old) userHasCommerce value.
+  // Reading the checkbox AFTER that call would silently discard whatever the user just ticked.
+  const spec = document.getElementById('onboardSpec').value;
+  const commerce = document.getElementById('onboardCommerce').checked;
+  setSpecialisation(spec);
+  setHasCommerce(commerce);
 }
 function closeOnboard(){
   document.getElementById('onboardVeil').hidden = true;
