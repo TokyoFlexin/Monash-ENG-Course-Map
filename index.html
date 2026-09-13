@@ -57,6 +57,10 @@
     font-family:'Fraunces',serif; font-weight:600; font-size:13px; letter-spacing:.02em;
     transform:rotate(-6deg); opacity:.85;
   }
+  /* .monogram's own display:flex above beats the browser's default [hidden]{display:none} rule
+     (author CSS always wins over user-agent CSS, regardless of specificity) — without this,
+     setting mono.hidden = true in JS has no visual effect at all. */
+  .monogram[hidden]{display:none;}
   .monogram::before{
     content:""; position:absolute; inset:-5px; border-radius:50%; border:1px solid var(--core); opacity:.35;
   }
@@ -1002,6 +1006,7 @@ function updateIdentity(){
   }else{
     title.textContent = 'Your course plan';
     mono.hidden = true;
+    mono.textContent = ''; // clear stale initials so they can't reappear if [hidden] ever fails
   }
   document.getElementById('onboardName').value = userName;
   document.getElementById('settingsName').value = userName;
