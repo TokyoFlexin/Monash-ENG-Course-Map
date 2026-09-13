@@ -627,6 +627,52 @@ didn't match his actual enrolment.
   belong as custom units (same pattern as Economics' unenumerated elective
   pool), not as a fake "common" catalog entry.
 
+## Animation pass (this session)
+Sahel asked for a collapsible catalog sidebar (with an open/close animation),
+an animation for placing a unit whether by drag or by the catalog +/arrow
+button, and free rein on anything else worth adding — same "Ledger, evolved"
+visual language throughout, nothing gradient/pill-shaped/emoji-based per the
+existing design guardrails.
+- **Sidebar collapse/expand** — new `.sidebar-toggle` button (chevron icon,
+  flips 180° when collapsed) sits on the border between catalog and main
+  content. `.catalog`'s `width` animates 320px→0 (`overflow-x:hidden` so
+  nothing spills out mid-transition), content fades via a separate faster
+  opacity transition so text doesn't visibly squash first. State persists in
+  its own `e3007-sidebar-collapsed-v1` localStorage key (separate from the
+  main plan blob — it's a UI preference, not plan data) and is restored
+  instantly on load (set before the first paint, so reopening the app never
+  shows a spurious animation). Disabled below the existing 860px mobile
+  breakpoint, where the sidebar already stacks above the grid instead of
+  sitting beside it — collapsing it there wouldn't reclaim useful space and
+  would just add complexity, so the toggle button is hidden and any
+  collapsed state is neutralised back to full width by a media query.
+- **Placing a unit down** — the existing fresh-add entrance animation
+  (`card-enter`/`cardIn`) got more physical: a slight overshoot-and-settle
+  (drop in, rise 2px past rest, ease back) instead of a flat fade+slide.
+  Added a **second, distinct animation (`card-settle`)** for the case that
+  had *zero* animation before: dragging an already-placed unit to a
+  different cell, or using its own move-`<select>` dropdown — previously
+  these caused an instant jump-cut (vanish from the old cell, reappear in
+  the new one, no transition at all). A one-shot `justMovedCode` variable
+  set right before the relevant `refreshAll()` call tells the next
+  `renderGrid()` which card to mark `card-settle` instead of `card-enter` —
+  a quick scale+shadow pop rather than a full fade-in, since the card was
+  already visible, just relocated. Tested all three paths via synthetic
+  events (catalog add → `card-enter`; per-card select move → `card-settle`;
+  synthetic `DragEvent('drop')` → `card-settle`, landed in the correct slot).
+- **Other polish, self-directed**: a subtle scale/slide entrance for every
+  modal (onboarding, settings) instead of just the veil fading in; catalog
+  folders now get a brief fade+drop-in reveal when a user actually opens one
+  (native `<details>` doesn't animate its own reveal; hooked the existing
+  `toggle` event listener, which only fires on genuine clicks — never on the
+  programmatic `.open` sets during a routine re-render — so this can't
+  misfire every time the catalog rebuilds); catalog rows now nudge right
+  slightly on hover, matching the lift the plan-grid cards already had, for
+  a more consistent "everything here is grabbable" feel.
+- All of the above respects the existing global
+  `prefers-reduced-motion: reduce` override (durations already forced to
+  ~0 there), so nothing new bypasses that.
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).

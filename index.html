@@ -23,25 +23,53 @@
   select{font-family:inherit;}
   ::selection{background:#d8dbce;}
 
-  @keyframes cardIn{ from{opacity:0; transform:translateY(5px);} to{opacity:1; transform:translateY(0);} }
+  @keyframes cardIn{
+    from{opacity:0; transform:translateY(10px) scale(.95);}
+    55%{opacity:1; transform:translateY(-2px) scale(1.02);}
+    to{opacity:1; transform:translateY(0) scale(1);}
+  }
   @keyframes cardOut{ from{opacity:1; transform:translateY(0) scale(1);} to{opacity:0; transform:translateY(-3px) scale(.97);} }
+  @keyframes cardSettle{
+    0%{transform:scale(1.04); box-shadow:0 8px 18px rgba(43,29,18,.2);}
+    100%{transform:scale(1); box-shadow:var(--card-shadow);}
+  }
   @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
   @keyframes pulse{ 0%{transform:scale(1);} 35%{transform:scale(1.18);} 100%{transform:scale(1);} }
-  .card-enter{ animation:cardIn .32s cubic-bezier(.2,.7,.3,1) both; }
+  @keyframes modalIn{ from{opacity:0; transform:translateY(10px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);} }
+  @keyframes folderReveal{ from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);} }
+  .card-enter{ animation:cardIn .38s cubic-bezier(.2,.7,.3,1) both; }
   .card-exit{ animation:cardOut .18s ease-in both; pointer-events:none; }
+  .card-settle{ animation:cardSettle .32s cubic-bezier(.2,.7,.3,1) both; }
   .pulse{ display:inline-block; animation:pulse .3s ease; }
+  .folder-reveal{ animation:folderReveal .22s ease both; }
 
   @media (prefers-reduced-motion: reduce){
     *, *::before, *::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; }
   }
 
   /* ---------- layout shell ---------- */
-  .app{display:flex; min-height:100vh;}
+  .app{display:flex; min-height:100vh; position:relative;}
   .catalog{
     width:320px; flex:none; border-right:1px solid var(--line); background:var(--panel);
-    display:flex; flex-direction:column; position:sticky; top:0; height:100vh; overflow-y:auto;
+    display:flex; flex-direction:column; position:sticky; top:0; height:100vh; overflow-y:auto; overflow-x:hidden;
+    transition:width .38s cubic-bezier(.4,0,.2,1), border-color .38s ease;
   }
+  .catalog.collapsed{ width:0; border-color:transparent; }
+  .catalog > *{ transition:opacity .18s ease; }
+  .catalog.collapsed > *{ opacity:0; pointer-events:none; }
   .main{flex:1; min-width:0; padding:28px 32px 80px;}
+
+  .sidebar-toggle{
+    position:absolute; top:26px; left:320px; transform:translateX(-50%);
+    width:26px; height:26px; border-radius:50%; border:1px solid var(--line-strong); background:var(--card-bg);
+    color:var(--sub); display:flex; align-items:center; justify-content:center; z-index:5; flex:none;
+    transition:left .38s cubic-bezier(.4,0,.2,1), border-color .15s ease, color .15s ease, transform .15s ease;
+  }
+  .sidebar-toggle:hover{ border-color:var(--core); color:var(--core); }
+  .sidebar-toggle:active{ transform:translateX(-50%) scale(.92); }
+  .sidebar-toggle.collapsed{ left:0; }
+  .sidebar-toggle .icon-svg{ transition:transform .38s cubic-bezier(.4,0,.2,1); }
+  .sidebar-toggle.collapsed .icon-svg{ transform:rotate(180deg); }
 
   /* ---------- header ---------- */
   .topbar{max-width:1040px; margin:0 auto 24px; display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap;}
@@ -97,10 +125,10 @@
   .catalog-group .catalog-group .catalog-group-body{padding-left:36px;}
   .cat-row{
     display:flex; align-items:flex-start; gap:8px; padding:8px 6px; margin:0 -6px; border-top:1px solid var(--line);
-    border-radius:2px; transition:background .18s ease; cursor:grab;
+    border-radius:2px; transition:background .18s ease, transform .18s ease; cursor:grab;
   }
   .cat-row:active{cursor:grabbing;}
-  .cat-row:hover{background:rgba(26,28,26,.035);}
+  .cat-row:hover{background:rgba(26,28,26,.035); transform:translateX(2px);}
   .catalog-group-body > .cat-row:first-child{border-top:none;}
   .cat-row .dot{width:6px; height:6px; border-radius:50%; margin-top:5px; flex:none;}
   .cat-row .meta{flex:1; min-width:0;}
@@ -200,6 +228,7 @@
   .modal{
     position:relative; background:var(--card-bg); border:1px solid var(--line-strong); border-radius:3px; box-shadow:0 12px 40px rgba(43,29,18,.25);
     max-width:480px; width:100%; padding:26px 28px 24px;
+    animation:modalIn .3s cubic-bezier(.2,.7,.3,1) both;
   }
   .modal-x{
     position:absolute; top:16px; right:16px; width:26px; height:26px; border-radius:50%; border:1px solid var(--line-strong);
@@ -257,6 +286,9 @@
   @media (max-width:860px){
     .app{flex-direction:column;}
     .catalog{width:100%; height:auto; position:relative; max-height:none; border-right:none; border-bottom:1px solid var(--line);}
+    .catalog.collapsed{width:100%; border-color:var(--line);}
+    .catalog.collapsed > *{opacity:1; pointer-events:auto;}
+    .sidebar-toggle{display:none;}
     .main{padding:22px 16px 60px;}
     .grid{grid-template-columns:1fr;}
   }
@@ -265,7 +297,9 @@
 <body>
 <div class="app">
 
-  <aside class="catalog">
+  <button class="sidebar-toggle" id="sidebarToggle" title="Toggle catalog" aria-label="Toggle catalog"></button>
+
+  <aside class="catalog" id="catalogAside">
     <div class="catalog-head">
       <div class="eyebrow" id="catalogEyebrow">Course planner</div>
       <h2>Catalog</h2>
@@ -419,6 +453,7 @@ let customUnits = [];      // {code,title,creditPoints,semesterOffered,type,note
 let placements = {};       // "Y{y}S{s}" -> [code, ...]
 let selectedCode = null;
 let knownPlacedCodes = new Set(); // for entrance-animation diffing — codes placed as of the last render
+let justMovedCode = null; // one-shot: code to play a "settle" animation for on the next grid render (drag/select move, not a fresh add)
 let openGroups = new Set(); // catalog-group keys the user has manually expanded (persists across re-renders)
 let userName = '';
 let userSpecialisation = '';  // discipline code, e.g. 'electrical' / 'civil' — '' means unset (no filtering)
@@ -432,7 +467,8 @@ const ICONS = {
   arrowRight: icon('<path d="M2.5 8h10.5M9 4l4 4-4 4"/>'),
   check: icon('<path d="M3 8.5l3.3 3.3L13 4.5"/>'),
   cross: icon('<path d="M4 4l8 8M12 4l-8 8"/>'),
-  settings: icon('<line x1="2" y1="4.5" x2="14" y2="4.5"/><circle cx="6" cy="4.5" r="1.6" fill="currentColor" stroke="none"/><line x1="2" y1="8" x2="14" y2="8"/><circle cx="10.5" cy="8" r="1.6" fill="currentColor" stroke="none"/><line x1="2" y1="11.5" x2="14" y2="11.5"/><circle cx="5" cy="11.5" r="1.6" fill="currentColor" stroke="none"/>')
+  settings: icon('<line x1="2" y1="4.5" x2="14" y2="4.5"/><circle cx="6" cy="4.5" r="1.6" fill="currentColor" stroke="none"/><line x1="2" y1="8" x2="14" y2="8"/><circle cx="10.5" cy="8" r="1.6" fill="currentColor" stroke="none"/><line x1="2" y1="11.5" x2="14" y2="11.5"/><circle cx="5" cy="11.5" r="1.6" fill="currentColor" stroke="none"/>'),
+  chevronLeft: icon('<path d="M10 3.5L5 8l5 4.5"/>')
 };
 
 function slotKey(y,s){ return `Y${y}S${s}`; }
@@ -628,9 +664,6 @@ function renderFolder(node, q, matches){
   const details = document.createElement('details');
   details.className = 'catalog-group';
   details.open = openGroups.has(node.key) || (!!q && hasContent);
-  details.addEventListener('toggle', () => {
-    if(details.open) openGroups.add(node.key); else openGroups.delete(node.key);
-  });
 
   const summary = document.createElement('summary');
   summary.className = 'catalog-group-title';
@@ -648,6 +681,21 @@ function renderFolder(node, q, matches){
     });
   }
   details.appendChild(body);
+
+  // Native <details> doesn't animate its own open/close — but the 'toggle' event only fires on
+  // genuine user interaction (clicking the summary), never when `.open` is merely set
+  // programmatically during a re-render, so this only plays when someone actually opens a folder.
+  details.addEventListener('toggle', () => {
+    if(details.open){
+      openGroups.add(node.key);
+      body.classList.remove('folder-reveal');
+      void body.offsetWidth; // restart the animation if toggled rapidly
+      body.classList.add('folder-reveal');
+    }else{
+      openGroups.delete(node.key);
+    }
+  });
+
   return details;
 }
 
@@ -698,6 +746,7 @@ function renderGrid(){
   });
   applySelection();
   knownPlacedCodes = currentCodes;
+  justMovedCode = null; // consumed for this render, whether or not any card actually used it
 }
 
 function renderCell(y, s, newCodes){
@@ -713,7 +762,10 @@ function renderCell(y, s, newCodes){
     empty.textContent = 'no units placed';
     cell.appendChild(empty);
   }
-  codes.forEach(code => cell.appendChild(unitCard(code, key, newCodes.has(code))));
+  codes.forEach(code => {
+    const anim = newCodes.has(code) ? 'enter' : (code === justMovedCode ? 'settle' : null);
+    cell.appendChild(unitCard(code, key, anim));
+  });
 
   cell.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -731,16 +783,17 @@ function renderCell(y, s, newCodes){
     if(placementOf(code) === key) return; // dropped back in its own cell
     removeUnit(code, false);
     addUnit(code, key);
+    justMovedCode = code;
     refreshAll();
   });
 
   return cell;
 }
 
-function unitCard(code, key, isNew){
+function unitCard(code, key, anim){
   const u = byCode(code);
   const card = document.createElement('div');
-  card.className = `card t-${u.type}` + (isNew ? ' card-enter' : '');
+  card.className = `card t-${u.type}` + (anim === 'enter' ? ' card-enter' : anim === 'settle' ? ' card-settle' : '');
   card.dataset.code = code;
   card.draggable = true;
   card.addEventListener('dragstart', (e) => {
@@ -774,6 +827,7 @@ function unitCard(code, key, isNew){
   moveSelect.addEventListener('change', () => {
     removeUnit(code, false);
     addUnit(code, moveSelect.value);
+    justMovedCode = code;
     refreshAll();
   });
   card.querySelector('.remove').addEventListener('click', (e) => {
@@ -1136,6 +1190,17 @@ importFile.addEventListener('change', () => {
   reader.readAsText(file);
 });
 
+/* ---------------- sidebar toggle ---------------- */
+const SIDEBAR_KEY = 'e3007-sidebar-collapsed-v1';
+function setSidebarCollapsed(collapsed){
+  document.getElementById('catalogAside').classList.toggle('collapsed', collapsed);
+  document.getElementById('sidebarToggle').classList.toggle('collapsed', collapsed);
+  try{ localStorage.setItem(SIDEBAR_KEY, collapsed ? '1' : '0'); }catch(e){}
+}
+document.getElementById('sidebarToggle').addEventListener('click', () => {
+  setSidebarCollapsed(!document.getElementById('catalogAside').classList.contains('collapsed'));
+});
+
 /* ---------------- init ---------------- */
 document.getElementById('onboardScratch').addEventListener('click', () => { commitOnboardChoices(); closeOnboard(); });
 document.getElementById('onboardVeil').addEventListener('click', (e) => {
@@ -1145,6 +1210,10 @@ document.getElementById('onboardVeil').addEventListener('click', (e) => {
 (async function init(){
   populateYearSelect();
   document.getElementById('settingsBtn').innerHTML = ICONS.settings;
+  document.getElementById('sidebarToggle').innerHTML = ICONS.chevronLeft;
+  let sidebarWasCollapsed = false;
+  try{ sidebarWasCollapsed = localStorage.getItem(SIDEBAR_KEY) === '1'; }catch(e){}
+  if(sidebarWasCollapsed) setSidebarCollapsed(true);
   await loadCatalog();
   loadState();
   updateIdentity();
