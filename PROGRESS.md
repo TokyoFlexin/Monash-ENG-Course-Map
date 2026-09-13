@@ -688,3 +688,16 @@ existing design guardrails.
 - CIV4249's real 2024 non-offering and CIV4286's Handbook-mandated
   replacement are documented but not yet resolved with an actual substitute
   unit — same "add as custom unit once decided" pattern as ECE4099.
+- **"What's left to graduate" view (Sahel liked this idea, 2026-09-13)** — a
+  progress-focused view answering "given what I've placed so far, what still
+  needs to go in before I can graduate?" Not scoped/designed yet; worth
+  thinking through against the credit-point/level rules already known (e.g.
+  Civil's 144cp Part C + Part D + Part E structure, Commerce major
+  credit-point minimums) rather than just counting placed units.
+- **More disciplines (Sahel confirmed interest, 2026-09-13)** — same session
+  discussed expanding breadth using the Civil-style pipeline (AoS code →
+  parallel Handbook research → `discipline`-tagged data file → one
+  manifest.json line → `node scripts/validate-catalog.mjs`). No specific
+  discipline requested yet (Mechanical/Chemical/Aerospace/Software/Robotics
+  &amp; Mechatronics/Materials/Environmental all still open per E3001's
+  Handbook list) — ask which one(s) when he's ready to pick up this thread.
