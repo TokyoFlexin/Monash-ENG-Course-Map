@@ -123,26 +123,6 @@
       "notes": "",
       "semesterOffered": "both",
       "discipline": "common"
-    },
-    {
-      "code": "SCI1000",
-      "title": "Science communication to influence change",
-      "creditPoints": 6,
-      "year": 2,
-      "semester": 1,
-      "type": "core",
-      "prerequisites": [],
-      "prerequisiteText": "",
-      "corequisites": [],
-      "corequisiteText": "",
-      "prohibitions": [
-        "SCI2010",
-        "SCI2015",
-        "SCI1005"
-      ],
-      "notes": "Faculty of Science unit, identical across every E3007 specialisation table.",
-      "semesterOffered": "both",
-      "discipline": "common"
     }
   ]
 }

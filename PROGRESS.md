@@ -19,7 +19,7 @@ Running log across sessions. Claude updates this as work happens.
 ## Current state (quick orientation — read this first, details below)
 The planner is live and has been through several iteration rounds since
 initial deploy. As of now:
-- **Catalog**: 85 units across 4 files/disciplines — Common core (7) +
+- **Catalog**: 84 units across 4 files/disciplines — Common core (6) +
   Electrical (12, E3007/E3001) + Civil (15, E3001) + Commerce (47, E3005
   double degree, Part A core + Part B for 4 shortlisted majors — no major
   picked yet). Every unit carries a `discipline` field (`common`/
@@ -602,6 +602,30 @@ updated to show Electrical + Commerce (Civil hidden) and the plan's
 already-placed Civil units were untouched in the grid → mobile viewport
 (375px) confirmed still collapsing cleanly with the new settings fields.
 localStorage cleared back to empty before finishing.
+
+## Data-quality fix: SCI1000 removed from common-first-year.json (this session)
+Sahel flagged this directly: "where did you get SCI1000, that's not a unit I
+did, that's not a first year eng [unit]." He was right. Checked the live 2024
+Handbook for E3007 (his Eng+Science double degree) — its Science component
+(96cp) is **entirely elective**: "six science listed units (36cp) at level 1,
+and ten science listed units (60cp) at levels 2 and 3," chosen from 20+ science
+areas. SCI1000 is a real Faculty of Science unit, but it's never named as a
+requirement anywhere in E3007's structure — it's one option among dozens, not
+a compulsory unit. It had been hard-coded into `common-first-year.json`
+(tagged `discipline:"common"`, meaning every specialisation's onboarding/quick
+start would auto-add it) since the very first research session, apparently
+mistaken for compulsory back then — the mistake predates this session's
+detailed sourcing discipline and was never caught until Sahel noticed it
+didn't match his actual enrolment.
+- Removed entirely (not reclassified — it isn't a genuine requirement for any
+  discipline currently in the catalog, Civil included, which has no Science
+  component at all). Confirmed nothing else in any catalog file referenced
+  SCI1000 as a prerequisite/corequisite before removing it.
+- `common-first-year.json` now 6 units (was 7). Catalog-wide total 84 (was 85).
+  Re-ran `node scripts/validate-catalog.mjs` — still 0 problems.
+- If Sahel's actual Science elective choices are ever worth tracking, they
+  belong as custom units (same pattern as Economics' unenumerated elective
+  pool), not as a fake "common" catalog entry.
 
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
