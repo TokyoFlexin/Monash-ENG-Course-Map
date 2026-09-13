@@ -1,9 +1,9 @@
 {
   "_meta": {
-    "description": "Common First Year for E3007 Bachelor of Engineering (Honours) and Bachelor of Science — identical regardless of specialisation. Shared by every specialisation data file. This is the catalog for the planner: units here are known/compulsory with real prerequisite data. Everything else (science major/elective choices, breadth, Commerce units) is added as a custom unit inside the planner itself, not pre-listed here.",
+    "description": "Common First Year for E3007 Bachelor of Engineering (Honours) and Bachelor of Science \u2014 identical regardless of specialisation. Shared by every specialisation data file. This is the catalog for the planner: units here are known/compulsory with real prerequisite data. Everything else (science major/elective choices, breadth, Commerce units) is added as a custom unit inside the planner itself, not pre-listed here.",
     "commencingYear": 2024,
     "campus": "Clayton",
-    "foundationPathway": "Foundation mathematics only (ENG1090) — VCE Specialist Maths >30 not met, VCE Physics >25 met",
+    "foundationPathway": "Foundation mathematics only (ENG1090) \u2014 VCE Specialist Maths >30 not met, VCE Physics >25 met",
     "sources": [
       "https://www.monash.edu/__data/assets/pdf_file/0003/3303642/2024-map-E3007.pdf (course progression map, 2024 commencing, updated 14 Oct 2025)",
       "https://handbook.monash.edu/2024/units/{CODE} (prerequisite/corequisite/prohibition rules, 2024 Handbook)"
@@ -24,8 +24,9 @@
       "prohibitions": [
         "MTH1020"
       ],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
-      "semesterOffered": "1"
+      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1",
+      "discipline": "common"
     },
     {
       "code": "ENG1013",
@@ -43,7 +44,8 @@
         "ENG1003"
       ],
       "notes": "",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "ENG1005",
@@ -63,7 +65,8 @@
         "MTH1035"
       ],
       "notes": "Handbook: enrolling without meeting this prerequisite risks discontinuation from the unit.",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "ENG1014",
@@ -82,7 +85,8 @@
         "ENG1060"
       ],
       "notes": "",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "ENG1011",
@@ -99,7 +103,8 @@
         "ENG1001"
       ],
       "notes": "",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "ENG1012",
@@ -116,7 +121,8 @@
         "ENG1002"
       ],
       "notes": "",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "SCI1000",
@@ -135,7 +141,8 @@
         "SCI1005"
       ],
       "notes": "Faculty of Science unit, identical across every E3007 specialisation table.",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     }
   ]
 }

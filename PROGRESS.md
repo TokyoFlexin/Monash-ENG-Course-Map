@@ -19,12 +19,27 @@ Running log across sessions. Claude updates this as work happens.
 ## Current state (quick orientation — read this first, details below)
 The planner is live and has been through several iteration rounds since
 initial deploy. As of now:
-- **Catalog**: 70 units total — 23 Electrical/Common-first-year (E3007) +
-  47 Commerce (E3005 double degree, Part A core + Part B for 4 shortlisted
-  majors: Finance/Economics/Business Analytics/Econometrics — no major
-  picked yet). Sidebar is collapsible folders (3 top-level, Commerce has 5
-  nested major subfolders), collapsed by default, counts shown, search
-  auto-expands matches.
+- **Catalog**: 85 units across 4 files/disciplines — Common core (7) +
+  Electrical (12, E3007/E3001) + Civil (15, E3001) + Commerce (47, E3005
+  double degree, Part A core + Part B for 4 shortlisted majors — no major
+  picked yet). Every unit carries a `discipline` field (`common`/
+  `electrical`/`civil`/`commerce`); `data/manifest.json` lists which catalog
+  files load, so adding a discipline is a new file + one manifest line, no
+  index.html changes. `node scripts/validate-catalog.mjs` checks the whole
+  catalog (required fields, duplicate codes, dangling prereq/coreq refs,
+  prerequisite cycles) — currently 0 problems. Sidebar is collapsible
+  folders, driven by discipline + (for Commerce) `major`, filtered to the
+  user's chosen specialisation once onboarding sets one (see below).
+- **Personalization**: onboarding modal (first visit, re-openable via
+  Settings) asks name, specialisation (dropdown, auto-populated from loaded
+  disciplines), an "also doing Commerce" checkbox, and a quick-start
+  year+semester cutoff (reused from the existing grid, now live-filtered to
+  the chosen specialisation). Once a specialisation is set, the catalog
+  sidebar hides every other discipline (fails open — shows everything — until
+  one is actually chosen, so old saved plans from before this feature never
+  lose visibility into units they already had). Switching specialisation
+  later (Settings panel) only changes sidebar visibility going forward —
+  never touches units already placed in the grid.
 - **Validation**: warn-not-block flags for prerequisites, corequisites,
   prohibitions, AND semester-offering (every catalog unit has a real
   Handbook-verified `semesterOffered` — this is a LIVE flag now, not just a
@@ -33,10 +48,6 @@ initial deploy. As of now:
 - **Interactions**: click a card to highlight its up/downstream chain; drag
   cards between semester cells (or drag straight from the catalog) to move/
   place units; per-card `<select>` dropdown kept as a touch-device fallback.
-- **Personalization**: optional name (asked on first visit, editable later),
-  "{Name}'s course plan" heading + ink-stamp monogram, gear-icon Settings
-  panel (top-right) with quick-start, export/import plan as `.json`, and
-  reset.
 - **Design**: "Ledger, evolved" — warm paper palette, saturated per-type
   colour + left-rule + shadow on cards, Fraunces/IBM Plex Sans+Mono.
 - **Live URL**: https://tokyoflexin.github.io/Monash-ENG-Course-Map/ — deployed
@@ -45,9 +56,10 @@ initial deploy. As of now:
   clean as of the last commit below).
 - **Not yet done**: Commerce major choice (waiting on Sahel), Part B
   elective-only units beyond core (Economics' large pool intentionally not
-  enumerated), custom-unit prereq checking (never asked for), E3005
-  transfer confirmation (would trigger updating electrical.json's
-  year/semester to match the double-degree sequence).
+  enumerated), Civil's Part E electives (also intentionally not enumerated),
+  custom-unit prereq checking (never asked for), E3005 transfer confirmation
+  (would trigger updating electrical.json's year/semester to match the
+  double-degree sequence).
 
 ## Post-launch revision round (this session)
 Sahel came back with feedback after using the deployed planner for real:
@@ -445,10 +457,164 @@ overstate what we actually verified.
 - Updated the stale code comment in `flagsFor()` that explained the *old*
   (incorrect) reasoning for not checking catalog units.
 
+## Civil Engineering added + multi-specialisation system (this session, follow-up)
+Sahel's showing the planner to a Civil Engineering friend and wanted: (1) Civil
+added with the same research rigor as electrical.json, but via a *repeatable
+system* so future disciplines (Phase 2+, "all disciplines of eng") are fast;
+and (2) an onboarding popup asking name/year/specialisation, which personalises
+(pre-fills up to that year, hides other disciplines' units from someone doing
+a different one — "if im doing electrical i don't wanna see civil units").
+
+**Course-code discovery, important for future discipline research**: Monash
+restructured undergrad course codes between the 2024 and 2026 commencing
+cohorts — in 2026, E3007 means Eng+Science double degree same as 2024 (that
+part didn't change), but the *specialisation itself* (Civil, Electrical, etc.)
+was always chosen within the single-degree course **E3001** (or within a
+double-degree code like E3007/E3005), never its own top-level course code.
+Confirmed via handbook.monash.edu/2024/courses/E3001 → "Engineering
+specialisations" → Civil's actual identifier is **area-of-study code
+CIVILENG03** (144cp: Part C core units, Part D professional practice via
+ENG0001, Part E — 36cp technical electives). This AoS-code pattern is exactly
+how Commerce majors were found before (FINANCE07 etc.) — confirms the research
+method generalizes cleanly to every future discipline: find the AoS code from
+the relevant course's Handbook "Structure" page, then
+`handbook.monash.edu/2024/aos/{CODE}` gives the real unit list.
+
+**Data added** — `data/civil.json`, 15 Civil-specific units (Part C's 18 core
+units minus 3 shared with Electrical: ENG2005, ENG4701, ENG4702, already living
+in electrical.json — re-tagged `discipline:"common"` there instead of
+duplicating, see below). Researched via 2 parallel background agents (8+7
+units), same rigor as Commerce: each unit's Handbook Rules/Requisites
+accordion expanded live via the Browser tool, not just Overview text.
+- Real OR-prerequisite chains found and correctly collapsed to one
+  representative AND-compatible code per the `prerequisites` array's known
+  limitation (full logic kept in `prerequisiteText`) — e.g. CIV3221 accepts
+  CIV2225 OR CIV2235, used CIV2235 (the current, non-superseded code).
+- **CIV4249 (Foundation engineering) was not offered at all in the 2024
+  Handbook** — no Offerings section, just a Notes line saying so.
+  `semesterOffered: "unknown"`, flagged in its notes and in openDecisions.
+- **CIV4286 (Project management for civil engineers) carries an explicit
+  Handbook replacement instruction** — "Replace CIV4286 with one Professional
+  Practice domain unit from Semester 2, 2024" — structurally identical to
+  electrical.json's ECE4099 precedent. Kept at its nominal Y4 S1 slot with the
+  instruction documented; add the real replacement as a custom unit.
+- One prohibition (CIV2242 ⟷ CIV2241) was hidden inside free-text "Enrolment
+  Rule" rather than a dedicated Prohibition accordion — caught by explicitly
+  checking Rules text, not just the Requisites summary.
+- Part E's 36cp technical-elective pool (~35 units) deliberately **not
+  enumerated** — same call already made for Economics' elective pool in
+  commerce.json, too large/open to be useful as catalog cards.
+- Year/semester placement is Claude's own suggested sequencing (unit level +
+  validated prerequisite/corequisite chains, checked so nothing sits before
+  its real prerequisite and every placement matches its actual verified
+  offering semester) — **not** from the official course-map PDF. That PDF
+  exists but couldn't be fetched: direct download is Cloudflare-blocked (same
+  as before), and this session's r.jina.ai reader-proxy attempt (used
+  successfully for the E3005 map in an earlier session) hit an interactive
+  Cloudflare "verify you are human" challenge, which was correctly **not**
+  bypassed — solving CAPTCHAs/bot-detection is a hard no regardless of how
+  minor the ask seems. Documented as a real limitation in civil.json's
+  `_meta.sources`, same transparency standard as the Commerce elective
+  placements' "suggested, not Handbook fact" caveat.
+
+**The reusable "system" (the actual ask — do this fast/correctly for future
+disciplines too)**:
+1. `data/manifest.json` — the list of catalog files the app loads. Adding a
+   discipline is now "drop a JSON file + add one line here," not an edit to
+   `loadCatalog()`'s JS.
+2. Every unit across all 4 catalog files now carries an explicit
+   **`discipline`** field (`common` / `electrical` / `civil` / `commerce`) —
+   replaces the old `YEARS_FIRST()` heuristic (which inferred "common first
+   year" purely from year/semester numbers, a hack that wouldn't have
+   survived a second specialisation). Shared cross-specialisation units
+   (ENG2005, ENG4701, ENG0001, ENG4702 — used by both Electrical's and Civil's
+   Part C) are tagged `discipline:"common"` regardless of which physical file
+   they live in, so they're never duplicated and never hidden from either
+   specialisation's filtered view.
+3. `scripts/validate-catalog.mjs` — a zero-dependency Node script (reads
+   `manifest.json`, checks every file it lists) replacing the old
+   per-session manual "add synthetic units, check via console" pass. Checks:
+   required fields present, valid `type`/`semesterOffered`/year/semester
+   values, duplicate codes, dangling prerequisite/corequisite references
+   (deliberately **not** prohibitions — those routinely reference real
+   Handbook codes for equivalent units at other campuses that were never
+   going to be catalog entries, e.g. Caulfield/Malaysia variants — flagging
+   those would be noise, not a bug), and prerequisite cycles (deliberately
+   **not** corequisite cycles — two units requiring each other, like
+   ENG4701⟷ENG0001, is a normal same-semester pairing, not a logical
+   impossibility). `KNOWN_EXTERNAL_GAPS` documents deliberate exceptions (e.g.
+   FIT3154's FIT2086 prereq). Currently: **85 units across 4 files, 0
+   problems.** Run with `node scripts/validate-catalog.mjs`.
+4. Sidebar rendering (`renderCatalog()`), the specialisation options
+   (`availableSpecialisations()`), and course-code/label branding
+   (`disciplineLabel()`, reading each file's `_meta.specialisation`) are all
+   now derived from whatever disciplines are actually loaded — a 5th
+   discipline file needs zero code changes to appear everywhere it should.
+
+**Onboarding + personalisation** — the modal (`#onboardVeil`) now asks, in
+addition to the existing name field:
+- **Specialisation** — a `<select>` populated from `availableSpecialisations()`
+  (currently Electrical, Civil).
+- **"Also doing Commerce (E3005 double degree)"** — a checkbox, separate from
+  the specialisation picker (per Sahel's choice: "primary + optional Commerce
+  toggle," matching how Monash double degrees actually work — one engineering
+  specialisation plus one companion course — rather than a free multi-select).
+- The existing quick-start cutoff grid (Y1 S1 … Y4 S2) is reused as-is for the
+  "year" ask (his choice: year+semester precision, not year-only) — its counts
+  now live-preview against whichever specialisation is currently selected in
+  the form, updating before the choice is even saved.
+- Choices only **persist** when the user actually proceeds (clicks a cutoff
+  button or "start from a blank plan") via `commitOnboardChoices()` — not on
+  every dropdown change — so opening the modal and dismissing it via the
+  veil/X never silently saves a default nobody picked. Settings panel's
+  matching fields, by contrast, save immediately (no separate "proceed" step
+  there).
+- **Filtering** (his choice: hide entirely, not just collapse) — once a
+  specialisation is set, the sidebar only shows Common core + that
+  specialisation (+ Commerce if ticked); `visibleDisciplines()` **fails open**
+  or (shows every discipline) when no specialisation is set yet, so an
+  existing saved plan from before this feature — like Sahel's own, mid-session
+  — never silently loses visibility into units it already had.
+- **Non-destructive**: switching specialisation later (via Settings) only
+  changes what the *catalog sidebar* shows going forward — units already
+  placed in the grid stay exactly where they are, regardless of discipline.
+  Confirmed live: placed Civil units while testing, switched Settings to
+  Electrical + Commerce, grid still showed all 17 previously-placed units
+  untouched.
+- Branding (topbar/catalog/modal eyebrows, e.g. "E3001 · Civil Engineering")
+  now derives from the chosen specialisation via `updateBranding()` instead of
+  being hardcoded "E3007 · Electrical" — same static markup would've been
+  wrong the moment a second discipline existed.
+- Export/import plan `.json` now round-trips `specialisation`/`hasCommerce`
+  too, not just name/placements/customUnits.
+
+**Tested live** (local static server, real browser automation, not just
+claimed): fresh onboarding modal shows all 4 disciplines pre-filter → selected
+"Civil Engineering" → grid counts updated live (2/4/7/10/13/17/20/23, provably
+different from Electrical's 2/4/7/9/11/13/15/17) → clicked "Through Y3 S2" →
+sidebar correctly showed only Common core + Civil Engineering (Electrical and
+Commerce hidden) → branding read "E3001 · Civil Engineering" → 17 units/102cp
+placed exactly matching the expected filtered set → clicked a placed CIV3221
+card and confirmed upstream-chain highlighting correctly reached into
+civil.json's CIV2235 (cross-file prerequisite resolution) → opened Settings,
+switched specialisation to Electrical + ticked Commerce, confirmed sidebar
+updated to show Electrical + Commerce (Civil hidden) and the plan's
+already-placed Civil units were untouched in the grid → mobile viewport
+(375px) confirmed still collapsing cleanly with the new settings fields.
+localStorage cleared back to empty before finishing.
+
 ## Next up
-- Once Sahel actually picks a major, trim the other 3 out (or just leave them
-  — they don't affect validation, only add sidebar length).
+- Once Sahel actually picks a Commerce major, trim the other 3 out (or just
+  leave them — they don't affect validation, only add sidebar length).
 - Optional, only if he wants it later: prereq/coreq checking for custom units
   too (he'd need to name which catalog/custom codes they depend on).
 - If the E3005 transfer is confirmed: update electrical.json's year/semester
   placements to match the double-degree sequence (see note above).
+- Phase 2 (future, not now): adding another discipline is now "research its
+  AoS code + units the same way Civil was done, write its data file with a
+  `discipline` tag, add one line to manifest.json, run
+  `node scripts/validate-catalog.mjs`" — no index.html changes needed unless
+  its course code should show in `COURSE_CODES`.
+- CIV4249's real 2024 non-offering and CIV4286's Handbook-mandated
+  replacement are documented but not yet resolved with an actual substitute
+  unit — same "add as custom unit once decided" pattern as ECE4099.

@@ -11,8 +11,8 @@
     ],
     "openDecisions": [
       "ECE3121 vs ECE3122 (Engineering electromagnetics): course map's stated core unit is ECE3121, but the 2024 Handbook shows ECE3121 was Malaysia-only that year, with Clayton students required to take ECE3122 instead. Using ECE3122 for the Clayton path. Re-check the live Handbook when you're closer to Year 4 in case the split has changed.",
-      "ECE4099 (Professional practice) is not in this catalog at all — it was Malaysia-only in 2024 and the course map instructs Clayton students to replace it with a Professional Practice domain unit of their own choice. Add whichever domain unit you pick as a custom unit in the planner.",
-      "Science major/elective slots and the Level 4/5 ECE-coded core elective slot are NOT pre-listed here — the planner is where you add your own choices for these (including Commerce units) via 'add custom unit', since they're personal/variable and outside the electrical core dependency chain that's the point of Phase 1."
+      "ECE4099 (Professional practice) is not in this catalog at all \u2014 it was Malaysia-only in 2024 and the course map instructs Clayton students to replace it with a Professional Practice domain unit of their own choice. Add whichever domain unit you pick as a custom unit in the planner.",
+      "Science major/elective slots and the Level 4/5 ECE-coded core elective slot are NOT pre-listed here \u2014 the planner is where you add your own choices for these (including Commerce units) via 'add custom unit', since they're personal/variable and outside the electrical core dependency chain that's the point of Phase 1."
     ]
   },
   "units": [
@@ -35,7 +35,8 @@
         "MTH2015"
       ],
       "notes": "",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "ECE2191",
@@ -55,7 +56,8 @@
       "corequisiteText": "ENG2005 Advanced engineering mathematics OR MTH2010 Multivariable calculus",
       "prohibitions": [],
       "notes": "Semester 2 offering only.",
-      "semesterOffered": "2"
+      "semesterOffered": "2",
+      "discipline": "electrical"
     },
     {
       "code": "ECE2071",
@@ -72,8 +74,9 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "2024 Handbook lists this unit under the title 'Computer organisation and programming'; the current course map (updated Oct 2025) shows the title as 'Systems programming'. Same code, same content area — title changed at some point after 2024. Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
-      "semesterOffered": "1"
+      "notes": "2024 Handbook lists this unit under the title 'Computer organisation and programming'; the current course map (updated Oct 2025) shows the title as 'Systems programming'. Same code, same content area \u2014 title changed at some point after 2024. Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1",
+      "discipline": "electrical"
     },
     {
       "code": "ECE2131",
@@ -92,8 +95,9 @@
       "prohibitions": [
         "ECE2031"
       ],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
-      "semesterOffered": "1"
+      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1",
+      "discipline": "electrical"
     },
     {
       "code": "ECE2072",
@@ -107,8 +111,9 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "If already completed as a First Year technical elective, must be replaced with another ECE technical elective (or an engineering minor unit) of equal or higher level. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
-      "semesterOffered": "2"
+      "notes": "If already completed as a First Year technical elective, must be replaced with another ECE technical elective (or an engineering minor unit) of equal or higher level. Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists in the 2024 Handbook.",
+      "semesterOffered": "2",
+      "discipline": "electrical"
     },
     {
       "code": "ECE2111",
@@ -127,8 +132,9 @@
       "prohibitions": [
         "ECE2011"
       ],
-      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
-      "semesterOffered": "2"
+      "notes": "Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists in the 2024 Handbook.",
+      "semesterOffered": "2",
+      "discipline": "electrical"
     },
     {
       "code": "ECE3051",
@@ -144,8 +150,9 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
-      "semesterOffered": "1"
+      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1",
+      "discipline": "electrical"
     },
     {
       "code": "ECE3073",
@@ -162,8 +169,9 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
-      "semesterOffered": "1"
+      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1",
+      "discipline": "electrical"
     },
     {
       "code": "ECE3122",
@@ -182,8 +190,9 @@
       "prohibitions": [
         "ECE3121"
       ],
-      "notes": "Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting — you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) — no Semester 1 offering exists.",
-      "semesterOffered": "2"
+      "notes": "Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting \u2014 you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists.",
+      "semesterOffered": "2",
+      "discipline": "electrical"
     },
     {
       "code": "ECE3161",
@@ -201,8 +210,9 @@
       "prohibitions": [
         "ECE3062"
       ],
-      "notes": "Course map places this at Y4 S2, but the 2024 Handbook shows it as Semester 1 offering only at Clayton (no S2 offering that year) — a real discrepancy between the recommended sequence and the specific 2024 timetable. Kept at the course map's Y4 S2 slot since sequencing can shift year to year; re-check the live Handbook before actually enrolling.",
-      "semesterOffered": "1"
+      "notes": "Course map places this at Y4 S2, but the 2024 Handbook shows it as Semester 1 offering only at Clayton (no S2 offering that year) \u2014 a real discrepancy between the recommended sequence and the specific 2024 timetable. Kept at the course map's Y4 S2 slot since sequencing can shift year to year; re-check the live Handbook before actually enrolling.",
+      "semesterOffered": "1",
+      "discipline": "electrical"
     },
     {
       "code": "ENG4701",
@@ -221,7 +231,8 @@
         "ECE4094"
       ],
       "notes": "Capstone project, part A of two. Not open to exchange/study abroad students.",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "ECE3141",
@@ -237,8 +248,9 @@
       "prohibitions": [
         "ECE2041"
       ],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
-      "semesterOffered": "1"
+      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "semesterOffered": "1",
+      "discipline": "electrical"
     },
     {
       "code": "ENG0001",
@@ -258,7 +270,8 @@
         "ENG0003"
       ],
       "notes": "0 credit points. Requires 420 hours of Continuous Professional Development accumulated across the whole degree, not just this semester. Must be enrolled in an engineering bachelor's degree.",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "ENG4702",
@@ -277,7 +290,8 @@
         "ECE4095"
       ],
       "notes": "Capstone project, part B of two. Not open to exchange/study abroad students.",
-      "semesterOffered": "both"
+      "semesterOffered": "both",
+      "discipline": "common"
     },
     {
       "code": "ECE4191",
@@ -299,8 +313,9 @@
         "ECE3091",
         "TRC4407"
       ],
-      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
-      "semesterOffered": "2"
+      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists in the 2024 Handbook.",
+      "semesterOffered": "2",
+      "discipline": "electrical"
     },
     {
       "code": "ECE4132",
@@ -319,8 +334,9 @@
       "prohibitions": [
         "ECE3062"
       ],
-      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
-      "semesterOffered": "2"
+      "notes": "Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists in the 2024 Handbook.",
+      "semesterOffered": "2",
+      "discipline": "electrical"
     }
   ]
 }

@@ -1,0 +1,9 @@
+{
+  "_comment": "List of catalog data files the planner loads. Add a new discipline by dropping its JSON file in this folder and adding its filename here — no other code changes needed for it to show up in the catalog, onboarding specialisation picker, and filtering.",
+  "files": [
+    "common-first-year.json",
+    "electrical.json",
+    "civil.json",
+    "commerce.json"
+  ]
+}

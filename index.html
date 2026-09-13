@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>E3007 Course Planner</title>
+<title>Monash Engineering Course Planner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,380;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -229,6 +229,15 @@
     font-family:'IBM Plex Sans',sans-serif; font-size:13px; color:var(--ink); border-radius:2px;
   }
   .settings-field input:focus{outline:1.5px solid var(--core); outline-offset:0;}
+  .settings-field select{
+    width:100%; padding:8px 10px; border:1px solid var(--line-strong); background:var(--panel);
+    font-family:'IBM Plex Sans',sans-serif; font-size:13px; color:var(--ink); border-radius:2px;
+  }
+  .settings-field.settings-check label{
+    display:flex; align-items:center; gap:8px; text-transform:none; font-family:'IBM Plex Sans',sans-serif;
+    font-size:12.5px; color:var(--ink); letter-spacing:0; font-weight:400;
+  }
+  .settings-field.settings-check input{width:auto;}
   .settings-actions{display:flex; flex-direction:column; gap:8px; margin-top:18px;}
   .settings-actions .onboard-scratch{margin-top:0;}
   .settings-danger{
@@ -254,7 +263,7 @@
 
   <aside class="catalog">
     <div class="catalog-head">
-      <div class="eyebrow">E3007 &middot; Electrical</div>
+      <div class="eyebrow" id="catalogEyebrow">Course planner</div>
       <h2>Catalog</h2>
     </div>
     <div class="catalog-search">
@@ -319,7 +328,7 @@
   <main class="main">
     <div class="topbar">
       <div>
-        <div class="eyebrow">E3007 &middot; Electrical &amp; Computer Systems &mdash; Clayton, 2024 commencing</div>
+        <div class="eyebrow" id="topbarEyebrow">Course planner &mdash; Clayton, 2024 commencing</div>
         <div class="title-row">
           <h1 id="planTitle">Your course plan</h1>
           <div class="monogram" id="monogram" hidden></div>
@@ -350,12 +359,20 @@
 
 <div class="modal-veil" id="onboardVeil" hidden>
   <div class="modal" role="dialog" aria-labelledby="onboardTitle">
-    <div class="eyebrow">E3007 &middot; Electrical</div>
+    <div class="eyebrow" id="onboardEyebrow">Course planner</div>
     <h2 id="onboardTitle">Welcome</h2>
     <div class="settings-field">
       <label for="onboardName">What should we call you?</label>
       <input type="text" id="onboardName" placeholder="e.g. Sahel" autocomplete="given-name">
     </div>
+    <div class="settings-field">
+      <label for="onboardSpec">Your specialisation</label>
+      <select id="onboardSpec"></select>
+    </div>
+    <div class="settings-field settings-check">
+      <label><input type="checkbox" id="onboardCommerce"> Also doing Commerce (E3005 double degree)</label>
+    </div>
+    <p class="modal-copy">This filters the catalog sidebar to your specialisation (plus Commerce, if you ticked it) so you're not wading through units from other disciplines. Change it anytime in Settings.</p>
     <p class="modal-copy">Already partway through? Pick how far you've gotten and every core/specialisation unit up to that point gets added in its canonical slot &mdash; edit or remove anything after, nothing here is final.</p>
     <div class="onboard-grid" id="onboardGrid"></div>
     <button class="onboard-scratch" id="onboardScratch">Start from a blank plan</button>
@@ -365,11 +382,18 @@
 <div class="modal-veil" id="settingsVeil" hidden>
   <div class="modal" role="dialog" aria-labelledby="settingsTitle">
     <button class="modal-x" id="settingsClose" aria-label="Close settings">&times;</button>
-    <div class="eyebrow">E3007 &middot; Electrical</div>
+    <div class="eyebrow" id="settingsEyebrow">Course planner</div>
     <h2 id="settingsTitle">Settings</h2>
     <div class="settings-field">
       <label for="settingsName">Your name</label>
       <input type="text" id="settingsName" placeholder="e.g. Sahel" autocomplete="given-name">
+    </div>
+    <div class="settings-field">
+      <label for="settingsSpec">Your specialisation</label>
+      <select id="settingsSpec"></select>
+    </div>
+    <div class="settings-field settings-check">
+      <label><input type="checkbox" id="settingsCommerce"> Also doing Commerce (E3005 double degree)</label>
     </div>
     <div class="settings-actions">
       <button class="onboard-scratch" id="settingsQuickStart">Quick start&hellip;</button>
@@ -393,6 +417,8 @@ let selectedCode = null;
 let knownPlacedCodes = new Set(); // for entrance-animation diffing — codes placed as of the last render
 let openGroups = new Set(); // catalog-group keys the user has manually expanded (persists across re-renders)
 let userName = '';
+let userSpecialisation = '';  // discipline code, e.g. 'electrical' / 'civil' — '' means unset (no filtering)
+let userHasCommerce = false;  // double-degree companion toggle
 
 function icon(path){
   return `<svg class="icon-svg" viewBox="0 0 16 16" width="12" height="12" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${path}</svg>`;
@@ -433,22 +459,34 @@ function loadState(){
     if(data.placements) placements = Object.assign(placements, data.placements);
     if(data.customUnits) customUnits = data.customUnits;
     if(typeof data.name === 'string') userName = data.name;
+    if(typeof data.specialisation === 'string') userSpecialisation = data.specialisation;
+    if(typeof data.hasCommerce === 'boolean') userHasCommerce = data.hasCommerce;
   }catch(e){ console.warn('planner: could not read saved plan', e); }
 }
 function saveState(){
   try{
-    localStorage.setItem(STORAGE_KEY, JSON.stringify({placements, customUnits, name: userName}));
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({placements, customUnits, name: userName, specialisation: userSpecialisation, hasCommerce: userHasCommerce}));
   }catch(e){ console.warn('planner: could not save plan', e); }
 }
 
 /* ---------------- data load ---------------- */
+// disciplineMeta: discipline code -> human label, read from each file's _meta.specialisation.
+// Adding a new discipline is just a new data file + a line in data/manifest.json — this loader
+// (and everything downstream: sidebar grouping, onboarding specialisation picker, filtering)
+// never needs editing again.
+let disciplineMeta = {};
+
 async function loadCatalog(){
-  const [common, elec, comm] = await Promise.all([
-    fetch('data/common-first-year.json').then(r => r.json()),
-    fetch('data/electrical.json').then(r => r.json()),
-    fetch('data/commerce.json').then(r => r.json())
-  ]);
-  catalog = common.units.concat(elec.units, comm.units);
+  const manifest = await fetch('data/manifest.json').then(r => r.json());
+  const files = await Promise.all(manifest.files.map(f => fetch(`data/${f}`).then(r => r.json())));
+  catalog = [];
+  files.forEach(f => {
+    catalog = catalog.concat(f.units);
+    const disc = f.units.find(u => u.discipline && u.discipline !== 'common')?.discipline;
+    if(disc && f._meta && f._meta.specialisation && !disciplineMeta[disc]){
+      disciplineMeta[disc] = f._meta.specialisation;
+    }
+  });
 }
 
 /* ---------------- validation ---------------- */
@@ -525,7 +563,28 @@ function chainFor(code){
 }
 
 /* ---------------- rendering: catalog ---------------- */
-function YEARS_FIRST(u){ return (u.year===1) || (u.year===2 && u.semester===1) || u.code==='SCI1000'; }
+const DISCIPLINE_LABELS = { common: 'Common core', commerce: 'Commerce (E3005 double degree)' };
+const COMMERCE_MAJOR_LABELS = {
+  core: 'Core (Part A)', finance: 'Finance major', economics: 'Economics major',
+  'business-analytics': 'Business Analytics major', econometrics: 'Econometrics major'
+};
+function disciplineLabel(disc){ return DISCIPLINE_LABELS[disc] || disciplineMeta[disc] || disc; }
+
+// Every non-common, non-commerce discipline present in the loaded catalog — this is what
+// populates the onboarding/settings specialisation picker. Add a new discipline's data file
+// (+ manifest.json entry) and it appears here automatically, no code change needed.
+function availableSpecialisations(){
+  return [...new Set(catalog.filter(u => u.discipline && u.discipline!=='common' && u.discipline!=='commerce').map(u => u.discipline))];
+}
+
+// Which disciplines should currently show in the sidebar. Fails open (shows everything) until
+// the user has actually chosen a specialisation — so an existing saved plan from before this
+// feature existed, or someone who skipped onboarding, never silently loses units they placed.
+function visibleDisciplines(){
+  const all = [...new Set(catalog.map(u => u.discipline))];
+  if(!userSpecialisation) return all;
+  return all.filter(d => d==='common' || d===userSpecialisation || (d==='commerce' && userHasCommerce));
+}
 
 function renderCatalog(filter){
   const el = document.getElementById('catalogGroups');
@@ -533,17 +592,21 @@ function renderCatalog(filter){
   const q = (filter||'').trim().toLowerCase();
   const matches = u => !q || u.code.toLowerCase().includes(q) || u.title.toLowerCase().includes(q);
 
-  const tree = [
-    {key:'common', title:'Common first year', items: catalog.filter(u => u.type!=='commerce' && YEARS_FIRST(u))},
-    {key:'electrical', title:'Electrical specialisation', items: catalog.filter(u => u.type!=='commerce' && !YEARS_FIRST(u))},
-    {key:'commerce', title:'Commerce (E3005 double degree)', sub:[
-      {key:'commerce-core', title:'Core (Part A)', items: catalog.filter(u => u.type==='commerce' && u.major==='core')},
-      {key:'commerce-finance', title:'Finance major', items: catalog.filter(u => u.type==='commerce' && u.major==='finance')},
-      {key:'commerce-economics', title:'Economics major', items: catalog.filter(u => u.type==='commerce' && u.major==='economics')},
-      {key:'commerce-business-analytics', title:'Business Analytics major', items: catalog.filter(u => u.type==='commerce' && u.major==='business-analytics')},
-      {key:'commerce-econometrics', title:'Econometrics major', items: catalog.filter(u => u.type==='commerce' && u.major==='econometrics')}
-    ]}
-  ];
+  const shown = visibleDisciplines();
+  const order = ['common', ...availableSpecialisations(), 'commerce'];
+  const tree = [];
+  order.forEach(disc => {
+    if(!shown.includes(disc)) return;
+    if(disc === 'commerce'){
+      const majors = [...new Set(catalog.filter(u => u.discipline==='commerce').map(u => u.major))];
+      tree.push({key:'commerce', title: disciplineLabel('commerce'), sub: majors.map(m => ({
+        key:`commerce-${m}`, title: COMMERCE_MAJOR_LABELS[m] || m,
+        items: catalog.filter(u => u.discipline==='commerce' && u.major===m)
+      }))});
+    }else{
+      tree.push({key:disc, title: disciplineLabel(disc), items: catalog.filter(u => u.discipline===disc)});
+    }
+  });
 
   tree.forEach(node => el.appendChild(renderFolder(node, q, matches)));
 }
@@ -781,21 +844,35 @@ const ONBOARD_CUTOFFS = [
   {y:4, s:2, label:'Through Y4 S2'},
 ];
 
+// Quick-start only ever auto-adds common-core + the given specialisation's units — never
+// Commerce (its majors don't have reliable single canonical slots the way a specialisation's
+// core sequence does) and never a specialisation that isn't the chosen one. Falls back to
+// "every non-commerce unit" if no specialisation is given, so the picker still does something
+// useful before onboarding has run.
+function quickStartEligible(u, spec){
+  if(u.discipline === 'commerce') return false;
+  if(!spec) return true;
+  return u.discipline === 'common' || u.discipline === spec;
+}
+
+// Reads live from the onboarding form (not saved state) so the grid's counts preview whatever
+// specialisation is currently selected, even before the user commits that choice.
 function renderOnboardGrid(){
+  const spec = document.getElementById('onboardSpec').value;
   const el = document.getElementById('onboardGrid');
   el.innerHTML = '';
   ONBOARD_CUTOFFS.forEach(({y,s,label}) => {
-    const count = catalog.filter(u => u.type!=='commerce' && (u.year*10+u.semester) <= (y*10+s)).length;
+    const count = catalog.filter(u => quickStartEligible(u, spec) && (u.year*10+u.semester) <= (y*10+s)).length;
     const btn = document.createElement('button');
     btn.innerHTML = `<b>${label}</b>${count} core/specialisation unit${count===1?'':'s'} added`;
-    btn.addEventListener('click', () => applyQuickStart(y*10+s));
+    btn.addEventListener('click', () => { commitOnboardChoices(); applyQuickStart(y*10+s); });
     el.appendChild(btn);
   });
 }
 
 function applyQuickStart(cutoffRank){
   catalog.forEach(u => {
-    if(u.type === 'commerce') return;
+    if(!quickStartEligible(u, userSpecialisation)) return;
     if((u.year*10 + u.semester) > cutoffRank) return;
     addUnit(u.code, slotKey(u.year, u.semester));
   });
@@ -805,8 +882,20 @@ function applyQuickStart(cutoffRank){
 }
 
 function openOnboard(){
+  const sel = document.getElementById('onboardSpec');
+  populateSpecialisationSelect(sel);
+  sel.value = userSpecialisation || availableSpecialisations()[0] || '';
+  document.getElementById('onboardCommerce').checked = userHasCommerce;
   renderOnboardGrid();
   document.getElementById('onboardVeil').hidden = false;
+}
+// Persists whatever the onboarding form currently shows — called right before the user actually
+// proceeds (a quick-start cutoff button, or "start from a blank plan"), not on every keystroke,
+// so opening the modal and closing it via the veil/X without choosing anything doesn't silently
+// save a default specialisation nobody picked.
+function commitOnboardChoices(){
+  setSpecialisation(document.getElementById('onboardSpec').value);
+  setHasCommerce(document.getElementById('onboardCommerce').checked);
 }
 function closeOnboard(){
   document.getElementById('onboardVeil').hidden = true;
@@ -908,9 +997,67 @@ function setName(v){
 document.getElementById('onboardName').addEventListener('input', (e) => setName(e.target.value));
 document.getElementById('settingsName').addEventListener('input', (e) => setName(e.target.value));
 
+/* ---------------- specialisation + branding ---------------- */
+// Real 2024-vintage Monash course codes, just for the eyebrow text — cosmetic only, nothing
+// downstream depends on these strings. Falls back to no code shown for a discipline this map
+// doesn't know (keeps working when a new discipline is added before this list is updated).
+const COURSE_CODES = { electrical: 'E3007', civil: 'E3001' };
+
+function populateSpecialisationSelect(sel){
+  const current = sel.value;
+  sel.innerHTML = '';
+  availableSpecialisations().forEach(disc => {
+    const opt = document.createElement('option');
+    opt.value = disc;
+    opt.textContent = disciplineLabel(disc);
+    sel.appendChild(opt);
+  });
+  if([...sel.options].some(o => o.value === current)) sel.value = current;
+}
+
+function updateBranding(){
+  const spec = userSpecialisation;
+  const label = spec ? disciplineLabel(spec) : 'Course planner';
+  const code = spec && COURSE_CODES[spec] ? COURSE_CODES[spec] + ' · ' : '';
+  const commerceSuffix = (spec && userHasCommerce) ? ' + Commerce (E3005)' : '';
+  document.getElementById('catalogEyebrow').textContent = spec ? `${code}${label}` : 'Course planner';
+  document.getElementById('topbarEyebrow').textContent = spec
+    ? `${code}${label}${commerceSuffix} — Clayton, 2024 commencing`
+    : 'Course planner — Clayton, 2024 commencing';
+  document.getElementById('onboardEyebrow').textContent = spec ? `${code}${label}` : 'Course planner';
+  document.getElementById('settingsEyebrow').textContent = spec ? `${code}${label}` : 'Course planner';
+  document.getElementById('onboardSpec').value = spec;
+  document.getElementById('settingsSpec').value = spec;
+  document.getElementById('onboardCommerce').checked = userHasCommerce;
+  document.getElementById('settingsCommerce').checked = userHasCommerce;
+}
+
+function setSpecialisation(v){
+  userSpecialisation = v;
+  saveState();
+  updateBranding();
+  refreshAll();
+}
+function setHasCommerce(v){
+  userHasCommerce = v;
+  saveState();
+  updateBranding();
+  refreshAll();
+}
+// Onboarding fields only preview live (renderOnboardGrid) — actually persisting happens in
+// commitOnboardChoices(), called right when the user proceeds (a cutoff button or "start blank"),
+// so merely opening the modal and dismissing it via the veil/X never saves an untouched default.
+document.getElementById('onboardSpec').addEventListener('change', renderOnboardGrid);
+document.getElementById('onboardCommerce').addEventListener('change', renderOnboardGrid);
+// Settings fields, by contrast, save immediately — there's no separate "proceed" step there.
+document.getElementById('settingsSpec').addEventListener('change', (e) => setSpecialisation(e.target.value));
+document.getElementById('settingsCommerce').addEventListener('change', (e) => setHasCommerce(e.target.checked));
+
 /* ---------------- settings panel ---------------- */
 function openSettings(){
   updateIdentity();
+  populateSpecialisationSelect(document.getElementById('settingsSpec'));
+  updateBranding();
   document.getElementById('settingsVeil').hidden = false;
 }
 function closeSettings(){ document.getElementById('settingsVeil').hidden = true; }
@@ -923,7 +1070,7 @@ document.getElementById('settingsQuickStart').addEventListener('click', () => { 
 document.getElementById('settingsReset').addEventListener('click', () => { closeSettings(); resetPlan(); });
 
 document.getElementById('settingsExport').addEventListener('click', () => {
-  const data = {name: userName, placements, customUnits, exportedAt: new Date().toISOString()};
+  const data = {name: userName, specialisation: userSpecialisation, hasCommerce: userHasCommerce, placements, customUnits, exportedAt: new Date().toISOString()};
   const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -951,8 +1098,11 @@ importFile.addEventListener('change', () => {
       YEARS.forEach(y => SEMS.forEach(s => placements[slotKey(y,s)] = data.placements[slotKey(y,s)] || []));
       customUnits = Array.isArray(data.customUnits) ? data.customUnits : [];
       if(typeof data.name === 'string') userName = data.name;
+      if(typeof data.specialisation === 'string') userSpecialisation = data.specialisation;
+      if(typeof data.hasCommerce === 'boolean') userHasCommerce = data.hasCommerce;
       saveState();
       updateIdentity();
+      updateBranding();
       refreshAll();
       closeSettings();
     }catch(e){
@@ -964,7 +1114,7 @@ importFile.addEventListener('change', () => {
 });
 
 /* ---------------- init ---------------- */
-document.getElementById('onboardScratch').addEventListener('click', closeOnboard);
+document.getElementById('onboardScratch').addEventListener('click', () => { commitOnboardChoices(); closeOnboard(); });
 document.getElementById('onboardVeil').addEventListener('click', (e) => {
   if(e.target.id === 'onboardVeil') closeOnboard();
 });
@@ -975,6 +1125,7 @@ document.getElementById('onboardVeil').addEventListener('click', (e) => {
   await loadCatalog();
   loadState();
   updateIdentity();
+  updateBranding();
   refreshAll();
   const isEmpty = Object.values(placements).every(arr => arr.length === 0) && customUnits.length === 0;
   let alreadyOnboarded = false;
