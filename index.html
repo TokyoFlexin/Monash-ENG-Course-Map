@@ -67,7 +67,10 @@
   }
   .sidebar-toggle:hover{ border-color:var(--core); color:var(--core); }
   .sidebar-toggle:active{ transform:translateX(-50%) scale(.92); }
-  .sidebar-toggle.collapsed{ left:0; }
+  /* left:0 + translateX(-50%) would center the button ON the viewport edge, clipping half of it
+     off-screen — offset by half its own width instead, so it lands fully visible with a small
+     margin (same translateX(-50%) math as the expanded state, just re-centered). */
+  .sidebar-toggle.collapsed{ left:27px; }
   .sidebar-toggle .icon-svg{ transition:transform .38s cubic-bezier(.4,0,.2,1); }
   .sidebar-toggle.collapsed .icon-svg{ transform:rotate(180deg); }
 
