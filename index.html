@@ -29,17 +29,22 @@
     to{opacity:1; transform:translateY(0) scale(1);}
   }
   @keyframes cardOut{ from{opacity:1; transform:translateY(0) scale(1);} to{opacity:0; transform:translateY(-3px) scale(.97);} }
-  @keyframes cardSettle{
-    0%{transform:scale(1.04); box-shadow:0 8px 18px rgba(43,29,18,.2);}
-    100%{transform:scale(1); box-shadow:var(--card-shadow);}
-  }
+  @keyframes cardSettle{ 0%{transform:scale(1.04);} 100%{transform:scale(1);} }
+  /* the "pop" shadow lives on a ::after layer so only its opacity animates, not box-shadow itself —
+     box-shadow interpolation forces a CPU repaint every frame, which is noticeably choppier than
+     transform/opacity (compositor-only) on weaker GPUs than a Mac's. */
+  @keyframes cardSettleGlow{ from{opacity:1;} to{opacity:0;} }
   @keyframes fadeIn{ from{opacity:0;} to{opacity:1;} }
   @keyframes pulse{ 0%{transform:scale(1);} 35%{transform:scale(1.18);} 100%{transform:scale(1);} }
   @keyframes modalIn{ from{opacity:0; transform:translateY(10px) scale(.98);} to{opacity:1; transform:translateY(0) scale(1);} }
   @keyframes folderReveal{ from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);} }
   .card-enter{ animation:cardIn .38s cubic-bezier(.2,.7,.3,1) both; }
   .card-exit{ animation:cardOut .18s ease-in both; pointer-events:none; }
-  .card-settle{ animation:cardSettle .32s cubic-bezier(.2,.7,.3,1) both; }
+  .card-settle{ position:relative; animation:cardSettle .32s cubic-bezier(.2,.7,.3,1) both; }
+  .card-settle::after{
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    box-shadow:0 8px 18px rgba(43,29,18,.2); animation:cardSettleGlow .32s ease both;
+  }
   .pulse{ display:inline-block; animation:pulse .3s ease; }
   .folder-reveal{ animation:folderReveal .22s ease both; }
 
@@ -53,6 +58,7 @@
     width:320px; flex:none; border-right:1px solid var(--line); background:var(--panel);
     display:flex; flex-direction:column; position:sticky; top:0; height:100vh; overflow-y:auto; overflow-x:hidden;
     transition:width .38s cubic-bezier(.4,0,.2,1), border-color .38s ease;
+    contain:layout paint style; will-change:width;
   }
   .catalog.collapsed{ width:0; border-color:transparent; }
   .catalog > *{ transition:opacity .18s ease; }
@@ -60,17 +66,20 @@
   .main{flex:1; min-width:0; padding:28px 32px 80px;}
 
   .sidebar-toggle{
-    position:absolute; top:26px; left:320px; transform:translateX(-50%);
+    position:absolute; top:26px; left:0; transform:translateX(320px) translateX(-50%);
     width:26px; height:26px; border-radius:50%; border:1px solid var(--line-strong); background:var(--card-bg);
     color:var(--sub); display:flex; align-items:center; justify-content:center; z-index:5; flex:none;
-    transition:left .38s cubic-bezier(.4,0,.2,1), border-color .15s ease, color .15s ease, transform .15s ease;
+    /* animating transform (not left) keeps this compositor-only, so it stays smooth on GPUs
+       weaker than the one this was designed on. */
+    transition:transform .38s cubic-bezier(.4,0,.2,1), border-color .15s ease, color .15s ease;
   }
   .sidebar-toggle:hover{ border-color:var(--core); color:var(--core); }
-  .sidebar-toggle:active{ transform:translateX(-50%) scale(.92); }
+  .sidebar-toggle:active{ transform:translateX(320px) translateX(-50%) scale(.92); }
   /* left:0 + translateX(-50%) would center the button ON the viewport edge, clipping half of it
      off-screen — offset by half its own width instead, so it lands fully visible with a small
      margin (same translateX(-50%) math as the expanded state, just re-centered). */
-  .sidebar-toggle.collapsed{ left:27px; }
+  .sidebar-toggle.collapsed{ transform:translateX(27px) translateX(-50%); }
+  .sidebar-toggle.collapsed:active{ transform:translateX(27px) translateX(-50%) scale(.92); }
   .sidebar-toggle .icon-svg{ transition:transform .38s cubic-bezier(.4,0,.2,1); }
   .sidebar-toggle.collapsed .icon-svg{ transform:rotate(180deg); }
 

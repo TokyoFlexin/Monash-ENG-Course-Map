@@ -13,14 +13,15 @@
       "https://handbook.monash.edu/2024/courses/E3001 (E3001 Bachelor of Engineering (Honours) — single degree, all specialisations including Civil share this course entry; Civil's own course code doesn't exist separately at 2024 vintage — it's a specialisation within E3001, area-of-study code CIVILENG03)",
       "https://handbook.monash.edu/2024/aos/CIVILENG03 (Civil engineering specialisation requirements — Part C core unit list, Part D professional practice, Part E elective study structure)",
       "https://handbook.monash.edu/2024/units/{CODE} (prerequisite/corequisite/prohibition rules per unit, 2024 Handbook — Rules/Requisites accordion, researched live via browser, same rigor as electrical.json)",
-      "Course progression map PDF for E3001 (2024 commencing) exists at monash.edu but could not be fetched — direct download is Cloudflare-blocked for automated fetching (same block noted in electrical.json's research), and the r.jina.ai reader-proxy workaround used for the E3005 map hit an interactive 'verify you are human' Cloudflare challenge this session, which was not bypassed (bot-detection challenges are never completed by policy). Year/semester placement below is therefore Claude's own suggested sequencing from unit levels + validated prerequisite chains — same methodology and same caveat already used for the Commerce majors' Level 2/3 electives (see PROGRESS.md), not lifted from an official course-map PDF."
+      "Course progression map PDF for E3001 (2024 commencing) exists at monash.edu but could not be fetched — direct download is Cloudflare-blocked for automated fetching (same block noted in electrical.json's research), and the r.jina.ai reader-proxy workaround used for the E3005 map hit an interactive 'verify you are human' Cloudflare challenge this session, which was not bypassed (bot-detection challenges are never completed by policy). Year/semester placement below is therefore Claude's own suggested sequencing from unit levels + validated prerequisite chains — same methodology and same caveat already used for the Commerce majors' Level 2/3 electives (see PROGRESS.md), not lifted from an official course-map PDF.",
+      "https://handbook.monash.edu/current/units/{CODE} (2026-09-14 re-audit, prompted by feedback from Sahel's Civil-engineering friend — every one of the 15 units below was re-checked against the CURRENT Handbook, not just the 2024 archive, since Monash's course structure/offerings shift year to year; see PROGRESS.md for the full per-unit diff)"
     ],
     "openDecisions": [
       "Part E — Civil engineering technical electives (36 credit points, single-degree students only) is a ~35-unit pool (Level 3/4/5: bridges into transport/traffic, water/hydrology, geotechnical, structures, plus cross-listed Resources Engineering and a few Level 5 postgrad-adjacent units) — deliberately NOT enumerated here, same call already made for Economics' elective pool and Business Analytics-adjacent lists in commerce.json: too large/open to be useful as catalog cards. Add specific ones as custom units once chosen. Double-degree students (e.g. a hypothetical Civil+Commerce) have this 36cp requirement waived entirely per the Handbook — 'already credited towards the double degree structure'.",
-      "CIV4249 (Foundation engineering) was NOT OFFERED in the 2024 Handbook at all — its page has no Offerings section, just a Notes line stating so directly. Kept in the catalog (it's a real, named Part C core unit with a real prerequisite chain) but semesterOffered is \"unknown\" rather than asserting a semester that didn't exist that year — re-check a live/current Handbook edition before actually enrolling in it.",
-      "CIV4286 (Project management for civil engineers) carries an explicit Handbook Notes instruction: 'Replace CIV4286 with one Professional Practice domain unit from Semester 2, 2024' — structurally identical to ECE4099's situation in electrical.json (a nominal core unit the Handbook itself says to swap for a self-chosen replacement). Kept at its nominal Y4 S1 slot with the replacement instruction in its notes, same treatment as ECE4099: add whichever Professional Practice unit is actually chosen as a custom unit.",
+      "CIV4286 (Project management for civil engineers) is GONE from the current Handbook entirely (404, and a site search returns zero results) — this is past the 2024 vintage's 'replace with a Professional Practice unit' instruction, the code itself no longer exists to enrol in. Removed from the catalog outright (2026-09-14) rather than kept as a stub — same 'not in the catalog at all, add the real replacement as a custom unit' treatment already used for ECE4099 in electrical.json.",
       "Part D (Professional practice) requires ENG0001 at Clayton (ENG0002 at Malaysia) — already satisfied by electrical.json's ENG0001 entry (discipline:\"common\"), no new unit added here.",
-      "Year/semester placement for all 15 Civil-specific units below is Claude's suggested sequencing (unit level + validated prerequisite/corequisite chains, cross-checked so nothing is placed before its real prerequisites and every placement matches its actual Handbook-verified offering semester), not an official Monash course-map fact — see sources note above for why the actual PDF couldn't be fetched this session."
+      "Year/semester placement for all 14 Civil-specific units below is Claude's suggested sequencing (unit level + validated prerequisite/corequisite chains, cross-checked so nothing is placed before its real prerequisites and every placement matches its actual Handbook-verified offering semester), not an official Monash course-map fact — see sources note above for why the actual PDF couldn't be fetched this session.",
+      "2026-09-14 re-audit findings (see PROGRESS.md for full detail): CIV3294 was wrongly marked 'both semesters'/Y3S2 — it's actually Semester 1 only, the exact bug Sahel's friend reported, now fixed (also required moving CIV2206 earlier to keep the prerequisite chain valid). CIV4249 (previously 'not offered') is now genuinely offered Semester 1 only. Several prohibition codes had gone stale as Monash retired old unit codes (CIV2241, CIV3264, CIV3222, CIV2226) and in three cases introduced new postgraduate-level equivalents (CIV5170, CIV5149, CIV5178) — all updated to match the current Handbook."
     ]
   },
   "units": [
@@ -48,12 +49,12 @@
       "semester": 2,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["ENG1011", "ENG1014"],
-      "prerequisiteText": "(ENG1011 Engineering methods OR ENG1001 Engineering design: Lighter, faster, stronger) AND (ENG1014 Engineering numerical analysis OR ENG1060 Computing for engineers)",
+      "prerequisites": [],
+      "prerequisiteText": "Completion of 30 credit points of engineering study (Master of Professional Engineering E6011 students exempt).",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV2241"],
-      "notes": "Semester 2 offering only (Clayton and Malaysia). Prohibited combination with CIV2241 (older/equivalent Geomechanics 1 code) — this rule lives inside the Handbook's free-text 'Enrolment Rule' rather than a dedicated Prohibition accordion.",
+      "prohibitions": [],
+      "notes": "Semester 2 offering only (Clayton and Malaysia). 2026 Handbook re-audit: the unit page no longer has a Requisites tab at all — the old ENG1011+ENG1014 unit-code prerequisites and the CIV2241 prohibition are gone, replaced by a generic 30cp-of-engineering-study rule under Rules > Enrolment Rule (CIV2241 itself is now retired/404 in the current Handbook). By this unit's Y2S2 placement, first-year units already clear the 30cp threshold anyway, so the placement itself is unaffected.",
       "semesterOffered": "2"
     },
     {
@@ -69,7 +70,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Semester 1 offering only (Clayton and Malaysia).",
+      "notes": "Semester 1 offering only (Clayton and Malaysia). Y3S1 placement is the earliest valid S1 slot given ENG1011 itself sits at Y2S1 in this catalog's shared common-first-year.json (Sahel's own foundation-maths pathway pushes it back from the standard Y1S2) — couldn't move this earlier without landing in the same semester as its own prerequisite.",
       "semesterOffered": "1"
     },
     {
@@ -165,8 +166,8 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": ["CIV3284"],
-      "notes": "Offered both semesters at Clayton and Malaysia in the 2024 Handbook — no offering restriction.",
-      "semesterOffered": "both"
+      "notes": "Sahel's Civil-engineering friend flagged this as wrong (2026-09-14), and he's right: confirmed against the live Handbook, this is Semester 1 offering only (Clayton and Malaysia), NOT both semesters as the 2024-sourced data claimed — semesterOffered corrected to \"1\". Kept at its Y3S2 canonical slot rather than moved, though, same treatment as ECE3161 in electrical.json: its own prerequisite CIV2206 is stuck at Y3S1 (the earliest slot that clears ENG1011's Y2S1 placement, see CIV2206's notes), so the only chronologically-clean S1 slot for this unit would be Y4S1 — which collides with CIV4280 needing this unit done first, also at Y4S1. Y3S2 preserves the whole downstream chain (CIV4280 Y4S1, CIV4212 Y4S2) correctly ordered; the tradeoff is this unit will now correctly show an off-semester flag at its own canonical placement, which is accurate — it genuinely doesn't fit a clean 4-year S1 slot given how late ENG1011 lands in this particular first-year pathway. Warn-not-block is exactly for surfacing this kind of real tension rather than hiding it.",
+      "semesterOffered": "1"
     },
     {
       "code": "CIV3285",
@@ -180,8 +181,8 @@
       "prerequisiteText": "CIV2263 Water systems AND ENG2005 Advanced engineering mathematics",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV3264"],
-      "notes": "Semester 1 offering only (Clayton and Malaysia) — no Semester 2 offering exists in the 2024 Handbook.",
+      "prohibitions": [],
+      "notes": "Semester 1 offering only (Clayton and Malaysia) — no Semester 2 offering exists. 2026 re-audit: the CIV3264 prohibition is stale, that code is retired/404 in the current Handbook; the current unit page has no Prohibition subsection at all.",
       "semesterOffered": "1"
     },
     {
@@ -196,24 +197,8 @@
       "prerequisiteText": "(CIV3284 Design of concrete and masonry structures OR CIV3294 Structural design) AND CIV3221 Building structures and technology",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV3222"],
-      "notes": "Semester 1 offering only (Clayton and Malaysia) — no Semester 2 offering exists in the 2024 Handbook.",
-      "semesterOffered": "1"
-    },
-    {
-      "code": "CIV4286",
-      "title": "Project management for civil engineers",
-      "creditPoints": 6,
-      "year": 4,
-      "semester": 1,
-      "type": "specialisation",
-      "discipline": "civil",
-      "prerequisites": [],
-      "prerequisiteText": "Completion of 72 credit points of engineering study (Master of Professional Engineering E6011 students exempt).",
-      "corequisites": [],
-      "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Handbook Notes instruct: 'Replace CIV4286 with one Professional Practice domain unit from Semester 2, 2024' — same pattern as ECE4099 in electrical.json. Nominal offering is Semester 1 only (Clayton and Malaysia), kept here as its documented slot; add the actual chosen Professional Practice replacement as a custom unit instead of enrolling in this code directly.",
+      "prohibitions": ["CIV5170"],
+      "notes": "Semester 1 offering only (Clayton and Malaysia) — no Semester 2 offering exists. 2026 re-audit: prohibition updated from CIV3222 (now retired/404) to CIV5170, the current postgraduate-level 'Bridge design and assessment' equivalent.",
       "semesterOffered": "1"
     },
     {
@@ -229,7 +214,7 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Handbook Overview calls this 'a capstone unit drawing together material from previous units' for a multi-disciplinary design project — kept as type \"specialisation\" (the degree's actual capstone is ENG4701/ENG4702, shared with Electrical). Semester 2 offering only (Clayton and Malaysia).",
+      "notes": "Handbook Overview calls this 'a capstone unit drawing together material from previous units' for a multi-disciplinary design project — kept as type \"specialisation\" (the degree's actual capstone is ENG4701/ENG4702, shared with Electrical). Semester 2 offering only (Clayton and Malaysia). 2026 re-audit: the Handbook's own free-text enrolment rule still names CIV2226 and CIV3264 as OR-branches for two of its clauses — both are retired/404 in the current Handbook (Monash hasn't cleaned up its own rule text), so in practice only the CIV3247/CIV3248 and CIV3294/CIV3284 branches are live options; doesn't change this catalog's `prerequisites` array, which already used the live representative codes.",
       "semesterOffered": "2"
     },
     {
@@ -237,16 +222,16 @@
       "title": "Foundation engineering",
       "creditPoints": 6,
       "year": 4,
-      "semester": 2,
+      "semester": 1,
       "type": "specialisation",
       "discipline": "civil",
       "prerequisites": ["CIV3247"],
       "prerequisiteText": "CIV3247 Geomechanics 2",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "NOT OFFERED IN 2024 — the Handbook page has no Offerings section at all, just a Notes line: \"This unit is not offered in 2024.\" semesterOffered set to \"unknown\" rather than asserting a semester that didn't exist that year; re-check a current Handbook edition before actually planning around it.",
-      "semesterOffered": "unknown"
+      "prohibitions": ["CIV5149"],
+      "notes": "2026 re-audit: no longer \"not offered\" as the 2024 Handbook had it — now genuinely offered, Semester 1 only (Clayton and Malaysia), so semesterOffered corrected from \"unknown\" to \"1\" and moved from its old Y4S2 placeholder slot to Y4S1 to match. Also picked up a new prohibition, CIV5149 (the postgraduate-level equivalent), not present in the 2024 data since this unit didn't run that year.",
+      "semesterOffered": "1"
     },
     {
       "code": "CIV4288",
@@ -260,8 +245,8 @@
       "prerequisiteText": "CIV2263 Water systems AND CIV3285 Engineering hydrology",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV3264"],
-      "notes": "Semester 2 offering only (Clayton and Malaysia) — no Semester 1 offering exists in the 2024 Handbook.",
+      "prohibitions": ["CIV5178"],
+      "notes": "Semester 2 offering only (Clayton and Malaysia) — no Semester 1 offering exists. 2026 re-audit: prohibition updated from CIV3264 (now retired/404) to CIV5178, the current postgraduate-level 'Advanced water treatment' equivalent.",
       "semesterOffered": "2"
     }
   ]

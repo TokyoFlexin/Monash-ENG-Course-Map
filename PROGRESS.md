@@ -673,6 +673,74 @@ existing design guardrails.
   `prefers-reduced-motion: reduce` override (durations already forced to
   ~0 there), so nothing new bypasses that.
 
+## Civil data re-audit + cross-platform animation fixes (2026-09-14)
+Sahel's Civil-engineering friend, trying the planner, reported prerequisite/
+semester data looking wrong (specifically: "Structural design" shown as
+Semester 2 when it's actually Semester 1) — and separately that the
+animations looked less smooth on his (non-Mac) laptop than on Sahel's.
+
+**Civil data re-audit.** Ran a full Handbook re-check of all 15 civil.json
+units via a background research agent, this time against the CURRENT
+Handbook (`handbook.monash.edu/current/units/{CODE}`), not just the 2024
+archive the original research used — Monash's course structure and unit
+offerings shift year to year, and this was 2 years stale. The friend was
+right, plus more was found:
+- **CIV3294 (Structural design)** — the reported bug, confirmed: it's
+  Semester 1 only, not "both" as the 2024-sourced data claimed.
+  `semesterOffered` corrected to `"1"`. Its canonical slot stays at Y3S2
+  though, not moved to Y3S1 — moving it collides with its own prerequisite
+  CIV2206 (which can't be pulled any earlier than Y3S1 without landing in the
+  same semester as ENG1011, itself pinned at Y2S1 by Sahel's own
+  foundation-maths first-year pathway), and moving downstream would need a
+  Y5S1 that doesn't exist in this 4-year single degree. Kept at Y3S2 with the
+  tension fully documented in its notes — same treatment as the existing
+  ECE3161 precedent in electrical.json: correct the data, accept the
+  resulting off-semester flag at the canonical slot, let warn-not-block
+  surface the real tension rather than hiding it. (First attempt actually
+  moved CIV2206 earlier to "fix" this cleanly — caught as wrong by writing a
+  standalone chronological-ordering check, since ENG1011 itself sits at Y2S1,
+  not the standard-pathway Y1S2. Reverted before it shipped.)
+- **CIV4286 (Project management for civil engineers)** — gone entirely from
+  the current Handbook (404, zero search results), past the 2024 vintage's
+  "replace with a Professional Practice unit" instruction. Removed from the
+  catalog outright (was 15 units, now 14) — same "not in the catalog, add the
+  real replacement as a custom unit" treatment as ECE4099.
+- **CIV4249 (Foundation engineering)** — was "not offered in 2024," now
+  genuinely offered Semester 1 only. `semesterOffered` corrected from
+  `"unknown"` to `"1"`, moved from its old Y4S2 placeholder to Y4S1 to match,
+  picked up a new prohibition (CIV5149, the postgrad equivalent).
+- **Stale prohibition codes** — CIV2241, CIV3264, CIV3222, CIV2226 have all
+  been retired/404'd from the Handbook since 2024. Removed from CIV2242 (also
+  lost its specific ENG1011+ENG1014 prereqs — the current Handbook only has a
+  generic 30cp-of-engineering-study rule now) and CIV3285; replaced with
+  current postgraduate-level equivalents on CIV4280 (→CIV5170) and CIV4288
+  (→CIV5178).
+- Full per-unit source citations and the complete diff are in civil.json's
+  `_meta.sources`/`openDecisions`. Re-ran `node scripts/validate-catalog.mjs`
+  (83 units now, was 84 — 0 problems) plus a standalone chronological-order
+  sanity script (every prerequisite genuinely lands in an earlier semester
+  than its dependent, CIV3294's documented by-design exception aside).
+
+**Cross-platform animation fixes.** Three animations in `index.html` were
+animating layout/paint properties instead of compositor-only ones — cheap on
+a Mac's GPU/compositor pipeline, visibly janky on weaker non-Apple GPUs:
+- Sidebar collapse toggle button was animating `left` (position/layout);
+  switched to `transform: translateX(...)` (compositor-only), same visual
+  result.
+- Catalog sidebar's width-collapse animation got `contain: layout paint
+  style` + `will-change: width` so its reflow/repaint cost is scoped to just
+  the sidebar rather than the whole page.
+- The "card settle" animation (plays when dragging or select-moving an
+  already-placed unit) was animating `box-shadow` directly in its keyframe —
+  a classic non-GPU-accelerated animation, forces CPU repaint every frame.
+  Moved the shadow onto a `::after` pseudo-element and animate only its
+  `opacity` instead (compositor-only), same "pop" effect.
+- Verified live: sidebar collapse/expand, and a select-triggered card move
+  (confirmed via computed styles that the card's own box-shadow never
+  changes value now — only the `::after` layer's opacity animates). No
+  console errors. Testing on the friend's actual (non-Mac) laptop is still
+  the real proof — worth asking him to check again next time he tries it.
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).
