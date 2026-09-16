@@ -1167,6 +1167,84 @@ Electrical (unchanged — electives are choices, not requirements) while 48 unit
 choose from, up from 21. Mechatronics (23 placed / 41 visible) and Civil (23 / 29) unaffected.
 No console errors.
 
+## Session 2026-09-16 (later) — layout overhaul, focus overlay, and the Year 4 truncation bug
+
+### The Year 4 bug — root cause found, not a data problem
+Sahel reported "year 4 only has one sem", then "it's not there, and Year 5 isn't even there".
+Reproduced and traced: **`ECE3122` was renamed to `ECE3121`** in this same day's Handbook
+re-audit. His saved plan still held `ECE3122` at Y4 S2. `byCode('ECE3122')` returned `undefined`,
+`unitCard()` threw on `u.type`, and **`renderGrid()` aborted mid-loop** — so the Y4 S1 and S2 cells
+never got appended and Year 5 was never reached. Grid silently truncated. Console error:
+`Cannot read properties of undefined (reading 'type')`.
+
+Confirmed the deployed GitHub Pages build was byte-identical to local (`shasum` match), so it was
+never a stale deploy.
+
+**Any re-audit that renames a unit can do this again.** Fixes, all three layers:
+- `CODE_RENAMES` map in index.html (`ECE3122 -> ECE3121`) — migrates old saved plans in place.
+- `reconcilePlacements()` runs after `loadState()` and after import: renames what it can, drops
+  codes that no longer exist anywhere, dedupes a rename that collides with an already-placed code,
+  and re-saves. Every downstream consumer (`flagsFor`, `chainFor`, cp totals, cards) can now assume
+  `byCode()` resolves.
+- Dropped codes surface in a dismissible `.plan-notice` banner naming them — silently deleting a
+  student's placed units is not acceptable.
+- `unitCard()` returns `null` instead of throwing, so a future mismatch degrades to one missing
+  tile rather than a truncated plan.
+- New `scripts/check-plan-migration.mjs` — asserts every rename target exists, no rename shadows a
+  live unit, and lists every code ever retired from the catalog that has no rename entry. Walks git
+  history to find them. Currently: 1 rename mapped, 4 codes retired (`SCI1000`, `CIV4286`,
+  `ETF3500` are genuine deletions; `ECE3122` is the rename).
+
+### Layout overhaul — dense 2x2 tiles, two years per row
+Old: 2 columns (S1 | S2), years stacked, 2464px tall — Year 4 was four scrolls down.
+New: `.grid` is two **year-blocks** per row (Y1|Y2, Y3|Y4, Y5), each block = its two semesters side
+by side, each semester a 2x2 of compact tiles. **Whole 4-year degree fits one 1440x900 screen even
+with the catalog sidebar open.** Year headers carry a per-year cp total.
+
+Tiles lost the inline notes / flag text / move select / remove button — there is nowhere to put
+them at ~160x72px. A red `.flag-dot` marks flagged units; everything else moved into the focus
+overlay. Drag-and-drop between cells is unchanged and still works.
+
+Breakpoints: 1180px -> one year-block per row; 860px -> existing mobile stack; 560px -> semesters
+stack within a year.
+
+### Focus overlay — click a unit, chain shown against a blurred plan
+Replaces the old scroll-and-squint dim/up/down highlighting on the grid itself (`.card.dim`,
+`.card.up`, `.card.down` are gone; `.card.selected` stays so you know where you were on close).
+
+Click any tile: a `backdrop-filter: blur(7px)` veil covers the plan and the dependency chain is
+rebuilt as **columns ordered by year/semester** — upstream, the selected unit, then downstream —
+each column labelled `Year 2 · Sem 1`. A Y1->Y4 chain reads on one screen instead of four scrolls.
+Upstream tiles use `--up`, downstream `--down`, matching the existing legend. Below sits the unit's
+full detail: prerequisites in plain language (`prerequisiteText`), corequisites, prohibitions,
+notes, live flags, the move dropdown and remove.
+
+- Clicking another tile in the chain re-focuses on it — you can walk the graph without closing.
+- Esc, the X, or clicking the veil closes. `body` scroll locked while open.
+- No chain at all -> "Nothing in your plan depends on X, and none of its prerequisites are placed
+  yet." rather than an empty stage.
+- `justify-content:center` clipped the leading tiles once a chain overflowed; fixed with
+  `::before/::after { margin:auto }` auto-margin centring, plus `scrollIntoView({inline:'center'})`
+  on the selected tile. Stage 1160px / columns 160px / arrows 30px fits a 6-column chain exactly,
+  which is the common case.
+
+### Verified (browser, 1440x900 and 375x812 mobile)
+- Stale-plan repro: seeded `ECE3122` at Y4 S2 -> before: 4 year labels, 6 cells. After: **5 year
+  labels, 10 cells, 30 tiles**, `ECE3122` migrated to `ECE3121` in place, no drop notice (correct —
+  it was a rename, not a deletion).
+- Dead-code path: seeded `SCI1000` + `CIV4286` -> both pruned, banner named them, grid intact,
+  pruned state persisted to localStorage.
+- 12/12 in-browser assertions passed: esc/close, move-select reflects current slot, move applies
+  and overlay stays open on the moved unit, chain-tile re-focus, 5 year labels, 10 cells, 8 `.cell-cards`
+  wrappers, flag dots present, 30 tiles, Y1 cp label `42cp`.
+- Drag-and-drop: synthetic `dragover` sets `.drag-over`, `drop` moves the unit between cells.
+- `node scripts/validate-catalog.mjs` -> clean, 118 units, 4 tracks.
+- `node scripts/check-plan-migration.mjs` -> OK.
+- No console errors.
+
+**Not committed — awaiting Sahel's confirmation on the drafts.** Backup of the pre-change file in
+the session scratchpad.
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).

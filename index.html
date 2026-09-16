@@ -183,48 +183,125 @@
   .add-custom .submit:hover{opacity:.88;}
   .add-custom .submit:active{transform:scale(.98);}
 
-  /* ---------- grid ---------- */
-  .grid{max-width:1040px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:14px 20px;}
-  .year-label{grid-column:1 / -1; font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--faint); margin:22px 0 -2px; padding-top:14px; border-top:1px solid var(--line);}
-  .year-label:first-of-type{border-top:none; margin-top:0; padding-top:0;}
-  .cell{border:1px solid var(--line); background:var(--panel); padding:12px 14px 14px; min-height:96px; border-radius:2px; transition:border-color .15s ease, background .15s ease;}
-  .cell.drag-over{border-color:var(--core); background:rgba(31,77,58,.06); outline:1.5px dashed var(--core); outline-offset:-5px;}
-  .cell-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:10px;}
-  .cell-head .label{font-family:'IBM Plex Mono',monospace; font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--sub);}
-  .cell-head .cp-total{font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--faint); font-variant-numeric:tabular-nums;}
-  .cell-empty{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--faint); padding:8px 0;}
+  /* ---------- grid ----------
+     Two year-blocks per row (Y1|Y2, Y3|Y4, Y5), each block holding its two semesters side by
+     side, each semester a 2x2 of compact tiles. Whole degree in ~2 screens instead of 5. */
+  .grid{max-width:1380px; margin:0 auto; display:grid; grid-template-columns:repeat(2,1fr); gap:24px 26px;}
+  .year-block{min-width:0;}
+  .year-label{
+    display:flex; justify-content:space-between; align-items:baseline; gap:10px;
+    font-family:'IBM Plex Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--faint); border-top:1px solid var(--line-strong); padding-top:9px; margin:0 0 10px;
+  }
+  .year-label .year-cp{font-variant-numeric:tabular-nums; letter-spacing:.04em;}
+  .sems{display:grid; grid-template-columns:1fr 1fr; gap:10px; align-items:stretch;}
+  .cell{border:1px solid var(--line); background:var(--panel); padding:9px 10px 10px; min-height:88px; border-radius:2px; transition:border-color .15s ease, background .15s ease;}
+  .cell.drag-over{border-color:var(--core); background:rgba(31,77,58,.06); outline:1.5px dashed var(--core); outline-offset:-4px;}
+  .cell-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;}
+  .cell-head .label{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--sub);}
+  .cell-head .cp-total{font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--faint); font-variant-numeric:tabular-nums;}
+  .cell-empty{font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--faint); padding:6px 0;}
+  .cell-cards{display:grid; grid-template-columns:1fr 1fr; gap:6px;}
 
   .card{
-    border:1px solid var(--line-strong); border-left:5px solid var(--line-strong); background:var(--card-bg);
-    padding:10px 12px 11px; margin-bottom:9px; border-radius:2px; box-shadow:var(--card-shadow);
+    position:relative; border:1px solid var(--line-strong); border-left:4px solid var(--line-strong); background:var(--card-bg);
+    padding:7px 8px 8px; border-radius:2px; box-shadow:var(--card-shadow); min-height:72px;
     cursor:grab; transition:opacity .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease, transform .15s ease;
   }
   .card:active{cursor:grabbing;}
-  .card:hover{transform:translateY(-1px);}
-  .card:last-child{margin-bottom:0;}
+  .card:hover{transform:translateY(-1px); border-color:var(--sub);}
   .card.dragging{opacity:.35;}
+  /* flagged units can no longer show their flag text inline at this tile size — a dot marks them
+     and the full text lives in the focus overlay. */
+  .card .flag-dot{position:absolute; top:6px; right:6px; width:5px; height:5px; border-radius:50%; background:var(--warn);}
+  .card .flag-dot + .card-top .cp{padding-right:9px;}
   .card.t-core{border-left-color:var(--core);}
   .card.t-specialisation{border-left-color:var(--spec);}
   .card.t-elective{border-left-color:var(--elective);}
   .card.t-commerce{border-left-color:var(--commerce);}
   .card.t-breadth{border-left-color:var(--breadth);}
-  .card-top{display:flex; justify-content:space-between; align-items:baseline; gap:8px;}
-  .card .code{font-family:'IBM Plex Mono',monospace; font-size:11px; display:flex; align-items:baseline; gap:6px;}
-  .card .code .dot{width:6px; height:6px; border-radius:50%; display:inline-block;}
-  .card .cp{color:var(--faint); font-size:10.5px; font-variant-numeric:tabular-nums;}
-  .card .title{font-family:'Fraunces',serif; font-weight:600; font-size:14.5px; line-height:1.28; margin-top:4px;}
-  .card .note{font-size:10.5px; color:var(--sub); line-height:1.35; margin-top:5px;}
-  .card .controls{display:flex; align-items:center; gap:6px; margin-top:7px;}
-  .card .controls select{font-size:10px; font-family:'IBM Plex Mono',monospace; border:1px solid var(--line-strong); background:var(--card-bg); padding:2px 8px; border-radius:20px; color:var(--sub);}
-  .card .remove{font-size:10px; color:var(--faint); border:none; background:none; padding:2px 4px; transition:color .15s ease;}
-  .card .remove:hover{color:var(--warn);}
-  .card .flags{margin-top:6px; display:flex; flex-direction:column; gap:3px; animation:fadeIn .3s ease;}
-  .card .flag{font-size:10.5px; color:var(--warn); background:var(--warn-bg); padding:3px 6px; border-radius:2px; line-height:1.35;}
+  .card-top{display:flex; justify-content:space-between; align-items:baseline; gap:6px;}
+  .card .code{font-family:'IBM Plex Mono',monospace; font-size:10px; display:flex; align-items:baseline; gap:5px;}
+  .card .code .dot{width:5px; height:5px; border-radius:50%; display:inline-block; flex:none;}
+  .card .cp{color:var(--faint); font-size:9.5px; font-variant-numeric:tabular-nums; flex:none;}
+  .card .title{
+    font-family:'Fraunces',serif; font-weight:600; font-size:11.5px; line-height:1.24; margin-top:4px;
+    display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden;
+  }
 
-  .card.dim{opacity:.32;}
-  .card.up{border-color:var(--up); box-shadow:0 0 0 1px var(--up) inset;}
-  .card.down{border-color:var(--down); box-shadow:0 0 0 1px var(--down) inset;}
   .card.selected{outline:1.5px solid var(--ink); outline-offset:2px;}
+
+  /* ---------- focus overlay ---------- */
+  .focus-veil{
+    position:fixed; inset:0; z-index:90; padding:30px 24px; overflow:auto;
+    background:rgba(43,29,18,.32); backdrop-filter:blur(7px) saturate(.9); -webkit-backdrop-filter:blur(7px) saturate(.9);
+    display:flex; align-items:center; justify-content:center; animation:fadeIn .2s ease;
+  }
+  .focus-veil[hidden]{display:none;}
+  .focus-stage{
+    width:100%; max-width:1160px; display:flex; flex-direction:column; gap:20px;
+    animation:modalIn .3s cubic-bezier(.2,.7,.3,1) both;
+  }
+  .focus-chain{
+    display:flex; align-items:flex-start; gap:0; overflow-x:auto; padding:4px 2px 8px;
+    scrollbar-width:thin; justify-content:flex-start;
+  }
+  /* justify-content:center clips the leading items once the chain overflows — auto-margin
+     pseudo-elements centre a short chain without ever cutting off a long one. */
+  .focus-chain::before, .focus-chain::after{content:""; margin:auto; flex:none;}
+  .focus-col{display:flex; flex-direction:column; gap:7px; flex:none; width:160px;}
+  .focus-col .slot-label{
+    font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.09em; text-transform:uppercase;
+    color:#f0e6d2; opacity:.72; padding-bottom:3px; border-bottom:1px solid rgba(240,230,210,.28); margin-bottom:2px;
+  }
+  .focus-arrow{flex:none; align-self:center; width:30px; text-align:center; color:#f0e6d2; opacity:.5; font-size:14px; margin-top:16px;}
+  .focus-tile{
+    border:1px solid var(--line-strong); border-left:4px solid var(--line-strong); background:var(--card-bg);
+    padding:8px 9px 9px; border-radius:2px; cursor:pointer; text-align:left; width:100%;
+    box-shadow:0 6px 18px rgba(43,29,18,.22); transition:transform .15s ease, border-color .15s ease;
+  }
+  .focus-tile:hover{transform:translateY(-2px);}
+  .focus-tile .code{font-family:'IBM Plex Mono',monospace; font-size:10px; display:flex; justify-content:space-between; gap:6px; color:var(--ink);}
+  .focus-tile .title{font-family:'Fraunces',serif; font-weight:600; font-size:11.5px; line-height:1.24; margin-top:3px; color:var(--ink);}
+  .focus-tile.up{border-left-color:var(--up); border-color:var(--up);}
+  .focus-tile.down{border-left-color:var(--down); border-color:var(--down);}
+  .focus-tile.is-selected{border-left-color:var(--ink); border-color:var(--ink); outline:1.5px solid var(--ink); outline-offset:2px; cursor:default;}
+  .focus-tile.is-selected:hover{transform:none;}
+  .focus-rel{
+    font-family:'IBM Plex Mono',monospace; font-size:8.5px; letter-spacing:.08em; text-transform:uppercase;
+    margin-top:5px; display:block;
+  }
+  .focus-rel.up{color:var(--up);} .focus-rel.down{color:var(--down);} .focus-rel.sel{color:var(--sub);}
+  .focus-empty{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:#f0e6d2; opacity:.75; text-align:center; padding:6px 0 2px;
+  }
+
+  .focus-detail{
+    position:relative; background:var(--card-bg); border:1px solid var(--line-strong); border-radius:3px;
+    padding:20px 22px 18px; box-shadow:0 14px 44px rgba(43,29,18,.3); max-height:46vh; overflow-y:auto;
+  }
+  .focus-detail .eyebrow{font-family:'IBM Plex Mono',monospace; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--sub);}
+  .focus-detail h3{font-family:'Fraunces',serif; font-weight:700; font-size:20px; margin-top:4px; padding-right:34px;}
+  .focus-meta{display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--sub);}
+  .focus-rule{margin-top:14px; padding-top:12px; border-top:1px solid var(--line);}
+  .focus-rule dt{font-family:'IBM Plex Mono',monospace; font-size:9.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--faint); margin-bottom:3px;}
+  .focus-rule dd{margin:0 0 10px; font-size:12px; line-height:1.45; color:var(--ink);}
+  .focus-rule dd:last-child{margin-bottom:0;}
+  .focus-detail .flag{font-size:11.5px; color:var(--warn); background:var(--warn-bg); padding:5px 8px; border-radius:2px; line-height:1.4; margin-bottom:4px;}
+  .focus-actions{display:flex; align-items:center; gap:10px; margin-top:16px; padding-top:14px; border-top:1px solid var(--line);}
+  .focus-actions select{font-size:11px; font-family:'IBM Plex Mono',monospace; border:1px solid var(--line-strong); background:var(--panel); padding:5px 10px; border-radius:20px; color:var(--ink);}
+  .focus-actions .remove{font-size:11px; color:var(--faint); border:1px solid var(--line-strong); background:none; padding:5px 10px; border-radius:20px; transition:color .15s ease, border-color .15s ease;}
+  .focus-actions .remove:hover{color:var(--warn); border-color:var(--warn);}
+  .focus-hint{margin-left:auto; font-family:'IBM Plex Mono',monospace; font-size:9.5px; color:var(--faint); letter-spacing:.05em;}
+
+  /* stale-plan notice */
+  .plan-notice{
+    max-width:1380px; margin:0 auto 18px; display:flex; align-items:flex-start; gap:10px;
+    background:var(--warn-bg); border:1px solid var(--warn); border-radius:2px; padding:10px 12px;
+    font-size:12px; color:var(--warn); line-height:1.45;
+  }
+  .plan-notice[hidden]{display:none;}
+  .plan-notice button{border:none; background:none; color:var(--warn); font-size:15px; line-height:1; padding:0 2px; margin-left:auto;}
 
   .type-core{background:var(--core);} .type-specialisation{background:var(--spec);}
   .type-elective{background:var(--elective);} .type-commerce{background:var(--commerce);}
@@ -295,6 +372,9 @@
   .legend span{display:flex; align-items:center; gap:5px;}
   .legend i{width:7px; height:7px; border-radius:50%; display:inline-block;}
 
+  /* one year-block per row before the 2x2 tiles get too narrow to read */
+  @media (max-width:1180px){ .grid{grid-template-columns:1fr; max-width:720px;} }
+
   @media (max-width:860px){
     .app{flex-direction:column;}
     .catalog{width:100%; height:auto; position:relative; max-height:none; border-right:none; border-bottom:1px solid var(--line);}
@@ -302,7 +382,13 @@
     .catalog.collapsed > *{opacity:1; pointer-events:auto;}
     .sidebar-toggle{display:none;}
     .main{padding:22px 16px 60px;}
-    .grid{grid-template-columns:1fr;}
+    .focus-veil{padding:16px 12px; align-items:flex-start;}
+    .focus-chain{justify-content:flex-start;}
+    .focus-detail{max-height:none;}
+  }
+  @media (max-width:560px){
+    .sems{grid-template-columns:1fr;}
+    .focus-col{width:140px;}
   }
 </style>
 </head>
@@ -402,9 +488,18 @@
       <span style="color:var(--warn)">&mdash; flagged</span>
     </div>
 
+    <div class="plan-notice" id="planNotice" hidden>
+      <span id="planNoticeText"></span>
+      <button id="planNoticeClose" aria-label="Dismiss">&times;</button>
+    </div>
+
     <div class="grid" id="planGrid"></div>
   </main>
 
+</div>
+
+<div class="focus-veil" id="focusVeil" hidden>
+  <div class="focus-stage" id="focusStage"></div>
 </div>
 
 <div class="modal-veil" id="onboardVeil" hidden>
@@ -503,6 +598,14 @@ function parseSlot(key){
 function rank(key){ const {y,s} = parseSlot(key); return y*10+s; }
 
 /* ---------------- persistence ---------------- */
+// Unit codes the Handbook has renamed out from under a saved plan. A plan saved before a
+// re-audit still holds the old code; without this it would be silently dropped as unknown.
+// Add an entry here whenever a re-audit renames a unit rather than deleting it.
+const CODE_RENAMES = {
+  ECE3122: 'ECE3121'   // renamed 2026-09-16 — ECE3122 is now a 404 in the Handbook
+};
+let droppedCodes = [];   // placed codes that no longer exist in any data file, pruned on load
+
 function loadState(){
   try{
     const raw = localStorage.getItem(STORAGE_KEY);
@@ -514,6 +617,29 @@ function loadState(){
     if(typeof data.specialisation === 'string') userSpecialisation = data.specialisation;
     if(typeof data.hasCommerce === 'boolean') userHasCommerce = data.hasCommerce;
   }catch(e){ console.warn('planner: could not read saved plan', e); }
+  reconcilePlacements();
+}
+
+// A placed code that resolves to no unit used to throw inside unitCard() and abort renderGrid()
+// mid-loop, silently truncating the plan from that cell onward. Rename what we can, drop the
+// rest here — once, on load — so every consumer downstream (cards, flags, chain, cp totals)
+// can assume byCode() resolves.
+function reconcilePlacements(){
+  droppedCodes = [];
+  let changed = false;
+  const seen = new Set(Object.values(placements).flat().filter(byCode));
+  for(const key in placements){
+    placements[key] = placements[key].map(code => {
+      if(byCode(code)) return code;
+      changed = true;
+      // a rename can collide with the new code already being placed — keep one copy
+      const renamed = CODE_RENAMES[code];
+      if(renamed && byCode(renamed) && !seen.has(renamed)){ seen.add(renamed); return renamed; }
+      if(!renamed || !byCode(renamed)) droppedCodes.push(code);
+      return null;
+    }).filter(Boolean);
+  }
+  if(changed) saveState();
 }
 function saveState(){
   try{
@@ -779,11 +905,19 @@ function renderGrid(){
   const newCodes = new Set([...currentCodes].filter(c => !knownPlacedCodes.has(c)));
   el.innerHTML = '';
   YEARS.forEach(y => {
+    const block = document.createElement('section');
+    block.className = 'year-block';
+    const cp = SEMS.reduce((sum,s) => sum + placements[slotKey(y,s)]
+      .reduce((n,c) => n + (byCode(c)?.creditPoints||0), 0), 0);
     const yl = document.createElement('div');
     yl.className = 'year-label';
-    yl.textContent = `Year ${y}`;
-    el.appendChild(yl);
-    SEMS.forEach(s => el.appendChild(renderCell(y,s,newCodes)));
+    yl.innerHTML = `<span>Year ${y}</span><span class="year-cp">${cp}cp</span>`;
+    block.appendChild(yl);
+    const sems = document.createElement('div');
+    sems.className = 'sems';
+    SEMS.forEach(s => sems.appendChild(renderCell(y,s,newCodes)));
+    block.appendChild(sems);
+    el.appendChild(block);
   });
   applySelection();
   knownPlacedCodes = currentCodes;
@@ -796,17 +930,22 @@ function renderCell(y, s, newCodes){
   cell.className = 'cell';
   const codes = placements[key];
   const cp = codes.reduce((sum,c) => sum + (byCode(c)?.creditPoints||0), 0);
-  cell.innerHTML = `<div class="cell-head"><span class="label">Semester ${s}</span><span class="cp-total">${cp}cp</span></div>`;
+  cell.innerHTML = `<div class="cell-head"><span class="label">Sem ${s}</span><span class="cp-total">${cp}cp</span></div>`;
   if(!codes.length){
     const empty = document.createElement('div');
     empty.className = 'cell-empty';
     empty.textContent = 'no units placed';
     cell.appendChild(empty);
+  } else {
+    const wrap = document.createElement('div');
+    wrap.className = 'cell-cards';
+    codes.forEach(code => {
+      const anim = newCodes.has(code) ? 'enter' : (code === justMovedCode ? 'settle' : null);
+      const card = unitCard(code, key, anim);
+      if(card) wrap.appendChild(card);
+    });
+    cell.appendChild(wrap);
   }
-  codes.forEach(code => {
-    const anim = newCodes.has(code) ? 'enter' : (code === justMovedCode ? 'settle' : null);
-    cell.appendChild(unitCard(code, key, anim));
-  });
 
   cell.addEventListener('dragover', (e) => {
     e.preventDefault();
@@ -831,8 +970,12 @@ function renderCell(y, s, newCodes){
   return cell;
 }
 
+// Compact tile: code, cp, title, and a dot if flagged. Everything that used to live inline
+// (notes, flag text, move, remove) now lives in the focus overlay a click away — at this tile
+// size there is nowhere to put it, and it was only ever readable one card at a time anyway.
 function unitCard(code, key, anim){
   const u = byCode(code);
+  if(!u) return null;   // reconcilePlacements() should have pruned this; never abort the render over it
   const card = document.createElement('div');
   card.className = `card t-${u.type}` + (anim === 'enter' ? ' card-enter' : anim === 'settle' ? ' card-settle' : '');
   card.dataset.code = code;
@@ -845,19 +988,112 @@ function unitCard(code, key, anim){
   card.addEventListener('dragend', () => card.classList.remove('dragging'));
   const flags = flagsFor(code, key);
   card.innerHTML = `
+    ${flags.length ? `<span class="flag-dot" title="${escapeAttr(flags.join(' '))}"></span>` : ''}
     <div class="card-top">
       <span class="code"><span class="dot type-${u.type}"></span>${u.code}</span>
       <span class="cp">${u.creditPoints}cp</span>
     </div>
     <div class="title">${u.title}</div>
-    ${u.notes ? `<div class="note">${u.notes}</div>` : ''}
-    <div class="controls">
-      <select class="move"></select>
-      <button class="remove">remove</button>
-    </div>
-    ${flags.length ? `<div class="flags">${flags.map(f => `<div class="flag">${f}</div>`).join('')}</div>` : ''}
   `;
-  const moveSelect = card.querySelector('.move');
+  card.addEventListener('click', () => openFocus(code));
+  return card;
+}
+
+function escapeAttr(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function applySelection(){
+  document.querySelectorAll('.card').forEach(card => {
+    card.classList.toggle('selected', card.dataset.code === selectedCode);
+  });
+}
+
+/* ---------------- focus overlay ----------------
+   Click a unit: veil blurs the plan and the dependency chain is rebuilt as columns ordered by
+   year/semester — upstream, the unit itself, then downstream — so a Y1->Y4 chain reads on one
+   screen instead of four scrolls. The unit's full detail sits under it. */
+function openFocus(code){
+  selectedCode = code;
+  applySelection();
+  renderFocus();
+  const veil = document.getElementById('focusVeil');
+  veil.hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeFocus(){
+  selectedCode = null;
+  document.getElementById('focusVeil').hidden = true;
+  document.body.style.overflow = '';
+  applySelection();
+}
+
+function renderFocus(){
+  const code = selectedCode;
+  const u = byCode(code);
+  const stage = document.getElementById('focusStage');
+  if(!u){ closeFocus(); return; }
+  const key = placementOf(code);
+  const {up, down} = chainFor(code);
+
+  // group every unit in the chain (plus the selected one) by its slot, then order the slots
+  const bySlot = new Map();
+  const add = (c, rel) => {
+    const k = placementOf(c);
+    if(!k) return;
+    if(!bySlot.has(k)) bySlot.set(k, []);
+    bySlot.get(k).push({code:c, rel});
+  };
+  up.forEach(c => add(c, 'up'));
+  add(code, 'sel');
+  down.forEach(c => add(c, 'down'));
+  const slots = [...bySlot.keys()].sort((a,b) => rank(a) - rank(b));
+
+  const REL_LABEL = {up:'upstream', down:'downstream', sel:'selected'};
+  const chainHtml = (up.size || down.size)
+    ? slots.map(k => {
+        const {y,s} = parseSlot(k);
+        const tiles = bySlot.get(k).map(({code:c, rel}) => {
+          const cu = byCode(c);
+          return `<button class="focus-tile t-${cu.type} ${rel==='sel' ? 'is-selected' : rel}" data-code="${c}" ${rel==='sel' ? 'disabled' : ''}>
+              <span class="code"><span>${cu.code}</span><span>${cu.creditPoints}cp</span></span>
+              <span class="title">${cu.title}</span>
+              <span class="focus-rel ${rel==='sel'?'sel':rel}">${REL_LABEL[rel]}</span>
+            </button>`;
+        }).join('');
+        return `<div class="focus-col"><div class="slot-label">Year ${y} &middot; Sem ${s}</div>${tiles}</div>`;
+      }).join('<div class="focus-arrow">&rarr;</div>')
+    : `<div class="focus-empty">Nothing in your plan depends on ${u.code}, and none of its prerequisites are placed yet.</div>`;
+
+  const flags = key ? flagsFor(code, key) : [];
+  const prereqText = u.prerequisiteText || (u.prerequisites||[]).join(', ');
+  const rules = [
+    ['Prerequisites', prereqText || 'None'],
+    (u.corequisites||[]).length ? ['Corequisites', u.corequisites.join(', ')] : null,
+    (u.prohibitions||[]).length ? ['Prohibitions', u.prohibitions.join(', ')] : null,
+    u.notes ? ['Notes', u.notes] : null
+  ].filter(Boolean);
+
+  stage.innerHTML = `
+    <div class="focus-chain">${chainHtml}</div>
+    <div class="focus-detail">
+      <button class="modal-x" id="focusClose" aria-label="Close">&times;</button>
+      <div class="eyebrow">${u.code} &middot; ${u.type}</div>
+      <h3>${u.title}</h3>
+      <div class="focus-meta">
+        <span>${u.creditPoints} credit points</span>
+        ${key ? `<span>placed ${key.replace('Y','Year ').replace('S',' &middot; Sem ')}</span>` : ''}
+        <span>${up.size} upstream &middot; ${down.size} downstream</span>
+      </div>
+      ${flags.length ? `<div class="focus-rule">${flags.map(f => `<div class="flag">${f}</div>`).join('')}</div>` : ''}
+      <dl class="focus-rule">${rules.map(([t,v]) => `<dt>${t}</dt><dd>${v}</dd>`).join('')}</dl>
+      <div class="focus-actions">
+        <select class="move" aria-label="Move unit"></select>
+        <button class="remove">remove from plan</button>
+        <span class="focus-hint">esc to close</span>
+      </div>
+    </div>`;
+
+  const moveSelect = stage.querySelector('.move');
   YEARS.forEach(y => SEMS.forEach(s => {
     const opt = document.createElement('option');
     opt.value = slotKey(y,s);
@@ -869,34 +1105,22 @@ function unitCard(code, key, anim){
     removeUnit(code, false);
     addUnit(code, moveSelect.value);
     justMovedCode = code;
+    selectedCode = code;   // removeUnit clears it
     refreshAll();
+    renderFocus();
   });
-  card.querySelector('.remove').addEventListener('click', (e) => {
-    e.stopPropagation();
+  stage.querySelector('.remove').addEventListener('click', () => {
+    closeFocus();
     removeUnitAnimated(code);
   });
-  card.addEventListener('click', () => {
-    selectedCode = (selectedCode === code) ? null : code;
-    applySelection();
+  stage.querySelector('#focusClose').addEventListener('click', closeFocus);
+  // clicking any other unit in the chain re-focuses on it — walk the graph without closing
+  stage.querySelectorAll('.focus-tile[data-code]:not([disabled])').forEach(t => {
+    t.addEventListener('click', () => { selectedCode = t.dataset.code; applySelection(); renderFocus(); });
   });
-  return card;
-}
-
-function applySelection(){
-  const cards = document.querySelectorAll('.card');
-  if(!selectedCode){
-    cards.forEach(c => c.classList.remove('up','down','dim','selected'));
-    return;
-  }
-  const {up, down} = chainFor(selectedCode);
-  cards.forEach(card => {
-    const c = card.dataset.code;
-    card.classList.remove('up','down','dim','selected');
-    if(c === selectedCode) card.classList.add('selected');
-    else if(up.has(c)) card.classList.add('up');
-    else if(down.has(c)) card.classList.add('down');
-    else card.classList.add('dim');
-  });
+  // a long chain scrolls horizontally — keep the unit you actually clicked in view
+  const sel = stage.querySelector('.focus-tile.is-selected');
+  if(sel) sel.scrollIntoView({inline:'center', block:'nearest'});
 }
 
 /* ---------------- mutation ---------------- */
@@ -1227,6 +1451,18 @@ document.getElementById('settingsClose').addEventListener('click', closeSettings
 document.getElementById('settingsVeil').addEventListener('click', (e) => {
   if(e.target.id === 'settingsVeil') closeSettings();
 });
+document.getElementById('focusVeil').addEventListener('click', (e) => {
+  if(e.target.id === 'focusVeil' || e.target.id === 'focusStage') closeFocus();
+});
+document.addEventListener('keydown', (e) => {
+  if(e.key !== 'Escape') return;
+  if(!document.getElementById('focusVeil').hidden) closeFocus();
+  else if(!document.getElementById('settingsVeil').hidden) closeSettings();
+});
+document.getElementById('planNoticeClose').addEventListener('click', () => {
+  document.getElementById('planNotice').hidden = true;
+});
+
 document.getElementById('settingsQuickStart').addEventListener('click', () => { closeSettings(); openOnboard(); });
 document.getElementById('settingsReset').addEventListener('click', () => { closeSettings(); resetPlan(); });
 
@@ -1261,6 +1497,7 @@ importFile.addEventListener('change', () => {
       if(typeof data.name === 'string') userName = data.name;
       if(typeof data.specialisation === 'string') userSpecialisation = data.specialisation;
       if(typeof data.hasCommerce === 'boolean') userHasCommerce = data.hasCommerce;
+      reconcilePlacements();   // an older export can carry codes the Handbook has since renamed
       saveState();
       updateIdentity();
       updateBranding();
@@ -1300,6 +1537,11 @@ document.getElementById('onboardVeil').addEventListener('click', (e) => {
   if(sidebarWasCollapsed) setSidebarCollapsed(true);
   await loadCatalog();
   loadState();
+  if(droppedCodes.length){
+    document.getElementById('planNoticeText').textContent =
+      `Removed from your plan: ${droppedCodes.join(', ')} — ${droppedCodes.length > 1 ? 'these codes are' : 'this code is'} no longer in the Monash Handbook. Check the catalog for a replacement.`;
+    document.getElementById('planNotice').hidden = false;
+  }
   updateIdentity();
   updateBranding();
   refreshAll();
