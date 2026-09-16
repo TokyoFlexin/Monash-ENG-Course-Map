@@ -3,7 +3,8 @@
 Running log across sessions. Claude updates this as work happens.
 
 ## Setup answers
-- Intake year: 2024
+- Intake year: **2025** (corrected 2026-09-16 — was recorded as 2024 for months, which is
+  why the original Electrical/common research was done against the 2024 Handbook)
 - Degree: E3007 single degree — Electrical & Computer Systems Engineering
   (currently enrolled/confirmed). Also applying to transfer into **E3005**
   (Electrical + Commerce double degree) — not confirmed yet, see "Commerce
@@ -741,6 +742,187 @@ a Mac's GPU/compositor pipeline, visibly janky on weaker non-Apple GPUs:
   console errors. Testing on the friend's actual (non-Mac) laptop is still
   the real proof — worth asking him to check again next time he tries it.
 
+## Data-accuracy hardening before Mechatronics (2026-09-16)
+Sahel asked, before any Mechatronics work started, to confirm there's a real
+*system* for getting prerequisites, semester offerings and unit facts right —
+because the Civil data had mistakes his friend caught by hand. Fair challenge.
+The honest answer was that the Civil pipeline had three holes, all of which
+are now closed by machine checks rather than by promising to be careful:
+
+**Root causes of the Civil errors (named, not hand-waved):**
+1. **Wrong Handbook vintage.** Research read `handbook.monash.edu/2024/units/...`
+   (matching Sahel's own intake) instead of `/current/`. Monash moves offerings
+   and requisites year to year; the data was 2 years stale on arrival. That's
+   what produced the CIV3294 "Semester 2" error the friend reported.
+2. **No machine check on the facts, only on the shape.**
+   `validate-catalog.mjs` verified structure (fields, dangling refs, cycles) but
+   nothing about whether a unit was placed in a semester it's actually taught,
+   or whether a prerequisite genuinely lands earlier than its dependent. A
+   chronological check was written ad-hoc during the re-audit and then thrown
+   away instead of being kept.
+3. **No provenance in the data.** Sources were file-level prose in `_meta`, so
+   there was no way to tell which unit was checked, against which URL, on what
+   date — staleness was invisible until a human noticed.
+
+**What changed (`scripts/validate-catalog.mjs`, now 4 new checks):**
+- **Placement vs offering** — a unit's canonical `year`/`semester` slot must be
+  a semester it's actually taught in. Violations are FATAL unless the code is
+  in the new `PLACEMENT_EXCEPTIONS` map with a written reason.
+- **Prerequisite chronology** — every prereq must sit *strictly* earlier in the
+  sequence than the unit needing it (same-semester = corequisite, not prereq).
+- **Corequisite chronology** — a coreq may be earlier or same-semester, never
+  later.
+- **Per-unit provenance** — a data file opting in with
+  `"_meta": { "provenance": "per-unit" }` must give every unit a `sourceUrl`
+  (must be a handbook.monash.edu URL) and an ISO `verifiedOn` date. Existing
+  files predating the convention are left alone until they're re-audited, so
+  no verification dates get fabricated for units nobody actually re-checked.
+- Verified the checks actually FAIL by running them against a deliberately
+  broken fixture (8 synthetic units, one bug of each class) — all 4 fired,
+  exit 1. A validator that has only ever been run on passing data isn't
+  evidence of anything.
+
+**What it immediately caught in existing data — 7 placement/offering
+mismatches, only 2 of which were previously known:**
+- `ECE3161`, `CIV3294` — the two already-documented verified conflicts (real
+  Handbook offering vs. a prereq chain with nowhere else to go). Now printed
+  as loud acknowledged exceptions on every run instead of living only in prose.
+- `ETC2520`, `ETC2420`, `ETC3400`, `ETC3450`, `FIT3179` (all commerce.json) —
+  **not previously known.** Every one of them has a note that literally says
+  "Semester 2 only" while sitting in a Semester 1 slot. Same bug class as the
+  Civil one, five instances, never spotted. Listed as UNVERIFIED exceptions
+  rather than silently moved — commerce.json is still 2024-vintage and needs
+  the same current-Handbook re-audit civil.json got, and guessing a new slot
+  without re-verifying would just be the original mistake again.
+
+**Confirmed for the Mechatronics build:** specialisation is "Robotics and
+Mechatronics engineering", area-of-study code **ROBMCTRN04** (144cp), found
+the documented way — E3001's current Structure page → AoS link — not guessed.
+(A guess at `MECTRONG01` 404'd first, which is exactly why the pipeline starts
+from the course structure page.) Current Handbook confirmed reachable via the
+browser pane.
+
+## Mechatronics added + official course maps + full re-audit (2026-09-16, same session)
+Sahel asked for Robotics & Mechatronics for a friend, but first asked to CONFIRM there was a real
+system for getting requisites/semesters right, since the Civil data had errors his friend caught.
+Answering that honestly turned into a much larger correction pass. He then supplied the two
+official course progression map PDFs, which removed the biggest source of error entirely.
+
+### The harvester — the actual answer to "do you have a system"
+`scripts/harvest-handbook.mjs` (new, zero-dependency Node). The Handbook is a Next.js app that
+embeds a `__NEXT_DATA__` JSON payload containing the REAL requisite tree (with genuine AND/OR
+containers), the real offering rows per campus, and the enrolment rules as data. Previous sessions
+read the rendered page as prose and hand-collapsed "A or B and C" sentences — lossy, and the direct
+cause of the Civil errors. The harvester reads the structured payload instead.
+- Fetches over plain HTTPS (no browser needed, no Cloudflare block on handbook.monash.edu).
+- Emits requisites as **conjunctive groups** — `[[A,B],[C]]` meaning "(A or B) AND C" — which is
+  what a planner actually needs: one representative satisfied PER GROUP.
+- Derives `semesterOffered` **per campus**, because a unit can run S1 at Clayton and S2 in Malaysia.
+- Deliberately emits NO year/semester: placement comes from the course map, not the unit page.
+  Conflating the two is how inferred sequencing got mistaken for Handbook fact before.
+- Usage: `node scripts/harvest-handbook.mjs --codes-from data/x.json --out h.json CODE...`
+
+**It caught a bug in its own first draft.** The initial representative-picker took one code across
+the whole flattened rule, which silently dropped an entire required group on MMA3101
+(`(MMA2003 or ...) AND (MEC3456 or MMA3001 or ECE3093)`). The validator's chronology check caught
+it. That is the system working: two independent mechanisms, not one careful pass.
+
+### Official course progression map PDFs (supplied by Sahel 2026-09-16)
+Previous sessions could not fetch these (Cloudflare), so ALL placement was inference. Sahel
+downloaded both. **They are not committed** — the repo is public and they're Monash documents.
+- `2025-map-E3001.pdf` — 12 pages, single degree. p1 common first year, p6 Electrical, p10 Robotics
+  and Mechatronics.
+- `2025-map-E3005.pdf` — 10 pages, Eng(Hons)+Commerce. p5 Electrical and Computer Systems.
+
+### Corrections to EXISTING data (all Handbook- or map-verified)
+- **E3007 is 240cp = a 5-year double degree** (Eng Hons + Science). An earlier claim this session
+  that electrical.json's Y5 placements were a "foundation maths shift" was WRONG and was retracted.
+- **`ECE3122` is a dead code** — 404. The unit is **`ECE3121`** (Engineering electromagnetics) in
+  both the current Handbook and both 2025 maps. Replaced.
+- **`ECE3161` is Semester 2, not Semester 1.** PROGRESS previously recorded this as a "VERIFIED
+  CONFLICT" needing a placement exception. It was never a conflict — just wrong data from the 2024
+  vintage. Both maps put it in S2. The exception has been deleted from the validator.
+- **`ENG2005` prerequisites** were `ENG1005 + ENG1014`; the real tree is `ENG1005` alone.
+- **`ECE4191`** had 4 invented prerequisites. Real rule: prereq `(TRC3500 OR ECE3141)`, corequisite
+  `(ECE3073 OR ECE3161)` — the corequisite was missing entirely.
+- **`PHS1001` (Foundation physics) was missing** from common-first-year.json despite being on the
+  official common-first-year map. Added, marked `optional` (conditional on VCE Physics <25).
+- **NO first-year unit has a unit-coded prerequisite.** Every first-year rule is a VCE entry
+  requirement. `ENG1090` was listed as a hard prerequisite of `ENG1005` — removed, because it
+  would have flagged every student who met the VCE Specialist Maths score instead.
+- **`ENG1011`/`ENG1012` were at Y2S1**; every official pathway puts them in Year 1. Whole common
+  first year re-placed from map page 1 (the "no foundation units" pathway is canonical).
+- **`ENG1012` renamed** by Monash: "Engineering design" (2025) → "Engineering for people and
+  planet" (current). 2025 name kept in notes.
+- **electrical.json re-placed to the official E3005 sequence** (map p5). Ten units moved — the
+  engineering sequence had been up to a FULL YEAR late. Endpoints (ENG4701/4702 at Y5) were right.
+
+### Per-course placements — the shared-unit problem, solved
+The same unit sits at different points in different courses: `ENG4701` is Year 4 in the 4-year
+E3001 single degree and Year 5 in the 5-year E3005 double degree. One canonical slot cannot serve
+both, and duplicating codes is rejected by the validator.
+- Units now take an optional **`placements`** map keyed by course code:
+  `"placements": { "E3001": { "year": 4, "semester": 1 } }`, with the top-level year/semester as
+  the default. A data file never has to enumerate every course to stay correct.
+- `index.html` gained `activeCourseCode()` (E3005 when the Commerce toggle is on, else
+  `COURSE_CODES[spec]`) and `unitSlot(u, spec, commerce)`. Used by the catalog row's "canonical"
+  label, catalog add, quick-start counts and quick-start placement.
+- Only 4 units actually needed an override: `ENG2005`, `ENG4701`, `ENG4702`, `ENG0001`.
+
+### `sharedWith` — a unit in two specialisations without being universal
+`ECE2071`, `ECE2072`, `ECE2131`, `ECE3073` are Part C CORE for both Electrical and Mechatronics,
+but Civil never touches them — so tagging them `discipline:"common"` would be wrong, and the
+single-valued `discipline` field hid them from Mechatronics students entirely (they were missing
+from the friend's quick start). New optional **`sharedWith: ["mechatronics"]`** array; the catalog
+files a shared unit under the borrowing discipline's folder only when its own folder isn't on
+screen, so it never appears twice.
+
+### `optional` — quick start was overstating the degree
+Quick start auto-placed conditional foundation units (`ENG1090`, `PHS1001` — required only without
+the VCE scores) and all four `ENG480x` Professional Practice units (you complete exactly ONE), plus
+every Part E elective. Now `quickStartEligible()` skips `type === 'elective'` and anything marked
+`optional: true`.
+
+### data/mechatronics.json — 26 units
+`ROBMCTRN04`, 144cp, E3001, Clayton, `provenance: "per-unit"` (every unit carries its Handbook URL
+and `verifiedOn`). AoS unit list verified **identical between the 2025 and current Handbook**, so
+there is no vintage ambiguity for a 2025 commencing student.
+- **Part C**: 10 specialisation units placed straight off map p10 + the 4 ENG480x (choose one).
+  The other 7 Part C units are shared with electrical.json and not duplicated.
+- **Part E**: 12 technical electives. **11 of the Handbook's 29-unit pool have NO Clayton
+  offering** (Malaysia-only or not offered at all: ENG0002, TRC2001, MMA3102, CHE4806, CHE4807,
+  ECE4044, ECE4146, TRC4200, TRC4902, ECE5881, MEC3821) and are deliberately omitted. `ECE4045` is
+  also omitted — its prereq ECE3141 sits at Y4S1, leaving no valid slot inside a 4-year degree.
+- **Cross-validation that would have caught the Civil bug**: every Part C unit's Handbook offering
+  semester matches its official map placement. Two independent sources agreeing, not one asserted.
+
+### Pre-commit double-check caught one more fabricated edge
+Before committing, every unit in the three touched files was re-fetched from the Handbook and
+diffed field-by-field (title, credit points, Clayton offering, source URL, every requisite code)
+rather than trusting the write. Two corequisites in the data were absent from the structured
+requisite tree:
+- **`ENG4701` -> `ENG0001` is REAL** — it lives in the free-text enrolment rule ("Clayton-based
+  students must also be concurrently enrolled in ENG0001 alongside ENG4701"), which the first pass
+  of the checker didn't read. Kept, with the rule quoted verbatim in corequisiteText.
+- **`ENG1014` -> `ENG1005` is NOT REAL.** ENG1014's only corequisite is a course-enrolment rule
+  ("must be enrolled in the Bachelor of Engineering (Honours)..."). The ENG1005 edge was invented
+  at some earlier point and had never been challenged. **Removed.**
+The checker now tests the structured tree AND the free-text rules; re-run clean across 49 units.
+Lesson worth keeping: "the validator passes" is not the same as "the data is true" — the validator
+checks internal consistency, the harvest diff checks correspondence with reality. Both are needed.
+
+### Verified live, not claimed
+- `node scripts/validate-catalog.mjs` — **110 units across 5 files, 0 problems.**
+- Independent re-verification of all 49 units in the touched files against a FRESH Handbook fetch:
+  every title, credit-point value, Clayton offering, source URL and requisite code matches.
+- Quick start as Mechatronics → 23 units / 132cp, **matching official map p10 slot-for-slot**.
+  Reconciles: 108cp Part C + 36cp Part E + 48cp first year = 192cp = 4 years.
+- Quick start as Electrical+Commerce → **matches official E3005 map p5 slot-for-slot**, Y2S1
+  through Y5S2, from the same catalog at the same time.
+- Sidebar for Mechatronics shows "Common core (11)" + "Robotics and Mechatronics Engineering (30)";
+  branding reads "E3001 · Robotics and Mechatronics Engineering". Topbar year corrected 2024→2025.
+- localStorage cleared afterwards.
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).
@@ -762,6 +944,19 @@ a Mac's GPU/compositor pipeline, visibly janky on weaker non-Apple GPUs:
   thinking through against the credit-point/level rules already known (e.g.
   Civil's 144cp Part C + Part D + Part E structure, Commerce major
   credit-point minimums) rather than just counting placed units.
+- **E3007 sequence is still unverified.** electrical.json now defaults to the official E3005
+  (Eng+Commerce) sequence, which is what Sahel wants post-transfer. His CURRENT course E3007
+  (Eng+Science, also 5 years) has a different map that was never supplied, so with the Commerce
+  toggle OFF the app falls back to the E3005 slots. Get the E3007 2025 map if that matters before
+  the transfer goes through.
+- **Re-audit civil.json with the harvester.** The 2026-09-14 re-audit was done by reading pages;
+  the harvester reads the structured tree and derives offerings per campus. Civil has not been
+  through it, and it found real errors in electrical.json that page-reading missed. Also worth
+  re-checking whether CIV3294's "verified conflict" is genuine or another ECE3161 (data just wrong).
+- **Re-audit commerce.json against the CURRENT Handbook** — same treatment
+  civil.json got on 2026-09-14. 5 known placement/offering contradictions are
+  sitting in `PLACEMENT_EXCEPTIONS` as UNVERIFIED (see 2026-09-16 section); the
+  whole file is 2024-vintage so there are likely more stale requisites too.
 - **More disciplines (Sahel confirmed interest, 2026-09-13)** — same session
   discussed expanding breadth using the Civil-style pipeline (AoS code →
   parallel Handbook research → `discipline`-tagged data file → one

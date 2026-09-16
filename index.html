@@ -378,7 +378,7 @@
   <main class="main">
     <div class="topbar">
       <div>
-        <div class="eyebrow" id="topbarEyebrow">Course planner &mdash; Clayton, 2024 commencing</div>
+        <div class="eyebrow" id="topbarEyebrow">Course planner &mdash; Clayton, 2025 commencing</div>
         <div class="title-row">
           <h1 id="planTitle">Your course plan</h1>
           <div class="monogram" id="monogram" hidden></div>
@@ -638,6 +638,19 @@ function visibleDisciplines(){
   return all.filter(d => d==='common' || d===userSpecialisation || (d==='commerce' && userHasCommerce));
 }
 
+// A unit can belong to more than one specialisation without being universal: ECE2071 is Part C core
+// for BOTH Electrical and Robotics & Mechatronics, but Civil never touches it, so tagging it
+// "common" would be wrong too. `sharedWith` lists the extra disciplines it counts for.
+function unitDisciplines(u){
+  return [u.discipline, ...(u.sharedWith || [])];
+}
+
+function unitVisible(u){
+  if(!userSpecialisation) return true;
+  return unitDisciplines(u).some(d =>
+    d==='common' || d===userSpecialisation || (d==='commerce' && userHasCommerce));
+}
+
 function renderCatalog(filter){
   const el = document.getElementById('catalogGroups');
   el.innerHTML = '';
@@ -656,7 +669,13 @@ function renderCatalog(filter){
         items: catalog.filter(u => u.discipline==='commerce' && u.major===m)
       }))});
     }else{
-      tree.push({key:disc, title: disciplineLabel(disc), items: catalog.filter(u => u.discipline===disc)});
+      // A unit files under its own discipline's folder. A unit SHARED into this discipline (e.g.
+      // ECE2071, which is Electrical's but is also Mechatronics Part C core) files here too — but
+      // only when its own folder isn't on screen, so it never appears twice in one sidebar.
+      tree.push({key:disc, title: disciplineLabel(disc), items: catalog.filter(u =>
+        u.discipline===disc ||
+        ((u.sharedWith||[]).includes(disc) && !shown.includes(u.discipline))
+      )});
     }
   });
 
@@ -725,7 +744,7 @@ function catalogRow(u){
     <div class="meta">
       <div class="code"><span>${u.code}</span><span class="cp">${u.creditPoints}cp</span></div>
       <div class="title">${u.title}</div>
-      <div class="slot">canonical Y${u.year} S${u.semester}</div>
+      <div class="slot">canonical Y${unitSlot(u).year} S${unitSlot(u).semester}</div>
     </div>
     <button class="toggle ${placed ? 'added' : ''}" title="${placed ? 'Remove from plan' : 'Add to plan'}">
       <span class="icon icon-a">${placed ? ICONS.check : ICONS.plus}</span>
@@ -736,7 +755,8 @@ function catalogRow(u){
     if(placementOf(u.code)){
       removeUnitAnimated(u.code);
     }else{
-      addUnit(u.code, slotKey(u.year, u.semester));
+      const slot = unitSlot(u);
+      addUnit(u.code, slotKey(slot.year, slot.semester));
       refreshAll();
     }
   });
@@ -921,8 +941,13 @@ const ONBOARD_CUTOFFS = [
 // useful before onboarding has run.
 function quickStartEligible(u, spec){
   if(u.discipline === 'commerce') return false;
+  // Quick start fills in what the course REQUIRES. Electives are a choice (Part E is 36cp picked
+  // from a pool), and `optional` marks units you only take under a condition — conditional
+  // foundation units (ENG1090/PHS1001, required only without the VCE scores) and choose-one groups
+  // (the four ENG480x Professional Practice units). Auto-placing these overstates the degree.
+  if(u.type === 'elective' || u.optional) return false;
   if(!spec) return true;
-  return u.discipline === 'common' || u.discipline === spec;
+  return unitDisciplines(u).some(d => d === 'common' || d === spec);
 }
 
 // Reads live from the onboarding form (not saved state) so the grid's counts preview whatever
@@ -932,7 +957,12 @@ function renderOnboardGrid(){
   const el = document.getElementById('onboardGrid');
   el.innerHTML = '';
   ONBOARD_CUTOFFS.forEach(({y,s,label}) => {
-    const count = catalog.filter(u => quickStartEligible(u, spec) && (u.year*10+u.semester) <= (y*10+s)).length;
+    const commerce = document.getElementById('onboardCommerce')?.checked ?? userHasCommerce;
+    const count = catalog.filter(u => {
+      if(!quickStartEligible(u, spec)) return false;
+      const sl = unitSlot(u, spec, commerce);
+      return (sl.year*10 + sl.semester) <= (y*10 + s);
+    }).length;
     const btn = document.createElement('button');
     btn.innerHTML = `<b>${label}</b>${count} core/specialisation unit${count===1?'':'s'} added`;
     btn.addEventListener('click', () => { commitOnboardChoices(); applyQuickStart(y*10+s); });
@@ -943,8 +973,9 @@ function renderOnboardGrid(){
 function applyQuickStart(cutoffRank){
   catalog.forEach(u => {
     if(!quickStartEligible(u, userSpecialisation)) return;
-    if((u.year*10 + u.semester) > cutoffRank) return;
-    addUnit(u.code, slotKey(u.year, u.semester));
+    const sl = unitSlot(u);
+    if((sl.year*10 + sl.semester) > cutoffRank) return;
+    addUnit(u.code, slotKey(sl.year, sl.semester));
   });
   saveState();
   refreshAll();
@@ -1087,10 +1118,27 @@ document.getElementById('onboardName').addEventListener('input', (e) => setName(
 document.getElementById('settingsName').addEventListener('input', (e) => setName(e.target.value));
 
 /* ---------------- specialisation + branding ---------------- */
-// Real 2024-vintage Monash course codes, just for the eyebrow text — cosmetic only, nothing
-// downstream depends on these strings. Falls back to no code shown for a discipline this map
-// doesn't know (keeps working when a new discipline is added before this list is updated).
-const COURSE_CODES = { electrical: 'E3007', civil: 'E3001' };
+// Monash course codes per specialisation. These are NOT cosmetic any more: a unit's canonical
+// year/semester depends on which COURSE you're in, because the same unit sits at different points
+// in a 4-year single degree and a 5-year double degree. ECE2071 is Year 2 Semester 1 in E3001 and
+// ENG4701 is Year 4 in E3001 but Year 5 in E3005 — one "canonical slot" per unit cannot serve both.
+const COURSE_CODES = { electrical: 'E3007', civil: 'E3001', mechatronics: 'E3001' };
+
+// Ticking "also doing Commerce" means the E3005 double degree, whose sequence is the one the
+// official E3005 progression map defines — it overrides the single-degree course code.
+function activeCourseCode(spec = userSpecialisation, commerce = userHasCommerce){
+  if(commerce) return 'E3005';
+  return COURSE_CODES[spec] || 'E3001';
+}
+
+// Resolve a unit's canonical slot for the course the student is actually in. A unit carries a
+// default year/semester plus an optional `placements` map keyed by course code; the default is
+// used whenever that course has no specific override, so a data file never has to enumerate
+// every course to stay correct.
+function unitSlot(u, spec = userSpecialisation, commerce = userHasCommerce){
+  const p = u.placements && u.placements[activeCourseCode(spec, commerce)];
+  return p ? { year: p.year, semester: p.semester } : { year: u.year, semester: u.semester };
+}
 
 function populateSpecialisationSelect(sel){
   const current = sel.value;
@@ -1111,8 +1159,8 @@ function updateBranding(){
   const commerceSuffix = (spec && userHasCommerce) ? ' + Commerce (E3005)' : '';
   document.getElementById('catalogEyebrow').textContent = spec ? `${code}${label}` : 'Course planner';
   document.getElementById('topbarEyebrow').textContent = spec
-    ? `${code}${label}${commerceSuffix} — Clayton, 2024 commencing`
-    : 'Course planner — Clayton, 2024 commencing';
+    ? `${code}${label}${commerceSuffix} — Clayton, 2025 commencing`
+    : 'Course planner — Clayton, 2025 commencing';
   document.getElementById('onboardEyebrow').textContent = spec ? `${code}${label}` : 'Course planner';
   document.getElementById('settingsEyebrow').textContent = spec ? `${code}${label}` : 'Course planner';
   document.getElementById('onboardSpec').value = spec;

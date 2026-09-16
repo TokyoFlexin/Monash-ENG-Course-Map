@@ -1,8 +1,8 @@
 {
   "_meta": {
     "specialisation": "Electrical and Computer Systems Engineering",
-    "courseCode": "E3007",
-    "commencingYear": 2024,
+    "courseCode": "E3005",
+    "commencingYear": 2025,
     "campus": "Clayton",
     "requiresFile": "common-first-year.json",
     "sources": [
@@ -11,9 +11,12 @@
     ],
     "openDecisions": [
       "ECE3121 vs ECE3122 (Engineering electromagnetics): course map's stated core unit is ECE3121, but the 2024 Handbook shows ECE3121 was Malaysia-only that year, with Clayton students required to take ECE3122 instead. Using ECE3122 for the Clayton path. Re-check the live Handbook when you're closer to Year 4 in case the split has changed.",
-      "ECE4099 (Professional practice) is not in this catalog at all \u2014 it was Malaysia-only in 2024 and the course map instructs Clayton students to replace it with a Professional Practice domain unit of their own choice. Add whichever domain unit you pick as a custom unit in the planner.",
-      "Science major/elective slots and the Level 4/5 ECE-coded core elective slot are NOT pre-listed here \u2014 the planner is where you add your own choices for these (including Commerce units) via 'add custom unit', since they're personal/variable and outside the electrical core dependency chain that's the point of Phase 1."
-    ]
+      "ECE4099 (Professional practice) is not in this catalog at all — it was Malaysia-only in 2024 and the course map instructs Clayton students to replace it with a Professional Practice domain unit of their own choice. Add whichever domain unit you pick as a custom unit in the planner.",
+      "Science major/elective slots and the Level 4/5 ECE-coded core elective slot are NOT pre-listed here — the planner is where you add your own choices for these (including Commerce units) via 'add custom unit', since they're personal/variable and outside the electrical core dependency chain that's the point of Phase 1."
+    ],
+    "provenance": "per-unit",
+    "placementSource": "Official Monash course progression map for 2025 commencing students, E3005 Bachelor of Engineering (Honours) and Bachelor of Commerce, page 5 (Electrical and Computer Systems Engineering). Supplied by Sahel 2026-09-16. Default year/semester on each unit is the E3005 sequence. Units whose slot differs in the 4-year E3001 single degree carry a \"placements\" override keyed by course code, sourced from the E3001 2025 map page 10.",
+    "sharedWithMechatronics": "ECE2071, ECE2072, ECE2131 and ECE3073 are Part C core units of BOTH Electrical and Robotics & Mechatronics. They carry sharedWith:['mechatronics'] so the catalog filter shows them to a Mechatronics student without duplicating the code into mechatronics.json."
   },
   "units": [
     {
@@ -21,28 +24,35 @@
       "title": "Advanced engineering mathematics",
       "creditPoints": 6,
       "year": 2,
-      "semester": 2,
+      "semester": 1,
       "type": "specialisation",
       "prerequisites": [
-        "ENG1014",
         "ENG1005"
       ],
-      "prerequisiteText": "(ENG1014 Engineering numerical analysis OR ENG1060 Computing for engineers) AND ENG1005 Engineering mathematics",
+      "prerequisiteText": "ENG1005 (structured requisite tree — ENG1014 was NOT a prerequisite; removed 2026-09-16)",
       "corequisites": [],
-      "corequisiteText": "",
+      "corequisiteText": "Enrolment rule (free text): You must be enrolled in your engineering specialisation at the time of enrolling in ENG2005. Not a unit-coded corequisite.",
       "prohibitions": [
         "MTH2010",
         "MTH2015"
       ],
       "notes": "",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG2005",
+      "verifiedOn": "2026-09-16",
+      "placements": {
+        "E3001": {
+          "year": 2,
+          "semester": 2
+        }
+      }
     },
     {
       "code": "ECE2191",
       "title": "Probability and AI for engineers",
       "creditPoints": 6,
-      "year": 2,
+      "year": 3,
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [
@@ -57,13 +67,15 @@
       "prohibitions": [],
       "notes": "Semester 2 offering only.",
       "semesterOffered": "2",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE2191",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECE2071",
       "title": "Systems programming",
       "creditPoints": 6,
-      "year": 3,
+      "year": 2,
       "semester": 1,
       "type": "specialisation",
       "prerequisites": [
@@ -74,15 +86,20 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "2024 Handbook lists this unit under the title 'Computer organisation and programming'; the current course map (updated Oct 2025) shows the title as 'Systems programming'. Same code, same content area \u2014 title changed at some point after 2024. Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "notes": "2024 Handbook lists this unit under the title 'Computer organisation and programming'; the current course map (updated Oct 2025) shows the title as 'Systems programming'. Same code, same content area — title changed at some point after 2024. Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook. Also a Part C core unit of the Robotics and Mechatronics specialisation (ROBMCTRN04) — shared, not duplicated.",
       "semesterOffered": "1",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE2071",
+      "verifiedOn": "2026-09-16",
+      "sharedWith": [
+        "mechatronics"
+      ]
     },
     {
       "code": "ECE2131",
       "title": "Electrical circuits",
       "creditPoints": 6,
-      "year": 3,
+      "year": 2,
       "semester": 1,
       "type": "specialisation",
       "prerequisites": [
@@ -95,15 +112,20 @@
       "prohibitions": [
         "ECE2031"
       ],
-      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook. Also a Part C core unit of the Robotics and Mechatronics specialisation (ROBMCTRN04) — shared, not duplicated.",
       "semesterOffered": "1",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE2131",
+      "verifiedOn": "2026-09-16",
+      "sharedWith": [
+        "mechatronics"
+      ]
     },
     {
       "code": "ECE2072",
       "title": "Digital systems",
       "creditPoints": 6,
-      "year": 3,
+      "year": 2,
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [],
@@ -111,15 +133,20 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "If already completed as a First Year technical elective, must be replaced with another ECE technical elective (or an engineering minor unit) of equal or higher level. Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists in the 2024 Handbook.",
+      "notes": "If already completed as a First Year technical elective, must be replaced with another ECE technical elective (or an engineering minor unit) of equal or higher level. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook. Also a Part C core unit of the Robotics and Mechatronics specialisation (ROBMCTRN04) — shared, not duplicated.",
       "semesterOffered": "2",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE2072",
+      "verifiedOn": "2026-09-16",
+      "sharedWith": [
+        "mechatronics"
+      ]
     },
     {
       "code": "ECE2111",
       "title": "Signals and systems",
       "creditPoints": 6,
-      "year": 3,
+      "year": 2,
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [
@@ -132,15 +159,17 @@
       "prohibitions": [
         "ECE2011"
       ],
-      "notes": "Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists in the 2024 Handbook.",
+      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
       "semesterOffered": "2",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE2111",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECE3051",
       "title": "Electrical energy systems",
       "creditPoints": 6,
-      "year": 4,
+      "year": 3,
       "semester": 1,
       "type": "specialisation",
       "prerequisites": [
@@ -150,15 +179,17 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
       "semesterOffered": "1",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE3051",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECE3073",
       "title": "Computer systems",
       "creditPoints": 6,
-      "year": 4,
+      "year": 3,
       "semester": 1,
       "type": "specialisation",
       "prerequisites": [
@@ -169,12 +200,17 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook. Also a Part C core unit of the Robotics and Mechatronics specialisation (ROBMCTRN04) — shared, not duplicated.",
       "semesterOffered": "1",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE3073",
+      "verifiedOn": "2026-09-16",
+      "sharedWith": [
+        "mechatronics"
+      ]
     },
     {
-      "code": "ECE3122",
+      "code": "ECE3121",
       "title": "Engineering electromagnetics",
       "creditPoints": 6,
       "year": 4,
@@ -184,15 +220,17 @@
         "ENG2005",
         "ECE2131"
       ],
-      "prerequisiteText": "ENG2005 Advanced engineering mathematics AND ECE2131 Electrical circuits",
+      "prerequisiteText": "ENG2005 AND ECE2131 (structured requisite tree, no OR branches)",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
         "ECE3121"
       ],
-      "notes": "Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting \u2014 you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists.",
+      "notes": "Catalogued as ECE3122 until 2026-09-16 — that code is now a 404 in the Handbook. The current code for Engineering electromagnetics is ECE3121, which is also what the official 2025 E3001 and E3005 progression maps list. Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting — you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) — no Semester 1 offering exists.",
       "semesterOffered": "2",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE3121",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECE3161",
@@ -210,9 +248,11 @@
       "prohibitions": [
         "ECE3062"
       ],
-      "notes": "Course map places this at Y4 S2, but the 2024 Handbook shows it as Semester 1 offering only at Clayton (no S2 offering that year) \u2014 a real discrepancy between the recommended sequence and the specific 2024 timetable. Kept at the course map's Y4 S2 slot since sequencing can shift year to year; re-check the live Handbook before actually enrolling.",
-      "semesterOffered": "1",
-      "discipline": "electrical"
+      "notes": "Course map places this at Y4 S2, but the 2024 Handbook shows it as Semester 1 offering only at Clayton (no S2 offering that year) — a real discrepancy between the recommended sequence and the specific 2024 timetable. Kept at the course map's Y4 S2 slot since sequencing can shift year to year; re-check the live Handbook before actually enrolling.",
+      "semesterOffered": "2",
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE3161",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ENG4701",
@@ -226,19 +266,27 @@
       "corequisites": [
         "ENG0001"
       ],
-      "corequisiteText": "ENG0001 Engineering continuous professional development (Clayton-based students)",
+      "corequisiteText": "Handbook enrolment rule, verbatim: \"COREQUISITE: Must be enrolled in either a single or double Bachelor's course in engineering. Clayton-based students must also be concurrently enrolled in ENG0001 alongside ENG4701.\" Free text, not a structured requisite - re-confirmed 2026-09-16.",
       "prohibitions": [
         "ECE4094"
       ],
       "notes": "Capstone project, part A of two. Not open to exchange/study abroad students.",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG4701",
+      "verifiedOn": "2026-09-16",
+      "placements": {
+        "E3001": {
+          "year": 4,
+          "semester": 1
+        }
+      }
     },
     {
       "code": "ECE3141",
       "title": "Information and networks",
       "creditPoints": 6,
-      "year": 5,
+      "year": 4,
       "semester": 1,
       "type": "specialisation",
       "prerequisites": [],
@@ -248,9 +296,11 @@
       "prohibitions": [
         "ECE2041"
       ],
-      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
       "semesterOffered": "1",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE3141",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ENG0001",
@@ -271,7 +321,15 @@
       ],
       "notes": "0 credit points. Requires 420 hours of Continuous Professional Development accumulated across the whole degree, not just this semester. Must be enrolled in an engineering bachelor's degree.",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG0001",
+      "verifiedOn": "2026-09-16",
+      "placements": {
+        "E3001": {
+          "year": 4,
+          "semester": 1
+        }
+      }
     },
     {
       "code": "ENG4702",
@@ -291,7 +349,15 @@
       ],
       "notes": "Capstone project, part B of two. Not open to exchange/study abroad students.",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG4702",
+      "verifiedOn": "2026-09-16",
+      "placements": {
+        "E3001": {
+          "year": 4,
+          "semester": 2
+        }
+      }
     },
     {
       "code": "ECE4191",
@@ -301,27 +367,28 @@
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [
-        "ECE3073",
-        "ECE3141",
-        "ECE2072",
-        "ECE3161"
+        "ECE3141"
       ],
-      "prerequisiteText": "ECE3073 Computer systems AND (ECE3141 Information and networks OR TRC3500 Sensors and artificial perception) AND ECE2072 Digital systems AND ECE3161 Analogue electronics",
-      "corequisites": [],
-      "corequisiteText": "",
+      "prerequisiteText": "TRC3500 OR ECE3141 — ECE3141 listed as the representative code for this (Electrical) specialisation; TRC3500 is the Robotics/Mechatronics path to the same rule.",
+      "corequisites": [
+        "ECE3073"
+      ],
+      "corequisiteText": "ECE3073 OR ECE3161 — ECE3073 listed as the representative code.",
       "prohibitions": [
         "ECE3091",
         "TRC4407"
       ],
-      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists in the 2024 Handbook.",
+      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
       "semesterOffered": "2",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE4191",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECE4132",
       "title": "Control system design",
       "creditPoints": 6,
-      "year": 5,
+      "year": 3,
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [
@@ -334,9 +401,11 @@
       "prohibitions": [
         "ECE3062"
       ],
-      "notes": "Semester 2 offering only (Clayton) \u2014 no Semester 1 offering exists in the 2024 Handbook.",
+      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
       "semesterOffered": "2",
-      "discipline": "electrical"
+      "discipline": "electrical",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECE4132",
+      "verifiedOn": "2026-09-16"
     }
   ]
 }

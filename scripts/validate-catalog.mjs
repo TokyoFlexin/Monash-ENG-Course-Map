@@ -20,6 +20,25 @@ const KNOWN_EXTERNAL_GAPS = new Set([
              // major's catalog (see PROGRESS.md "Business Analytics" section).
 ]);
 
+// A unit whose canonical year/semester slot deliberately sits in a semester it ISN'T taught.
+// This is ONLY legitimate when the real Handbook offering and the real prerequisite chain
+// genuinely conflict inside a 4-year sequence — the planner then shows a live off-semester flag
+// (warn-not-block) rather than the data hiding the tension. Every entry needs a reason; anything
+// not listed here is treated as a data bug, because that's exactly the class of error a real user
+// caught in the Civil data ("Structural design shows Semester 2, it's actually Semester 1").
+const PLACEMENT_EXCEPTIONS = new Map([
+  ['CIV3294', 'VERIFIED CONFLICT. S1-only (2026-09-14 re-audit); moving it to Y3S1 collides with its own prereq CIV2206. Kept at Y3S2 with the tension documented. See PROGRESS.md.'],
+  // The five below are NOT verified conflicts — they are 2024-vintage suggested placements for
+  // elective units whose own notes already say "Semester 2 only". Queued for a current-Handbook
+  // re-audit of commerce.json (same treatment civil.json got on 2026-09-14). Listed here so the
+  // validator reports them loudly every run instead of them sitting silently wrong.
+  ['ETC2520', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
+  ['ETC2420', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
+  ['ETC3400', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
+  ['ETC3450', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
+  ['FIT3179', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
+]);
+
 const VALID_TYPES = new Set(['core', 'specialisation', 'elective', 'commerce', 'breadth']);
 const VALID_OFFERED = new Set(['1', '2', 'both', 'unknown']);
 
@@ -43,7 +62,7 @@ function loadCatalogFiles() {
       perFile.push({ file: f, error: 'no top-level "units" array', units: [] });
       continue;
     }
-    perFile.push({ file: f, units: parsed.units });
+    perFile.push({ file: f, units: parsed.units, meta: parsed._meta || {} });
   }
   return perFile;
 }
@@ -56,7 +75,7 @@ function main() {
     if (pf.error) problems.push(`[${pf.file}] ${pf.error}`);
   }
 
-  const allUnits = perFile.flatMap(pf => pf.units.map(u => ({ ...u, __file: pf.file })));
+  const allUnits = perFile.flatMap(pf => pf.units.map(u => ({ ...u, __file: pf.file, __meta: pf.meta || {} })));
   const byCode = new Map();
 
   // required fields + duplicate codes
@@ -142,9 +161,79 @@ function main() {
     if (color.get(code) === WHITE) dfs(code);
   }
 
+  // ---------------------------------------------------------------------------
+  // Placement sanity. Structural validity isn't enough — the Civil round shipped
+  // structurally-perfect JSON that was factually wrong about when units run. These
+  // three checks make that class of mistake fail the build instead of reaching a user.
+  // ---------------------------------------------------------------------------
+  const seq = u => u.year * 2 + u.semester;          // Y2S1 -> 5, Y2S2 -> 6, ...
+  const slot = u => `Y${u.year}S${u.semester}`;
+  const acknowledged = [];
+
+  // 1. A unit's canonical slot must be a semester the unit is actually taught in.
+  for (const u of allUnits) {
+    const offered = String(u.semesterOffered);
+    if (offered === 'both' || offered === 'unknown') continue;
+    if (offered === String(u.semester)) continue;
+    const reason = PLACEMENT_EXCEPTIONS.get(u.code);
+    const msg = `${u.code} (${u.title}): placed ${slot(u)} but semesterOffered is "${offered}"`;
+    if (reason) {
+      acknowledged.push(`[${u.__file}] ${msg}\n     └─ ${reason}`);
+    } else {
+      problems.push(`[${u.__file}] ${msg} — either the placement or the offering is wrong. Fix it, or add ${u.code} to PLACEMENT_EXCEPTIONS with a verified reason.`);
+    }
+  }
+
+  // 2. Every prerequisite must sit STRICTLY earlier in the sequence than the unit needing it.
+  //    (Same-semester is a corequisite, not a prerequisite.)
+  for (const u of allUnits) {
+    for (const code of u.prerequisites || []) {
+      const pre = byCode.get(code);
+      if (!pre) continue; // dangling refs already reported above
+      if (seq(pre) >= seq(u)) {
+        problems.push(`[${u.__file}] ${u.code} is at ${slot(u)} but its prerequisite ${code} is at ${slot(pre)} — a prerequisite must finish in an earlier semester.`);
+      }
+    }
+  }
+
+  // 3. A corequisite may be earlier or same-semester, never later.
+  for (const u of allUnits) {
+    for (const code of u.corequisites || []) {
+      const co = byCode.get(code);
+      if (!co) continue;
+      if (seq(co) > seq(u)) {
+        problems.push(`[${u.__file}] ${u.code} is at ${slot(u)} but its corequisite ${code} is at ${slot(co)} — a corequisite can't be placed later.`);
+      }
+    }
+  }
+
+  // 4. Provenance. A file opts in with "_meta": { "provenance": "per-unit" }; every unit in it
+  //    must then carry the exact Handbook URL it was read from and the date it was checked, so
+  //    stale data is visible in the data itself rather than inferred from a git log. Files
+  //    predating this convention (file-level _meta.sources only) are left alone until re-audited.
+  const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
+  for (const u of allUnits) {
+    if (u.__meta?.provenance !== 'per-unit') continue;
+    if (!u.sourceUrl) {
+      problems.push(`[${u.__file}] ${u.code}: missing "sourceUrl" (file declares provenance:"per-unit")`);
+    } else if (!/^https:\/\/handbook\.monash\.edu\//.test(u.sourceUrl)) {
+      problems.push(`[${u.__file}] ${u.code}: sourceUrl "${u.sourceUrl}" isn't a handbook.monash.edu URL`);
+    }
+    if (!u.verifiedOn) {
+      problems.push(`[${u.__file}] ${u.code}: missing "verifiedOn" date (file declares provenance:"per-unit")`);
+    } else if (!ISO_DATE.test(u.verifiedOn)) {
+      problems.push(`[${u.__file}] ${u.code}: verifiedOn "${u.verifiedOn}" must be YYYY-MM-DD`);
+    }
+  }
+
   // report
   const disciplines = [...new Set(allUnits.map(u => u.discipline).filter(Boolean))];
   console.log(`Checked ${allUnits.length} units across ${perFile.length} files. Disciplines: ${disciplines.join(', ')}`);
+  if (acknowledged.length) {
+    console.log(`\n⚠ ${acknowledged.length} acknowledged placement exception(s) — allowed, but never silent:\n`);
+    acknowledged.forEach(a => console.log(' - ' + a));
+    console.log('');
+  }
   if (problems.length === 0) {
     console.log('✔ No problems found.');
     process.exit(0);

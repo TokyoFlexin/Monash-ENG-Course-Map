@@ -1,13 +1,16 @@
 {
   "_meta": {
-    "description": "Common First Year for E3007 Bachelor of Engineering (Honours) and Bachelor of Science \u2014 identical regardless of specialisation. Shared by every specialisation data file. This is the catalog for the planner: units here are known/compulsory with real prerequisite data. Everything else (science major/elective choices, breadth, Commerce units) is added as a custom unit inside the planner itself, not pre-listed here.",
-    "commencingYear": 2024,
+    "description": "Common First Year for E3007 Bachelor of Engineering (Honours) and Bachelor of Science — identical regardless of specialisation. Shared by every specialisation data file. This is the catalog for the planner: units here are known/compulsory with real prerequisite data. Everything else (science major/elective choices, breadth, Commerce units) is added as a custom unit inside the planner itself, not pre-listed here.",
+    "commencingYear": 2025,
     "campus": "Clayton",
-    "foundationPathway": "Foundation mathematics only (ENG1090) \u2014 VCE Specialist Maths >30 not met, VCE Physics >25 met",
+    "foundationPathway": "Foundation mathematics only (ENG1090) — VCE Specialist Maths >30 not met, VCE Physics >25 met",
     "sources": [
       "https://www.monash.edu/__data/assets/pdf_file/0003/3303642/2024-map-E3007.pdf (course progression map, 2024 commencing, updated 14 Oct 2025)",
       "https://handbook.monash.edu/2024/units/{CODE} (prerequisite/corequisite/prohibition rules, 2024 Handbook)"
-    ]
+    ],
+    "provenance": "per-unit",
+    "placementSource": "Official Monash course progression map for 2025 commencing students, E3001 Bachelor of Engineering (Honours) Common First Year, page 1. Supplied by Sahel 2026-09-16. The map gives FOUR pathways depending on VCE background; the canonical slots here are the \"no foundation units required\" pathway. ENG1090 (Foundation mathematics) and PHS1001 (Foundation physics) are conditional — required only without VCE Specialist Maths >30 and/or Physics >25 — and are parked at Y1S1, the semester both are offered. A student on a foundation pathway shifts some units a semester later; that belongs in their own saved plan, not the shared catalog.",
+    "requisiteNote": "VERIFIED 2026-09-16: NOT ONE first-year unit has a unit-coded prerequisite in the Handbook. Every rule is a VCE entry requirement (e.g. ENG1014 needs VCE Specialist Maths >=30, ENG1005 needs ENG1090 OR VCE Specialist Maths >=30). ENG1090 was previously listed as a hard prerequisite of ENG1005 — removed, because it would flag every student who met the VCE score instead. Full rule text is kept in each unit prerequisiteText."
   },
   "units": [
     {
@@ -24,16 +27,19 @@
       "prohibitions": [
         "MTH1020"
       ],
-      "notes": "Semester 1 offering only (Clayton) \u2014 no Semester 2 offering exists in the 2024 Handbook.",
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
       "semesterOffered": "1",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG1090",
+      "verifiedOn": "2026-09-16",
+      "optional": true
     },
     {
       "code": "ENG1013",
       "title": "Engineering smart systems",
       "creditPoints": 6,
       "year": 1,
-      "semester": 1,
+      "semester": 2,
       "type": "core",
       "prerequisites": [],
       "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics (Units 3 & 4) recommended",
@@ -45,19 +51,19 @@
       ],
       "notes": "",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG1013",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ENG1005",
       "title": "Engineering mathematics",
       "creditPoints": 6,
       "year": 1,
-      "semester": 2,
+      "semester": 1,
       "type": "core",
-      "prerequisites": [
-        "ENG1090"
-      ],
-      "prerequisiteText": "ENG1090 Foundation mathematics (passed), OR VCE Specialist Mathematics (Units 3 & 4) with a raw study score of at least 30",
+      "prerequisites": [],
+      "prerequisiteText": "Enrolment rule (free text, not a structured requisite): You must have passed ENG1090 or VCE Specialist Mathematics Units 3 and 4 with a raw study score of at least 30 (or equivalent). ENG1090 is listed here as the plannable path; students who met the VCE score satisfy it without taking any unit.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
@@ -66,34 +72,36 @@
       ],
       "notes": "Handbook: enrolling without meeting this prerequisite risks discontinuation from the unit.",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG1005",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ENG1014",
       "title": "Engineering numerical analysis",
       "creditPoints": 6,
       "year": 1,
-      "semester": 2,
+      "semester": 1,
       "type": "core",
       "prerequisites": [],
       "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics recommended",
-      "corequisites": [
-        "ENG1005"
-      ],
-      "corequisiteText": "ENG1005 Engineering mathematics; must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree",
+      "corequisites": [],
+      "corequisiteText": "Enrolment rule (free text, not a unit corequisite): You must be enrolled in the Bachelor of Engineering (Honours) or an engineering double degree, or have permission. ENG1005 was previously listed here as a corequisite - REMOVED 2026-09-16, the Handbook has no such rule.",
       "prohibitions": [
         "ENG1060"
       ],
       "notes": "",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG1014",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ENG1011",
       "title": "Engineering methods",
       "creditPoints": 6,
-      "year": 2,
-      "semester": 1,
+      "year": 1,
+      "semester": 2,
       "type": "core",
       "prerequisites": [],
       "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent; VCE Physics recommended",
@@ -104,14 +112,16 @@
       ],
       "notes": "",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG1011",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ENG1012",
-      "title": "Engineering design",
+      "title": "Engineering for people and planet",
       "creditPoints": 6,
-      "year": 2,
-      "semester": 1,
+      "year": 1,
+      "semester": 2,
       "type": "core",
       "prerequisites": [],
       "prerequisiteText": "VCE Mathematical Methods or Specialist Mathematics (Units 3 & 4) or equivalent",
@@ -120,9 +130,30 @@
       "prohibitions": [
         "ENG1002"
       ],
-      "notes": "",
+      "notes": "Renamed: this unit was 'Engineering design' in the 2025 Handbook (the name on the 2025 progression map) and is 'Engineering for people and planet' in the current Handbook. Same unit code.",
       "semesterOffered": "both",
-      "discipline": "common"
+      "discipline": "common",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ENG1012",
+      "verifiedOn": "2026-09-16"
+    },
+    {
+      "code": "PHS1001",
+      "title": "Foundation physics",
+      "creditPoints": 6,
+      "year": 1,
+      "semester": 1,
+      "type": "core",
+      "discipline": "common",
+      "prerequisites": [],
+      "prerequisiteText": "",
+      "corequisites": [],
+      "corequisiteText": "",
+      "prohibitions": [],
+      "notes": "Foundation physics. Required ONLY if you did not complete VCE Units 3 & 4 Physics with a study score above 25 (or equivalent) — it is a conditional foundation unit, not universal. Listed on page 1 of the official 2025 E3001 progression map in the two pathways that need it.",
+      "semesterOffered": "1",
+      "sourceUrl": "https://handbook.monash.edu/current/units/PHS1001",
+      "verifiedOn": "2026-09-16",
+      "optional": true
     }
   ]
 }

@@ -4,6 +4,7 @@
     "common-first-year.json",
     "electrical.json",
     "civil.json",
-    "commerce.json"
+    "commerce.json",
+    "mechatronics.json"
   ]
 }
