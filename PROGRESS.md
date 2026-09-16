@@ -1120,6 +1120,53 @@ Electrical / Y2S2 Civil and Mechatronics; ENG4801 resolves to four different cor
 **Campus confirmed Clayton** for every current user, so mechatronics.json's campus caveat is now a
 confirmed note rather than an assumption.
 
+## Electrical elective structure added — Core List A/B + Part E (2026-09-16)
+Sahel's own degree was only two-thirds represented: 126cp of 192cp. The missing 66cp was all
+elective structure that had never been catalogued, so a third of his map was official boxes with
+no cards to put in them. Source: https://handbook.monash.edu/current/aos/ECSYSENG04
+
+**What the structure actually is** (worth writing down, the names are opaque):
+- **Core List A** — 4 units; Part C requires ONE, and the official map puts that slot at Y4S1.
+- **Core List B** — 26 units; the Y4S2 slot takes one unit from List A *or* B.
+- **Part E** — 36cp / 6 units from a 38-unit pool. These are the six "Level 1, 2 or 3 elective or
+  engineering technical elective" / "Engineering minor or level 3 or 4 ECSE technical elective"
+  boxes spread across Y2-Y4 on the map.
+- 15 named Part C units + 1 List A + 1 List A-or-B + 1 Professional Practice = 18 units = 108cp,
+  + Part E 36cp = 144cp specialisation, + 48cp common first year = 192cp = 4 years. Reconciles.
+
+**Availability is the real constraint: of the 42 units across those three lists, only 25 have a
+Clayton offering.** Seventeen are Malaysia-only or currently not offered anywhere at all
+(ECE4032, ECE4043, ECE4044, ECE4058, ECE4063, ECE4075, ECE4086, ECE4146, ECE4808, ECE4809,
+ECE4810, ECE4813, ECE5156, ECE5881, MEC5886, MTE3104, TRC2001) and are deliberately omitted.
+- 9 new units added to electrical.json (ECE3093, MEC3001, RSE3141, MTE3202, ECE4045, MEC5885,
+  ECE4024, ECE4087, ECE4122), all `type:"elective"`, `optional:true`, with an `ecseLists` field
+  recording List A / B / Part E membership.
+- 12 already existed in mechatronics.json and were cross-tagged rather than duplicated.
+
+**CONSTRAINT FOUND — Core List A is effectively forced at Y4S1.** The four List A units are
+ECE4053, ECE4055, ECE4122 and ECE4886, and only **ECE4055 (Power electronic converters)** runs
+Semester 1 at Clayton. Since the map puts the List A slot at Y4S1, that slot is ECE4055 unless
+Sahel uses his Y4S2 slot for List A and takes a List B unit in S1 instead. Recorded in
+electrical.json `_meta.coreListANote`.
+
+**New concept: `electiveFor`, distinct from `sharedWith`.** Cross-tagging the 12 Mechatronics
+units with `sharedWith` was wrong and quick start immediately proved it — it jumped from 21 to 24
+placed units for Electrical, because TRC3500, ECE4179 and ECE4076 are Part C CORE for Mechatronics
+and were being treated as core for Electrical too. They are only elective OPTIONS there. So:
+- `sharedWith` = this unit is CORE for that discipline too (ECE2071 -> Mechatronics). Auto-placed.
+- `electiveFor` = merely an elective OPTION there (TRC3500 -> Electrical). Visible, never required.
+- Visibility unions both; quick start honours only `sharedWith`.
+
+**Track validation earned its keep again.** Two of the new electives collided with their own
+prerequisites under E3005 only — ECE4045 needs ECE3141 (which moves to Y4S1 under E3005) and
+ECE4122 needs ECE3121 (Y4S2 under E3005). Both got E3005 overrides to Y5. Under E3001 neither is
+a problem, so checking default slots alone would have shipped two silent post-transfer bugs.
+
+**Verified:** validator clean, 118 units, all four tracks. Quick start places 21 required units for
+Electrical (unchanged — electives are choices, not requirements) while 48 units are now VISIBLE to
+choose from, up from 21. Mechatronics (23 placed / 41 visible) and Civil (23 / 29) unaffected.
+No console errors.
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).

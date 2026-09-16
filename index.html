@@ -638,16 +638,25 @@ function visibleDisciplines(){
   return all.filter(d => d==='common' || d===userSpecialisation || (d==='commerce' && userHasCommerce));
 }
 
-// A unit can belong to more than one specialisation without being universal: ECE2071 is Part C core
-// for BOTH Electrical and Robotics & Mechatronics, but Civil never touches it, so tagging it
-// "common" would be wrong too. `sharedWith` lists the extra disciplines it counts for.
+// Two DIFFERENT cross-discipline relationships, and conflating them auto-placed three Mechatronics
+// core units into Electrical plans:
+//   sharedWith  — the unit is CORE for that discipline too (ECE2071 is Part C for both Electrical
+//                 and Mechatronics), so it should be auto-placed by quick start for either.
+//   electiveFor — the unit is merely an ELECTIVE OPTION there (TRC3500 is Mechatronics Part C, but
+//                 only one of ~25 Core List B / Part E choices for Electrical). Visible and
+//                 choosable, never required.
 function unitDisciplines(u){
   return [u.discipline, ...(u.sharedWith || [])];
 }
 
+// Visibility is the union of both relationships — you should SEE everything you may enrol in.
+function unitAllDisciplines(u){
+  return [u.discipline, ...(u.sharedWith || []), ...(u.electiveFor || [])];
+}
+
 function unitVisible(u){
   if(!userSpecialisation) return true;
-  return unitDisciplines(u).some(d =>
+  return unitAllDisciplines(u).some(d =>
     d==='common' || d===userSpecialisation || (d==='commerce' && userHasCommerce));
 }
 
@@ -674,7 +683,7 @@ function renderCatalog(filter){
       // only when its own folder isn't on screen, so it never appears twice in one sidebar.
       tree.push({key:disc, title: disciplineLabel(disc), items: catalog.filter(u =>
         u.discipline===disc ||
-        ((u.sharedWith||[]).includes(disc) && !shown.includes(u.discipline))
+        (([...(u.sharedWith||[]), ...(u.electiveFor||[])]).includes(disc) && !shown.includes(u.discipline))
       )});
     }
   });

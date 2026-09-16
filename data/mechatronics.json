@@ -117,10 +117,16 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "",
+      "notes": "Also an Electrical (ECSYSENG04) elective option: PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/TRC3500",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "MMA2005",
@@ -165,10 +171,17 @@
       "prohibitions": [
         "ECE5179"
       ],
-      "notes": "Level-4 code, taken in Year 3 Semester 2 per the official map. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5179.",
+      "notes": "Level-4 code, taken in Year 3 Semester 2 per the official map. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5179. Also an Electrical (ECSYSENG04) elective option: CORE LIST B — the Year 4 Semester 2 slot takes one unit from Core List A or B. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4179",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "B",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "MMA2003",
@@ -235,10 +248,17 @@
       "prohibitions": [
         "ECE5176"
       ],
-      "notes": "Prohibitions re-synced from the Handbook 2026-09-16: added ECE5176.",
+      "notes": "Prohibitions re-synced from the Handbook 2026-09-16: added ECE5176. Also an Electrical (ECSYSENG04) elective option: CORE LIST B — the Year 4 Semester 2 slot takes one unit from Core List A or B. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4076",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "B",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "TRC4407",
@@ -453,11 +473,17 @@
         "MEC2403",
         "MEC3601"
       ],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course. Prohibitions re-synced from the Handbook 2026-09-16: added MAE2401, MEC2403, MEC3601.",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course. Prohibitions re-synced from the Handbook 2026-09-16: added MAE2401, MEC2403, MEC3601. Also an Electrical (ECSYSENG04) elective option: PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2002",
       "verifiedOn": "2026-09-16",
-      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree."
+      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree.",
+      "ecseLists": [
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "ECE3142",
@@ -478,10 +504,16 @@
       "prohibitions": [
         "ECE4042"
       ],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE4042.",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE4042. Also an Electrical (ECSYSENG04) elective option: PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE3142",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "MMA3001",
@@ -549,10 +581,17 @@
       "prohibitions": [
         "ECE5155"
       ],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5155.",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5155. Also an Electrical (ECSYSENG04) elective option: CORE LIST A — Part C requires ONE unit from this 4-unit list; the official map puts that slot at Year 4 Semester 1. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4055",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "A",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "ECE5882",
@@ -567,10 +606,17 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: You must be currently enrolled in a master’s course in engineering or related STEM and in a related discipline. The unit assumes you have the necessary foundational knowledge equivalent to ECE3161.",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: You must be currently enrolled in a master’s course in engineering or related STEM and in a related discipline. The unit assumes you have the necessary foundational knowledge equivalent to ECE3161. Also an Electrical (ECSYSENG04) elective option: CORE LIST B — the Year 4 Semester 2 slot takes one unit from Core List A or B. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE5882",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "B",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "ECE5883",
@@ -585,10 +631,17 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: You must be currently enrolled in a master’s course in engineering or related STEM and in a related discipline. The unit assumes you have the necessary foundational knowledge equivalent to ECE2111 and ECE2191",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: You must be currently enrolled in a master’s course in engineering or related STEM and in a related discipline. The unit assumes you have the necessary foundational knowledge equivalent to ECE2111 and ECE2191 Also an Electrical (ECSYSENG04) elective option: CORE LIST B — the Year 4 Semester 2 slot takes one unit from Core List A or B. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE5883",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "B",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "ECE4053",
@@ -608,10 +661,17 @@
       "prohibitions": [
         "ECE5153"
       ],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5153.",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5153. Also an Electrical (ECSYSENG04) elective option: CORE LIST A — Part C requires ONE unit from this 4-unit list; the official map puts that slot at Year 4 Semester 1. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4053",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "A",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "ECE4078",
@@ -630,10 +690,17 @@
       "prohibitions": [
         "ECE5178"
       ],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: If you are currently enrolled in E6013 Master of Applied Engineering , you are exempt from the prerequisite requirement. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5178.",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: If you are currently enrolled in E6013 Master of Applied Engineering , you are exempt from the prerequisite requirement. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5178. Also an Electrical (ECSYSENG04) elective option: CORE LIST B — the Year 4 Semester 2 slot takes one unit from Core List A or B. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4078",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "B",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "ECE4081",
@@ -650,10 +717,17 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Also an Electrical (ECSYSENG04) elective option: CORE LIST B — the Year 4 Semester 2 slot takes one unit from Core List A or B. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4081",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "B",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "ECE4886",
@@ -672,10 +746,17 @@
       "prohibitions": [
         "ECE5886"
       ],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5886.",
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5886. Also an Electrical (ECSYSENG04) elective option: CORE LIST A — Part C requires ONE unit from this 4-unit list; the official map puts that slot at Year 4 Semester 1. PART E technical elective — 36cp / 6 units chosen from the Part E pool.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4886",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "ecseLists": [
+        "A",
+        "E"
+      ],
+      "electiveFor": [
+        "electrical"
+      ]
     },
     {
       "code": "ECE5884",
