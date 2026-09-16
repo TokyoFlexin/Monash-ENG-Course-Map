@@ -5,10 +5,13 @@ Running log across sessions. Claude updates this as work happens.
 ## Setup answers
 - Intake year: **2025** (corrected 2026-09-16 — was recorded as 2024 for months, which is
   why the original Electrical/common research was done against the 2024 Handbook)
-- Degree: E3007 single degree — Electrical & Computer Systems Engineering
-  (currently enrolled/confirmed). Also applying to transfer into **E3005**
-  (Electrical + Commerce double degree) — not confirmed yet, see "Commerce
-  expansion" below.
+- Degree: **E3001 single degree** — Electrical & Computer Systems Engineering,
+  4 years (currently enrolled). Also applying to transfer into **E3005**
+  (Engineering Honours + Commerce, 5 years) — not confirmed yet.
+  **CORRECTED 2026-09-16:** this said "E3007 single degree" from session one and
+  was wrong twice over — E3007 is Engineering + SCIENCE, and it is a 5-year
+  DOUBLE degree, not a single one. Every placement decision made before this
+  correction inherited the error.
 
 ## Status
 - [x] Step 1 — Research (unit data + prereqs/coreqs) — DONE
@@ -1082,6 +1085,41 @@ Verified across all four views: Electrical "E3005 · ... + Commerce", Civil "E30
 Engineering", Mechatronics "E3001 · Robotics and Mechatronics Engineering"; ECE2071 resolves Y2S1
 everywhere, ENG4701 Y5S1 under E3005 and Y4S1 under E3001. No console errors.
 
+## Course code corrected: E3001, not E3007 (2026-09-16)
+Sahel: "no my current enrollment is just E3001. a single degree and i want to transfer to eng and
+commerce." Both of my earlier readings were wrong — first I treated E3007 as his single degree,
+then (on discovering E3007 is 240cp) I decided his 5-year placements were legitimate and rebuilt
+electrical.json around the E3005 sequence. He is in **E3001, 4 years**, transferring to **E3005**.
+
+**electrical.json now defaults to the official E3001 sequence (map page 6)** with E3005 as the
+override — the exact inverse of what was built an hour earlier. Eight units moved back:
+ECE2191 Y3S2->Y2S2, ECE3141 Y4S1->Y3S1, ECE3121/ECE3161 Y4S2->Y3S2, ENG4701/ENG0001 Y5S1->Y4S1,
+ENG4702/ECE4191 Y5S2->Y4S2.
+
+**The `placements` key had to change shape.** Keying by course code alone cannot express that
+ENG2005 is Y2S1 in E3001 **Electrical** but Y2S2 in E3001 **Civil** and E3001 **Mechatronics** —
+same course, different specialisation, because progression maps are published per (course,
+specialisation). Resolution order is now:
+`placements["COURSE:spec"]` -> `placements["COURSE"]` -> the unit's own year/semester.
+Most units need no override; ENG4801-4804 need the most (four distinct slots: Y4S1 Electrical,
+Y3S1 Civil, Y4S2 Mechatronics, Y5S1 E3005).
+
+**Validator now checks every track, not just defaults.** An override could previously place a unit
+in a semester it isn't taught, or before its own prerequisite, and nothing would catch it. It now
+resolves each unit under every track found in the data and re-runs the offering and chronology
+checks: `E3001:civil, E3001:electrical, E3001:mechatronics, E3005` — all clean.
+
+**Branding follows the course actually being planned for**, via `activeCourseCode()`: ticking
+Commerce shows "E3005 · ... + Commerce" instead of the single-degree code, and the redundant
+"(E3005)" suffix is dropped when the code already reads E3005.
+
+**Verified live, all four views:** Electrical E3001 matches map page 6 slot-for-slot; toggling
+Commerce flips the entire sequence to match map page 5 slot-for-slot; ENG2005 resolves Y2S1
+Electrical / Y2S2 Civil and Mechatronics; ENG4801 resolves to four different correct slots.
+
+**Campus confirmed Clayton** for every current user, so mechatronics.json's campus caveat is now a
+confirmed note rather than an assumption.
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).
@@ -1103,8 +1141,8 @@ everywhere, ENG4701 Y5S1 under E3005 and Y4S1 under E3001. No console errors.
   thinking through against the credit-point/level rules already known (e.g.
   Civil's 144cp Part C + Part D + Part E structure, Commerce major
   credit-point minimums) rather than just counting placed units.
-- E3007 (Eng+Science, Sahel's pre-transfer enrolment) is deliberately NOT mapped — he plans
-  against E3005. Only worth revisiting if the transfer falls through.
+- E3007 is irrelevant to this project — it was never Sahel's course. Both courses that matter
+  (E3001 now, E3005 after transfer) are mapped from official PDFs and validated as separate tracks.
 - **More disciplines (Sahel confirmed interest, 2026-09-13)** — same session
   discussed expanding breadth using the Civil-style pipeline (AoS code →
   parallel Handbook research → `discipline`-tagged data file → one

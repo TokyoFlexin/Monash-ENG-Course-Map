@@ -1128,7 +1128,7 @@ document.getElementById('settingsName').addEventListener('input', (e) => setName
 // but E3007 interleaves Science units instead of Commerce ones and has its own progression map,
 // which we deliberately do NOT hold. Claiming "E3007" while showing E3005 slots would be a lie;
 // planning toward the transfer is the actual use case.
-const COURSE_CODES = { electrical: 'E3005', civil: 'E3001', mechatronics: 'E3001' };
+const COURSE_CODES = { electrical: 'E3001', civil: 'E3001', mechatronics: 'E3001' };
 
 // Ticking "also doing Commerce" means the E3005 double degree, whose sequence is the one the
 // official E3005 progression map defines — it overrides the single-degree course code.
@@ -1141,8 +1141,13 @@ function activeCourseCode(spec = userSpecialisation, commerce = userHasCommerce)
 // default year/semester plus an optional `placements` map keyed by course code; the default is
 // used whenever that course has no specific override, so a data file never has to enumerate
 // every course to stay correct.
+// Resolution order matters. A progression map is published per (course, specialisation), not per
+// course: ENG2005 is Y2S1 in E3001 Electrical but Y2S2 in E3001 Civil and E3001 Mechatronics —
+// same course code, different slot. So a "COURSE:spec" key wins over a plain "COURSE" key, which
+// wins over the unit's own default. Most units need no override at all.
 function unitSlot(u, spec = userSpecialisation, commerce = userHasCommerce){
-  const p = u.placements && u.placements[activeCourseCode(spec, commerce)];
+  const course = activeCourseCode(spec, commerce);
+  const p = u.placements && (u.placements[`${course}:${spec}`] || u.placements[course]);
   return p ? { year: p.year, semester: p.semester } : { year: u.year, semester: u.semester };
 }
 
@@ -1161,12 +1166,12 @@ function populateSpecialisationSelect(sel){
 function updateBranding(){
   const spec = userSpecialisation;
   const label = spec ? disciplineLabel(spec) : 'Course planner';
-  const code = spec && COURSE_CODES[spec] ? COURSE_CODES[spec] + ' · ' : '';
+  // Show the course actually being planned for: ticking Commerce means E3005, not the
+  // single-degree code. activeCourseCode() already encodes that rule.
+  const code = spec ? activeCourseCode(spec, userHasCommerce) + ' · ' : '';
   // Don't repeat the course code: Electrical already reads "E3005 ·" because its data IS the
   // E3005 sequence, so "+ Commerce (E3005)" would print E3005 twice in one line.
-  const commerceSuffix = (spec && userHasCommerce)
-    ? (COURSE_CODES[spec] === 'E3005' ? ' + Commerce' : ' + Commerce (E3005)')
-    : '';
+  const commerceSuffix = (spec && userHasCommerce) ? ' + Commerce' : '';
   document.getElementById('catalogEyebrow').textContent = spec ? `${code}${label}` : 'Course planner';
   document.getElementById('topbarEyebrow').textContent = spec
     ? `${code}${label}${commerceSuffix} — Clayton, 2025 commencing`

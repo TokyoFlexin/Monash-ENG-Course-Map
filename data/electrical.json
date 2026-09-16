@@ -1,7 +1,7 @@
 {
   "_meta": {
     "specialisation": "Electrical and Computer Systems Engineering",
-    "courseCode": "E3005",
+    "courseCode": "E3001",
     "commencingYear": 2025,
     "campus": "Clayton",
     "requiresFile": "common-first-year.json",
@@ -15,10 +15,10 @@
       "Science major/elective slots and the Level 4/5 ECE-coded core elective slot are NOT pre-listed here — the planner is where you add your own choices for these (including Commerce units) via 'add custom unit', since they're personal/variable and outside the electrical core dependency chain that's the point of Phase 1."
     ],
     "provenance": "per-unit",
-    "placementSource": "Official Monash course progression map for 2025 commencing students, E3005 Bachelor of Engineering (Honours) and Bachelor of Commerce, page 5 (Electrical and Computer Systems Engineering). Supplied by Sahel 2026-09-16. Default year/semester on each unit is the E3005 sequence. Units whose slot differs in the 4-year E3001 single degree carry a \"placements\" override keyed by course code, sourced from the E3001 2025 map page 10.",
+    "placementSource": "Official Monash 2025 progression maps, both supplied by Sahel 2026-09-16: E3001 page 6 (Electrical and Computer Systems, single degree) for the defaults, E3005 page 5 for the Commerce double-degree overrides.",
     "sharedWithMechatronics": "ECE2071, ECE2072, ECE2131 and ECE3073 are Part C core units of BOTH Electrical and Robotics & Mechatronics. They carry sharedWith:['mechatronics'] so the catalog filter shows them to a Mechatronics student without duplicating the code into mechatronics.json.",
     "vintagePolicy": "Unit facts here track the CURRENT Handbook, because a unit's requisites are those published for the year you ENROL in that unit. Course STRUCTURE (which units the degree requires) tracks the commencing year instead, because course requirements lock at commencement. Units whose rules changed between the 2025 commencing year and now carry a vintageNote. Re-check with: node scripts/check-vintage-drift.mjs --from 2025 --codes-from <this file>",
-    "courseCodeNote": "Placements are the official E3005 (Engineering Honours + Commerce) sequence — the course Sahel is transferring INTO, and the one he plans against. His current enrolment is E3007 (Engineering + Science), also 5 years and 240cp with the same engineering units, but a different interleaving and its own progression map which is NOT held here. Units whose slot differs in the 4-year E3001 single degree carry a placements override, which is what Civil and Mechatronics students resolve to."
+    "courseCodeNote": "Sahel is enrolled in E3001 Bachelor of Engineering (Honours) SINGLE degree (4 years, Electrical and Computer Systems) and is applying to transfer to E3005 (Engineering Honours + Commerce, 5 years). Default placements are the official 2025 E3001 map page 6. Units whose slot differs under E3005 carry a \"placements\" override from the official 2025 E3005 map page 5, which the app uses once the Commerce toggle is on. ENG2005 additionally differs BY SPECIALISATION within E3001 (Y2S1 Electrical, Y2S2 Civil and Mechatronics), hence the \"E3001:<spec>\" keys."
   },
   "units": [
     {
@@ -44,7 +44,11 @@
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG2005",
       "verifiedOn": "2026-09-16",
       "placements": {
-        "E3001": {
+        "E3001:civil": {
+          "year": 2,
+          "semester": 2
+        },
+        "E3001:mechatronics": {
           "year": 2,
           "semester": 2
         }
@@ -55,7 +59,7 @@
       "code": "ECE2191",
       "title": "Probability and AI for engineers",
       "creditPoints": 6,
-      "year": 3,
+      "year": 2,
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [
@@ -72,7 +76,13 @@
       "semesterOffered": "2",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE2191",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "placements": {
+        "E3005": {
+          "year": 3,
+          "semester": 2
+        }
+      }
     },
     {
       "code": "ECE2071",
@@ -215,7 +225,7 @@
       "code": "ECE3121",
       "title": "Engineering electromagnetics",
       "creditPoints": 6,
-      "year": 4,
+      "year": 3,
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [
@@ -233,13 +243,19 @@
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE3121",
       "verifiedOn": "2026-09-16",
-      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook required ENG2005 only; from 2026 it requires ENG2005 AND ECE2131."
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook required ENG2005 only; from 2026 it requires ENG2005 AND ECE2131.",
+      "placements": {
+        "E3005": {
+          "year": 4,
+          "semester": 2
+        }
+      }
     },
     {
       "code": "ECE3161",
       "title": "Analogue electronics",
       "creditPoints": 6,
-      "year": 4,
+      "year": 3,
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [
@@ -255,13 +271,19 @@
       "semesterOffered": "2",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE3161",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "placements": {
+        "E3005": {
+          "year": 4,
+          "semester": 2
+        }
+      }
     },
     {
       "code": "ENG4701",
       "title": "Final year project A",
       "creditPoints": 6,
-      "year": 5,
+      "year": 4,
       "semester": 1,
       "type": "core",
       "prerequisites": [],
@@ -288,8 +310,8 @@
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG4701",
       "verifiedOn": "2026-09-16",
       "placements": {
-        "E3001": {
-          "year": 4,
+        "E3005": {
+          "year": 5,
           "semester": 1
         }
       }
@@ -298,7 +320,7 @@
       "code": "ECE3141",
       "title": "Information and networks",
       "creditPoints": 6,
-      "year": 4,
+      "year": 3,
       "semester": 1,
       "type": "specialisation",
       "prerequisites": [],
@@ -310,13 +332,19 @@
       "semesterOffered": "1",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE3141",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "placements": {
+        "E3005": {
+          "year": 4,
+          "semester": 1
+        }
+      }
     },
     {
       "code": "ENG0001",
       "title": "Engineering continuous professional development",
       "creditPoints": 0,
-      "year": 5,
+      "year": 4,
       "semester": 1,
       "type": "core",
       "prerequisites": [],
@@ -335,8 +363,8 @@
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG0001",
       "verifiedOn": "2026-09-16",
       "placements": {
-        "E3001": {
-          "year": 4,
+        "E3005": {
+          "year": 5,
           "semester": 1
         }
       }
@@ -345,7 +373,7 @@
       "code": "ENG4702",
       "title": "Final year project B",
       "creditPoints": 6,
-      "year": 5,
+      "year": 4,
       "semester": 2,
       "type": "core",
       "prerequisites": [
@@ -372,8 +400,8 @@
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG4702",
       "verifiedOn": "2026-09-16",
       "placements": {
-        "E3001": {
-          "year": 4,
+        "E3005": {
+          "year": 5,
           "semester": 2
         }
       }
@@ -382,7 +410,7 @@
       "code": "ECE4191",
       "title": "Engineering integrated design",
       "creditPoints": 6,
-      "year": 5,
+      "year": 4,
       "semester": 2,
       "type": "specialisation",
       "prerequisites": [
@@ -402,7 +430,13 @@
       "semesterOffered": "2",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4191",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "placements": {
+        "E3005": {
+          "year": 5,
+          "semester": 2
+        }
+      }
     },
     {
       "code": "ECE4132",

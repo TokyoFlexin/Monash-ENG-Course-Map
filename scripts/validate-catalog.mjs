@@ -216,6 +216,56 @@ function main() {
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // Placement OVERRIDES get the same scrutiny as defaults. A unit can carry a
+  // `placements` map keyed by course code ("E3005") or course+specialisation
+  // ("E3001:civil"), because a progression map is published per course AND
+  // specialisation — ENG2005 is Y2S1 in E3001 Electrical but Y2S2 in E3001 Civil.
+  // Without this, an override could put a unit in a semester it isn't taught, or
+  // before its own prerequisite, and nothing would catch it.
+  // ---------------------------------------------------------------------------
+  const tracks = new Set();
+  for (const u of allUnits) for (const k of Object.keys(u.placements || {})) tracks.add(k);
+
+  function slotIn(u, track) {
+    const p = u.placements || {};
+    if (p[track]) return p[track];
+    const course = track.includes(':') ? track.split(':')[0] : track;
+    if (p[course]) return p[course];
+    return { year: u.year, semester: u.semester };
+  }
+
+  for (const track of tracks) {
+    for (const u of allUnits) {
+      const mine = slotIn(u, track);
+      const offered = String(u.semesterOffered);
+      if (offered !== 'both' && offered !== 'unknown' && offered !== String(mine.semester)
+          && u.placements && (u.placements[track] || u.placements[track.split(':')[0]])) {
+        if (!PLACEMENT_EXCEPTIONS.has(u.code)) {
+          problems.push(`[${u.__file}] ${u.code}: placements["${track}"] puts it at Y${mine.year}S${mine.semester}, but semesterOffered is "${offered}"`);
+        }
+      }
+      const mineSeq = mine.year * 2 + mine.semester;
+      for (const code of u.prerequisites || []) {
+        const pre = byCode.get(code);
+        if (!pre) continue;
+        const theirs = slotIn(pre, track);
+        if (theirs.year * 2 + theirs.semester >= mineSeq) {
+          problems.push(`[${u.__file}] under "${track}": ${u.code} at Y${mine.year}S${mine.semester} but prerequisite ${code} at Y${theirs.year}S${theirs.semester}`);
+        }
+      }
+      for (const code of u.corequisites || []) {
+        const co = byCode.get(code);
+        if (!co) continue;
+        const theirs = slotIn(co, track);
+        if (theirs.year * 2 + theirs.semester > mineSeq) {
+          problems.push(`[${u.__file}] under "${track}": ${u.code} at Y${mine.year}S${mine.semester} but corequisite ${code} at Y${theirs.year}S${theirs.semester}`);
+        }
+      }
+    }
+  }
+  if (tracks.size) console.log(`Placement tracks validated: ${[...tracks].sort().join(', ')}`);
+
   // report
   const disciplines = [...new Set(allUnits.map(u => u.discipline).filter(Boolean))];
   console.log(`Checked ${allUnits.length} units across ${perFile.length} files. Disciplines: ${disciplines.join(', ')}`);
