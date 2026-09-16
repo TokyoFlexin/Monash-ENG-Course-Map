@@ -1122,7 +1122,13 @@ document.getElementById('settingsName').addEventListener('input', (e) => setName
 // year/semester depends on which COURSE you're in, because the same unit sits at different points
 // in a 4-year single degree and a 5-year double degree. ECE2071 is Year 2 Semester 1 in E3001 and
 // ENG4701 is Year 4 in E3001 but Year 5 in E3005 — one "canonical slot" per unit cannot serve both.
-const COURSE_CODES = { electrical: 'E3007', civil: 'E3001', mechatronics: 'E3001' };
+// electrical.json holds the official E3005 (Engineering + Commerce) sequence, so Electrical is
+// labelled E3005 whether or not the Commerce toggle is on. Sahel's current enrolment is E3007
+// (Engineering + Science) and he is transferring to E3005 — the engineering unit set is the same,
+// but E3007 interleaves Science units instead of Commerce ones and has its own progression map,
+// which we deliberately do NOT hold. Claiming "E3007" while showing E3005 slots would be a lie;
+// planning toward the transfer is the actual use case.
+const COURSE_CODES = { electrical: 'E3005', civil: 'E3001', mechatronics: 'E3001' };
 
 // Ticking "also doing Commerce" means the E3005 double degree, whose sequence is the one the
 // official E3005 progression map defines — it overrides the single-degree course code.
@@ -1156,7 +1162,11 @@ function updateBranding(){
   const spec = userSpecialisation;
   const label = spec ? disciplineLabel(spec) : 'Course planner';
   const code = spec && COURSE_CODES[spec] ? COURSE_CODES[spec] + ' · ' : '';
-  const commerceSuffix = (spec && userHasCommerce) ? ' + Commerce (E3005)' : '';
+  // Don't repeat the course code: Electrical already reads "E3005 ·" because its data IS the
+  // E3005 sequence, so "+ Commerce (E3005)" would print E3005 twice in one line.
+  const commerceSuffix = (spec && userHasCommerce)
+    ? (COURSE_CODES[spec] === 'E3005' ? ' + Commerce' : ' + Commerce (E3005)')
+    : '';
   document.getElementById('catalogEyebrow').textContent = spec ? `${code}${label}` : 'Course planner';
   document.getElementById('topbarEyebrow').textContent = spec
     ? `${code}${label}${commerceSuffix} — Clayton, 2025 commencing`

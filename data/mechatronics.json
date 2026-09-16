@@ -18,7 +18,7 @@
       "Official 2025 E3001 course progression map PDF, page 10 — year/semester placement for every Part C unit."
     ],
     "openDecisions": [
-      "CAMPUS ASSUMED CLAYTON. 11 Part E units in the Handbook's pool have NO Clayton offering (ENG0002, TRC2001, MMA3102, CHE4806, CHE4807, ECE4044, ECE4146, TRC4200, TRC4902, ECE5881, MEC3821) — Malaysia-only or not currently offered at all — so they are deliberately omitted. If this student is at Malaysia, this file is wrong and needs rebuilding with campus='Malaysia'.",
+      "CAMPUS CONFIRMED CLAYTON (Sahel, 2026-09-16 — every current user is Clayton-based). The 11 Part E units with no Clayton offering (ENG0002, TRC2001, MMA3102, CHE4806, CHE4807, ECE4044, ECE4146, TRC4200, TRC4902, ECE5881, MEC3821) are correctly omitted, and ENG0001 rather than ENG0002 is the right Part D unit. Rebuild with campus='Malaysia' only if a Malaysia-based student ever uses this.",
       "ENG0002 (Industrial training) is the Part D requirement for MALAYSIA students; Clayton students do ENG0001 instead (already in the catalog as discipline:'common'). ENG0002 omitted for the same campus reason.",
       "Part E slots are SUGGESTED, not map fact: the map only says 'engineering minor or level 3/4/5 technical elective' in six slots. Each elective's SEMESTER here is its real Clayton offering; which of the six slots it fills is the student's choice.",
       "The Part E pool also allows an engineering MINOR (24cp) in place of electives — minors are not enumerated here.",

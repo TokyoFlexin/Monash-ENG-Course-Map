@@ -1055,6 +1055,33 @@ elective-pool slots (Civil Part E, Mechatronics Part E, Commerce Part B majors),
 itself only says "technical elective" / "major unit N" and the choice is genuinely the student's —
 each carries the unit's real offering semester and is labelled suggested in the data.
 
+## Clayton confirmed; Electrical labelled E3005, not E3007 (2026-09-16)
+Two clarifications from Sahel that close open items rather than opening them.
+
+**Campus: everyone using the planner is Clayton-based.** The "CAMPUS ASSUMED CLAYTON" caveat in
+mechatronics.json is now a CONFIRMED note. The 11 Part E units with no Clayton offering stay
+omitted, and ENG0001 (not ENG0002) is the correct Part D unit. Only revisit if a Malaysia-based
+student ever uses it.
+
+**The E3007 map was never needed — that was my confusion, not a missing document.** Sahel had
+already sent the map that matters. E3007 is Engineering + Science, his CURRENT enrolment;
+E3005 is Engineering + Commerce, the course he is transferring into and planning against. Asking
+repeatedly for an E3007 map was asking for the sequence he is leaving.
+- The real defect was narrower: electrical.json holds the official E3005 sequence, but
+  `COURSE_CODES` still mapped Electrical to 'E3007', so with the Commerce toggle OFF the app
+  printed "E3007 ·" above slots that are E3005's. Labelling a sequence with the wrong course code
+  is a lie even when the slots themselves are right.
+- `COURSE_CODES.electrical` is now `'E3005'`, and electrical.json's `_meta.courseCode` matches,
+  with a `courseCodeNote` recording that E3007 shares the engineering unit set but interleaves
+  Science instead of Commerce and has its own map we deliberately do not hold.
+- Fixed the resulting duplicate: the eyebrow read "E3005 · ... + Commerce (E3005)". The suffix now
+  drops the parenthetical when the course code is already E3005. Civil + Commerce still shows
+  "(E3005)", which is informative there since Civil's own code is E3001.
+
+Verified across all four views: Electrical "E3005 · ... + Commerce", Civil "E3001 · Civil
+Engineering", Mechatronics "E3001 · Robotics and Mechatronics Engineering"; ECE2071 resolves Y2S1
+everywhere, ENG4701 Y5S1 under E3005 and Y4S1 under E3001. No console errors.
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).
@@ -1076,11 +1103,8 @@ each carries the unit's real offering semester and is labelled suggested in the 
   thinking through against the credit-point/level rules already known (e.g.
   Civil's 144cp Part C + Part D + Part E structure, Commerce major
   credit-point minimums) rather than just counting placed units.
-- **E3007 sequence is still unverified.** electrical.json now defaults to the official E3005
-  (Eng+Commerce) sequence, which is what Sahel wants post-transfer. His CURRENT course E3007
-  (Eng+Science, also 5 years) has a different map that was never supplied, so with the Commerce
-  toggle OFF the app falls back to the E3005 slots. Get the E3007 2025 map if that matters before
-  the transfer goes through.
+- E3007 (Eng+Science, Sahel's pre-transfer enrolment) is deliberately NOT mapped — he plans
+  against E3005. Only worth revisiting if the transfer falls through.
 - **More disciplines (Sahel confirmed interest, 2026-09-13)** — same session
   discussed expanding breadth using the Civil-style pipeline (AoS code →
   parallel Handbook research → `discipline`-tagged data file → one
