@@ -27,7 +27,6 @@ const KNOWN_EXTERNAL_GAPS = new Set([
 // not listed here is treated as a data bug, because that's exactly the class of error a real user
 // caught in the Civil data ("Structural design shows Semester 2, it's actually Semester 1").
 const PLACEMENT_EXCEPTIONS = new Map([
-  ['CIV3294', 'VERIFIED CONFLICT. S1-only (2026-09-14 re-audit); moving it to Y3S1 collides with its own prereq CIV2206. Kept at Y3S2 with the tension documented. See PROGRESS.md.'],
   // The five below are NOT verified conflicts — they are 2024-vintage suggested placements for
   // elective units whose own notes already say "Semester 2 only". Queued for a current-Handbook
   // re-audit of commerce.json (same treatment civil.json got on 2026-09-14). Listed here so the

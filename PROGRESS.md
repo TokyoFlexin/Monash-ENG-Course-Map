@@ -960,6 +960,55 @@ reorders groups freely — a raw string diff reported 17 differences where only 
 - All 14 now carry a `vintageNote` in the data, and the three files carry a `_meta.vintagePolicy`
   stating the rule above, so "why does this say X when I remember Y" answers itself.
 
+## Civil re-audited through the harvester + drift check (2026-09-16)
+Ran civil.json through `harvest-handbook.mjs` and `check-vintage-drift.mjs`.
+
+**The 2026-09-14 page-reading re-audit held up on unit FACTS: 0 mismatches** on titles, credit
+points, Clayton offerings, prerequisites and corequisites across all 14 units. Drift 2025 ->
+current is a single change (CIV2242 lost its specific prerequisites for a generic 30cp rule),
+which that audit had already caught. Credit where it is due.
+
+**But the harvester had a bug that had been hiding every prohibition in the project.** The
+Handbook's requisite type for prohibitions is `prohibitions` (PLURAL) while prerequisites come
+through as `prerequisite` (singular). The parser only matched the singular, so `prohibition` came
+back null for every unit — indistinguishable from "this unit has none". A false clean bill of
+health, and it means the prohibition checks earlier in this session verified nothing at all.
+Fixed with a type-alias map; re-ran everything.
+- **mechatronics.json had NO prohibitions on any of its 26 units** — it was generated with the
+  broken parser.
+- **ECE3121 prohibited ITSELF** — the ECE3122 -> ECE3121 rename updated the code but not its own
+  prohibition list. The Handbook says it prohibits ECE3122.
+- Re-synced prohibitions across all four files from the Handbook: **+88 added, -4 removed**
+  across 29 units. A catalog-only prohibition is now kept only if it appears in the free-text
+  enrolment rules; Civil's six "stale" ones turned out to be correct all along.
+
+**Civil placements are now official, not inferred.** Page 5 of the 2025 E3001 map. Five units
+moved — and one of them is the bug that started all of this:
+- **CIV3294 (Structural design) Y3S2 -> Y3S1.** Sahel's friend reported months ago that Structural
+  design showed Semester 2 when it is Semester 1. The 2026-09-14 audit fixed `semesterOffered` but
+  KEPT the Y3S2 placement, documenting a "VERIFIED CONFLICT" because moving it would collide with
+  its prerequisite CIV2206. The official map puts CIV2206 at **Y2S1**, not Y3S1 — so there was
+  never a conflict. The entire documented tension was an artifact of inferred placement. The
+  exception has been deleted from the validator and the friend's original report is now fully
+  resolved.
+- CIV2206, CIV2263, CIV2282 Y3S1 -> Y2S1; CIV3285 Y4S1 -> Y3S1.
+- civil.json's `_meta` no longer claims placement is Claude's own suggested sequencing.
+
+**Professional Practice units unblocked for every specialisation.** ENG4801/4802/4803/4804 were
+tagged `discipline:"mechatronics"` purely because mechatronics.json is the file they were first
+written into — which hid them from Civil and Electrical students, who each need one to graduate.
+Retagged `discipline:"common"`, with the per-specialisation map slots documented on the units
+(Civil Y3S1, Mechatronics Y4S2, Electrical Y4S1 in E3001 / Y5S1 in E3005). They are `optional`,
+so quick start never auto-places one at the wrong slot. **This resolves the open item left when
+CIV4286 was removed** — the replacement no longer has to be added as a custom unit.
+
+**Verified:** validator clean (110 units, 5 files); all 63 units across the four audited files
+re-diffed against a fresh Handbook fetch including prohibitions and free-text rules — everything
+matches; quick start as Civil matches official map page 5 slot-for-slot, as Mechatronics matches
+page 10. (First run of that test showed Civil at the OLD slots — stale browser HTTP cache of
+data/civil.json, not a code bug; confirmed by diffing on-disk against in-memory, then re-run
+clean after a cache-bypassing reload. Worth remembering when testing data edits locally.)
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).
@@ -986,10 +1035,6 @@ reorders groups freely — a raw string diff reported 17 differences where only 
   (Eng+Science, also 5 years) has a different map that was never supplied, so with the Commerce
   toggle OFF the app falls back to the E3005 slots. Get the E3007 2025 map if that matters before
   the transfer goes through.
-- **Re-audit civil.json with the harvester.** The 2026-09-14 re-audit was done by reading pages;
-  the harvester reads the structured tree and derives offerings per campus. Civil has not been
-  through it, and it found real errors in electrical.json that page-reading missed. Also worth
-  re-checking whether CIV3294's "verified conflict" is genuine or another ECE3161 (data just wrong).
 - **Re-audit commerce.json against the CURRENT Handbook** — same treatment
   civil.json got on 2026-09-14. 5 known placement/offering contradictions are
   sitting in `PLACEMENT_EXCEPTIONS` as UNVERIFIED (see 2026-09-16 section); the

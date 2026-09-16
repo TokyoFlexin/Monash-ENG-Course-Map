@@ -111,10 +111,8 @@
       "prerequisiteText": "(ENG1013 Engineering smart systems OR ENG1012 Engineering design OR ENG1003 OR ENG1002) AND ENG1005 Engineering mathematics",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [
-        "ECE2031"
-      ],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook. Also a Part C core unit of the Robotics and Mechatronics specialisation (ROBMCTRN04) — shared, not duplicated.",
+      "prohibitions": [],
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook. Also a Part C core unit of the Robotics and Mechatronics specialisation (ROBMCTRN04) — shared, not duplicated. Prohibitions re-synced from the Handbook 2026-09-16: removed ECE2031 (not in the current Handbook).",
       "semesterOffered": "1",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE2131",
@@ -227,9 +225,9 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
-        "ECE3121"
+        "ECE3122"
       ],
-      "notes": "Catalogued as ECE3122 until 2026-09-16 — that code is now a 404 in the Handbook. The current code for Engineering electromagnetics is ECE3121, which is also what the official 2025 E3001 and E3005 progression maps list. Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting — you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) — no Semester 1 offering exists.",
+      "notes": "Catalogued as ECE3122 until 2026-09-16 — that code is now a 404 in the Handbook. The current code for Engineering electromagnetics is ECE3121, which is also what the official 2025 E3001 and E3005 progression maps list. Course map names the core unit as ECE3121; 2024 Handbook shows ECE3121 was Malaysia-only that year, with ECE3122 as the required Clayton substitute (mutually prohibiting — you take one or the other). Using ECE3122 for the Clayton path. Re-verify against the live Handbook closer to Year 4. Semester 2 offering only (Clayton) — no Semester 1 offering exists. Prohibitions re-synced from the Handbook 2026-09-16: added ECE3122; removed ECE3121 (not in the current Handbook); removed a self-prohibition introduced by the ECE3122->ECE3121 rename.",
       "semesterOffered": "2",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE3121",
@@ -272,9 +270,18 @@
       ],
       "corequisiteText": "Handbook enrolment rule, verbatim: \"COREQUISITE: Must be enrolled in either a single or double Bachelor's course in engineering. Clayton-based students must also be concurrently enrolled in ENG0001 alongside ENG4701.\" Free text, not a structured requisite - re-confirmed 2026-09-16.",
       "prohibitions": [
-        "ECE4094"
+        "CHE4164",
+        "CHE4180",
+        "CHE4181",
+        "CIV4210",
+        "ECE4094",
+        "FIT4003",
+        "FIT4701",
+        "MEC4401",
+        "MTE4525",
+        "TRC4000"
       ],
-      "notes": "Capstone project, part A of two. Not open to exchange/study abroad students.",
+      "notes": "Capstone project, part A of two. Not open to exchange/study abroad students. Prohibitions re-synced from the Handbook 2026-09-16: added CHE4164, CHE4180, CHE4181, CIV4210, FIT4003, FIT4701, MEC4401, MTE4525, TRC4000.",
       "semesterOffered": "both",
       "discipline": "common",
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG4701",
@@ -297,10 +304,8 @@
       "prerequisiteText": "Completion of 48 credit points in engineering study",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [
-        "ECE2041"
-      ],
-      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook.",
+      "prohibitions": [],
+      "notes": "Semester 1 offering only (Clayton) — no Semester 2 offering exists in the 2024 Handbook. Prohibitions re-synced from the Handbook 2026-09-16: removed ECE2041 (not in the current Handbook).",
       "semesterOffered": "1",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE3141",
@@ -349,9 +354,18 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
-        "ECE4095"
+        "CHE4165",
+        "CHE4180",
+        "CHE4182",
+        "CIV4211",
+        "ECE4095",
+        "FIT4003",
+        "FIT4702",
+        "MEC4402",
+        "MTE4526",
+        "TRC4001"
       ],
-      "notes": "Capstone project, part B of two. Not open to exchange/study abroad students.",
+      "notes": "Capstone project, part B of two. Not open to exchange/study abroad students. Prohibitions re-synced from the Handbook 2026-09-16: added CHE4165, CHE4180, CHE4182, CIV4211, FIT4003, FIT4702, MEC4402, MTE4526, TRC4001.",
       "semesterOffered": "both",
       "discipline": "common",
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG4702",
@@ -380,9 +394,10 @@
       "corequisiteText": "ECE3073 OR ECE3161 — ECE3073 listed as the representative code.",
       "prohibitions": [
         "ECE3091",
+        "ENG4105",
         "TRC4407"
       ],
-      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
+      "notes": "Not open to exchange/study abroad students. Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook. Prohibitions re-synced from the Handbook 2026-09-16: added ENG4105.",
       "semesterOffered": "2",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4191",
@@ -403,9 +418,11 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
-        "ECE3062"
+        "MAE3408",
+        "MEC3457",
+        "TRC3600"
       ],
-      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook.",
+      "notes": "Semester 2 offering only (Clayton) — no Semester 1 offering exists in the 2024 Handbook. Prohibitions re-synced from the Handbook 2026-09-16: added MAE3408, MEC3457, TRC3600; removed ECE3062 (not in the current Handbook).",
       "semesterOffered": "2",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4132",

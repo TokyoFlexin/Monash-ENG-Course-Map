@@ -3,7 +3,7 @@
     "specialisation": "Civil Engineering",
     "courseCode": "E3001",
     "areaOfStudyCode": "CIVILENG03",
-    "commencingYear": 2024,
+    "commencingYear": 2025,
     "campus": "Clayton",
     "requiresFile": "common-first-year.json",
     "sharedWithElectrical": [
@@ -22,7 +22,9 @@
       "Part D (Professional practice) requires ENG0001 at Clayton (ENG0002 at Malaysia) — already satisfied by electrical.json's ENG0001 entry (discipline:\"common\"), no new unit added here.",
       "Year/semester placement for all 14 Civil-specific units below is Claude's suggested sequencing (unit level + validated prerequisite/corequisite chains, cross-checked so nothing is placed before its real prerequisites and every placement matches its actual Handbook-verified offering semester), not an official Monash course-map fact — see sources note above for why the actual PDF couldn't be fetched this session.",
       "2026-09-14 re-audit findings (see PROGRESS.md for full detail): CIV3294 was wrongly marked 'both semesters'/Y3S2 — it's actually Semester 1 only, the exact bug Sahel's friend reported, now fixed (also required moving CIV2206 earlier to keep the prerequisite chain valid). CIV4249 (previously 'not offered') is now genuinely offered Semester 1 only. Several prohibition codes had gone stale as Monash retired old unit codes (CIV2241, CIV3264, CIV3222, CIV2226) and in three cases introduced new postgraduate-level equivalents (CIV5170, CIV5149, CIV5178) — all updated to match the current Handbook."
-    ]
+    ],
+    "placementSource": "Official Monash course progression map for 2025 commencing students, E3001 Bachelor of Engineering (Honours), page 5 (Civil engineering). Supplied by Sahel 2026-09-16. Every placement below is now taken from that map. This REPLACES the previous inferred sequencing — earlier versions of this file noted that the PDF was Cloudflare-blocked and that year/semester was Claude's own suggestion from unit levels and prerequisite chains. That caveat no longer applies.",
+    "professionalPractice": "Part C requires ONE Professional Practice domain unit at Year 3 Semester 1 per the official map. Those are ENG4801/4802/4803/4804, now in the catalog tagged discipline:'common' (they live in mechatronics.json). This resolves the open item left when CIV4286 was removed — the replacement no longer needs to be added as a custom unit."
   },
   "units": [
     {
@@ -33,11 +35,16 @@
       "semester": 2,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["ENG1011"],
+      "prerequisites": [
+        "ENG1011"
+      ],
       "prerequisiteText": "ENG1011 Engineering methods OR ENG1001 Engineering design: Lighter, faster, stronger",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV2225", "CIV3284"],
+      "prohibitions": [
+        "CIV2225",
+        "CIV3284"
+      ],
       "notes": "Semester 2 offering only (Clayton and Malaysia). Prohibited combination with CIV2225 (Design of steel and timber structures) and CIV3284 (Design of concrete and masonry structures) — older predecessor units this one appears to have absorbed/superseded.",
       "semesterOffered": "2"
     },
@@ -61,11 +68,13 @@
       "code": "CIV2206",
       "title": "Structural mechanics",
       "creditPoints": 6,
-      "year": 3,
+      "year": 2,
       "semester": 1,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["ENG1011"],
+      "prerequisites": [
+        "ENG1011"
+      ],
       "prerequisiteText": "ENG1011 Engineering methods OR ENG1001 Engineering design: Lighter, faster, stronger",
       "corequisites": [],
       "corequisiteText": "",
@@ -77,11 +86,15 @@
       "code": "CIV2263",
       "title": "Water systems",
       "creditPoints": 6,
-      "year": 3,
+      "year": 2,
       "semester": 1,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["ENG1014", "ENG1011", "ENG1005"],
+      "prerequisites": [
+        "ENG1014",
+        "ENG1011",
+        "ENG1005"
+      ],
       "prerequisiteText": "(ENG1014 Engineering numerical analysis OR ENG1060 Computing for engineers) AND (ENG1011 Engineering methods OR ENG1001 Engineering design: Lighter, faster, stronger) AND ENG1005 Engineering mathematics",
       "corequisites": [],
       "corequisiteText": "",
@@ -93,7 +106,7 @@
       "code": "CIV2282",
       "title": "Transport and traffic engineering",
       "creditPoints": 6,
-      "year": 3,
+      "year": 2,
       "semester": 1,
       "type": "specialisation",
       "discipline": "civil",
@@ -113,7 +126,10 @@
       "semester": 2,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV2235", "CIV2206"],
+      "prerequisites": [
+        "CIV2235",
+        "CIV2206"
+      ],
       "prerequisiteText": "(CIV2225 Design of steel and timber structures OR CIV2235 Structural materials) AND CIV2206 Structural mechanics",
       "corequisites": [],
       "corequisiteText": "",
@@ -129,9 +145,14 @@
       "semester": 2,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV2242", "CIV2206"],
+      "prerequisites": [
+        "CIV2242",
+        "CIV2206"
+      ],
       "prerequisiteText": "CIV2242 Geomechanics 1 AND CIV2206 Structural mechanics",
-      "corequisites": ["ENG2005"],
+      "corequisites": [
+        "ENG2005"
+      ],
       "corequisiteText": "ENG2005 Advanced engineering mathematics",
       "prohibitions": [],
       "notes": "Semester 2 offering only (Clayton and Malaysia).",
@@ -145,11 +166,16 @@
       "semester": 2,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV2282"],
+      "prerequisites": [
+        "CIV2282"
+      ],
       "prerequisiteText": "CIV2282 Transport and traffic engineering",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV4287", "CIV5177"],
+      "prohibitions": [
+        "CIV4287",
+        "CIV5177"
+      ],
       "notes": "Semester 2 offering only (Clayton and Malaysia). Prohibited combination with CIV4287 (same title — appears to be the Malaysia-specific code for identical content) and CIV5177 (Advanced road engineering, postgraduate level).",
       "semesterOffered": "2"
     },
@@ -158,14 +184,19 @@
       "title": "Structural design",
       "creditPoints": 6,
       "year": 3,
-      "semester": 2,
+      "semester": 1,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV2235", "CIV2206"],
+      "prerequisites": [
+        "CIV2235",
+        "CIV2206"
+      ],
       "prerequisiteText": "(CIV2225 Design of steel and timber structures OR CIV2235 Structural materials) AND CIV2206 Structural mechanics",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV3284"],
+      "prohibitions": [
+        "CIV3284"
+      ],
       "notes": "Sahel's Civil-engineering friend flagged this as wrong (2026-09-14), and he's right: confirmed against the live Handbook, this is Semester 1 offering only (Clayton and Malaysia), NOT both semesters as the 2024-sourced data claimed — semesterOffered corrected to \"1\". Kept at its Y3S2 canonical slot rather than moved, though, same treatment as ECE3161 in electrical.json: its own prerequisite CIV2206 is stuck at Y3S1 (the earliest slot that clears ENG1011's Y2S1 placement, see CIV2206's notes), so the only chronologically-clean S1 slot for this unit would be Y4S1 — which collides with CIV4280 needing this unit done first, also at Y4S1. Y3S2 preserves the whole downstream chain (CIV4280 Y4S1, CIV4212 Y4S2) correctly ordered; the tradeoff is this unit will now correctly show an off-semester flag at its own canonical placement, which is accurate — it genuinely doesn't fit a clean 4-year S1 slot given how late ENG1011 lands in this particular first-year pathway. Warn-not-block is exactly for surfacing this kind of real tension rather than hiding it.",
       "semesterOffered": "1"
     },
@@ -173,11 +204,14 @@
       "code": "CIV3285",
       "title": "Engineering hydrology",
       "creditPoints": 6,
-      "year": 4,
+      "year": 3,
       "semester": 1,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV2263", "ENG2005"],
+      "prerequisites": [
+        "CIV2263",
+        "ENG2005"
+      ],
       "prerequisiteText": "CIV2263 Water systems AND ENG2005 Advanced engineering mathematics",
       "corequisites": [],
       "corequisiteText": "",
@@ -193,11 +227,16 @@
       "semester": 1,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV3294", "CIV3221"],
+      "prerequisites": [
+        "CIV3294",
+        "CIV3221"
+      ],
       "prerequisiteText": "(CIV3284 Design of concrete and masonry structures OR CIV3294 Structural design) AND CIV3221 Building structures and technology",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV5170"],
+      "prohibitions": [
+        "CIV5170"
+      ],
       "notes": "Semester 1 offering only (Clayton and Malaysia) — no Semester 2 offering exists. 2026 re-audit: prohibition updated from CIV3222 (now retired/404) to CIV5170, the current postgraduate-level 'Bridge design and assessment' equivalent.",
       "semesterOffered": "1"
     },
@@ -209,7 +248,13 @@
       "semester": 2,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV2282", "CIV3221", "CIV3247", "CIV3294", "CIV3285"],
+      "prerequisites": [
+        "CIV2282",
+        "CIV3221",
+        "CIV3247",
+        "CIV3294",
+        "CIV3285"
+      ],
       "prerequisiteText": "No formal Requisites section — the rule lives as free text under Rules > Enrolment Rule. Civil engineering students: (CIV2282 OR CIV3283) AND CIV3221 AND (CIV3247 OR CIV3248) AND (CIV3294 Structural design OR CIV3284 Design of concrete and masonry structures OR CIV2226) AND (CIV3285 Engineering hydrology OR CIV3264). Environmental engineering students use an entirely different rule: (ENE3031 AND ENE3032) OR [ENE3606 AND (ENE2021 OR ENE3048) AND (CIV3285 OR CIV3264)] — not applicable to this Civil-only catalog.",
       "corequisites": [],
       "corequisiteText": "",
@@ -225,11 +270,15 @@
       "semester": 1,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV3247"],
+      "prerequisites": [
+        "CIV3247"
+      ],
       "prerequisiteText": "CIV3247 Geomechanics 2",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV5149"],
+      "prohibitions": [
+        "CIV5149"
+      ],
       "notes": "2026 re-audit: no longer \"not offered\" as the 2024 Handbook had it — now genuinely offered, Semester 1 only (Clayton and Malaysia), so semesterOffered corrected from \"unknown\" to \"1\" and moved from its old Y4S2 placeholder slot to Y4S1 to match. Also picked up a new prohibition, CIV5149 (the postgraduate-level equivalent), not present in the 2024 data since this unit didn't run that year.",
       "semesterOffered": "1"
     },
@@ -241,11 +290,16 @@
       "semester": 2,
       "type": "specialisation",
       "discipline": "civil",
-      "prerequisites": ["CIV2263", "CIV3285"],
+      "prerequisites": [
+        "CIV2263",
+        "CIV3285"
+      ],
       "prerequisiteText": "CIV2263 Water systems AND CIV3285 Engineering hydrology",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": ["CIV5178"],
+      "prohibitions": [
+        "CIV5178"
+      ],
       "notes": "Semester 2 offering only (Clayton and Malaysia) — no Semester 1 offering exists. 2026 re-audit: prohibition updated from CIV3264 (now retired/404) to CIV5178, the current postgraduate-level 'Advanced water treatment' equivalent.",
       "semesterOffered": "2"
     }

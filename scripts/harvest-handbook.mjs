@@ -98,10 +98,21 @@ function toGroups(container) {
   return childGroups;                                                  // AND: each stays its own group
 }
 
+// The Handbook's own type values are not uniform: prerequisites come through as "prerequisite"
+// but prohibitions come through as "prohibitions" (plural). Reading only the singular silently
+// yields null for EVERY prohibition, which looks identical to "this unit has none" — a false
+// clean bill of health. Normalise before bucketing.
+const REQUISITE_TYPE_ALIASES = {
+  prerequisites: 'prerequisite',
+  corequisites: 'corequisite',
+  prohibitions: 'prohibition',
+};
+
 function parseRequisites(requisites = []) {
   const byType = {};
   for (const req of requisites) {
-    const type = req.requisite_type?.value || 'unknown';
+    const rawType = req.requisite_type?.value || 'unknown';
+    const type = REQUISITE_TYPE_ALIASES[rawType] || rawType;
     const containers = req.container || [];
     const expr = containers.map(renderContainer).filter(Boolean).join(' AND ');
     const codes = containers.flatMap(c => collectCodes(c));

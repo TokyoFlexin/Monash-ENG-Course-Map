@@ -41,8 +41,11 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Map note: replacing MEC2402.",
+      "prohibitions": [
+        "MAE2412",
+        "MEC2402"
+      ],
+      "notes": "Map note: replacing MEC2402. Prohibitions re-synced from the Handbook 2026-09-16: added MAE2412, MEC2402.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2001",
       "verifiedOn": "2026-09-16",
@@ -62,8 +65,13 @@
       "prerequisiteText": "ENG1005",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Map note: replacing TRC2201. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course.",
+      "prohibitions": [
+        "MAE2406",
+        "MAE2505",
+        "MEC2401",
+        "TRC2201"
+      ],
+      "notes": "Map note: replacing TRC2201. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course. Prohibitions re-synced from the Handbook 2026-09-16: added MAE2406, MAE2505, MEC2401, TRC2201.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2004",
       "verifiedOn": "2026-09-16",
@@ -84,8 +92,10 @@
       "prerequisiteText": "ENG2005 AND (TRC2201 OR MEC2401 OR MMA2004) — one representative code per required group is listed; this is the full rule.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "",
+      "prohibitions": [
+        "MEC3453"
+      ],
+      "notes": "Prohibitions re-synced from the Handbook 2026-09-16: added MEC3453.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/TRC3200",
       "verifiedOn": "2026-09-16",
@@ -126,8 +136,12 @@
       "prerequisiteText": "ENG1005",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Map note: replacing TRC3600. Level-2 code, taken in Year 3 per the official map. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course.",
+      "prohibitions": [
+        "MAE3408",
+        "MEC3457",
+        "TRC3600"
+      ],
+      "notes": "Map note: replacing TRC3600. Level-2 code, taken in Year 3 per the official map. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course. Prohibitions re-synced from the Handbook 2026-09-16: added MAE3408, MEC3457, TRC3600.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2005",
       "verifiedOn": "2026-09-16",
@@ -148,8 +162,10 @@
       "prerequisiteText": "ENG2005 AND (ECE2071 OR ECE2191) — one representative code per required group is listed; this is the full rule.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Level-4 code, taken in Year 3 Semester 2 per the official map.",
+      "prohibitions": [
+        "ECE5179"
+      ],
+      "notes": "Level-4 code, taken in Year 3 Semester 2 per the official map. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5179.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4179",
       "verifiedOn": "2026-09-16"
@@ -168,8 +184,11 @@
       "prerequisiteText": "ENG1005",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Map note: replacing TRC4802. Level-2 code, taken in Year 3 per the official map. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course.",
+      "prohibitions": [
+        "CHE2161",
+        "CHE2164"
+      ],
+      "notes": "Map note: replacing TRC4802. Level-2 code, taken in Year 3 per the official map. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course. Prohibitions re-synced from the Handbook 2026-09-16: added CHE2161, CHE2164.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2003",
       "verifiedOn": "2026-09-16",
@@ -189,8 +208,10 @@
       "prerequisiteText": "MAE3408 OR MEC3457 OR TRC3600 OR MMA2005 — one representative code per required group is listed; this is the full rule.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "",
+      "prohibitions": [
+        "MEC4456"
+      ],
+      "notes": "Prohibitions re-synced from the Handbook 2026-09-16: added MEC4456.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/TRC4800",
       "verifiedOn": "2026-09-16",
@@ -211,8 +232,10 @@
       "prerequisiteText": "ENG1005 AND (ECE2071 OR ECE2191) — one representative code per required group is listed; this is the full rule.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "",
+      "prohibitions": [
+        "ECE5176"
+      ],
+      "notes": "Prohibitions re-synced from the Handbook 2026-09-16: added ECE5176.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4076",
       "verifiedOn": "2026-09-16"
@@ -229,8 +252,11 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Enrolment rule: PREREQUISITE Completion of 24 credit points of level 3 or 4 engineering units.",
+      "prohibitions": [
+        "ECE4191",
+        "MEC4407"
+      ],
+      "notes": "Enrolment rule: PREREQUISITE Completion of 24 credit points of level 3 or 4 engineering units. Prohibitions re-synced from the Handbook 2026-09-16: added ECE4191, MEC4407.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/TRC4407",
       "verifiedOn": "2026-09-16",
@@ -243,17 +269,33 @@
       "year": 4,
       "semester": 2,
       "type": "core",
-      "discipline": "mechatronics",
+      "discipline": "common",
       "prerequisites": [],
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part C Professional Practice: complete exactly ONE of ENG4801/4802/4803/4804, Year 4 Semester 2 per the official map. All four catalogued so you can choose. Enrolment rule: Prerequisite: Completion of 72 credit points of engineering study.",
+      "prohibitions": [
+        "CHE4161",
+        "CIV4286",
+        "ECE4099",
+        "ENG4802",
+        "ENG4803",
+        "ENG4804",
+        "MEC4404",
+        "MTE4201",
+        "TRC4002"
+      ],
+      "notes": "Part C Professional Practice: complete exactly ONE of ENG4801/4802/4803/4804, Year 4 Semester 2 per the official map. All four catalogued so you can choose. Enrolment rule: Prerequisite: Completion of 72 credit points of engineering study. Prohibitions re-synced from the Handbook 2026-09-16: added CHE4161, CIV4286, ECE4099, ENG4802, ENG4803, ENG4804, MEC4404, MTE4201, TRC4002. Official map slots differ by specialisation: Civil Year 3 Semester 1; Robotics and Mechatronics Year 4 Semester 2; Electrical Year 4 Semester 1 (E3001) or Year 5 Semester 1 (E3005). The default slot shown is the Mechatronics one. This unit is never auto-placed by quick start (you complete exactly ONE of the four), so drag it to your own map's slot.",
       "semesterOffered": "both",
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG4801",
       "verifiedOn": "2026-09-16",
-      "optional": true
+      "optional": true,
+      "placements": {
+        "E3005": {
+          "year": 5,
+          "semester": 1
+        }
+      }
     },
     {
       "code": "ENG4802",
@@ -262,17 +304,33 @@
       "year": 4,
       "semester": 2,
       "type": "core",
-      "discipline": "mechatronics",
+      "discipline": "common",
       "prerequisites": [],
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part C Professional Practice: complete exactly ONE of ENG4801/4802/4803/4804, Year 4 Semester 2 per the official map. All four catalogued so you can choose. Enrolment rule: Prerequisite: Currently enrolled in a Bachelor course at Monash. Completion of 72 credit points. If you are enrolled in a non-engineering course, you must obtain written approval from your faculty before enrolling in the unit. Additional requirement: You must be a current member of an Engineering or IT student team during the semester of enrolment. Enrollees who are not current members of one of these teams will be discontinued from the unit ahead of each semester intake.",
+      "prohibitions": [
+        "CHE4161",
+        "CIV4286",
+        "ECE4099",
+        "ENG4801",
+        "ENG4803",
+        "ENG4804",
+        "MEC4404",
+        "MTE4201",
+        "TRC4002"
+      ],
+      "notes": "Part C Professional Practice: complete exactly ONE of ENG4801/4802/4803/4804, Year 4 Semester 2 per the official map. All four catalogued so you can choose. Enrolment rule: Prerequisite: Currently enrolled in a Bachelor course at Monash. Completion of 72 credit points. If you are enrolled in a non-engineering course, you must obtain written approval from your faculty before enrolling in the unit. Additional requirement: You must be a current member of an Engineering or IT student team during the semester of enrolment. Enrollees who are not current members of one of these teams will be discontinued from the unit ahead of each semester intake. Prohibitions re-synced from the Handbook 2026-09-16: added CHE4161, CIV4286, ECE4099, ENG4801, ENG4803, ENG4804, MEC4404, MTE4201, TRC4002. Official map slots differ by specialisation: Civil Year 3 Semester 1; Robotics and Mechatronics Year 4 Semester 2; Electrical Year 4 Semester 1 (E3001) or Year 5 Semester 1 (E3005). The default slot shown is the Mechatronics one. This unit is never auto-placed by quick start (you complete exactly ONE of the four), so drag it to your own map's slot.",
       "semesterOffered": "both",
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG4802",
       "verifiedOn": "2026-09-16",
-      "optional": true
+      "optional": true,
+      "placements": {
+        "E3005": {
+          "year": 5,
+          "semester": 1
+        }
+      }
     },
     {
       "code": "ENG4803",
@@ -281,17 +339,33 @@
       "year": 4,
       "semester": 2,
       "type": "core",
-      "discipline": "mechatronics",
+      "discipline": "common",
       "prerequisites": [],
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part C Professional Practice: complete exactly ONE of ENG4801/4802/4803/4804, Year 4 Semester 2 per the official map. All four catalogued so you can choose. Enrolment rule: Prerequisite: Completion of 72 credit points of engineering studies. Additional requirement: You must apply through the Industry Experience application process . Recommendation: Completion of the Engineering Employability Skills Program is highly recommended prior to enrolling in this unit.",
+      "prohibitions": [
+        "CHE4161",
+        "CIV4286",
+        "ECE4099",
+        "ENG4801",
+        "ENG4802",
+        "ENG4804",
+        "MEC4404",
+        "MTE4201",
+        "TRC4002"
+      ],
+      "notes": "Part C Professional Practice: complete exactly ONE of ENG4801/4802/4803/4804, Year 4 Semester 2 per the official map. All four catalogued so you can choose. Enrolment rule: Prerequisite: Completion of 72 credit points of engineering studies. Additional requirement: You must apply through the Industry Experience application process . Recommendation: Completion of the Engineering Employability Skills Program is highly recommended prior to enrolling in this unit. Prohibitions re-synced from the Handbook 2026-09-16: added CHE4161, CIV4286, ECE4099, ENG4801, ENG4802, ENG4804, MEC4404, MTE4201, TRC4002. Official map slots differ by specialisation: Civil Year 3 Semester 1; Robotics and Mechatronics Year 4 Semester 2; Electrical Year 4 Semester 1 (E3001) or Year 5 Semester 1 (E3005). The default slot shown is the Mechatronics one. This unit is never auto-placed by quick start (you complete exactly ONE of the four), so drag it to your own map's slot.",
       "semesterOffered": "both",
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG4803",
       "verifiedOn": "2026-09-16",
-      "optional": true
+      "optional": true,
+      "placements": {
+        "E3005": {
+          "year": 5,
+          "semester": 1
+        }
+      }
     },
     {
       "code": "ENG4804",
@@ -300,17 +374,33 @@
       "year": 4,
       "semester": 2,
       "type": "core",
-      "discipline": "mechatronics",
+      "discipline": "common",
       "prerequisites": [],
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part C Professional Practice: complete exactly ONE of ENG4801/4802/4803/4804, Year 4 Semester 2 per the official map. All four catalogued so you can choose. Enrolment rule: Prerequisite: Completion of 72 credit points of engineering studies. For more details about registering your paid internship, please visit the Professional Practice page of the Engineering Co-Operative Education Program website. Both self-sourced and Monash-sourced internships are accepted. You do not need to be a part of the Co-op Program to be enrolled in this unit.",
+      "prohibitions": [
+        "CHE4161",
+        "CIV4286",
+        "ECE4099",
+        "ENG4801",
+        "ENG4802",
+        "ENG4803",
+        "MEC4404",
+        "MTE4201",
+        "TRC4002"
+      ],
+      "notes": "Part C Professional Practice: complete exactly ONE of ENG4801/4802/4803/4804, Year 4 Semester 2 per the official map. All four catalogued so you can choose. Enrolment rule: Prerequisite: Completion of 72 credit points of engineering studies. For more details about registering your paid internship, please visit the Professional Practice page of the Engineering Co-Operative Education Program website. Both self-sourced and Monash-sourced internships are accepted. You do not need to be a part of the Co-op Program to be enrolled in this unit. Prohibitions re-synced from the Handbook 2026-09-16: added CHE4161, CIV4286, ECE4099, ENG4801, ENG4802, ENG4803, MEC4404, MTE4201, TRC4002. Official map slots differ by specialisation: Civil Year 3 Semester 1; Robotics and Mechatronics Year 4 Semester 2; Electrical Year 4 Semester 1 (E3001) or Year 5 Semester 1 (E3005). The default slot shown is the Mechatronics one. This unit is never auto-placed by quick start (you complete exactly ONE of the four), so drag it to your own map's slot.",
       "semesterOffered": "both",
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG4804",
       "verifiedOn": "2026-09-16",
-      "optional": true
+      "optional": true,
+      "placements": {
+        "E3005": {
+          "year": 5,
+          "semester": 1
+        }
+      }
     },
     {
       "code": "MMA2002",
@@ -326,8 +416,12 @@
       "prerequisiteText": "ENG1001 OR ENG1011 — one representative code per required group is listed; this is the full rule.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course.",
+      "prohibitions": [
+        "MAE2401",
+        "MEC2403",
+        "MEC3601"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course. Prohibitions re-synced from the Handbook 2026-09-16: added MAE2401, MEC2403, MEC3601.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2002",
       "verifiedOn": "2026-09-16",
@@ -349,8 +443,10 @@
         "ECE3141"
       ],
       "corequisiteText": "ECE3141",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
+      "prohibitions": [
+        "ECE4042"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE4042.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE3142",
       "verifiedOn": "2026-09-16"
@@ -370,8 +466,11 @@
       "prerequisiteText": "ENG2005 AND (ENG1014 OR ENG1060) — one representative code per required group is listed; this is the full rule.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
+      "prohibitions": [
+        "MAE3456",
+        "MEC3456"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added MAE3456, MEC3456.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA3001",
       "verifiedOn": "2026-09-16",
@@ -392,8 +491,10 @@
       "prerequisiteText": "(MMA2003 OR MEC2404 OR TRC4802 OR MAE2404 OR CHE2161 OR CIV2263) AND (MEC3456 OR MMA3001 OR ECE3093) — one representative code per required group is listed; this is the full rule.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
+      "prohibitions": [
+        "MEC4447"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added MEC4447.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA3101",
       "verifiedOn": "2026-09-16",
@@ -413,8 +514,10 @@
       "prerequisiteText": "ECE2131",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
+      "prohibitions": [
+        "ECE5155"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5155.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4055",
       "verifiedOn": "2026-09-16"
@@ -470,8 +573,10 @@
       "prerequisiteText": "ECE2131 AND ECE3051",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
+      "prohibitions": [
+        "ECE5153"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5153.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4053",
       "verifiedOn": "2026-09-16"
@@ -490,8 +595,10 @@
       "prerequisiteText": "ECE2071 OR ECE2191 — one representative code per required group is listed; this is the full rule.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: If you are currently enrolled in E6013 Master of Applied Engineering , you are exempt from the prerequisite requirement.",
+      "prohibitions": [
+        "ECE5178"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: If you are currently enrolled in E6013 Master of Applied Engineering , you are exempt from the prerequisite requirement. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5178.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4078",
       "verifiedOn": "2026-09-16"
@@ -530,8 +637,10 @@
       "prerequisiteText": "ECE2131",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
+      "prohibitions": [
+        "ECE5886"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Prohibitions re-synced from the Handbook 2026-09-16: added ECE5886.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE4886",
       "verifiedOn": "2026-09-16"
@@ -548,8 +657,10 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: You must be currently enrolled in a master’s course in engineering or related STEM and in a related discipline. The unit assumes you have the necessary foundational knowledge equivalent to ECE4042",
+      "prohibitions": [
+        "ECE4024"
+      ],
+      "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: You must be currently enrolled in a master’s course in engineering or related STEM and in a related discipline. The unit assumes you have the necessary foundational knowledge equivalent to ECE4042 Prohibitions re-synced from the Handbook 2026-09-16: added ECE4024.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE5884",
       "verifiedOn": "2026-09-16"
