@@ -98,6 +98,23 @@ function toGroups(container) {
   return childGroups;                                                  // AND: each stays its own group
 }
 
+// KNOWN LIMITATION, made explicit rather than left silent. toGroups flattens an OR whose branches
+// are themselves ANDs into a single alternatives list, which loses the conjunction. FIT2094's real
+// rule is "(FIT1045 or FIT1048 or FIT1051 or FIT1053) OR (ENG1013 AND ENG1014)" — the flat group
+// wrongly implies ENG1013 alone would satisfy it. The `expression` string is always faithful; this
+// flag marks the units where the flat `groups` array is NOT, so a human checks the expression.
+function hasNestedAnd(container) {
+  const connector = (container.parent_connector?.value || 'AND').toUpperCase();
+  if (connector === 'OR') {
+    for (const sub of container.containers || []) {
+      const subConn = (sub.parent_connector?.value || 'AND').toUpperCase();
+      const kids = (sub.relationships || []).length + (sub.containers || []).length;
+      if (subConn === 'AND' && kids > 1) return true;
+    }
+  }
+  return (container.containers || []).some(hasNestedAnd);
+}
+
 // The Handbook's own type values are not uniform: prerequisites come through as "prerequisite"
 // but prohibitions come through as "prohibitions" (plural). Reading only the singular silently
 // yields null for EVERY prohibition, which looks identical to "this unit has none" — a false
@@ -118,11 +135,12 @@ function parseRequisites(requisites = []) {
     const codes = containers.flatMap(c => collectCodes(c));
     const groups = containers.flatMap(c => toGroups(c));
     const anyOr = containers.some(hasOr);
-    const bucket = (byType[type] ||= { expression: [], codes: [], groups: [], hasOrLogic: false, description: [] });
+    const bucket = (byType[type] ||= { expression: [], codes: [], groups: [], hasOrLogic: false, groupsAreLossy: false, description: [] });
     if (expr) bucket.expression.push(expr);
     bucket.codes.push(...codes);
     bucket.groups.push(...groups);
     bucket.hasOrLogic = bucket.hasOrLogic || anyOr;
+    bucket.groupsAreLossy = bucket.groupsAreLossy || containers.some(hasNestedAnd);
     if (req.description) bucket.description.push(String(req.description).replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim());
   }
   for (const t of Object.keys(byType)) {

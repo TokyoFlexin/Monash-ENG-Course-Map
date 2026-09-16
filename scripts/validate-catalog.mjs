@@ -27,15 +27,6 @@ const KNOWN_EXTERNAL_GAPS = new Set([
 // not listed here is treated as a data bug, because that's exactly the class of error a real user
 // caught in the Civil data ("Structural design shows Semester 2, it's actually Semester 1").
 const PLACEMENT_EXCEPTIONS = new Map([
-  // The five below are NOT verified conflicts — they are 2024-vintage suggested placements for
-  // elective units whose own notes already say "Semester 2 only". Queued for a current-Handbook
-  // re-audit of commerce.json (same treatment civil.json got on 2026-09-14). Listed here so the
-  // validator reports them loudly every run instead of them sitting silently wrong.
-  ['ETC2520', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
-  ['ETC2420', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
-  ['ETC3400', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
-  ['ETC3450', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
-  ['FIT3179', 'UNVERIFIED — suggested elective placement contradicts its own semesterOffered. Queued for commerce.json current-Handbook re-audit.'],
 ]);
 
 const VALID_TYPES = new Set(['core', 'specialisation', 'elective', 'commerce', 'breadth']);

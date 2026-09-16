@@ -2,7 +2,7 @@
   "_meta": {
     "specialisation": "Commerce component of E3005 (double degree with Bachelor of Engineering Honours, Electrical and Computer Systems Engineering specialisation)",
     "courseCode": "E3005",
-    "commencingYear": 2024,
+    "commencingYear": 2025,
     "campus": "Clayton",
     "requiresFile": "common-first-year.json",
     "sources": [
@@ -10,24 +10,28 @@
       "https://handbook.monash.edu/2024/courses/B2001 (Bachelor of Commerce Part A/B/C structure)",
       "https://www.monash.edu/__data/assets/pdf_file/0020/3303641/2024-map-E3005.pdf (course progression map, Electrical and Computer Systems Engineering specialisation, 2024 commencing, updated 14 Oct 2025)",
       "https://handbook.monash.edu/2024/units/{CODE} (prerequisite/corequisite/prohibition rules, 2024 Handbook)",
-      "https://handbook.monash.edu/2024/aos/{MAJOR_CODE} (major requirements \u2014 FINANCE07, ECONOMIC07, BUSANLMJ01, ECONOMTR05)"
+      "https://handbook.monash.edu/2024/aos/{MAJOR_CODE} (major requirements — FINANCE07, ECONOMIC07, BUSANLMJ01, ECONOMTR05)"
     ],
     "openDecisions": [
-      "Sahel hasn't decided a major yet (still applying to the double degree) \u2014 shortlisted 4: Finance, Economics, Business Analytics, Econometrics. All 4 are researched and added below as explorable options so he can compare progress; he'll only actually complete ONE of these 48cp blocks.",
-      "Each `unit` now carries a `major` field: \"core\" (Part A, everyone), \"finance\", \"economics\", \"business-analytics\", or \"econometrics\" \u2014 used to group the sidebar into per-major sections. A handful of units are required/optional in more than one major (see their `notes`) but only carry ONE `major` tag here (their strongest/first-researched role) to keep sidebar grouping simple.",
-      "Per major, only CORE (mandatory) units and small/closed elective pools (roughly \u226412 options) are listed as real catalog entries. Economics' own elective pool ('Economics units offered at Clayton', 24cp from ~30+ units across 6 overlapping themes) is NOT enumerated \u2014 it's too large and open-ended to usefully list as catalog cards. Add specific Economics electives as custom units once actually chosen.",
-      "year/semester for every Part B (major) unit below is Claude's suggested placement, not an authoritative Handbook sequence \u2014 Monash doesn't mandate a specific semester for major electives, only a level-1/2/3 credit-point mix. Placement follows this reasoning: Level 1/2 major units \u2192 Year 3 (matches the E3005 map's un-suffixed 'Commerce listed major unit 1/2/3' slots); Level 3 units \u2192 Year 4 or Year 5 ('3rd year level' slots on the map), ordered to respect real prerequisite chains found during research. Treat these as a reasonable starting sequence to edit, not fact.",
+      "Sahel hasn't decided a major yet (still applying to the double degree) — shortlisted 4: Finance, Economics, Business Analytics, Econometrics. All 4 are researched and added below as explorable options so he can compare progress; he'll only actually complete ONE of these 48cp blocks.",
+      "Each `unit` now carries a `major` field: \"core\" (Part A, everyone), \"finance\", \"economics\", \"business-analytics\", or \"econometrics\" — used to group the sidebar into per-major sections. A handful of units are required/optional in more than one major (see their `notes`) but only carry ONE `major` tag here (their strongest/first-researched role) to keep sidebar grouping simple.",
+      "Per major, only CORE (mandatory) units and small/closed elective pools (roughly ≤12 options) are listed as real catalog entries. Economics' own elective pool ('Economics units offered at Clayton', 24cp from ~30+ units across 6 overlapping themes) is NOT enumerated — it's too large and open-ended to usefully list as catalog cards. Add specific Economics electives as custom units once actually chosen.",
+      "year/semester for every Part B (major) unit below is Claude's suggested placement, not an authoritative Handbook sequence — Monash doesn't mandate a specific semester for major electives, only a level-1/2/3 credit-point mix. Placement follows this reasoning: Level 1/2 major units → Year 3 (matches the E3005 map's un-suffixed 'Commerce listed major unit 1/2/3' slots); Level 3 units → Year 4 or Year 5 ('3rd year level' slots on the map), ordered to respect real prerequisite chains found during research. Treat these as a reasonable starting sequence to edit, not fact.",
       "Real prerequisite chains exist WITHIN majors that aren't obvious from unit titles: Finance's BFC2751/BFC3241 (and several electives) need BFC2140 (Corporate finance) first; several Finance electives need BOTH BFC2140 AND BFC2751; Economics' ECC2010 needs BOTH ECC1000 AND ECC1100; all four Econometrics 'Level 3' units need ETC2410 first; Business Analytics' ETC3250 needs ETC2420, and ETC3555/FIT3003 go a level deeper still.",
       "Cross-major overlaps found: ETC2410 is Finance-major CORE but also a Business Analytics elective option and effectively feeds the whole Econometrics major. ECC2000/ECC2010 are Economics-major core but also count as Econometrics elective options. ETC2420/ETC3250 are Business Analytics core but also Econometrics elective options. ETC3460 is a Finance elective AND one of the Econometrics 'choose 3 of 4' Level-3 units. These are each entered ONCE (see the `major` field note above) with both roles documented in `notes`.",
-      "FIT2094 and FIT3171 (both 'Databases', a Business Analytics elective option) are a REAL prohibition pair \u2014 same content at Level 2 vs Level 3, only one may be counted. First genuine prohibition-conflict pair in the catalog data itself (previously only tested with synthetic custom units).",
-      "FIT3171 and FIT3179 (both Business Analytics electives) list ENG1003/ENG1013/ENG1014 as valid alternative prerequisites \u2014 units this student already has from the Electrical catalog \u2014 so those two may already be unlocked without needing FIT1045 first.",
-      "Gap found: FIT3154 (Business Analytics elective 'Advanced data analysis') requires FIT2086 'Modelling for data analysis', which isn't offered anywhere in this catalog or major list. It'll show a permanent 'prerequisite isn't in your plan' flag unless FIT2086 is added as a custom unit \u2014 flagging here rather than silently omitting FIT3154, since it's still a real elective option.",
+      "FIT2094 and FIT3171 (both 'Databases', a Business Analytics elective option) are a REAL prohibition pair — same content at Level 2 vs Level 3, only one may be counted. First genuine prohibition-conflict pair in the catalog data itself (previously only tested with synthetic custom units).",
+      "FIT3171 and FIT3179 (both Business Analytics electives) list ENG1003/ENG1013/ENG1014 as valid alternative prerequisites — units this student already has from the Electrical catalog — so those two may already be unlocked without needing FIT1045 first.",
+      "Gap found: FIT3154 (Business Analytics elective 'Advanced data analysis') requires FIT2086 'Modelling for data analysis', which isn't offered anywhere in this catalog or major list. It'll show a permanent 'prerequisite isn't in your plan' flag unless FIT2086 is added as a custom unit — flagging here rather than silently omitting FIT3154, since it's still a real elective option.",
       "Some Finance elective units are NOT standard Clayton semester units even though the Handbook lists them under the major: BFX3301 (Treasury and financial markets) is Caulfield-only, taught in a quota-limited trading-simulation lab; BFX3871 (International study program in banking and finance) is an overseas summer immersion block with its own extra costs; BEX3726 (a Business Analytics elective) is a similar Term-1 immersion block requiring 72cp completed first. Left in the catalog since they're real options, but flagged in their notes.",
-      "Part A also includes an 'Additional commerce unit' (6 CP, flexible/FREE-eligible) and one 'Capstone, consulting project, international experience or internship unit' (6 CP, chosen from ~30 options, sits in Year 4 Semester 2 on the ECE course map) \u2014 neither has a fixed code, so neither is listed as a catalog unit here. Add whichever specific unit is chosen as a custom unit closer to the time.",
-      "ACC1100 vs ACC1001: only one counts toward the 36 CP Part A core. ACC1100 is required if majoring in Accounting or Actuarial Studies; otherwise either satisfies the requirement. Both listed as separate catalog entries \u2014 add whichever one applies, not both.",
+      "Part A also includes an 'Additional commerce unit' (6 CP, flexible/FREE-eligible) and one 'Capstone, consulting project, international experience or internship unit' (6 CP, chosen from ~30 options, sits in Year 4 Semester 2 on the ECE course map) — neither has a fixed code, so neither is listed as a catalog unit here. Add whichever specific unit is chosen as a custom unit closer to the time.",
+      "ACC1100 vs ACC1001: only one counts toward the 36 CP Part A core. ACC1100 is required if majoring in Accounting or Actuarial Studies; otherwise either satisfies the requirement. Both listed as separate catalog entries — add whichever one applies, not both.",
       "ECC1000 vs ECX2953: only one counts. ECX2953 is restricted to students completing an Accounting major in a double degree (E3005 is on its approved-course list) and is required for professional accounting accreditation; ECC1000 is the standard choice for every other major. Both listed as separate catalog entries.",
       "The E3005 double-degree course map places several ECE core units in different semesters than the E3007 single-degree map already in electrical.json (e.g. ECE2191 and ECE4132 move from Year 2/5 to Year 3 Semester 2; ECE3141 moves from Year 5 to Year 4 Semester 1; an extra 'Level 4/5 ECE-coded core elective' slot appears in Year 4 Semester 1). electrical.json was NOT changed to match, since Sahel's transfer to the double degree isn't confirmed yet and the current single-degree placements are what's actually enrolled. If the transfer is confirmed, electrical.json's year/semester fields should be updated to the E3005 sequence."
-    ]
+    ],
+    "provenance": "per-unit",
+    "placementSource": "Part A core units (ACC1100/ACC1001, ECC1000/ECX2953, ETC1000, MKC1200, MGC1010, BTC1110) are placed from the official Monash 2025 E3005 progression map, page 5. Part B major units are SUGGESTED placements: the map only says \"Commerce listed major unit 1..8\" across Y3S1-Y5S1, so each unit's SEMESTER here is its real Clayton offering but which major slot it fills is the student's choice.",
+    "vintagePolicy": "Unit facts track the CURRENT Handbook (requisites apply from the year you enrol in the unit); course structure tracks the 2025 commencing year. Re-check with: node scripts/check-vintage-drift.mjs --from 2025 --codes-from data/commerce.json",
+    "requisiteNote": "Requisites are conjunctive GROUPS: prerequisiteText carries the full Handbook expression and the prerequisites array lists ONE representative per required group. Two units in the whole catalog (FIT2094 here, ENG1013 in common-first-year.json) have a rule shaped OR-of-AND, which a flat array cannot represent - both carry an explicit RULE LOGIC NOTE. The harvester flags these with groupsAreLossy so they cannot pass unnoticed again."
   },
   "units": [
     {
@@ -42,10 +46,18 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Choose one of ACC1100/ACC1001 \u2014 only one counts toward the 36cp Part A core. Required (not ACC1001) if majoring in Accounting or Actuarial Studies.",
+      "prohibitions": [
+        "ACB1120",
+        "ACF1100",
+        "ACI1001",
+        "ACW1120",
+        "ACX1100"
+      ],
+      "notes": "Choose one of ACC1100/ACC1001 — only one counts toward the 36cp Part A core. Required (not ACC1001) if majoring in Accounting or Actuarial Studies.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ACC1100",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ACC1001",
@@ -59,10 +71,23 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Choose one of ACC1100/ACC1001 \u2014 only one counts toward the 36cp Part A core. Not valid if majoring in Accounting or Actuarial Studies (use ACC1100 instead).",
+      "prohibitions": [
+        "ACB1020",
+        "ACB1120",
+        "ACC1100",
+        "ACF1001",
+        "ACF1100",
+        "ACI1001",
+        "ACW1020",
+        "ACW1120",
+        "ACX1001",
+        "ACX1100"
+      ],
+      "notes": "Choose one of ACC1100/ACC1001 — only one counts toward the 36cp Part A core. Not valid if majoring in Accounting or Actuarial Studies (use ACC1100 instead).",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ACC1001",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECC1000",
@@ -76,10 +101,17 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Choose one of ECC1000/ECX2953 \u2014 only one counts toward the 36cp Part A core. Use this one unless majoring in Accounting. Also a real prerequisite for the Economics major core (ECC2000) and several Business Analytics/Econometrics units accept it as an intro-stats-adjacent alternative.",
+      "prohibitions": [
+        "ECB1101",
+        "ECF1100",
+        "ECI1100",
+        "ECW1101"
+      ],
+      "notes": "Choose one of ECC1000/ECX2953 — only one counts toward the 36cp Part A core. Use this one unless majoring in Accounting. Also a real prerequisite for the Economics major core (ECC2000) and several Business Analytics/Econometrics units accept it as an intro-stats-adjacent alternative.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECC1000",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECX2953",
@@ -93,10 +125,25 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
+      "prohibitions": [
+        "ECB1101",
+        "ECB1102",
+        "ECC1000",
+        "ECC1100",
+        "ECC5953",
+        "ECF1100",
+        "ECF1200",
+        "ECF5953",
+        "ECF5954",
+        "ECW1101",
+        "ECW1102",
+        "ECX1200"
+      ],
       "notes": "Choose one of ECC1000/ECX2953. Restricted enrolment: only students in specific double-degree courses (E3005 included) completing an Accounting major, for professional accreditation.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECX2953",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC1000",
@@ -110,10 +157,21 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Part A core. Also the standard prerequisite behind ETC1010, ETC2420, ETC2410, ETC2440, ETC2520 and other Business Analytics/Econometrics units below \u2014 most of them accept ETC1000 as their 'intro statistics' requirement.",
+      "prohibitions": [
+        "ETB1100",
+        "ETF1100",
+        "ETI1100",
+        "ETW1001",
+        "ETX1100",
+        "FIT1006",
+        "SCI1020",
+        "STA1010"
+      ],
+      "notes": "Part A core. Also the standard prerequisite behind ETC1010, ETC2420, ETC2410, ETC2440, ETC2520 and other Business Analytics/Econometrics units below — most of them accept ETC1000 as their 'intro statistics' requirement.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC1000",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "MKC1200",
@@ -127,10 +185,17 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
+      "prohibitions": [
+        "MKB1700",
+        "MKF1120",
+        "MKI1120",
+        "MKW1120"
+      ],
       "notes": "",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/MKC1200",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "MGC1010",
@@ -144,10 +209,18 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
+      "prohibitions": [
+        "MGB1010",
+        "MGF1010",
+        "MGI1010",
+        "MGW1010",
+        "MGX1010"
+      ],
       "notes": "",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/MGC1010",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BTC1110",
@@ -161,10 +234,19 @@
       "prerequisiteText": "",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
+      "prohibitions": [
+        "BTB1010",
+        "BTF1010",
+        "BTI1010",
+        "BTW1042",
+        "BTX1010",
+        "LAW2102"
+      ],
       "notes": "",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BTC1110",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC2140",
@@ -177,7 +259,7 @@
       "prerequisites": [
         "ECC1000"
       ],
-      "prerequisiteText": "One of ECB1101/ECC1000/ECF1100/ECW1101 (Introductory microeconomics, campus variants) or ECX2953 (Economics) \u2014 ECC1000 is the Clayton on-campus version already in Part A.",
+      "prerequisiteText": "One of ECB1101/ECC1000/ECF1100/ECW1101 (Introductory microeconomics, campus variants) or ECX2953 (Economics) — ECC1000 is the Clayton on-campus version already in Part A.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
@@ -188,7 +270,10 @@
       ],
       "notes": "Finance major core unit. Prohibitions are the same unit offered at other campuses (Berwick/Federation/Warwick/Malaysia), not real conflicts for this student. Offered S1 and S2 at Clayton, flexible.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC2140",
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook also accepted ECA1100 as a prerequisite alternative; dropped from 2026."
     },
     {
       "code": "BFC2751",
@@ -210,7 +295,9 @@
       ],
       "notes": "Finance major core unit. Real prerequisite chain: needs BFC2140 first. Offered S1 and S2 at Clayton, flexible.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC2751",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC3241",
@@ -229,7 +316,9 @@
       "prohibitions": [],
       "notes": "Finance major core unit. Needs BFC2140 first. Offered S1 and S2 at Clayton, flexible.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC3241",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC3999",
@@ -240,16 +329,18 @@
       "type": "commerce",
       "major": "finance",
       "prerequisites": [],
-      "prerequisiteText": "No unit-level prerequisite \u2014 an enrolment rule instead requires 96 credit points of study completed before enrolling.",
+      "prerequisiteText": "No unit-level prerequisite — an enrolment rule instead requires 96 credit points of study completed before enrolling.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
-        "BFX3999",
-        "BFF3999"
+        "BFF3999",
+        "BFX3999"
       ],
-      "notes": "Finance major core unit \u2014 the CAPSTONE of the major/Bachelor of Finance; the Handbook says it should be completed as a final unit within the major, hence the late placement. Requires 96cp completed. On-campus only (not flexible), S1 and S2 at Clayton.",
+      "notes": "Finance major core unit — the CAPSTONE of the major/Bachelor of Finance; the Handbook says it should be completed as a final unit within the major, hence the late placement. Requires 96cp completed. On-campus only (not flexible), S1 and S2 at Clayton.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC3999",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC2410",
@@ -262,17 +353,20 @@
       "prerequisites": [
         "ETC1000"
       ],
-      "prerequisiteText": "One of STA1010/ETX1100/ETB1100/ETC1000/ETF1100 (Business statistics, campus variants) or ETW1001/FIT1006/SCI1020 \u2014 ETC1000 is the Clayton on-campus version already in Part A.",
+      "prerequisiteText": "One of STA1010/ETX1100/ETB1100/ETC1000/ETF1100 (Business statistics, campus variants) or ETW1001/FIT1006/SCI1020 — ETC1000 is the Clayton on-campus version already in Part A.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
         "ETC3440",
         "ETF2100",
-        "ETW2510"
+        "ETW2510",
+        "ETX2100"
       ],
       "notes": "Finance major core unit. ALSO a Business Analytics elective option (choose 5 of 12) and effectively the gateway unit for the whole Econometrics major's Level-3 units. On-campus only, S1 and S2 at Clayton.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC2410",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ACX3150",
@@ -285,13 +379,15 @@
       "prerequisites": [
         "ACC1100"
       ],
-      "prerequisiteText": "One of ACB1020/ACC1001/ACF1001/ACX1001/ACB1120/ACC1100/ACF1100/ACX1100 (an intro accounting unit \u2014 ACC1100/ACC1001 already in Part A) PLUS 72 credit points completed.",
+      "prerequisiteText": "One of ACB1020/ACC1001/ACF1001/ACX1001/ACB1120/ACC1100/ACF1100/ACX1100 (an intro accounting unit — ACC1100/ACC1001 already in Part A) PLUS 72 credit points completed.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Finance major elective \u2014 choose 3 of 12. Needs an intro accounting unit (have it from Part A) plus 72cp completed. Offered S1 Clayton (flexible); S2 offering is at Caulfield, not Clayton.",
-      "semesterOffered": "both",
-      "discipline": "commerce"
+      "notes": "Finance major elective — choose 3 of 12. Needs an intro accounting unit (have it from Part A) plus 72cp completed. Offered S1 Clayton (flexible); S2 offering is at Caulfield, not Clayton.",
+      "semesterOffered": "1",
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ACX3150",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC3140",
@@ -308,10 +404,14 @@
       "prerequisiteText": "(BFC2751 Derivatives, or campus-equivalent) AND (BFC2140 Corporate finance, or campus-equivalent).",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Finance major elective \u2014 choose 3 of 12. Real two-unit prerequisite chain: needs both Corporate finance AND Derivatives first. Offered S1 and S2 at Clayton, flexible.",
+      "prohibitions": [
+        "BFF3140"
+      ],
+      "notes": "Finance major elective — choose 3 of 12. Real two-unit prerequisite chain: needs both Corporate finance AND Derivatives first. Offered S1 and S2 at Clayton, flexible.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC3140",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC3170",
@@ -331,9 +431,11 @@
         "BFF2401",
         "BFW2401"
       ],
-      "notes": "Finance major elective \u2014 choose 3 of 12. Needs BFC2140 first. Also unlocks BFX3301 (Treasury and financial markets) below. Semester 1 only at Clayton \u2014 no S2 Clayton offering found.",
+      "notes": "Finance major elective — choose 3 of 12. Needs BFC2140 first. Also unlocks BFX3301 (Treasury and financial markets) below. Semester 1 only at Clayton — no S2 Clayton offering found.",
       "semesterOffered": "1",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC3170",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC3240",
@@ -350,10 +452,14 @@
       "prerequisiteText": "(BFC2140 Corporate finance) AND (BFC2751 Derivatives), or campus-equivalents.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Finance major elective \u2014 choose 3 of 12. Real two-unit prerequisite chain. Offered S1 and S2 at Clayton, flexible.",
+      "prohibitions": [
+        "BFF3231"
+      ],
+      "notes": "Finance major elective — choose 3 of 12. Real two-unit prerequisite chain. Offered S1 and S2 at Clayton, flexible.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC3240",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC3340",
@@ -370,9 +476,11 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Finance major elective \u2014 choose 3 of 12. Needs BFC2751 first. Offered S1 and S2 at Clayton, flexible.",
+      "notes": "Finance major elective — choose 3 of 12. Needs BFC2751 first. Offered S1 and S2 at Clayton, flexible.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC3340",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC3341",
@@ -390,9 +498,11 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Finance major elective \u2014 choose 3 of 12. Real two-unit prerequisite chain. Offered S1 and S2 at Clayton, flexible.",
-      "semesterOffered": "both",
-      "discipline": "commerce"
+      "notes": "Finance major elective — choose 3 of 12. Real two-unit prerequisite chain. Offered S1 and S2 at Clayton, flexible.",
+      "semesterOffered": "2",
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC3341",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFC3540",
@@ -412,9 +522,11 @@
       "prohibitions": [
         "BFC5936"
       ],
-      "notes": "Finance major elective \u2014 choose 3 of 12. Real two-unit prerequisite chain. Excel/VBA-based, on-campus, S1 and S2 at Clayton.",
+      "notes": "Finance major elective — choose 3 of 12. Real two-unit prerequisite chain. Excel/VBA-based, on-campus, S1 and S2 at Clayton.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFC3540",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFX3301",
@@ -431,9 +543,11 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Finance major elective \u2014 choose 3 of 12. NOT offered at Clayton \u2014 Caulfield only, taught in the STARLab trading-simulation lab, compulsory attendance, quota-limited (78 places S1 / 156 S2). Needs BFC3170 first.",
+      "notes": "Finance major elective — choose 3 of 12. NOT offered at Clayton — Caulfield only, taught in the STARLab trading-simulation lab, compulsory attendance, quota-limited (78 places S1 / 156 S2). Needs BFC3170 first.",
       "semesterOffered": "unknown",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFX3301",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BFX3355",
@@ -450,9 +564,12 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Finance major elective \u2014 choose 3 of 12. Needs BFC2140 first. Offered S1 and S2 at Clayton, flexible.",
-      "semesterOffered": "both",
-      "discipline": "commerce"
+      "notes": "Finance major elective — choose 3 of 12. Needs BFC2140 first. Offered S1 and S2 at Clayton, flexible.",
+      "semesterOffered": "1",
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFX3355",
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook: both semesters. From 2026 Semester 1 only at Clayton."
     },
     {
       "code": "BFX3871",
@@ -469,13 +586,15 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Finance major elective \u2014 choose 3 of 12. NOT a normal semester unit \u2014 an overseas summer immersion study tour (extra costs roughly $250\u2013$3000 depending on destination/duration). Needs BFC2140 first.",
+      "notes": "Finance major elective — choose 3 of 12. NOT a normal semester unit — an overseas summer immersion study tour (extra costs roughly $250–$3000 depending on destination/duration). Needs BFC2140 first.",
       "semesterOffered": "unknown",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BFX3871",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BTC3200",
-      "title": "Finance law",
+      "title": "Banking and finance law",
       "creditPoints": 6,
       "year": 4,
       "semester": 1,
@@ -489,9 +608,12 @@
         "BTF2601",
         "BTF3601"
       ],
-      "notes": "Finance major elective \u2014 choose 3 of 12. No prerequisites at all (taught by Business Law and Taxation, not Finance) \u2014 the easiest of the 12 to slot in early. Semester 1 only at Clayton.",
+      "notes": "Finance major elective — choose 3 of 12. No prerequisites at all (taught by Business Law and Taxation, not Finance) — the easiest of the 12 to slot in early. Semester 1 only at Clayton.",
       "semesterOffered": "1",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BTC3200",
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook listed no Clayton offering. From 2026 it runs Semester 1 at Clayton."
     },
     {
       "code": "ETC3460",
@@ -510,9 +632,11 @@
       "prohibitions": [
         "ETF3300"
       ],
-      "notes": "Finance major elective \u2014 choose 3 of 12. ALSO one of the Econometrics major's 'choose 3 of 4' Level-3 units. Needs ETC2410 first. Semester 1 only at Clayton (flexible).",
+      "notes": "Finance major elective — choose 3 of 12. ALSO one of the Econometrics major's 'choose 3 of 4' Level-3 units. Needs ETC2410 first. Semester 1 only at Clayton (flexible).",
       "semesterOffered": "1",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC3460",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECC1100",
@@ -534,7 +658,9 @@
       ],
       "notes": "Economics major core unit.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECC1100",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECC2000",
@@ -547,7 +673,7 @@
       "prerequisites": [
         "ECC1000"
       ],
-      "prerequisiteText": "ECC1000 Principles of microeconomics (or campus-equivalent ECB1101/ECF1100/ECS1101/ECW1101) \u2014 already in Part A.",
+      "prerequisiteText": "ECC1000 Principles of microeconomics (or campus-equivalent ECB1101/ECF1100/ECS1101/ECW1101) — already in Part A.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
@@ -558,7 +684,9 @@
       ],
       "notes": "Economics major core unit. ALSO an Econometrics major elective option (choose 2 of 8).",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECC2000",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ECC2010",
@@ -582,7 +710,9 @@
       ],
       "notes": "Economics major core unit. Real two-unit prerequisite chain (both micro AND macro principles needed). ALSO an Econometrics major elective option (choose 2 of 8).",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ECC2010",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC2440",
@@ -595,44 +725,49 @@
       "prerequisites": [
         "ETC1000"
       ],
-      "prerequisiteText": "ETC1000 Business and economic statistics (or campus-equivalent) \u2014 already in Part A.",
+      "prerequisiteText": "ETC1000 Business and economic statistics (or campus-equivalent) — already in Part A.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
         "ETF2700"
       ],
-      "notes": "Econometrics major elective \u2014 choose 2 of 8. Can be replaced with MTH1030 (Techniques for modelling) or ENG1005 (Engineering mathematics) for engineering/maths double-degree students \u2014 ENG1005 is already in this student's Electrical catalog. Semester 1 only at Clayton.",
+      "notes": "Econometrics major elective — choose 2 of 8. Can be replaced with MTH1030 (Techniques for modelling) or ENG1005 (Engineering mathematics) for engineering/maths double-degree students — ENG1005 is already in this student's Electrical catalog. Semester 1 only at Clayton.",
       "semesterOffered": "1",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC2440",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC2520",
       "title": "Probability and statistical inference for economics and business",
       "creditPoints": 6,
       "year": 3,
-      "semester": 1,
+      "semester": 2,
       "type": "commerce",
       "major": "econometrics",
       "prerequisites": [
         "ETC1000"
       ],
-      "prerequisiteText": "ETC1000 Business and economic statistics (or campus-equivalent) \u2014 already in Part A.",
+      "prerequisiteText": "ETC1000 Business and economic statistics (or campus-equivalent) — already in Part A.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
-        "MTH2232",
-        "ETF2020"
+        "ETF2020",
+        "ETM2100",
+        "MTH2232"
       ],
-      "notes": "Econometrics major elective \u2014 choose 2 of 8. Can be replaced with ECE2191 (Probability and AI for engineers) \u2014 already in this student's Electrical catalog, so this requirement may already be satisfied for free. Semester 2 only at Clayton.",
+      "notes": "Econometrics major elective — choose 2 of 8. Can be replaced with ECE2191 (Probability and AI for engineers) — already in this student's Electrical catalog, so this requirement may already be satisfied for free. Semester 2 only at Clayton. Placement corrected 2026-09-16: was in a semester this unit is not taught. Suggested major slot; the semester is the unit's real Clayton offering.",
       "semesterOffered": "2",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC2520",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC3400",
       "title": "Principles of econometrics",
       "creditPoints": 6,
       "year": 4,
-      "semester": 1,
+      "semester": 2,
       "type": "commerce",
       "major": "econometrics",
       "prerequisites": [
@@ -642,9 +777,11 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Econometrics major \u2014 choose 3 of 4 Level-3 units (this one, ETC3410, ETC3450, and ETC3460 which is listed under Finance above). Needs ETC2410 first. Semester 2 only at Clayton.",
+      "notes": "Econometrics major — choose 3 of 4 Level-3 units (this one, ETC3410, ETC3450, and ETC3460 which is listed under Finance above). Needs ETC2410 first. Semester 2 only at Clayton. Placement corrected 2026-09-16: was in a semester this unit is not taught. Suggested major slot; the semester is the unit's real Clayton offering.",
       "semesterOffered": "2",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC3400",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC3410",
@@ -664,16 +801,18 @@
         "ETF3200",
         "ETW3510"
       ],
-      "notes": "Econometrics major \u2014 choose 3 of 4 Level-3 units. Needs ETC2410 first. Semester 1 only at Clayton.",
+      "notes": "Econometrics major — choose 3 of 4 Level-3 units. Needs ETC2410 first. Semester 1 only at Clayton.",
       "semesterOffered": "1",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC3410",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC3450",
       "title": "Applied time series econometrics",
       "creditPoints": 6,
       "year": 4,
-      "semester": 1,
+      "semester": 2,
       "type": "commerce",
       "major": "econometrics",
       "prerequisites": [
@@ -685,9 +824,11 @@
       "prohibitions": [
         "ETW3450"
       ],
-      "notes": "Econometrics major \u2014 choose 3 of 4 Level-3 units. Needs ETC2410 first. Semester 2 only at Clayton.",
+      "notes": "Econometrics major — choose 3 of 4 Level-3 units. Needs ETC2410 first. Semester 2 only at Clayton. Placement corrected 2026-09-16: was in a semester this unit is not taught. Suggested major slot; the semester is the unit's real Clayton offering.",
       "semesterOffered": "2",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC3450",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC1010",
@@ -700,7 +841,7 @@
       "prerequisites": [
         "ETC1000"
       ],
-      "prerequisiteText": "One of SCI1020/STA1010/ETX1100/ETB1100/ETC1000/ETF1100/ETW1001/FIT1006 (an intro statistics unit) \u2014 ETC1000 already in Part A.",
+      "prerequisiteText": "One of SCI1020/STA1010/ETX1100/ETB1100/ETC1000/ETF1100/ETW1001/FIT1006 (an intro statistics unit) — ETC1000 already in Part A.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
@@ -708,7 +849,9 @@
       ],
       "notes": "Business Analytics major core unit. Offered S1 and S2 at Clayton, on-campus.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC1010",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC2420",
@@ -721,13 +864,16 @@
       "prerequisites": [
         "ETC1000"
       ],
-      "prerequisiteText": "One of STA1010/ETX1100/ETB1100/ETC1000/ETF1100/ETW1001/FIT1006/SCI1020 (an intro statistics unit) \u2014 ETC1000 already in Part A.",
+      "prerequisiteText": "One of STA1010/ETX1100/ETB1100/ETC1000/ETF1100/ETW1001/FIT1006/SCI1020 (an intro statistics unit) — ETC1000 already in Part A.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
       "notes": "Business Analytics major core unit. ALSO an Econometrics major elective option (choose 2 of 8). Offered Clayton Semester 2 only in 2024.",
-      "semesterOffered": "2",
-      "discipline": "commerce"
+      "semesterOffered": "both",
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC2420",
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook: Semester 2 only. From 2026 it runs both semesters."
     },
     {
       "code": "ETC3250",
@@ -748,7 +894,9 @@
       ],
       "notes": "Business Analytics major core unit. ALSO an Econometrics major elective option (choose 2 of 8). Needs ETC2420 first. Offered Clayton Semester 1 only in 2024 (flexible).",
       "semesterOffered": "1",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC3250",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "BEX3726",
@@ -763,16 +911,18 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). NOT a normal semester unit \u2014 a Term 1 immersion/study-trip block at an 'Australia (Other)' location, application-based, 72cp threshold.",
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). NOT a normal semester unit — a Term 1 immersion/study-trip block at an 'Australia (Other)' location, application-based, 72cp threshold.",
       "semesterOffered": "unknown",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/BEX3726",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC3550",
       "title": "Applied forecasting",
       "creditPoints": 6,
       "year": 4,
-      "semester": 1,
+      "semester": 2,
       "type": "commerce",
       "major": "business-analytics",
       "prerequisites": [
@@ -785,9 +935,12 @@
         "ETF3231",
         "ETW3420"
       ],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). Satisfied via ETC2410 or ETC2420 above. Offered Clayton Semester 1 only in 2024.",
-      "semesterOffered": "1",
-      "discipline": "commerce"
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). Satisfied via ETC2410 or ETC2420 above. Offered Clayton Semester 1 only in 2024. Placement corrected 2026-09-16: was in a semester this unit is not taught. Suggested major slot; the semester is the unit's real Clayton offering.",
+      "semesterOffered": "2",
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC3550",
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook: Semester 1 and prerequisites did not include FIT2086/ETX2100. From 2026 it runs Semester 2 with a wider prerequisite list."
     },
     {
       "code": "ETC3555",
@@ -804,9 +957,11 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). Needs ETC3250 first (a level deeper than most of this pool). Offered Clayton Semester 2 only in 2024.",
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). Needs ETC3250 first (a level deeper than most of this pool). Offered Clayton Semester 2 only in 2024.",
       "semesterOffered": "2",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC3555",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "ETC3580",
@@ -823,28 +978,11 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). Satisfied via ETC2410 or ETC2420 above. Offered Clayton Semester 1 only in 2024.",
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). Satisfied via ETC2410 or ETC2420 above. Offered Clayton Semester 1 only in 2024.",
       "semesterOffered": "1",
-      "discipline": "commerce"
-    },
-    {
-      "code": "ETF3500",
-      "title": "High dimensional data analysis",
-      "creditPoints": 6,
-      "year": 4,
-      "semester": 2,
-      "type": "commerce",
-      "major": "business-analytics",
-      "prerequisites": [
-        "ETC1010"
-      ],
-      "prerequisiteText": "One of ETX2250/ETF2100/ETC2410/ETC1010/ETC2420/ETC3550/ETF2020/ETF3231/ETW2001.",
-      "corequisites": [],
-      "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). IMPORTANT: 2024 Handbook lists this as Caulfield-only, Semester 2 \u2014 NOT offered at Clayton that year. Re-check before relying on it.",
-      "semesterOffered": "unknown",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/ETC3580",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "FIT1045",
@@ -855,15 +993,17 @@
       "type": "commerce",
       "major": "business-analytics",
       "prerequisites": [],
-      "prerequisiteText": "No prerequisites \u2014 entry-level Python programming unit.",
+      "prerequisiteText": "No prerequisites — entry-level Python programming unit.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
         "FIT1053"
       ],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). Offered Clayton S1 (flexible) and S2 (on-campus).",
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). Offered Clayton S1 (flexible) and S2 (on-campus).",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/FIT1045",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "FIT2094",
@@ -880,11 +1020,15 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
-        "FIT3171"
+        "FIT3171",
+        "ITI2094"
       ],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). REAL PROHIBITION: only one of FIT2094/FIT3171 (both 'Databases') may be counted \u2014 same content, Level 2 vs Level 3. Needs an intro programming unit first.",
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). REAL PROHIBITION: only one of FIT2094/FIT3171 (both 'Databases') may be counted — same content, Level 2 vs Level 3. Needs an intro programming unit first. RULE LOGIC NOTE: the real rule is \"(FIT1045 OR FIT1048 OR FIT1051 OR FIT1053) OR (ENG1013 AND ENG1014)\". The prerequisites array lists FIT1045 as one satisfying path, but an engineering student more likely satisfies it via ENG1013 AND ENG1014 TOGETHER - both are needed, neither alone is enough. The flat prerequisites array cannot express that nesting; prerequisiteText is authoritative.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/FIT2094",
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook required one of FIT1045/FIT1048/FIT1051/FIT1053. From 2026 it ALSO accepts ENG1013 AND ENG1014 together - the engineering pathway into this unit."
     },
     {
       "code": "FIT3171",
@@ -897,15 +1041,17 @@
       "prerequisites": [
         "ENG1013"
       ],
-      "prerequisiteText": "One of FIT1045/FIT1048/FIT1051/FIT1053 (intro programming) or ENG1003/ENG1013 (Engineering mobile apps / Engineering smart systems) \u2014 ENG1013 is already in this student's Electrical catalog.",
+      "prerequisiteText": "One of FIT1045/FIT1048/FIT1051/FIT1053 (intro programming) or ENG1003/ENG1013 (Engineering mobile apps / Engineering smart systems) — ENG1013 is already in this student's Electrical catalog.",
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [
         "FIT2094"
       ],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). REAL PROHIBITION: only one of FIT2094/FIT3171 may be counted. Prerequisite likely already satisfied via ENG1013 without needing any FIT unit.",
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). REAL PROHIBITION: only one of FIT2094/FIT3171 may be counted. Prerequisite likely already satisfied via ENG1013 without needing any FIT unit.",
       "semesterOffered": "both",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/FIT3171",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "FIT3003",
@@ -922,9 +1068,11 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). Needs one of the Databases units first. Offered Clayton Semester 2 only in 2024 (flexible).",
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). Needs one of the Databases units first. Offered Clayton Semester 2 only in 2024 (flexible).",
       "semesterOffered": "2",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/FIT3003",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "FIT3154",
@@ -941,28 +1089,34 @@
       "corequisites": [],
       "corequisiteText": "",
       "prohibitions": [],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). GAP: needs FIT2086, which isn't in this catalog at all \u2014 will show a permanent missing-prerequisite flag unless FIT2086 is added as a custom unit. Offered Clayton Semester 2 only in 2024 (flexible).",
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). GAP: needs FIT2086, which isn't in this catalog at all — will show a permanent missing-prerequisite flag unless FIT2086 is added as a custom unit. Offered Clayton Semester 2 only in 2024 (flexible).",
       "semesterOffered": "2",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/FIT3154",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "FIT3179",
       "title": "Data visualisation",
       "creditPoints": 6,
       "year": 4,
-      "semester": 1,
+      "semester": 2,
       "type": "commerce",
       "major": "business-analytics",
       "prerequisites": [
         "ENG1013"
       ],
-      "prerequisiteText": "One of FIT1048/FIT1051/FIT1045/FIT1053/FIT1008/FIT1054/FIT2085 (programming/algorithms) or ENG1013/ENG1014 (already in this student's Electrical catalog) \u2014 AND 24 credit points of Level 2/3 units completed from any faculty.",
+      "prerequisiteText": "One of FIT1048/FIT1051/FIT1045/FIT1053/FIT1008/FIT1054/FIT2085 (programming/algorithms) or ENG1013/ENG1014 (already in this student's Electrical catalog) — AND 24 credit points of Level 2/3 units completed from any faculty.",
       "corequisites": [],
       "corequisiteText": "",
-      "prohibitions": [],
-      "notes": "Business Analytics major elective \u2014 choose 5 of 12 (min 2 at Level 3). Prerequisite likely already satisfied via ENG1013/ENG1014. Also needs 24cp of Level 2/3 study completed first \u2014 a later-year elective. Offered Clayton Semester 2 only in 2024, on-campus.",
+      "prohibitions": [
+        "FIT2179"
+      ],
+      "notes": "Business Analytics major elective — choose 5 of 12 (min 2 at Level 3). Prerequisite likely already satisfied via ENG1013/ENG1014. Also needs 24cp of Level 2/3 study completed first — a later-year elective. Offered Clayton Semester 2 only in 2024, on-campus. Placement corrected 2026-09-16: was in a semester this unit is not taught. Suggested major slot; the semester is the unit's real Clayton offering.",
       "semesterOffered": "2",
-      "discipline": "commerce"
+      "discipline": "commerce",
+      "sourceUrl": "https://handbook.monash.edu/current/units/FIT3179",
+      "verifiedOn": "2026-09-16"
     }
   ]
 }

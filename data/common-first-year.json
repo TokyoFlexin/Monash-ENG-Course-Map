@@ -50,11 +50,12 @@
         "ENG1002",
         "ENG1003"
       ],
-      "notes": "",
+      "notes": "RULE LOGIC NOTE: the prohibition is \"(ENG1002 AND ENG1003)\" - prohibited only if you hold BOTH, not either one alone. The flat prohibitions array cannot express that; see prohibitionText.",
       "semesterOffered": "both",
       "discipline": "common",
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG1013",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "prohibitionText": "(ENG1002 AND ENG1003) - prohibited only if you hold BOTH."
     },
     {
       "code": "ENG1005",

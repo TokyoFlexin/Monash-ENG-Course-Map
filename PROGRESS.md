@@ -1009,6 +1009,52 @@ page 10. (First run of that test showed Civil at the OLD slots — stale browser
 data/civil.json, not a code bug; confirmed by diffing on-disk against in-memory, then re-run
 clean after a cache-bypassing reload. Worth remembering when testing data edits locally.)
 
+## commerce.json re-audited — catalog now 100% Handbook-verified (2026-09-16)
+Last file through the harvester. It was still 2024-vintage, two years unchecked.
+
+**Requisites were clean — 0 issues across all 46 units.** The original Commerce research was sound
+on prerequisites and corequisites, as Civil's was. The failures were elsewhere:
+- **ETF3500 (High dimensional data analysis) is a 404** — removed, same as ECE3122 and CIV4286.
+  Nothing referenced it.
+- **6 title/offering corrections**: ACX3150 both->S1, BFC3341 both->S2, BFX3355 both->S1,
+  ETC2420 S2->both, ETC3550 S1->S2, and BTC3200 retitled "Finance law" -> "Banking and finance law".
+- **14 units had prohibitions missing entirely** — the plural-key parser bug again.
+- **The 5 placement contradictions flagged earlier this session are RESOLVED.** ETC2420 fixed
+  itself (it genuinely runs both semesters now). The other four plus ETC3550 were moved to the
+  semester they are actually taught. **`PLACEMENT_EXCEPTIONS` is now EMPTY** — every unit in the
+  catalog sits in a semester it is really offered, with no exceptions carried.
+- Part A core placements were checked against the official 2025 E3005 map page 5 and were
+  **already correct**.
+
+**Known limitation, now detected instead of silent.** `toGroups` flattens a rule shaped
+OR-of-AND into a single alternatives list, losing the conjunction. Found via FIT2094, whose real
+rule is "(FIT1045 OR FIT1048 OR FIT1051 OR FIT1053) OR (ENG1013 AND ENG1014)" — the flat array
+wrongly implies ENG1013 alone suffices, when an engineering student needs ENG1013 AND ENG1014
+together. The harvester now emits `groupsAreLossy`; a scan of the whole catalog found exactly
+**two** affected units (FIT2094, and ENG1013's own prohibition), both now carrying an explicit
+RULE LOGIC NOTE. The `expression` string was always faithful — only the flat array is lossy.
+
+**Vintage drift 2025 -> current: 20 changes across 17 units.** Most are prohibition additions for
+new Indonesia-campus equivalents (ACI1001, ECI1100, MKI1120, MGI1010, BTI1010, ETI1100) —
+irrelevant to a Clayton student. Six substantive ones carry a `vintageNote`, notably FIT2094
+gaining the ENG1013+ENG1014 engineering pathway and ETC3550 moving to Semester 2.
+
+### Catalog status: fully verified
+- `node scripts/validate-catalog.mjs` — **109 units, 5 files, 0 problems, 0 acknowledged
+  exceptions.**
+- **All 109 units** re-diffed against a fresh Handbook fetch: titles, credit points, Clayton
+  offerings, prerequisites, corequisites AND prohibitions, checked against both the structured
+  requisite tree and the free-text enrolment rules. Everything matches.
+- Every catalog file now carries `provenance: "per-unit"`, so every unit has its own Handbook URL
+  and verifiedOn date, plus a `vintagePolicy` and a `placementSource`.
+- Quick start verified for Civil, Mechatronics and Electrical+Commerce; no console errors.
+
+**Every placement in the catalog is now sourced from an official Monash progression map.** No
+discipline still relies on inferred sequencing. The only remaining suggested placements are
+elective-pool slots (Civil Part E, Mechatronics Part E, Commerce Part B majors), where the map
+itself only says "technical elective" / "major unit N" and the choice is genuinely the student's —
+each carries the unit's real offering semester and is labelled suggested in the data.
+
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just
   leave them — they don't affect validation, only add sidebar length).
@@ -1035,10 +1081,6 @@ clean after a cache-bypassing reload. Worth remembering when testing data edits 
   (Eng+Science, also 5 years) has a different map that was never supplied, so with the Commerce
   toggle OFF the app falls back to the E3005 slots. Get the E3007 2025 map if that matters before
   the transfer goes through.
-- **Re-audit commerce.json against the CURRENT Handbook** — same treatment
-  civil.json got on 2026-09-14. 5 known placement/offering contradictions are
-  sitting in `PLACEMENT_EXCEPTIONS` as UNVERIFIED (see 2026-09-16 section); the
-  whole file is 2024-vintage so there are likely more stale requisites too.
 - **More disciplines (Sahel confirmed interest, 2026-09-13)** — same session
   discussed expanding breadth using the Civil-style pipeline (AoS code →
   parallel Handbook research → `discipline`-tagged data file → one
