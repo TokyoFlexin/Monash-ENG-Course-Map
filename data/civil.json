@@ -24,7 +24,9 @@
       "2026-09-14 re-audit findings (see PROGRESS.md for full detail): CIV3294 was wrongly marked 'both semesters'/Y3S2 — it's actually Semester 1 only, the exact bug Sahel's friend reported, now fixed (also required moving CIV2206 earlier to keep the prerequisite chain valid). CIV4249 (previously 'not offered') is now genuinely offered Semester 1 only. Several prohibition codes had gone stale as Monash retired old unit codes (CIV2241, CIV3264, CIV3222, CIV2226) and in three cases introduced new postgraduate-level equivalents (CIV5170, CIV5149, CIV5178) — all updated to match the current Handbook."
     ],
     "placementSource": "Official Monash course progression map for 2025 commencing students, E3001 Bachelor of Engineering (Honours), page 5 (Civil engineering). Supplied by Sahel 2026-09-16. Every placement below is now taken from that map. This REPLACES the previous inferred sequencing — earlier versions of this file noted that the PDF was Cloudflare-blocked and that year/semester was Claude's own suggestion from unit levels and prerequisite chains. That caveat no longer applies.",
-    "professionalPractice": "Part C requires ONE Professional Practice domain unit at Year 3 Semester 1 per the official map. Those are ENG4801/4802/4803/4804, now in the catalog tagged discipline:'common' (they live in mechatronics.json). This resolves the open item left when CIV4286 was removed — the replacement no longer needs to be added as a custom unit."
+    "professionalPractice": "Part C requires ONE Professional Practice domain unit at Year 3 Semester 1 per the official map. Those are ENG4801/4802/4803/4804, now in the catalog tagged discipline:'common' (they live in mechatronics.json). This resolves the open item left when CIV4286 was removed — the replacement no longer needs to be added as a custom unit.",
+    "provenance": "per-unit",
+    "vintagePolicy": "Unit facts track the CURRENT Handbook (requisites apply from the year you enrol in the unit); course structure tracks the 2025 commencing year. Drift 2025 -> current for this file is a single change (CIV2242 lost its specific prerequisites for a generic 30cp-of-engineering rule). Re-check: node scripts/check-vintage-drift.mjs --from 2025 --codes-from data/civil.json"
   },
   "units": [
     {
@@ -46,7 +48,9 @@
         "CIV3284"
       ],
       "notes": "Semester 2 offering only (Clayton and Malaysia). Prohibited combination with CIV2225 (Design of steel and timber structures) and CIV3284 (Design of concrete and masonry structures) — older predecessor units this one appears to have absorbed/superseded.",
-      "semesterOffered": "2"
+      "semesterOffered": "2",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV2235",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV2242",
@@ -62,7 +66,9 @@
       "corequisiteText": "",
       "prohibitions": [],
       "notes": "Semester 2 offering only (Clayton and Malaysia). 2026 Handbook re-audit: the unit page no longer has a Requisites tab at all — the old ENG1011+ENG1014 unit-code prerequisites and the CIV2241 prohibition are gone, replaced by a generic 30cp-of-engineering-study rule under Rules > Enrolment Rule (CIV2241 itself is now retired/404 in the current Handbook). By this unit's Y2S2 placement, first-year units already clear the 30cp threshold anyway, so the placement itself is unaffected.",
-      "semesterOffered": "2"
+      "semesterOffered": "2",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV2242",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV2206",
@@ -80,7 +86,9 @@
       "corequisiteText": "",
       "prohibitions": [],
       "notes": "Semester 1 offering only (Clayton and Malaysia). Y3S1 placement is the earliest valid S1 slot given ENG1011 itself sits at Y2S1 in this catalog's shared common-first-year.json (Sahel's own foundation-maths pathway pushes it back from the standard Y1S2) — couldn't move this earlier without landing in the same semester as its own prerequisite.",
-      "semesterOffered": "1"
+      "semesterOffered": "1",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV2206",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV2263",
@@ -100,7 +108,9 @@
       "corequisiteText": "",
       "prohibitions": [],
       "notes": "Semester 1 offering only (Clayton and Malaysia). A special course-specific rule lets E3009 (Architectural Design double degree) students take ENG1005 and (ENG1014 or ENG1060) as corequisites instead of prerequisites — not applicable here.",
-      "semesterOffered": "1"
+      "semesterOffered": "1",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV2263",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV2282",
@@ -116,7 +126,9 @@
       "corequisiteText": "",
       "prohibitions": [],
       "notes": "Semester 1 offering only (Clayton and Malaysia). No Requisites/Rules section exists at all on the 2024 Handbook page — genuinely no prerequisites, corequisites, or prohibitions.",
-      "semesterOffered": "1"
+      "semesterOffered": "1",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV2282",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV3221",
@@ -135,7 +147,9 @@
       "corequisiteText": "",
       "prohibitions": [],
       "notes": "Semester 2 offering only (Clayton and Malaysia). CIV2225 is CIV2235's older predecessor (the two prohibit each other) — CIV2235 used as the representative prerequisite code since it's the currently-taught unit.",
-      "semesterOffered": "2"
+      "semesterOffered": "2",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV3221",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV3247",
@@ -156,7 +170,9 @@
       "corequisiteText": "ENG2005 Advanced engineering mathematics",
       "prohibitions": [],
       "notes": "Semester 2 offering only (Clayton and Malaysia).",
-      "semesterOffered": "2"
+      "semesterOffered": "2",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV3247",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV3283",
@@ -177,7 +193,9 @@
         "CIV5177"
       ],
       "notes": "Semester 2 offering only (Clayton and Malaysia). Prohibited combination with CIV4287 (same title — appears to be the Malaysia-specific code for identical content) and CIV5177 (Advanced road engineering, postgraduate level).",
-      "semesterOffered": "2"
+      "semesterOffered": "2",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV3283",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV3294",
@@ -198,7 +216,9 @@
         "CIV3284"
       ],
       "notes": "Sahel's Civil-engineering friend flagged this as wrong (2026-09-14), and he's right: confirmed against the live Handbook, this is Semester 1 offering only (Clayton and Malaysia), NOT both semesters as the 2024-sourced data claimed — semesterOffered corrected to \"1\". Kept at its Y3S2 canonical slot rather than moved, though, same treatment as ECE3161 in electrical.json: its own prerequisite CIV2206 is stuck at Y3S1 (the earliest slot that clears ENG1011's Y2S1 placement, see CIV2206's notes), so the only chronologically-clean S1 slot for this unit would be Y4S1 — which collides with CIV4280 needing this unit done first, also at Y4S1. Y3S2 preserves the whole downstream chain (CIV4280 Y4S1, CIV4212 Y4S2) correctly ordered; the tradeoff is this unit will now correctly show an off-semester flag at its own canonical placement, which is accurate — it genuinely doesn't fit a clean 4-year S1 slot given how late ENG1011 lands in this particular first-year pathway. Warn-not-block is exactly for surfacing this kind of real tension rather than hiding it.",
-      "semesterOffered": "1"
+      "semesterOffered": "1",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV3294",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV3285",
@@ -217,7 +237,9 @@
       "corequisiteText": "",
       "prohibitions": [],
       "notes": "Semester 1 offering only (Clayton and Malaysia) — no Semester 2 offering exists. 2026 re-audit: the CIV3264 prohibition is stale, that code is retired/404 in the current Handbook; the current unit page has no Prohibition subsection at all.",
-      "semesterOffered": "1"
+      "semesterOffered": "1",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV3285",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV4280",
@@ -238,7 +260,9 @@
         "CIV5170"
       ],
       "notes": "Semester 1 offering only (Clayton and Malaysia) — no Semester 2 offering exists. 2026 re-audit: prohibition updated from CIV3222 (now retired/404) to CIV5170, the current postgraduate-level 'Bridge design and assessment' equivalent.",
-      "semesterOffered": "1"
+      "semesterOffered": "1",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV4280",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV4212",
@@ -260,7 +284,9 @@
       "corequisiteText": "",
       "prohibitions": [],
       "notes": "Handbook Overview calls this 'a capstone unit drawing together material from previous units' for a multi-disciplinary design project — kept as type \"specialisation\" (the degree's actual capstone is ENG4701/ENG4702, shared with Electrical). Semester 2 offering only (Clayton and Malaysia). 2026 re-audit: the Handbook's own free-text enrolment rule still names CIV2226 and CIV3264 as OR-branches for two of its clauses — both are retired/404 in the current Handbook (Monash hasn't cleaned up its own rule text), so in practice only the CIV3247/CIV3248 and CIV3294/CIV3284 branches are live options; doesn't change this catalog's `prerequisites` array, which already used the live representative codes.",
-      "semesterOffered": "2"
+      "semesterOffered": "2",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV4212",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV4249",
@@ -280,7 +306,9 @@
         "CIV5149"
       ],
       "notes": "2026 re-audit: no longer \"not offered\" as the 2024 Handbook had it — now genuinely offered, Semester 1 only (Clayton and Malaysia), so semesterOffered corrected from \"unknown\" to \"1\" and moved from its old Y4S2 placeholder slot to Y4S1 to match. Also picked up a new prohibition, CIV5149 (the postgraduate-level equivalent), not present in the 2024 data since this unit didn't run that year.",
-      "semesterOffered": "1"
+      "semesterOffered": "1",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV4249",
+      "verifiedOn": "2026-09-16"
     },
     {
       "code": "CIV4288",
@@ -301,7 +329,9 @@
         "CIV5178"
       ],
       "notes": "Semester 2 offering only (Clayton and Malaysia) — no Semester 1 offering exists. 2026 re-audit: prohibition updated from CIV3264 (now retired/404) to CIV5178, the current postgraduate-level 'Advanced water treatment' equivalent.",
-      "semesterOffered": "2"
+      "semesterOffered": "2",
+      "sourceUrl": "https://handbook.monash.edu/current/units/CIV4288",
+      "verifiedOn": "2026-09-16"
     }
   ]
 }
