@@ -10,7 +10,8 @@
     ],
     "provenance": "per-unit",
     "placementSource": "Official Monash course progression map for 2025 commencing students, E3001 Bachelor of Engineering (Honours) Common First Year, page 1. Supplied by Sahel 2026-09-16. The map gives FOUR pathways depending on VCE background; the canonical slots here are the \"no foundation units required\" pathway. ENG1090 (Foundation mathematics) and PHS1001 (Foundation physics) are conditional — required only without VCE Specialist Maths >30 and/or Physics >25 — and are parked at Y1S1, the semester both are offered. A student on a foundation pathway shifts some units a semester later; that belongs in their own saved plan, not the shared catalog.",
-    "requisiteNote": "VERIFIED 2026-09-16: NOT ONE first-year unit has a unit-coded prerequisite in the Handbook. Every rule is a VCE entry requirement (e.g. ENG1014 needs VCE Specialist Maths >=30, ENG1005 needs ENG1090 OR VCE Specialist Maths >=30). ENG1090 was previously listed as a hard prerequisite of ENG1005 — removed, because it would flag every student who met the VCE score instead. Full rule text is kept in each unit prerequisiteText."
+    "requisiteNote": "VERIFIED 2026-09-16: NOT ONE first-year unit has a unit-coded prerequisite in the Handbook. Every rule is a VCE entry requirement (e.g. ENG1014 needs VCE Specialist Maths >=30, ENG1005 needs ENG1090 OR VCE Specialist Maths >=30). ENG1090 was previously listed as a hard prerequisite of ENG1005 — removed, because it would flag every student who met the VCE score instead. Full rule text is kept in each unit prerequisiteText.",
+    "vintagePolicy": "Unit facts here track the CURRENT Handbook, because a unit's requisites are those published for the year you ENROL in that unit. Course STRUCTURE (which units the degree requires) tracks the commencing year instead, because course requirements lock at commencement. Units whose rules changed between the 2025 commencing year and now carry a vintageNote. Re-check with: node scripts/check-vintage-drift.mjs --from 2025 --codes-from <this file>"
   },
   "units": [
     {
@@ -134,7 +135,8 @@
       "semesterOffered": "both",
       "discipline": "common",
       "sourceUrl": "https://handbook.monash.edu/current/units/ENG1012",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: Titled \"Engineering design\" in the 2025 Handbook (the name printed on the 2025 progression map) and \"Engineering for people and planet\" from 2026. Same unit code."
     },
     {
       "code": "PHS1001",

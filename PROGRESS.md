@@ -842,7 +842,9 @@ downloaded both. **They are not committed** — the repo is public and they're M
 - **`ECE3161` is Semester 2, not Semester 1.** PROGRESS previously recorded this as a "VERIFIED
   CONFLICT" needing a placement exception. It was never a conflict — just wrong data from the 2024
   vintage. Both maps put it in S2. The exception has been deleted from the validator.
-- **`ENG2005` prerequisites** were `ENG1005 + ENG1014`; the real tree is `ENG1005` alone.
+- **`ENG2005` prerequisites** were `ENG1005 + ENG1014`; the current tree is `ENG1005` alone. NOTE:
+  the old entry was correct for the 2025 Handbook (`ENG1005 AND (ENG1060 OR ENG1014)`) and had
+  gone stale — it was not fabricated. See "Which Handbook vintage governs" below.
 - **`ECE4191`** had 4 invented prerequisites. Real rule: prereq `(TRC3500 OR ECE3141)`, corequisite
   `(ECE3073 OR ECE3161)` — the corequisite was missing entirely.
 - **`PHS1001` (Foundation physics) was missing** from common-first-year.json despite being on the
@@ -904,7 +906,7 @@ requisite tree:
 - **`ENG4701` -> `ENG0001` is REAL** — it lives in the free-text enrolment rule ("Clayton-based
   students must also be concurrently enrolled in ENG0001 alongside ENG4701"), which the first pass
   of the checker didn't read. Kept, with the rule quoted verbatim in corequisiteText.
-- **`ENG1014` -> `ENG1005` is NOT REAL.** ENG1014's only corequisite is a course-enrolment rule
+- **`ENG1014` -> `ENG1005` is NOT REAL** (in any vintage — this one genuinely was fabricated). ENG1014's only corequisite is a course-enrolment rule
   ("must be enrolled in the Bachelor of Engineering (Honours)..."). The ENG1005 edge was invented
   at some earlier point and had never been challenged. **Removed.**
 The checker now tests the structured tree AND the free-text rules; re-run clean across 49 units.
@@ -922,6 +924,41 @@ checks internal consistency, the harvest diff checks correspondence with reality
 - Sidebar for Mechatronics shows "Common core (11)" + "Robotics and Mechatronics Engineering (30)";
   branding reads "E3001 · Robotics and Mechatronics Engineering". Topbar year corrected 2024→2025.
 - localStorage cleared afterwards.
+
+## Which Handbook vintage governs — settled (2026-09-16)
+Sahel pushed back on a correction with a screenshot: the 2025 Handbook shows ENG2005 requiring
+"(ENG1014 OR ENG1060) AND ENG1005", but he took the unit in 2026 where the only prerequisite is
+ENG1005. He was right, and the earlier commit message overstated the case: it said "ENG1014 was
+never a prerequisite". **It was** — in 2025, as one branch of an OR group. The old catalog entry
+was CORRECT for the 2025 vintage and had rotted, which is a different failure from a fabrication.
+(The ENG1014 -> ENG1005 corequisite removed earlier in the session WAS a genuine fabrication —
+it appears in no vintage. Two different problems, and they should not have been described alike.)
+
+**The governing rule, which is a split one:**
+- A unit's **requisites/offerings** are those published for the year you **ENROL in that unit**.
+- A course's **structure** (which units the degree requires) locks at the year you **COMMENCED**.
+
+So the catalog tracks the **current** Handbook for unit facts and the **commencing year** (2025)
+for course structure. That is what was already built — ROBMCTRN04's structure was checked 2025 vs
+current and found identical, so the split never surfaced until Sahel asked.
+
+**`scripts/check-vintage-drift.mjs`** (new) compares any two Handbook years and reports only
+SUBSTANTIVE changes. It normalises requisites structurally before comparing, because the Handbook
+reorders groups freely — a raw string diff reported 17 differences where only 8 were real, and
+9 were "(A or B) AND C" vs "C AND (B or A)".
+
+**2025 -> current across the 49 units in the three audited files: 15 real changes in 14 units.**
+- 7 units (MMA2001/2002/2003/2004/2005, MMA3001, MMA3101) **do not exist in the 2025 Handbook at
+  all** — new from 2026. The 2025 progression map already lists them ("Replacing MEC2402",
+  "Replacing TRC2201", "Replacing TRC3600", "Replacing TRC4802"), so the map anticipated units the
+  2025 Handbook had not published yet. A 2025 commencer reaches them in 2026, when they exist, so
+  tracking current is correct for both Sahel and his friend.
+- ENG2005 prerequisite loosened (the one Sahel spotted). ECE2111 gained an ENG2005 corequisite.
+  ECE3121 tightened to ENG2005 AND ECE2131. TRC3200/TRC4800 gained the new MMA units as accepted
+  alternatives. TRC4407 lost its prerequisite and gained a Clayton Semester 2 offering.
+  ENG1012 renamed.
+- All 14 now carry a `vintageNote` in the data, and the three files carry a `_meta.vintagePolicy`
+  stating the rule above, so "why does this say X when I remember Y" answers itself.
 
 ## Next up
 - Once Sahel actually picks a Commerce major, trim the other 3 out (or just

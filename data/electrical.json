@@ -16,7 +16,8 @@
     ],
     "provenance": "per-unit",
     "placementSource": "Official Monash course progression map for 2025 commencing students, E3005 Bachelor of Engineering (Honours) and Bachelor of Commerce, page 5 (Electrical and Computer Systems Engineering). Supplied by Sahel 2026-09-16. Default year/semester on each unit is the E3005 sequence. Units whose slot differs in the 4-year E3001 single degree carry a \"placements\" override keyed by course code, sourced from the E3001 2025 map page 10.",
-    "sharedWithMechatronics": "ECE2071, ECE2072, ECE2131 and ECE3073 are Part C core units of BOTH Electrical and Robotics & Mechatronics. They carry sharedWith:['mechatronics'] so the catalog filter shows them to a Mechatronics student without duplicating the code into mechatronics.json."
+    "sharedWithMechatronics": "ECE2071, ECE2072, ECE2131 and ECE3073 are Part C core units of BOTH Electrical and Robotics & Mechatronics. They carry sharedWith:['mechatronics'] so the catalog filter shows them to a Mechatronics student without duplicating the code into mechatronics.json.",
+    "vintagePolicy": "Unit facts here track the CURRENT Handbook, because a unit's requisites are those published for the year you ENROL in that unit. Course STRUCTURE (which units the degree requires) tracks the commencing year instead, because course requirements lock at commencement. Units whose rules changed between the 2025 commencing year and now carry a vintageNote. Re-check with: node scripts/check-vintage-drift.mjs --from 2025 --codes-from <this file>"
   },
   "units": [
     {
@@ -46,7 +47,8 @@
           "year": 2,
           "semester": 2
         }
-      }
+      },
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook required \"ENG1005 AND (ENG1060 OR ENG1014)\"; from 2026 it is ENG1005 alone. If you took ENG2005 in 2025 the older, stricter rule applied to you."
     },
     {
       "code": "ECE2191",
@@ -163,7 +165,8 @@
       "semesterOffered": "2",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE2111",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook had NO corequisite; from 2026 ENG2005 is a corequisite."
     },
     {
       "code": "ECE3051",
@@ -230,7 +233,8 @@
       "semesterOffered": "2",
       "discipline": "electrical",
       "sourceUrl": "https://handbook.monash.edu/current/units/ECE3121",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook required ENG2005 only; from 2026 it requires ENG2005 AND ECE2131."
     },
     {
       "code": "ECE3161",

@@ -25,7 +25,8 @@
       "Five Part E options (ECE2111, ECE2191, ECE3051, ECE3141, ECE3161) already exist in electrical.json tagged discipline:'electrical', so a student filtered to Mechatronics will not see them in the sidebar even though they are valid Part E choices.",
       "ECE4045 (Network performance) is a valid Part E option but is NOT catalogued: its prerequisite is (ECE3141 OR ECE2041), and ECE3141 sits at Y4S1 in electrical.json, leaving no valid Year-4 Semester-1 slot for ECE4045 inside a 4-year E3001 degree. Add it as a custom unit if the sequence is worked out."
     ],
-    "requisiteNote": "Requisites are conjunctive GROUPS: prerequisiteText carries the full Handbook expression, and the prerequisites array lists ONE representative code per required AND-group. An earlier draft picked a single representative across the whole flattened rule, which silently dropped a required group on MMA3101 — caught by the validator's chronology check, now fixed in scripts/harvest-handbook.mjs."
+    "requisiteNote": "Requisites are conjunctive GROUPS: prerequisiteText carries the full Handbook expression, and the prerequisites array lists ONE representative code per required AND-group. An earlier draft picked a single representative across the whole flattened rule, which silently dropped a required group on MMA3101 — caught by the validator's chronology check, now fixed in scripts/harvest-handbook.mjs.",
+    "vintagePolicy": "Unit facts here track the CURRENT Handbook, because a unit's requisites are those published for the year you ENROL in that unit. Course STRUCTURE (which units the degree requires) tracks the commencing year instead, because course requirements lock at commencement. Units whose rules changed between the 2025 commencing year and now carry a vintageNote. Re-check with: node scripts/check-vintage-drift.mjs --from 2025 --codes-from <this file>"
   },
   "units": [
     {
@@ -44,7 +45,8 @@
       "notes": "Map note: replacing MEC2402.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2001",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree."
     },
     {
       "code": "MMA2004",
@@ -64,7 +66,8 @@
       "notes": "Map note: replacing TRC2201. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2004",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree."
     },
     {
       "code": "TRC3200",
@@ -85,7 +88,8 @@
       "notes": "",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/TRC3200",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook required \"ENG2005 AND (TRC2201 OR MEC2403)\"; from 2026 the second group is (TRC2201 OR MEC2401 OR MMA2004)."
     },
     {
       "code": "TRC3500",
@@ -126,7 +130,8 @@
       "notes": "Map note: replacing TRC3600. Level-2 code, taken in Year 3 per the official map. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2005",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree."
     },
     {
       "code": "ECE4179",
@@ -167,7 +172,8 @@
       "notes": "Map note: replacing TRC4802. Level-2 code, taken in Year 3 per the official map. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2003",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree."
     },
     {
       "code": "TRC4800",
@@ -187,7 +193,8 @@
       "notes": "",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/TRC4800",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook required \"MEC3457 OR TRC3600\"; from 2026 it is (MAE3408 OR MEC3457 OR TRC3600 OR MMA2005)."
     },
     {
       "code": "ECE4076",
@@ -226,7 +233,8 @@
       "notes": "Enrolment rule: PREREQUISITE Completion of 24 credit points of level 3 or 4 engineering units.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/TRC4407",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: 2025 Handbook required TRC3600 and listed no Clayton offering; from 2026 it has no prerequisite and runs Semester 2 at Clayton."
     },
     {
       "code": "ENG4801",
@@ -322,7 +330,8 @@
       "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice. Enrolment rule: E6011 Master of Professional Engineering - You are exempt from the prerequisite rule if you are enrolled in this course.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA2002",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree."
     },
     {
       "code": "ECE3142",
@@ -365,7 +374,8 @@
       "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
       "semesterOffered": "2",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA3001",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree."
     },
     {
       "code": "MMA3101",
@@ -386,7 +396,8 @@
       "notes": "Part E technical elective (36cp / 6 units). The SEMESTER is this unit's real Clayton offering; which of the six Part E slots you spend on it is your choice.",
       "semesterOffered": "1",
       "sourceUrl": "https://handbook.monash.edu/current/units/MMA3101",
-      "verifiedOn": "2026-09-16"
+      "verifiedOn": "2026-09-16",
+      "vintageNote": "Handbook change 2025 -> current: This unit does not exist in the 2025 Handbook — it is new from 2026. The 2025 progression map already listed it as the replacement for an older unit, which is why the map and the 2025 Handbook disagree."
     },
     {
       "code": "ECE4055",
